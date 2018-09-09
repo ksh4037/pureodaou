@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daou.pd.user.mod.UserMapper">
+	<resultMap type="com.daou.pd.user.mod.UserVO" id="userVO">
+		<result column="e_id" property="e_id" />
+		<result column="e_name" property="e_name" />
+		<result column="e_dep" property="e_dep" />
+		<result column="e_pw" property="e_pw" />
+		<result column="e_tel" property="e_tel" />
+		<result column="e_type" property="e_type" />
+		<result column="dept_no" property="dept_no" />
+		<result column="dept_name" property="dept_name" />
+		<result column="reg_id" property="reg_id" />
+		<result column="reg_date" property="reg_date" />
+		<result column="updt_id" property="updt_id" />
+		<result column="updt_date" property="updt_date" />
+		<result column="delete_yn" property="delete_yn" />
+	</resultMap>
+
+
+
+	<select id="checkUser"
+		parameterType="com.daou.pd.user.mod.UserVO" resultType="Integer">
+		select count(*)
+		from employee
+		where e_id = #{e_id}
+		and e_pw = #{e_pw}
+		and e_type = 2
+	</select>
+</mapper>	 

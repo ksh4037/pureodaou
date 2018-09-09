@@ -1,0 +1,6 @@
+### IGNORE FILE ###
+
+*.log
+*.bak
+
+*.c
