@@ -29,32 +29,33 @@ public class EmpController {
 	@RequestMapping(value = "admin/goLogin")
 	public ModelAndView goLogin(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			EmpVO evo) {
-		ModelAndView mav = new ModelAndView();
-		int result = empService.selectAdmin(evo);
-		System.out.println("결과 : " + result);
 
-		if (result == 1) {
+		int fullCheckResult = empService.selectAdmin(evo);
+		int IdCheckResult = empService.employeeIdCheck(evo);
+
+		System.out.println("결과 : " + fullCheckResult);
+		ModelAndView mav = new ModelAndView("admin/employee/result");
+
+		if (IdCheckResult != 1) {
+			mav.addObject("resultCode", "IDfail");
+		} else if (fullCheckResult == 1) {
 			session.setAttribute("e_id", evo.getE_id());
 			session.setAttribute("e_name", evo.getE_name());
-			List<HashMap<String, Object>> memberList = empService.memberList(evo);
-			mav.addObject("memberList", memberList);
-			mav.setViewName("admin/employee/userList");
+			mav.addObject("resultCode", "success");
 		} else {
-			String msg = "로그인 실패";
-			mav.addObject("msg", msg);
-			mav.setViewName("admin/employee/login");
+			mav.addObject("resultCode", "PWfail");
 		}
-
 		return mav;
 	}
 
-	@RequestMapping(value = "goLogout")
+	@RequestMapping(value = "admin/logout")
 	public ModelAndView logout(HttpSession session) {
 		session.invalidate();
 		ModelAndView mav = new ModelAndView();
+		System.out.println("로그아웃?");
 		String msg = "로그아웃!";
 		mav.addObject("msg", msg);
-		mav.setViewName("admin/employee/login");
+		mav.setViewName("admin/login");
 		return mav;
 	}
 
@@ -62,8 +63,7 @@ public class EmpController {
 	public ModelAndView goUser(HttpServletRequest request, HttpServletResponse response, EmpVO evo) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/employee/userList");
-		List<HashMap<String, Object>> memberList = empService.memberList(evo);
-
+		List<HashMap<String, Object>> memberList = empService.memberList();
 		mav.addObject("memberList", memberList);
 		return mav;
 	}
@@ -105,7 +105,7 @@ public class EmpController {
 	}
 
 	@RequestMapping(value = "admin/employeeUpdtForm")
-	public ModelAndView goUptForm(HttpServletRequest request, HttpServletResponse response, EmpVO evo) {
+	public ModelAndView employeeUpdtForm(HttpServletRequest request, HttpServletResponse response, EmpVO evo) {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/employee/userUpdateForm");

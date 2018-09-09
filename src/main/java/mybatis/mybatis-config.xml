@@ -7,6 +7,8 @@
 	<typeAliases>
 		<typeAlias alias="empVO"
 			type="com.daou.pd.admin.employee.EmpVO"></typeAlias>
+		<typeAlias alias="deptVO"
+			type="com.daou.pd.admin.employee.DeptVO"></typeAlias>
 		<typeAlias alias="boardVO"
 			type="com.daou.pd.admin.board.BoardVO"></typeAlias>
 		<typeAlias alias="problemVO"
@@ -15,7 +17,7 @@
 			type="com.daou.pd.admin.problem.OptionVO"></typeAlias>
 		<typeAlias alias="examVO"
 			type="com.daou.pd.user.exam.ExamVO"></typeAlias>
-			<typeAlias alias="examlistVO"
+		<typeAlias alias="examlistVO"
 			type="com.daou.pd.user.exam.ExamListVO"></typeAlias>
 		<typeAlias alias="markVO"
 			type="com.daou.pd.user.exam.MarkVO"></typeAlias>

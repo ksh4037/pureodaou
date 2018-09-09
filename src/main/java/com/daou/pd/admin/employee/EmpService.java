@@ -9,7 +9,7 @@ public interface EmpService {
 
 	public int selectUser(EmpVO evo);
 
-	public List<HashMap<String, Object>> memberList(EmpVO evo);
+	public List<HashMap<String, Object>> memberList();
 
 	public void insertMember(EmpVO evo) throws Exception;
 

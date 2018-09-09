@@ -1,5 +1,6 @@
 package com.daou.pd.user.mod;
 
+import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,9 +17,32 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int checkUser(UserVO uvo) {
+	public int selectUser(UserVO uvo) {
 		userMapper = sqlSession.getMapper(UserMapper.class);
-		return userMapper.checkUser(uvo);
+		return userMapper.selectUser(uvo);
+	}
+
+	public int userIdCheck(UserVO uvo) {
+		userMapper = sqlSession.getMapper(UserMapper.class);
+		return userMapper.userIdCheck(uvo);
+	}
+
+	@Override
+	public UserVO memberView(UserVO uvo) {
+		userMapper = sqlSession.getMapper(UserMapper.class);
+		return userMapper.memberView(uvo);
+	}
+
+	@Override
+	public List<UserVO> deptList() {
+		userMapper = sqlSession.getMapper(UserMapper.class);
+		return userMapper.deptList();
+	}
+
+	@Override
+	public void updateMember(UserVO uvo) throws Exception {
+		userMapper = sqlSession.getMapper(UserMapper.class);
+		userMapper.updateMember(uvo);
 	}
 
 }

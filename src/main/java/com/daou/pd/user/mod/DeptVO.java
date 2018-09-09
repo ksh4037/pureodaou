@@ -1,17 +1,6 @@
 package com.daou.pd.user.mod;
 
-public class UserVO {
-
-	// 사원테이블
-	private String e_id;
-	private String e_name;
-	private int e_dep;
-	private String e_pw;
-	private String e_tel;
-	private int e_type;
-
-	// 부서 테이블
-
+public class DeptVO {
 	private int dept_no;
 	private String dept_name;
 	private String reg_id;
@@ -19,54 +8,6 @@ public class UserVO {
 	private String updt_id;
 	private String updt_date;
 	private String delete_yn;
-
-	public int getE_dep() {
-		return e_dep;
-	}
-
-	public void setE_dep(int e_dep) {
-		this.e_dep = e_dep;
-	}
-
-	public String getE_id() {
-		return e_id;
-	}
-
-	public void setE_id(String e_id) {
-		this.e_id = e_id;
-	}
-
-	public String getE_name() {
-		return e_name;
-	}
-
-	public void setE_name(String e_name) {
-		this.e_name = e_name;
-	}
-
-	public String getE_pw() {
-		return e_pw;
-	}
-
-	public void setE_pw(String e_pw) {
-		this.e_pw = e_pw;
-	}
-
-	public String getE_tel() {
-		return e_tel;
-	}
-
-	public void setE_tel(String e_tel) {
-		this.e_tel = e_tel;
-	}
-
-	public int getE_type() {
-		return e_type;
-	}
-
-	public void setE_type(int e_type) {
-		this.e_type = e_type;
-	}
 
 	public int getDept_no() {
 		return dept_no;
@@ -123,4 +64,5 @@ public class UserVO {
 	public void setDelete_yn(String delete_yn) {
 		this.delete_yn = delete_yn;
 	}
+
 }

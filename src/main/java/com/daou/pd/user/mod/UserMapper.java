@@ -1,6 +1,15 @@
 package com.daou.pd.user.mod;
 
-public interface UserMapper {
+import java.util.List;
 
-	public int checkUser(UserVO uvo);
+public interface UserMapper {
+	public int selectUser(UserVO uvo);
+
+	public int userIdCheck(UserVO uvo);
+
+	public UserVO memberView(UserVO uvo);
+
+	public List<UserVO> deptList();
+
+	public void updateMember(UserVO uvo) throws Exception;
 }

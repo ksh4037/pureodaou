@@ -1,5 +1,7 @@
 package com.daou.pd.user.mod;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,45 +19,74 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "/")
-	public ModelAndView goUserLoginPage(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		HttpSession session = req.getSession(false);
-		if (session == null) {
-			mav.setViewName("user/mod/userLogin");
-		} else {
-			/*if (session.getAttribute("e_id") != null)*/
-				mav.setViewName("user/mod/userMain");
-		}
+	public ModelAndView goUserLoginPage() {
+		ModelAndView mav = new ModelAndView("user/mod/userLogin");
 		return mav;
 	}
 
-	@RequestMapping(value = "/goUserLogin")
-	public ModelAndView goLogin(HttpSession session, HttpServletRequest request, HttpServletResponse response,
+	@RequestMapping(value = "goUserLogin")
+	public ModelAndView goUserLogin(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			UserVO uvo) {
-		ModelAndView mav = new ModelAndView();
-		int result = userService.checkUser(uvo);
-		if (result == 1) {
+
+		int fullCheckResult = userService.selectUser(uvo);
+		int IdCheckResult = userService.userIdCheck(uvo);
+
+		ModelAndView mav = new ModelAndView("user/mod/result");
+
+		if (IdCheckResult != 1) {
+			mav.addObject("resultCode", "IDfail");
+		} else if (fullCheckResult == 1) {
 			session.setAttribute("e_id", uvo.getE_id());
 			session.setAttribute("e_name", uvo.getE_name());
-			String msg = "로그인 성공";
-			mav.addObject("msg", msg);
-			mav.setViewName("user/mod/userMain");
+			mav.addObject("resultCode", "success");
 		} else {
-			String msg = "로그인 실패";
-			mav.addObject("msg", msg);
-			mav.setViewName("user/mod/userLogin");
+			mav.addObject("resultCode", "PWfail");
 		}
-
 		return mav;
 	}
 
-	@RequestMapping(value = "/userLogout")
-	public ModelAndView logout(HttpSession session) {
+	@RequestMapping(value = "userLogout")
+	public ModelAndView userLogout(HttpSession session) {
 		session.invalidate();
 		ModelAndView mav = new ModelAndView();
-		String msg = "�α׾ƿ�!";
-		mav.addObject("msg", msg);
+		System.out.println("로그아웃!");
 		mav.setViewName("user/mod/userLogin");
 		return mav;
 	}
+
+	@RequestMapping(value = "userMain")
+	public ModelAndView userMain(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("user/mod/userMain");
+		return mav;
+	}
+
+	@RequestMapping(value = "userUpdtForm")
+	public ModelAndView userUpdtForm(HttpServletRequest request, HttpServletResponse response, UserVO uvo) {
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("user/mod/p_dataUpdateForm");
+
+		List<UserVO> deptList = userService.deptList();
+
+		UserVO memberView = userService.memberView(uvo);
+		mav.addObject("memberView", memberView);
+		mav.addObject("deptList", deptList);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "userUpdt")
+	public ModelAndView userUpdt(HttpServletRequest request, HttpServletResponse response, UserVO uvo) {
+		ModelAndView mav = new ModelAndView("user/mod/result");
+		System.out.println("아이디 : " + uvo.getE_id());
+		try {
+			userService.updateMember(uvo);
+			mav.addObject("resultCode", "success");
+			return mav;
+		} catch (Exception e) {
+			mav.addObject("resultCode", "error");
+		}
+		return mav;
+	}
+
 }

@@ -33,7 +33,7 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> memberList(EmpVO evo) {
+	public List<HashMap<String, Object>> memberList() {
 		empMapper = sqlSession.getMapper(EmpMapper.class);
 		return empMapper.memberList();
 	}

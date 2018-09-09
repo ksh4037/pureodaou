@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%
+	if (session.getAttribute("e_id") == null) {
+		response.sendRedirect("login");
+	}
+%>
 
 <!DOCTYPE html>
 <html>
@@ -16,8 +20,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="../resources/css/admin.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../resources/js/admin.js"></script>
+
+<link href="../resources/css/admin.css" rel="stylesheet" type="text/css">
 
 
 <style>
@@ -85,9 +90,10 @@
 		});
 	}
 
-	function goUptForm(e_id) {
+	function goUpdtForm(e_id) {
 		$("#e_id").val(e_id);
 		document.user_list.submit();
+
 	}
 
 	function goList(path) {
@@ -99,6 +105,10 @@
 		} else if (path == "boardList") {
 			location.href = "boardList";
 		}
+	}
+
+	function goLogout() {
+		location.href = "login";
 	}
 </script>
 </head>
@@ -134,6 +144,9 @@
 				<h4 class="s_title" style="padding-top: 25px; padding-left: 15px">
 					<span class="span-font">Home > 회원관리</span>
 				</h4>
+				<input style="float: right" type="submit" id="logout_btn"
+					class="btn btn-default" value="로그아웃"
+					onclick="goLogout(); return false;"> <br>
 				<hr>
 				<br>
 				<h2>
@@ -159,7 +172,7 @@
 								<tr>
 									<td><input type="checkbox" name="del_check"
 										value="${item.e_id}">
-									<td><a href="#" onclick="goUptForm('${item.e_id}');">${item.e_id}</a></td>
+									<td><a href="#" onclick="goUpdtForm('${item.e_id}');">${item.e_id}</a></td>
 									<td>${item.e_name}</td>
 									<td>${item.dept_name}</td>
 									<td>${item.e_tel}</td>
