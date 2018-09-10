@@ -20,13 +20,13 @@
 
 	<select id="getOxList" resultType="problemVO"
 		parameterType="Integer">
-		select * from problem_info where type=1 order by rand()
+		select * from problem_info where type=1 and delete_yn='N' order by rand()
 		limit #{cnt}
 	</select>
 
 	<select id="getObjList" resultType="problemVO"
 		parameterType="Integer">
-		select * from problem_info where type=2 order by rand()
+		select * from problem_info where type=2 and delete_yn='N' order by rand()
 		limit #{cnt}
 	</select>
 

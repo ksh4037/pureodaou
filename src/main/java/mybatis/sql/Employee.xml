@@ -3,53 +3,29 @@
 	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.daou.pd.admin.employee.EmpMapper">
-	<resultMap type="com.daou.pd.admin.employee.EmpVO" id="empVO">
-		<result column="e_id" property="e_id" />
-		<result column="e_name" property="e_name" />
-		<result column="e_dep" property="e_dep" />
-		<result column="e_pw" property="e_pw" />
-		<result column="e_tel" property="e_tel" />
-		<result column="e_type" property="e_type" />
-		<result column="dept_no" property="dept_no" />
-		<result column="dept_name" property="dept_name" />
-		<result column="reg_id" property="reg_id" />
-		<result column="reg_date" property="reg_date" />
-		<result column="updt_id" property="updt_id" />
-		<result column="updt_date" property="updt_date" />
-		<result column="delete_yn" property="delete_yn" />
-	</resultMap>
-
-	<select id="selectAdmin"
-		parameterType="com.daou.pd.admin.employee.EmpVO" resultType="Integer">
-		select
-		count(*) from employee
+	
+	<select id="selectAdmin" parameterType="empVO" resultType="Integer">
+		select count(*) from employee
 		where e_id = #{e_id}
 		and e_pw = #{e_pw}
-		and e_type
-		= 1
+		and e_type = 1
 	</select>
-
-	<select id="selectUser"
-		parameterType="com.daou.pd.admin.employee.EmpVO" resultType="Integer">
-		select
-		count(*) from employee
+	
+	<select id="employeeIdCheck" parameterType="empVO" resultType="Integer">
+		select count(*) from employee
 		where e_id = #{e_id}
 	</select>
-
-
-	<select id="memberList"
-		parameterType="com.daou.pd.admin.employee.EmpVO"
-		resultType="com.daou.pd.admin.employee.EmpVO">
-		select *
-		from employee
+	
+	
+	<select id="memberList" parameterType="empVO" resultType="HashMap">
+		select e.e_id, e.e_name, d.dept_name, e.e_tel 
+		from employee e left join dept d
+		on e.e_dep = d.dept_no
 		where e_type = 2
 	</select>
-
-
-	<insert id="insertMember"
-		parameterType="com.daou.pd.admin.employee.EmpVO">
-		insert into employee(e_id, e_name, e_dep, e_tel, e_pw,
-		e_type)
+		
+	<insert id="insertMember"  parameterType="empVO">
+		insert into employee(e_id, e_name, e_dep, e_tel, e_pw, e_type)
 		values
 		(
 		#{e_id},
@@ -60,38 +36,33 @@
 		#{e_type}
 		)
 	</insert>
-
-	<delete id="deleteMember" parameterType="String">
+	
+	<delete id="deleteMember"  parameterType="String">
 		delete from employee
 		where e_id = #{e_id}
 	</delete>
-
-	<select id="memberView"
-		parameterType="com.daou.pd.admin.employee.EmpVO"
-		resultType="com.daou.pd.admin.employee.EmpVO">
+	
+	<select id="memberView" parameterType="empVO" resultType="empVO">
 		select *
 		from employee
 		where e_id = #{e_id}
 	</select>
-
-
-	<select id="deptList"
-		resultType="com.daou.pd.admin.employee.EmpVO">
-		select dept_no, dept_name
+	
+	
+	<select id="deptList" resultType="deptVO">
+		select dept_no, dept_name 
 		from dept
 	</select>
-
-
-	<update id="updateMember"
-		parameterType="com.daou.pd.admin.employee.EmpVO">
+	
+	
+	<update id="updateMember"  parameterType="empVO" >
 		update employee
 		set
 		e_name = #{e_name},
 		e_dep = #{e_dep},
 		e_tel = #{e_tel}
-		where e_id =
-		#{e_id}
+		where e_id = #{e_id}	
 	</update>
-
-
+	
+	
 </mapper>	 
