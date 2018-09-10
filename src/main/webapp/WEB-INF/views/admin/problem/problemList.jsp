@@ -10,9 +10,7 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="import.jsp"%>
-
 <body>
-
 	<div class="container-fluid">
 		<div class="row content">
 
