@@ -86,13 +86,6 @@ public class UserController {
 		} catch (Exception e) {
 			mav.addObject("resultCode", "error");
 		}
-//		아니
-//		아니
-//		안녕
-//		하십
-//		니까
-//		
-
 		return mav;
 	}
 
