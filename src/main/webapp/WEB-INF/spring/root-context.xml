@@ -19,6 +19,8 @@
 		<property name="username" value="websvc2"></property>
 		<property name="password" value="websvc2"></property>
 	</bean>
+	
+	
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
