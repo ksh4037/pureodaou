@@ -11,9 +11,8 @@
 <body>
 
 	<form name="clistForm" id="clistForm">
-		<input type="hidden" id="category_seq" name="category_seq"
-			value="${categoryDetail.category_seq}"> <input type="hidden"
-			name="caller" value="updt">
+		<input type="hidden" id="c_seq" name="c_seq" value="${categoryDetail.c_seq}"> 
+		<input type="hidden" name="caller" value="updt">
 
 		<div class="container">
 			<h2 style="color: #5bc0de">문제 상세보기</h2>
@@ -23,26 +22,14 @@
 			<table class="table">
 				<tr>
 					<td>카테고리명</td>
-					<td>${categoryDetail.category_name}</td>
-				</tr>
-
-				<tr>
-					<td>등록자</td>
-					<td>${categoryDetail.reg_id}</td>
-				</tr>
-
-				<tr>
-					<td>등록일</td>
-					<td>${categoryDetail.reg_date}</td>
+					<td>${categoryDetail.c_name}</td>
 				</tr>
 			</table>
 
 			<div style="float: right">
-				<input type="button" value="수정" onclick="goUpdtForm();"
-					class="btn btn-primary" /> <input type="button" value="삭제"
-					onclick="goDel();" class="btn btn-danger" /> <input type="button"
-					value="취소" onclick="goList(); return false;"
-					class="btn btn-default" />
+				<input type="button" value="수정" onclick="goUpdtForm();" class="btn btn-primary" /> 
+				<input type="button" value="삭제" onclick="goDel();" class="btn btn-danger" /> 
+				<input type="button" value="취소" onclick="goList(); return false;" class="btn btn-default" />
 			</div>
 		</div>
 	</form>

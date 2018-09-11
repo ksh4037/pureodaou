@@ -19,9 +19,8 @@
 				<tr>
 					<td>
 						<div class="form-group">
-							<label for="inputdefault">카테고리명 </label> <input type="text"
-								class="form-control" id="category_name"
-								placeholder="카테고리명을 입력해주세요." name="category_name" />
+							<label for="inputdefault">카테고리명 </label> 
+							<input type="text" class="form-control" id="c_name" name="c_name" placeholder="카테고리명을 입력해주세요." />
 						</div>
 					</td>
 				</tr>
@@ -29,10 +28,9 @@
 
 			<table class="table table-hover">
 				<tr>
-					<td><input type="button" value="취소" onclick="goList();"
-						class="btn btn-default" style="float: right" /> <input
-						type="button" value="등록" onclick="goReg(); return false;"
-						class="btn btn-default" style="float: right; margin-right: 5px" />
+					<td>
+						<input type="button" value="취소" onclick="goList();" class="btn btn-default" style="float: right" />
+						<input type="button" value="등록" onclick="goReg(); return false;" class="btn btn-default" style="float: right; margin-right: 5px" />
 					</td>
 				</tr>
 			</table>

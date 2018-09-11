@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.daou.pd.admin.problem.OptionVO;
-import com.daou.pd.admin.problem.ProblemVO;
+import com.daou.pd.admin.question.QuestionVO;
 
 public interface ExamMapper {
 	public int test();
@@ -14,15 +14,15 @@ public interface ExamMapper {
 
 	public List<OptionVO> getOption(int problem_seq);
 
-	public List<ProblemVO> getOxList(int cnt);
+	public List<QuestionVO> getOxList(int cnt);
 
-	public List<ProblemVO> getObjList(int cnt);
+	public List<QuestionVO> getObjList(int cnt);
 
 	public Integer getPersence(HashMap<String, Object> map);
 
 	public void insertExam(HashMap<String, List<ExamVO>> map);
 
-	public List<ProblemVO> getexamList(Map<String, Object> map);
+	public List<QuestionVO> getexamList(Map<String, Object> map);
 
 	public List<OptionVO> getoptionList(HashMap<String, Object> map);
 

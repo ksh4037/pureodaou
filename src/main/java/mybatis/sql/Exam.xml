@@ -3,6 +3,7 @@
 	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.daou.pd.user.exam.ExamMapper">
+<!--  
 	<select id="test" resultType="Integer">
 		select a from test where a=1
 	</select>
@@ -95,4 +96,5 @@
 		where reg_id = #{reg_id} and exam_test_no = #{degree} and problem_seq =
 		#{problem}
 	</update>
+	-->
 </mapper>	 
