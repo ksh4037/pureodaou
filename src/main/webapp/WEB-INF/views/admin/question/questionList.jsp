@@ -31,12 +31,11 @@
 					</p>
 
 					<form name="listForm" id="listForm" method="post">
-						<input type="hidden" name="problem_seq" id="problem_seq" />
+						<input type="hidden" name="q_seq" id="q_seq" />
 						<table class="table">
 							<thead>
 								<tr>
-									<th align="center"><input type="checkbox" id="allCheck"
-										onclick="allChk(this);" /></th>
+									<th align="center"><input type="checkbox" id="allCheck" onclick="allChk(this);" /></th>
 									<th align="center">No.</th>
 									<th align="center" width="35%">문제내용</th>
 									<th><center>문제유형</center></th>
@@ -46,34 +45,33 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:if test="${!empty problemList}">
-									<c:forEach items="${problemList}" var="problemList"
-										varStatus="status">
+								<c:if test="${!empty questionList}">
+									<c:forEach items="${questionList}" var="questionList" varStatus="status">
 										<tr>
-											<td><input type="checkbox" name="del_check"
-												id="del_check" value="${problemList.problem_seq}"></td>
+											<td><input type="checkbox" name="del_check" id="del_check" value="${questionList.q_seq}"></td>
 											<td align="left">${status.index+1}</td>
-											<td><a href="#"
-												onclick="goDetail('${problemList.problem_seq}');">${problemList.problem}</a></td>
-											<td align="center"><c:if test="${problemList.type == 1}">
-													<span style="color: red">O/X</span>
-												</c:if> <c:if test="${problemList.type == 2}">
-													<span style="color: red">객관식</span>
-												</c:if></td>
-											<td align="center"><c:forEach items="${categoryList}"
-													var="categoryList" varStatus="status">
-													<c:if
-														test="${problemList.category_seq == categoryList.category_seq}">
-														<span style="color: red">${categoryList.category_name}
-														</span>
+											<td><a href="#" onclick="goDetail('${questionList.q_seq}');">${questionList.q_contents}</a></td>
+											
+											<td align="center">
+												<c:if test="${questionList.q_type == 1}"><span style="color: red">O/X</span></c:if>
+												<c:if test="${questionList.q_type == 2}"><span style="color: red">객관식</span></c:if>
+											</td>
+											
+											<td align="center">
+												<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
+													<c:if test="${questionList.c_seq == categoryList.c_seq}">
+														<span style="color: red">${categoryList.c_name}</span>
 													</c:if>
-												</c:forEach></td>
-											<td align="center">${problemList.reg_id}</td>
-											<td align="center">${fn:substring(problemList.reg_date,0,10)}</td>
+												</c:forEach>
+											</td>
+											
+											<td align="center">${questionList.reg_id}</td>
+											<td align="center">${fn:substring(questionList.reg_date,0,10)}</td>
 										</tr>
 									</c:forEach>
 								</c:if>
-								<c:if test="${empty problemList}">
+								
+								<c:if test="${empty questionList}">
 									<tr>
 										<td colspan="6"><center>등록된 문제 정보가 없습니다.</center></td>
 									</tr>
@@ -83,12 +81,9 @@
 						</table>
 					</form>
 
-					<input type="button" value="카테고리 관리" onclick="goCtgList();"
-						class="btn btn-default" /> <input type="button" value="삭제"
-						onclick="goDel(); return false;" class="btn btn-default"
-						style="float: right" /> <input type="button" value="문제등록"
-						onclick="goReg();" class="btn btn-default"
-						style="float: right; margin-right: 5px" />
+					<input type="button" value="카테고리 관리" onclick="goCtgList();" class="btn btn-default" /> 
+					<input type="button" value="삭제" onclick="goDel(); return false;" class="btn btn-default" style="float: right" /> 
+					<input type="button" value="문제등록" onclick="goReg();" class="btn btn-default" style="float: right; margin-right: 5px" />
 				</div>
 			</div>
 		</div>
@@ -97,24 +92,19 @@
 	<%@ include file="footer.jsp"%>
 
 	<script type="text/javascript">
-		function goDetail(problem_seq) {
-			$("#problem_seq").val(problem_seq);
-			$("#listForm").attr("action", "problemDetail");
+	
+		function goDetail(q_seq) { //상세보기 페이지 이동
+			$("#q_seq").val(q_seq);
+			$("#listForm").attr("action", "questionDetail");
 			$("#listForm").submit();
 		}
 
-		function goReg() {
-			location.href = "problemRegForm";
+		function goReg() { // 등록페이지 이동
+			location.href = "questionRegForm";
 		}
 
-		function goCtgList() {
-			var popUrl = "categoryList"; //팝업창에 출력될 페이지 URL
-			var popOption = "width=500, height=360, resizable=no, scrollbars=no, status=no, ,scrollbars=yes"; //팝업창 옵션(optoin)
 
-			window.open(popUrl, "", popOption);
-		}
-
-		function goDel() {
+		function goDel() {  //삭제
 
 			var chk = document.getElementsByName("del_check"); // 체크박스객체를 담는다
 			var len = chk.length; //체크박스의 전체 개수
@@ -155,7 +145,7 @@
 			} else {
 				$.ajax({
 					type : "POST",
-					url : "deleteChkProblem",
+					url : "deleteChkQuestion",
 					data : {
 						"rowid" : rowid
 					},
@@ -177,12 +167,7 @@
 			}
 		}
 
-		function search() {
-			$("#pageForm").attr("action", "problemList");
-			$("#pageForm").submit();
-		}
-
-		function allChk(obj) {
+		function allChk(obj) {  //라디오버튼 전체선택
 			var chkObj = document.getElementsByName("del_check");
 			var rowCnt = chkObj.length - 1;
 			var check = obj.checked;
@@ -200,16 +185,14 @@
 			}
 		}
 
-		function goList(page_type) {
+		
+		function goCtgList() { // 카테고리관리 페이지 이동 (팝업창 띄우기)
+			var popUrl = "categoryList"; //팝업창에 출력될 페이지 URL
+			var popOption = "width=500, height=360, resizable=no, scrollbars=no, status=no, ,scrollbars=yes"; //팝업창 옵션(optoin)
 
-			if (page_type == "problemList") {
-				location.href = "problemList";
-			} else if (page_type == 'employeeList') {
-				location.href = "employeeList";
-			} else if (page_type == 'boardList') {
-				location.href = "boardList";
-			}
+			window.open(popUrl, "", popOption);
 		}
+		
 	</script>
 </body>
 </html>

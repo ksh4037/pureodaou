@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.daou</groupId>
 	<artifactId>pureodaou</artifactId>
-	<name>preodaou</name>
+	<name>pureodaou</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>1.6</java-version>
+		<java-version>1.8</java-version>
 		<org.springframework-version>4.3.14.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
@@ -83,7 +83,7 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
-
+    
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>

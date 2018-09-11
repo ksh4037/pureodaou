@@ -3,16 +3,14 @@
 
 <div class="col-sm-4 sidenav">
 	<div align="center">
-		<a href="#" onclick="goList('problemList');"><img
-			src="../resources/img/logo4.png" width="80%"
-			style="padding-top: 20px; float: center" /></a>
+		<a href="#" onclick="goList('problemList');"><img src="../resources/img/logo4.png" width="80%" style="padding-top: 20px; float: center" /></a>
 	</div>
 	<br>
 
 	<hr style="height: 2px; background-color: white">
 
 	<ul class="nav nav-pills nav-stacked">
-		<li><a href="#" onclick="goList('problemList');" id="problem_li">문제관리</a>
+		<li><a href="#" onclick="goList('questionList');" id="question_li">문제관리</a>
 
 		</li>
 

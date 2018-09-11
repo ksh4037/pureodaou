@@ -15,8 +15,7 @@
 			<%@ include file="lnb.jsp"%>
 
 			<form name="detailKeyInfo" id="detailKeyInfo" method="post">
-				<input type="hidden" name="problem_seq"
-					value="${problemDetail.problem_seq}" />
+				<input type="hidden" name="q_seq" value="${questionDetail.q_seq}" />
 			</form>
 
 			<div class="col-sm-9">
@@ -32,82 +31,80 @@
 					<table class="table">
 						<tr>
 							<td>문제</td>
-							<td>${problemDetail.problem}</td>
+							<td>${questionDetail.q_contents}</td>
 						</tr>
 
 						<tr>
 							<td>문제유형</td>
-							<td><c:if test="${problemDetail.type == 1}">
+							<td>
+								<c:if test="${questionDetail.q_type == 1}">
 									<span style="color: red">O/X </span>
-								</c:if> <c:if test="${problemDetail.type == 2}">
+								</c:if> 
+								
+								<c:if test="${questionDetail.q_type == 2}">
 									<span style="color: red">객관식</span>
-								</c:if></td>
+								</c:if>
+							</td>
 						</tr>
 
 						<tr>
 							<td>문제유형</td>
-							<td><c:forEach items="${categoryList}" var="categoryList"
-									varStatus="status">
-									<c:if
-										test="${problemDetail.category_seq == categoryList.category_seq}">
-										<span style="color: red">${categoryList.category_name}
-										</span>
+							<td>
+								<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
+									<c:if test="${questionDetail.c_seq == categoryList.c_seq}">
+										<span style="color:red">${categoryList.c_name}</span>
 									</c:if>
-								</c:forEach></td>
+								</c:forEach>
+							</td>
 						</tr>
 
-						<c:if test="${problemDetail.type == 1}">
+						<c:if test="${questionDetail.q_type == '1'}">
 							<tr>
 								<td>보기</td>
-								<td><c:forEach items="${optionDetail}" var="optionDetail"
-										varStatus="status">
-										<input type="radio" name="type"
-											<c:if test="${optionDetail.option_contents == 'O' }">checked</c:if>
-											disabled /> O
-					    <input type="radio" name="type"
-											<c:if test="${optionDetail.option_contents == 'X' }">checked</c:if>
-											disabled /> X
-					</c:forEach></td>
+								<td>
+									<c:forEach items="${optionDetail}" var="optionDetail" varStatus="status">
+										<input type="radio" name="type" <c:if test="${optionDetail.option_contents == 'O' }">checked</c:if> disabled /> O
+					    				<input type="radio" name="type" <c:if test="${optionDetail.option_contents == 'X' }">checked</c:if> disabled /> X
+									</c:forEach>
+								</td>
 							</tr>
 						</c:if>
 
-						<c:if test="${problemDetail.type == 2}">
-							<c:forEach items="${optionDetail}" var="optionDetail"
-								varStatus="status">
-
+						<c:if test="${questionDetail.q_type == '2'}">
+						
+							<c:forEach items="${optionDetail}" var="optionDetail" varStatus="status">
 								<c:if test="${optionDetail.answer_yn == 'Y'}">
 									<tr>
 										<td><span style="color: red">정답</span></td>
-										<td><span>${optionDetail.option_contents}</span></td>
+										<td><span>${optionDetail.o_contents}</span></td>
 									</tr>
 								</c:if>
 
 								<c:if test="${optionDetail.answer_yn == 'N'}">
 									<tr>
 										<td>보기</td>
-										<td><span>${optionDetail.option_contents}</span></td>
+										<td><span>${optionDetail.o_contents}</span></td>
 									</tr>
 								</c:if>
-
 							</c:forEach>
+							
 						</c:if>
 
 						<tr>
 							<td>작성자</td>
-							<td>${problemDetail.reg_id}</td>
+							<td>${questionDetail.reg_id}</td>
 						</tr>
+						
 						<tr>
 							<td>작성일자</td>
-							<td>${fn:substring(problemDetail.reg_date,0,16)}</td>
+							<td>${fn:substring(questionDetail.reg_date,0,16)}</td>
 						</tr>
 					</table>
 
 					<div style="float: right">
-						<input type="button" value="수정" onclick="goUpdtForm()"
-							class="btn btn-primary"> <input type="button" value="삭제"
-							onclick="goDelete()" class="btn btn-danger"> <input
-							type="button" value="취소" onclick="goList()"
-							class="btn btn-default">
+						<input type="button" value="수정" onclick="goUpdtForm()" class="btn btn-primary"> 
+						<input type="button" value="삭제" onclick="goDelete()" class="btn btn-danger"> 
+						<input type="button" value="취소" onclick="goList()" class="btn btn-default">
 					</div>
 				</div>
 			</div>
@@ -119,11 +116,11 @@
 
 	<script type="text/javascript">
 		function goList() {
-			location.href = "problemList";
+			location.href = "questionList";
 		}
 
 		function goUpdtForm() {
-			$("#detailKeyInfo").attr("action", "problemUpdtForm");
+			$("#detailKeyInfo").attr("action", "questionUpdtForm");
 			$("#detailKeyInfo").submit();
 		}
 
@@ -134,13 +131,13 @@
 
 				$.ajax({
 					type : "POST",
-					url : "deleteProblem",
+					url : "deleteQuestion",
 					data : queryString,
 					async : false,
 					success : function(data) {
 						if (data == "success") {
 							alert("삭제되었습니다.");
-							location.href = "problemList";
+							location.href = "questionList";
 						} else if (data == "error") {
 							alert("삭제에 실패하였습니다. \n다시 시도해주세요.");
 							return;

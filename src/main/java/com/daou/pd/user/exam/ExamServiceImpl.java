@@ -9,8 +9,8 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
-import com.daou.pd.admin.problem.OptionVO;
-import com.daou.pd.admin.problem.ProblemVO;
+import com.daou.pd.admin.question.OptionVO;
+import com.daou.pd.admin.question.QuestionVO;
 
 @Component("examService")
 public class ExamServiceImpl implements ExamService {
@@ -29,10 +29,10 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public List<ProblemVO> getProblem(int ox, int obj) {
+	public List<QuestionVO> getProblem(int ox, int obj) {
 		examMapper = sqlSession.getMapper(ExamMapper.class);
-		List<ProblemVO> oxlist = examMapper.getOxList(ox);
-		List<ProblemVO> objlist = examMapper.getObjList(obj);
+		List<QuestionVO> oxlist = examMapper.getOxList(ox);
+		List<QuestionVO> objlist = examMapper.getObjList(obj);
 		oxlist.addAll(objlist);
 		return oxlist;
 	}
@@ -95,7 +95,7 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public List<ProblemVO> getExam(String id, int degree) {
+	public List<QuestionVO> getExam(String id, int degree) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reg_id", id);
 		map.put("exam_test_no", degree);

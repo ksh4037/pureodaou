@@ -18,34 +18,25 @@
 			<span class="span-font">풀어다우 서비스의 문제 카테고리 정보입니다.</span>
 		</p>
 
-		<form name="clistForm" id="clistForm" method="post"
-			action="categoryDetail">
-			<input type="hidden" name="category_seq" id="category_seq" /> <input
-				type="hidden" name="caller" value="detail" />
+		<form name="clistForm" id="clistForm" method="post" action="categoryDetail">
+			<input type="hidden" name="c_seq" id="c_seq" /> 
+			<input type="hidden" name="caller" value="detail" />
 			<table class="table">
 				<thead>
 					<tr>
-						<th><input type="checkbox" id="allCheck"
-							onclick="allChk(this);" /></th>
+						<th><input type="checkbox" id="allCheck" onclick="allChk(this);" /></th>
 						<th>No.</th>
 						<th>카테고리명</th>
-						<th>등록자</th>
-						<th>등록일</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<c:if test="${!empty categoryList}">
-						<c:forEach items="${categoryList}" var="categoryList"
-							varStatus="status">
+						<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
 							<tr>
-								<td><input type="checkbox" name="del_check" id="del_check"
-									value="${categoryList.category_seq}"></td>
+								<td><input type="checkbox" name="del_check" id="del_check"value="${categoryList.c_seq}"></td>
 								<td>${status.index+1}</td>
-								<td><a href="#"
-									onclick="goDetail('${categoryList.category_seq}');">${categoryList.category_name}</a></td>
-								<td>${categoryList.reg_id}</td>
-								<td>${fn:substring(categoryList.reg_date,0,10)}</td>
+								<td><a href="javascript:void(0);" onclick="goDetail('${categoryList.c_seq}');">${categoryList.c_name}</a></td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -59,17 +50,15 @@
 			</table>
 		</form>
 
-		<input type="button" value="삭제" onclick="goDel();"
-			class="btn btn-default" style="float: right" /> <input type="button"
-			value="카테고리 등록" onclick="goCtgRegForm();" class="btn btn-default"
-			style="float: right; margin-right: 5px" />
+			<input type="button" value="삭제" onclick="goDel();" class="btn btn-default" style="float: right" /> 
+			<input type="button" value="카테고리 등록" onclick="goCtgRegForm();" class="btn btn-default" style="float: right; margin-right: 5px" />
 	</div>
 
 
 
 	<script type="text/javascript">
-		function goDetail(category_seq) {
-			$("#category_seq").val(category_seq);
+		function goDetail(c_seq) {
+			$("#c_seq").val(c_seq);
 			document.clistForm.submit();
 		}
 

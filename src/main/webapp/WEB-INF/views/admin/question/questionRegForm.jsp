@@ -24,15 +24,14 @@
 				<br>
 
 				<div class="container">
-					<span style="color: red">문제유형을 선택해주세요.</span><br> <br> <input
-						type="radio" name="p_type" onclick="typeChange('2');"> 객관식
-					&nbsp;&nbsp;&nbsp; <input type="radio" name="p_type"
-						onclick="typeChange('1');"> O/X
+					<span style="color: red">문제유형을 선택해주세요.</span>
+					<br><br> 
+					<input type="radio" name="type" onclick="typeChange('2');"> 객관식 &nbsp;&nbsp;&nbsp; 
+					<input type="radio" name="type" onclick="typeChange('1');"> O/X
 				</div>
 
-				<form name="ox_writeForm" id="ox_writeForm" method="post"
-					style="display: none">
-					<input type="hidden" name="type" value="1" />
+				<form name="ox_writeForm" id="ox_writeForm" method="post" style="display: none">
+					<input type="hidden" name="q_type" value="1" />
 					<div class="container">
 						<h2 class="span-font">O/X 문제 등록 페이지</h2>
 						<p class="span-font">풀어다우 O/X 문제 등록 페이지 입니다.</p>
@@ -41,43 +40,45 @@
 
 							<tr>
 								<td width="7%">문제</td>
-								<td><textarea id="problem" class="form-control"
-										name="problem" rows="20" cols="200"> </textarea></td>
+								<td><textarea class="form-control" id="q_contents" name="q_contents" rows="20" cols="200"> </textarea></td>
 							</tr>
 
 							<tr>
 								<td width="7%">카테고리</td>
-								<td><c:if test="${!empty categoryList}">
-										<select name="category_seq" id="category_seq"
-											class="form-control" style="width: 200px; height: 40px;">
+								<td>
+								
+									<c:if test="${!empty categoryList}">
+										<select name="c_seq" id="c_seq" class="form-control" style="width: 200px; height: 40px;">
 											<option value="">카테고리 선택</option>
-											<c:forEach items="${categoryList}" var="categoryList"
-												varStatus="status">
-												<option value="${categoryList.category_seq}">${categoryList.category_name}</option>
+											<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
+												<option value="${categoryList.c_seq}">${categoryList.c_name}</option>
 											</c:forEach>
 										</select>
-									</c:if> <c:if test="${empty categoryList}">
-										<select name="category_seq" id="category_seq"
-											class="form-control" style="width: 200px; height: 40px;">
-											<option value="">카테고리 정보가 없습니다.
-											<option>
+									</c:if> 
+									
+									<c:if test="${empty categoryList}">
+										<select name="c_seq" id="c_seq" class="form-control" style="width: 200px; height: 40px;">
+											<option value="">카테고리 정보가 없습니다.<option>
 										</select>
-									</c:if></td>
+									</c:if>
+									
+								</td>
 							</tr>
 
 							<tr>
 								<td>정답</td>
-								<td><input type="radio" value="O" name="option_contents" />
-									O <input type="radio" value="X" name="option_contents" /> X</td>
+								<td>
+									<input type="radio" value="O" name="o_contents" /> O 
+									<input type="radio" value="X" name="o_contents" /> X
+								</td>
 							</tr>
 						</table>
 
 						<table class="table table-hover">
 							<tr>
-								<td><input type="button" value="취소" onclick="goList();"
-									class="btn btn-default" style="float: right" /> <input
-									type="button" value="등록" onclick="goReg(); return false;"
-									class="btn btn-default" style="float: right; margin-right: 5px" />
+								<td>
+									<input type="button" value="취소" onclick="goList();" class="btn btn-default" style="float: right" /> 
+									<input type="button" value="등록" onclick="goReg(); return false;" class="btn btn-default" style="float: right; margin-right: 5px" />
 								</td>
 							</tr>
 						</table>
@@ -85,10 +86,10 @@
 				</form>
 
 
-				<form name="ch_writeForm" id="ch_writeForm" method="post"
-					style="display: none">
-					<input type="hidden" name="type" value="2" /> <input type="hidden"
-						name="answer_no" id="answer_no" />
+				<form name="ch_writeForm" id="ch_writeForm" method="post" style="display:none">
+					<input type="hidden" name="q_type" value="2" /> 
+					<input type="hidden" name="answer_no" id="answer_no" />
+					
 					<div class="container">
 						<h2 class="span-font">객관식 문제 등록 페이지</h2>
 						<p class="span-font">풀어다우 객관식 문제 등록 페이지 입니다.</p>
@@ -97,87 +98,78 @@
 						<table class="table table-hover">
 							<tr>
 								<td width="7%">문제</td>
-								<td><textarea id="problem" name="problem"
-										class="form-control" rows="20" cols="200"> </textarea></td>
+								<td><textarea id="q_contents" name="q_contents" class="form-control" rows="20" cols="200"> </textarea></td>
 							</tr>
 
 							<tr>
 								<td width="7%">카테고리</td>
-								<td><c:if test="${!empty categoryList}">
-										<select name="category_seq" id="category_seq"
-											class="form-control" style="width: 200px; height: 40px;">
+								<td>
+									<c:if test="${!empty categoryList}">
+										<select name="c_seq" id="c_seq" class="form-control" style="width: 200px; height: 40px;">
 											<option value="">카테고리 선택</option>
-											<c:forEach items="${categoryList}" var="categoryList"
-												varStatus="status">
-												<option value="${categoryList.category_seq}">${categoryList.category_name}</option>
+											<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
+												<option value="${categoryList.c_seq}">${categoryList.c_name}</option>
 											</c:forEach>
 										</select>
-									</c:if> <c:if test="${empty categoryList}">
-										<select name="category_seq" id="category_seq"
-											class="form-control" style="width: 200px; height: 40px;">
+										
+									</c:if> 
+									
+									<c:if test="${empty categoryList}">
+										<select name="c_seq" id="c_seq"class="form-control" style="width: 200px; height: 40px;">
 											<option value="">카테고리 정보가 없습니다.
 											<option>
 										</select>
-									</c:if></td>
+									</c:if>
+								</td>
 							</tr>
 						</table>
 
 
 						<table class="table table-hover">
 							<tr>
-								<td><a class="btn btn-fault" style="float: right;"><span
-										style="color: red">정답여부</span></a> <a href="javascript:void(0);"
-									onclick="addOption();" class="btn btn-info"
-									style="float: right; margin-right: 5px">보기추가</a></td>
+								<td>
+									<a class="btn btn-fault" style="float: right;"><span style="color: red">정답여부</span></a> 
+									<a href="javascript:void(0);" onclick="addOption();" class="btn btn-info" style="float: right; margin-right: 5px">보기추가</a>
+								</td>
 							</tr>
 						</table>
 
 						<table id="option" class="table table-hover">
 							<tr>
 								<td width="5%">보기 :</td>
-								<td><input type="text" class="form-control"
-									id="ch_option_contents" name="option_contents" /></td>
-								<td><a href="javascript:void(0);"
-									onclick="delOption(this);" class="btn btn-info">보기삭제</a></td>
-								<td><input type="radio" id="answer_seq" name="answer_seq"
-									style="float: right; margin-right: 35px"></td>
+								<td><input type="text" class="form-control" id="o_contents" name="o_contents" /></td>
+								<td><a href="javascript:void(0);" onclick="delOption(this);" class="btn btn-info">보기삭제</a></td>
+								<td><input type="radio" id="answer_seq" name="answer_seq" style="float: right; margin-right: 35px"></td>
 							</tr>
+							
 							<tr>
 								<td>보기 :</td>
-								<td><input type="text" class="form-control"
-									id="ch_option_contents" name="option_contents" /></td>
-								<td><a href="javascript:void(0);"
-									onclick="delOption(this);" class="btn btn-info">보기삭제</a></td>
-								<td><input type="radio" id="answer_seq" name="answer_seq"
-									style="float: right; margin-right: 35px"></td>
+								<td><input type="text" class="form-control" id="o_contents" name="o_contents" /></td>
+								<td><a href="javascript:void(0);" onclick="delOption(this);" class="btn btn-info">보기삭제</a></td>
+								<td><input type="radio" id="answer_seq" name="answer_seq" style="float: right; margin-right: 35px"></td>
 							</tr>
+							
 							<tr>
 								<td>보기 :</td>
-								<td><input type="text" class="form-control"
-									id="ch_option_contents" name="option_contents" /></td>
-								<td><a href="javascript:void(0);"
-									onclick="delOption(this);" class="btn btn-info">보기삭제</a></td>
-								<td><input type="radio" id="answer_seq" name="answer_seq"
-									style="float: right; margin-right: 35px"></td>
+								<td><input type="text" class="form-control" id="o_contents" name="o_contents" /></td>
+								<td><a href="javascript:void(0);" onclick="delOption(this);" class="btn btn-info">보기삭제</a></td>
+								<td><input type="radio" id="answer_seq" name="answer_seq" style="float: right; margin-right: 35px"></td>
 							</tr>
+							
 							<tr>
 								<td>보기 :</td>
-								<td><input type="text" class="form-control"
-									id="ch_option_contents" name="option_contents" /></td>
-								<td><a href="javascript:void(0);"
-									onclick="delOption(this);" class="btn btn-info">보기삭제</a></td>
-								<td><input type="radio" id="answer_seq" name="answer_seq"
-									style="float: right; margin-right: 35px"></td>
+								<td><input type="text" class="form-control" id="o_contents" name="o_contents" /></td>
+								<td><a href="javascript:void(0);" onclick="delOption(this);" class="btn btn-info">보기삭제</a></td>
+								<td><input type="radio" id="answer_seq" name="answer_seq" style="float: right; margin-right: 35px"></td>
 							</tr>
 						</table>
 
 						<table class="table table-hover">
 							<tr>
-								<td><input type="button" value="취소" onclick="goList();"
-									class="btn btn-default" style="float: right" /> <input
-									type="button" value="등록" onclick="goReg(); return false;"
-									class="btn btn-default" style="float: right; margin-right: 5px" />
-									&nbsp;&nbsp;</td>
+								<td>
+									<input type="button" value="취소" onclick="goList();" class="btn btn-default" style="float: right" /> 
+									<input type="button" value="등록" onclick="goReg(); return false;" class="btn btn-default" style="float: right; margin-right: 5px" />&nbsp;&nbsp;
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -194,7 +186,7 @@
 		function addOption() {
 			var cell = '';
 			cell += '<tr><td width="60px">보기 : </td>';
-			cell += '<td><input type="text" class="form-control" id="ch_option_contents" name="option_contents" /></td>';
+			cell += '<td><input type="text" class="form-control" id="o_contents" name="o_contents" /></td>';
 			cell += '<td><a href="javascript:void(0);" onclick="delOption(this)" class="btn btn-info chDel">보기삭제</a></td>';
 			cell += '<td><input type="radio" id="answer_seq" name="answer_seq" style="float:right;margin-right:35px"></td></tr>';
 			$("#option").append(cell);
@@ -236,29 +228,27 @@
 			if (input_check == true) {
 
 				if ($("#ch_writeForm").css('display') == 'block') {
-
-					$("#answer_no").val(
-							$('input[id="answer_seq"]:checked').index(
-									'input[id="answer_seq"]'));
+					alert("c");
+					$("#answer_no").val($('input[id="answer_seq"]:checked').index('input[id="answer_seq"]'));
 
 					var queryString = $("form[name=ch_writeForm]").serialize();
 					var option_contents = new Array();
 
 					for (var i = 0; i < document
-							.getElementsByName('option_contents').length; i++) {
+							.getElementsByName('o_contents').length; i++) {
 						option_contents[i] = document
-								.getElementsByName('option_contents')[i].value;
+								.getElementsByName('o_contents')[i].value;
 					}
 
 					$.ajax({
 						type : "POST",
-						url : "problemReg",
+						url : "questionReg",
 						data : queryString,
 						async : false,
 						success : function(data) {
 							if (data == "success") {
 								alert("등록되었습니다.");
-								location.href = "problemList";
+								location.href = 'questionList';
 							} else if (data == "error") {
 								alert("등록에 실패하였습니다.");
 								return;
@@ -277,13 +267,13 @@
 
 					$.ajax({
 						type : "POST",
-						url : "problemReg",
+						url : "questionReg",
 						data : queryString,
 						async : false,
 						success : function(data) {
 							if (data == "success") {
 								alert("등록되었습니다.");
-								location.href = "problemList";
+								location.href = "questionList";
 							} else if (data == "error") {
 								alert("등록에 실패하였습니다.");
 								return;
@@ -300,7 +290,7 @@
 		}
 
 		function goList() {
-			location.href = "problemList";
+			location.href = "questionList";
 		}
 
 		function goInputCheck() {
@@ -309,13 +299,13 @@
 
 			if ($("#ch_writeForm").css('display') == 'block') {
 
-				if ($('#ch_writeForm [name="problem"]').val().trim() == "") {
+				if ($('#ch_writeForm [name="q_contents"]').val().trim() == "") {
 					alert("문제가 입력되지 않았습니다.");
 					input_check = false;
 				}
 
 				if (input_check == true) {
-					if ($('#ch_writeForm [name="category_seq"]').val() == '') {
+					if ($('#ch_writeForm [name="c_seq"]').val() == '') {
 						alert("카테고리가 선택되지 않았습니다.");
 						input_check = false;
 						return input_check;
@@ -323,8 +313,8 @@
 				}
 
 				if (input_check == true) {
-					for (var i = 0; i < $('#ch_writeForm [name="option_contents"]').length; i++) {
-						if ($('#ch_writeForm [name="option_contents"]')[i].value == '') {
+					for (var i = 0; i < $('#ch_writeForm [name="o_contents"]').length; i++) {
+						if ($('#ch_writeForm [name="o_contents"]')[i].value == '') {
 							alert((i + 1) + "번째 보기가 입력되지 않았습니다.");
 							input_check = false;
 							return input_check;
@@ -352,13 +342,13 @@
 
 			else if ($("#ox_writeForm").css('display') == 'block') {
 
-				if ($('#ox_writeForm [name="problem"]').val().trim() == "") {
+				if ($('#ox_writeForm [name="q_contents"]').val().trim() == "") {
 					alert("문제가 입력되지 않았습니다.");
 					input_check = false;
 				}
 
 				if (input_check == true) {
-					if ($('#ox_writeForm [name="category_seq"]').val() == '') {
+					if ($('#ox_writeForm [name="c_seq"]').val() == '') {
 						alert("카테고리가 선택되지 않았습니다.");
 						input_check = false;
 						return input_check;
@@ -366,7 +356,7 @@
 				}
 
 				if (input_check == true) {
-					if ($(':radio[name="option_contents"]:checked').length < 1) {
+					if ($(':radio[name="o_contents"]:checked').length < 1) {
 						alert('O/X 정답을 선택해주세요');
 						input_check = false;
 						return input_check;

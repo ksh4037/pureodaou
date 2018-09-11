@@ -1,28 +1,34 @@
-package com.daou.pd.admin.problem;
+package com.daou.pd.admin.question;
 
 import java.util.List;
 
-public class ProblemVO {
+public class QuestionVO {
 
-	private int problem_seq;
-	private String problem;
-	private String type;
+	private int q_seq;
+	private String q_contents;
+	private String q_type;
 	private String reg_id;
 	private String reg_date;
 	private String upt_id;
 	private String upt_date;
-	private String delete_yn;
-	private List<OptionVO> ovo;
+	private String use_yn;
+	
+	
+	//private List<OptionVO> ovo;
+	
+	// 몇 번째가 정답인지 받아오는 변수
 	private int answer_no;
 
 	// 카테고리
-	private int category_seq;
-	private String category_name;
+	private int c_seq;
+	private String c_name;
 
 	// 검색
 	private String scType;
 	private String srch_input;
 
+	
+	/*
 	public List<OptionVO> getOvo() {
 		return ovo;
 	}
@@ -30,39 +36,7 @@ public class ProblemVO {
 	public void setOvo(List<OptionVO> ovo) {
 		this.ovo = ovo;
 	}
-
-	public int getProblem_seq() {
-		return problem_seq;
-	}
-
-	public void setProblem_seq(int problem_seq) {
-		this.problem_seq = problem_seq;
-	}
-
-	public String getProblem() {
-		return problem;
-	}
-
-	public void setProblem(String problem) {
-		this.problem = problem;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public int getCategory_seq() {
-		return category_seq;
-	}
-
-	public void setCategory_seq(int category_seq) {
-		this.category_seq = category_seq;
-	}
-
+	*/
 	public String getReg_id() {
 		return reg_id;
 	}
@@ -95,22 +69,6 @@ public class ProblemVO {
 		this.upt_date = upt_date;
 	}
 
-	public String getDelete_yn() {
-		return delete_yn;
-	}
-
-	public void setDelete_yn(String delete_yn) {
-		this.delete_yn = delete_yn;
-	}
-
-	public String getCategory_name() {
-		return category_name;
-	}
-
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
-	}
-
 	public String getScType() {
 		return scType;
 	}
@@ -134,5 +92,55 @@ public class ProblemVO {
 	public void setAnswer_no(int answer_no) {
 		this.answer_no = answer_no;
 	}
+
+	public int getQ_seq() {
+		return q_seq;
+	}
+
+	public void setQ_seq(int q_seq) {
+		this.q_seq = q_seq;
+	}
+
+	public String getQ_contents() {
+		return q_contents;
+	}
+
+	public void setQ_contents(String q_contents) {
+		this.q_contents = q_contents;
+	}
+
+	public String getQ_type() {
+		return q_type;
+	}
+
+	public void setQ_type(String q_type) {
+		this.q_type = q_type;
+	}
+
+	public String getUse_yn() {
+		return use_yn;
+	}
+
+	public void setUse_yn(String use_yn) {
+		this.use_yn = use_yn;
+	}
+
+	public int getC_seq() {
+		return c_seq;
+	}
+
+	public void setC_seq(int c_seq) {
+		this.c_seq = c_seq;
+	}
+
+	public String getC_name() {
+		return c_name;
+	}
+
+	public void setC_name(String c_name) {
+		this.c_name = c_name;
+	}
+	
+	
 
 }
