@@ -161,7 +161,7 @@
 				if (chkObj[i].type == "checkbox") {
 					chkObj[i].checked = false;
 				}
-			}
+			} // fffffwdwdwfwfa
 		}
 	} 
 </script>
