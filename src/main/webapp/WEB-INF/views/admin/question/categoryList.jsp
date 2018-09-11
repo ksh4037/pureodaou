@@ -12,7 +12,7 @@
 
 	<div class="container">
 		<h2>
-			<span style="color: #5bc0de">카테고리 관리test</span>
+			<span style="color: #5bc0de">카테고리 관리</span>
 		</h2>
 		<p>
 			<span class="span-font">풀어다우 서비스의 문제 카테고리 정보입니다.</span>

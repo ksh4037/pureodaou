@@ -26,8 +26,9 @@
 				<div class="container">
 					<span style="color: red">문제유형을 선택해주세요.</span>
 					<br><br> 
+					<input type="radio" name="type" onclick="typeChange('1');"> O/X &nbsp;&nbsp;&nbsp; 
 					<input type="radio" name="type" onclick="typeChange('2');"> 객관식 &nbsp;&nbsp;&nbsp; 
-					<input type="radio" name="type" onclick="typeChange('1');"> O/X
+					<input type="radio" name="type" onclick="typeChange('3');"> 주관식 
 				</div>
 
 				<form name="ox_writeForm" id="ox_writeForm" method="post" style="display: none">
@@ -98,7 +99,7 @@
 						<table class="table table-hover">
 							<tr>
 								<td width="7%">문제</td>
-								<td><textarea id="q_contents" name="q_contents" class="form-control" rows="20" cols="200"> </textarea></td>
+								<td><textarea id="q_contents" name="q_contents" rows="20" cols="200"  class="form-control summernote" style="width: 100%"> </textarea></td>
 							</tr>
 
 							<tr>
@@ -173,6 +174,10 @@
 							</tr>
 						</table>
 					</div>
+				</form>
+				
+				<form name="long_writeForm" id="long_writeForm" method="post" style="display:none">
+				
 				</form>
 
 			</div>
