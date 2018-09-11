@@ -3,6 +3,7 @@
 	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.daou.pd.admin.question.QuestionMapper">
+
 	<select id="questionList" resultType="questionVO">
 		select q_seq, q_contents, q_type, use_yn, reg_id, reg_date, upt_id, upt_date, c_seq
 		from question_info
@@ -14,6 +15,7 @@
 		</if>
 	</select>
 
+	
 	<select id="questionDetail" resultType="questionVO">
 		select q_seq, q_contents, q_type, use_yn, reg_id, reg_date, upt_id, upt_date, c_seq
 		from question_info
