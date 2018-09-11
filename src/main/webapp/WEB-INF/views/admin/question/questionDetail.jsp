@@ -63,8 +63,8 @@
 								<td>보기</td>
 								<td>
 									<c:forEach items="${optionDetail}" var="optionDetail" varStatus="status">
-										<input type="radio" name="type" <c:if test="${optionDetail.option_contents == 'O' }">checked</c:if> disabled /> O
-					    				<input type="radio" name="type" <c:if test="${optionDetail.option_contents == 'X' }">checked</c:if> disabled /> X
+										<input type="radio" name="type" <c:if test="${optionDetail.o_contents == 'O' }">checked</c:if> disabled /> O
+					    				<input type="radio" name="type" <c:if test="${optionDetail.o_contents == 'X' }">checked</c:if> disabled /> X
 									</c:forEach>
 								</td>
 							</tr>
