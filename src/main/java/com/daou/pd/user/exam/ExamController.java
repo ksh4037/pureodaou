@@ -1,10 +1,27 @@
 package com.daou.pd.user.exam;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.daou.pd.admin.question.OptionVO;
+import com.daou.pd.admin.question.QuestionVO;
 
 @Controller
 public class ExamController {
-	/*
 	String id = "90100";// 임시 아이디와 회차
 //	int degree = 1;
 	@Autowired
@@ -56,7 +73,7 @@ public class ExamController {
 		if (cnt == 0) {
 			List<QuestionVO> list = examService.getProblem(ox_num, obj_num);
 			for (QuestionVO pVO : list) {
-				List<OptionVO> oplist = examService.getOpList(pVO.getProblem_seq());
+				List<OptionVO> oplist = examService.getOpList(pVO.getQ_seq());
 				List<OptionVO> oplist2 = new ArrayList<OptionVO>();
 				if (oplist.size() > 2) {// 객관식 보기 섞기
 					for (OptionVO oVO : oplist) {
@@ -81,13 +98,13 @@ public class ExamController {
 				ExamVO eVO = new ExamVO();
 				eVO.setExam_test_no(degree);
 				eVO.setReg_id(id);
-				eVO.setProblem_seq(pVO.getProblem_seq());
+				eVO.setProblem_seq(pVO.getQ_seq());
 				List<OptionVO> oplist = pVO.getOvo();
 				if (oplist.size() > 2) {
-					eVO.setOption1(oplist.get(0).getOption_seq());
-					eVO.setOption2(oplist.get(1).getOption_seq());
-					eVO.setOption3(oplist.get(2).getOption_seq());
-					eVO.setOption4(oplist.get(3).getOption_seq());
+					eVO.setOption1(oplist.get(0).getO_seq());
+					eVO.setOption2(oplist.get(1).getO_seq());
+					eVO.setOption3(oplist.get(2).getO_seq());
+					eVO.setOption4(oplist.get(3).getO_seq());
 				}
 				examList.add(eVO);
 			}
@@ -107,8 +124,8 @@ public class ExamController {
 		map.put("reg_id", id);
 		map.put("exam_test_no", degree);
 		for (QuestionVO pVO : plist) {
-			if (pVO.getType().equals("2")) {
-				map.put("problem_seq", pVO.getProblem_seq());
+			if (pVO.getQ_type().equals("2")) {
+				map.put("problem_seq", pVO.getQ_seq());
 				List<OptionVO> olist = examService.getExamOption(map);
 				pVO.setOvo(olist);
 				map.remove("problem_seq");
@@ -170,5 +187,5 @@ public class ExamController {
 		HttpSession session = req.getSession(false);
 		String id = (String) session.getAttribute("e_id");
 		return id;
-	}*/
+	}
 }

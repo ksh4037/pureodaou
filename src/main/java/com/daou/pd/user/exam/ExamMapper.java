@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.daou.pd.admin.problem.OptionVO;
+import com.daou.pd.admin.question.OptionVO;
 import com.daou.pd.admin.question.QuestionVO;
 
 public interface ExamMapper {

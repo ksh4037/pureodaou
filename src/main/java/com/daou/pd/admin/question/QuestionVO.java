@@ -12,10 +12,10 @@ public class QuestionVO {
 	private String upt_id;
 	private String upt_date;
 	private String use_yn;
-	
-	
-	//private List<OptionVO> ovo;
-	
+	private List<OptionVO> ovo;
+
+	// private List<OptionVO> ovo;
+
 	// 몇 번째가 정답인지 받아오는 변수
 	private int answer_no;
 
@@ -27,16 +27,12 @@ public class QuestionVO {
 	private String scType;
 	private String srch_input;
 
-	
 	/*
-	public List<OptionVO> getOvo() {
-		return ovo;
-	}
+	 * public List<OptionVO> getOvo() { return ovo; }
+	 * 
+	 * public void setOvo(List<OptionVO> ovo) { this.ovo = ovo; }
+	 */
 
-	public void setOvo(List<OptionVO> ovo) {
-		this.ovo = ovo;
-	}*/
-	
 	public String getReg_id() {
 		return reg_id;
 	}
@@ -140,7 +136,13 @@ public class QuestionVO {
 	public void setC_name(String c_name) {
 		this.c_name = c_name;
 	}
-	
-	
+
+	public List<OptionVO> getOvo() {
+		return ovo;
+	}
+
+	public void setOvo(List<OptionVO> ovo) {
+		this.ovo = ovo;
+	}
 
 }
