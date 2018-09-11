@@ -228,17 +228,16 @@
 			if (input_check == true) {
 
 				if ($("#ch_writeForm").css('display') == 'block') {
-					alert("c");
+
 					$("#answer_no").val($('input[id="answer_seq"]:checked').index('input[id="answer_seq"]'));
 
 					var queryString = $("form[name=ch_writeForm]").serialize();
 					var option_contents = new Array();
 
-					for (var i = 0; i < document
-							.getElementsByName('o_contents').length; i++) {
-						option_contents[i] = document
-								.getElementsByName('o_contents')[i].value;
+					for (var i = 0; i < document.getElementsByName('o_contents').length; i++) {
+						option_contents[i] = document.getElementsByName('o_contents')[i].value;
 					}
+					
 
 					$.ajax({
 						type : "POST",
