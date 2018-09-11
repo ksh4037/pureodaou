@@ -35,8 +35,8 @@ public class QuestionVO {
 
 	public void setOvo(List<OptionVO> ovo) {
 		this.ovo = ovo;
-	}
-	*/
+	}*/
+	
 	public String getReg_id() {
 		return reg_id;
 	}

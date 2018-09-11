@@ -24,7 +24,7 @@
 	<select id="optionDetail" resultType="HashMap">
 		select q.q_seq, q.q_contents, q.q_type, q.c_seq, q.reg_id, q.reg_date, q.c_seq, o.o_seq, o.o_contents , o.answer_yn
 		from question_info q left join option_info o
-		on q.q__seq = o.q_seq
+		on q.q_seq = o.q_seq
 		where q.q_seq = #{q_seq}
 		and q.use_yn = 'N'
 		order by o.answer_yn desc
@@ -51,16 +51,12 @@
 
 	<insert id="optionReg" parameterType="OptionVO">
 		insert into
-		option_info(q_seq, o_contents, answer_yn, reg_id, reg_date, upt_id, upt_date)
+		option_info(q_seq, o_contents, answer_yn)
 		values
 		(
 			#{q_seq},
 			#{o_contents},
-			#{answer_yn},
-			'admin',
-			now(),
-			null,
-			null
+			#{answer_yn}
 		)
 	</insert>
 

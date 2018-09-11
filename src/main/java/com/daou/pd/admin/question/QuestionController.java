@@ -66,6 +66,7 @@ public class QuestionController {
 	public ModelAndView questionReg(HttpServletRequest request, HttpServletResponse response, QuestionVO pvo,
 			OptionVO ovo, @RequestParam(value = "o_contents") String[] o_contents) {
 
+
 		ModelAndView mav = new ModelAndView("admin/question/result");
 
 		String msg = "";
@@ -95,20 +96,21 @@ public class QuestionController {
 
 				q_result = questionService.questionReg(pvo);
 				int q_seq = questionService.selectQuestionSeq();
+
 				ovo.setQ_seq(q_seq);
 
 				for (int i = 0; i < o_contents.length; i++) {
 
-					if (i == pvo.getAnswer_no()) { // 첫 번째가 정답이니까
+					if (i == pvo.getAnswer_no()) { // 정답인 보기의 위치
 						ovo.setAnswer_yn("Y");
 					} else {
 						ovo.setAnswer_yn("N");
 					}
 
 					ovo.setO_contents(o_contents[i]);
-					o_result = questionService.optionReg(ovo);
+					o_result += questionService.optionReg(ovo);
 				}
-
+				
 				if (q_result == 1 && o_result >= 1) {
 					msg = "success";
 				} else {
