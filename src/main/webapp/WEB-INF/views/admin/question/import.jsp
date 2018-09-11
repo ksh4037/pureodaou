@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="../resources/js/admin.js"></script>
 	
 	
-	<!-- // editor -->
+	<!-- // --  editor -->
 	<script src="../resources/summernote/summernote.js"></script>
  	<script src="../resources/summernote/lang/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="../resources/summernote/summernote.css">
