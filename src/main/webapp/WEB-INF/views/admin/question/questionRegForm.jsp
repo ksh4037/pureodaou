@@ -99,7 +99,7 @@
 						<table class="table table-hover">
 							<tr>
 								<td width="7%">문제</td>
-								<td><textarea id="q_contents" name="q_contents" class="form-control" rows="20" cols="200"> </textarea></td>
+								<td><textarea id="q_contents" name="q_contents" rows="20" cols="200"  class="form-control summernote" style="width: 100%"> </textarea></td>
 							</tr>
 
 							<tr>
