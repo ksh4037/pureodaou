@@ -46,7 +46,7 @@
 								</tr>
 
 								<tr>
-									<td width="7%">보충자료</td>
+									<td width="7%">보충자료<br>(50kb 이하)</td>
 									<td>
 										<textarea id="item_contents" name="item_contents" class="form-control summernote" rows="20" cols="200">${itemDetail.item_contents}</textarea>
 									</td>

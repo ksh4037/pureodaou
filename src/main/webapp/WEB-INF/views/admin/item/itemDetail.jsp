@@ -30,7 +30,7 @@
 					<br>
 					<table class="table">
 						<tr>
-							<td>문제</td>
+							<td style="width:10%">문제</td>
 							<td>${itemDetail.item_title}</td>
 						</tr>
 						

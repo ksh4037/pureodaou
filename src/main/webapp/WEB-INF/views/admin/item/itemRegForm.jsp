@@ -46,7 +46,7 @@
 			
 			
 							<tr>
-								<td width="7%">보충자료</td>
+								<td width="7%">보충자료<br>(50kb 이하)</td>
 								<td><textarea class="form-control summernote" id="item_contents" name="item_contents" rows="20" cols="170"> </textarea></td>
 							</tr>
 							
@@ -280,32 +280,7 @@
 			}
 		}
 
-		function typeChange(type) {
-			if (type == '1') {
-				document.ch_writeForm.reset();
-				document.short_writeForm.reset();
-				$("#ch_writeForm").css('display', 'none');
-				$("#short_writeForm").css('display', 'none');
-				$("#ox_writeForm").css('display', 'block');
-			}
 
-			if (type == '2') {
-				document.ox_writeForm.reset();
-				document.short_writeForm.reset();
-				$("#ox_writeForm").css('display', 'none');
-				$("#short_writeForm").css('display', 'none');
-				$("#ch_writeForm").css('display', 'block');
-			}
-			
-			if (type == '3') {
-				document.ox_writeForm.reset();
-				document.ch_writeForm.reset();
-				$("#ox_writeForm").css('display', 'none');
-				$("#ch_writeForm").css('display', 'none');
-				$("#short_writeForm").css('display', 'block');
-			}
-			
-		}
 
 		function goReg() {
 			var input_check = goInputCheck();
@@ -398,6 +373,33 @@
 				return;
 			}
 		}
+		
+		function typeChange(type) {
+			if (type == '1') {
+				document.ch_writeForm.reset();
+				document.short_writeForm.reset();
+				$("#ch_writeForm").css('display', 'none');
+				$("#short_writeForm").css('display', 'none');
+				$("#ox_writeForm").css('display', 'block');
+			}
+
+			if (type == '2') {
+				document.ox_writeForm.reset();
+				document.short_writeForm.reset();
+				$("#ox_writeForm").css('display', 'none');
+				$("#short_writeForm").css('display', 'none');
+				$("#ch_writeForm").css('display', 'block');
+			}
+			
+			if (type == '3') {
+				document.ox_writeForm.reset();
+				document.ch_writeForm.reset();
+				$("#ox_writeForm").css('display', 'none');
+				$("#ch_writeForm").css('display', 'none');
+				$("#short_writeForm").css('display', 'block');
+			}
+		}
+		
 
 		function goList() {
 			location.href = "itemList.daou";
