@@ -7,11 +7,11 @@
 
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+<%@ include file="../common/import.jsp"%>
 <body>
 
 	<form name="clistForm" id="clistForm">
-		<input type="hidden" id="c_seq" name="c_seq" value="${categoryDetail.c_seq}"> 
+		<input type="hidden" id="category_no" name="category_no" value="${categoryDetail.category_no}"> 
 		<input type="hidden" name="caller" value="updt">
 
 		<div class="container">
@@ -22,7 +22,7 @@
 			<table class="table">
 				<tr>
 					<td>카테고리명</td>
-					<td>${categoryDetail.c_name}</td>
+					<td>${categoryDetail.category_name}</td>
 				</tr>
 			</table>
 
@@ -37,7 +37,7 @@
 
 	<script type="text/javascript">
 		function goList() {
-			location.href = "categoryList";
+			location.href = "categoryList.daou";
 		}
 
 		function goUpdtForm() {
@@ -50,13 +50,13 @@
 
 				$.ajax({
 					type : "POST",
-					url : "deleteCategory",
+					url : "deleteCategory.daou",
 					data : queryString,
 					async : false,
 					success : function(data) {
 						if (data == "success") {
 							alert("삭제되었습니다.");
-							location.href = "categoryList";
+							location.href = "categoryList.daou";
 						} else if (data == "error") {
 							alert("삭제에 실패하였습니다.");
 							return;

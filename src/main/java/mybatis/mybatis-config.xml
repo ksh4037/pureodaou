@@ -14,11 +14,11 @@
 		<typeAlias alias="boardVO"
 			type="com.daou.pd.admin.board.BoardVO"></typeAlias>
 			
-		<typeAlias alias="questionVO"
-			type="com.daou.pd.admin.question.QuestionVO"></typeAlias>
+		<typeAlias alias="itemVO"
+			type="com.daou.pd.admin.item.ItemVO"></typeAlias>
 			
-		<typeAlias alias="OptionVO"
-			type="com.daou.pd.admin.question.OptionVO"></typeAlias>
+		<typeAlias alias="optionVO"
+			type="com.daou.pd.admin.item.OptionVO"></typeAlias>
 			
 		<typeAlias alias="examVO"
 			type="com.daou.pd.user.exam.ExamVO"></typeAlias>

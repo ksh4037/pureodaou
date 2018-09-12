@@ -9,12 +9,12 @@
 
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+<%@ include file="../common/import.jsp"%>
 <body>
 	<div class="container-fluid">
 		<div class="row content">
 
-			<%@ include file="lnb.jsp"%>
+		<%@ include file="../common/lnb.jsp"%>
 
 			<div class="col-sm-9">
 				<h4 class="s_title" style="padding-top: 25px; padding-bottom: 15px">
@@ -31,7 +31,7 @@
 					</p>
 
 					<form name="listForm" id="listForm" method="post">
-						<input type="hidden" name="q_seq" id="q_seq" />
+						<input type="hidden" name="item_no" id="item_no" />
 						<table class="table">
 							<thead>
 								<tr>
@@ -45,33 +45,34 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:if test="${!empty questionList}">
-									<c:forEach items="${questionList}" var="questionList" varStatus="status">
+								<c:if test="${!empty itemList}">
+									<c:forEach items="${itemList}" var="itemList" varStatus="status">
 										<tr>
-											<td><input type="checkbox" name="del_check" id="del_check" value="${questionList.q_seq}"></td>
+											<td><input type="checkbox" name="del_check" id="del_check" value="${itemList.item_no}"></td>
 											<td align="left">${status.index+1}</td>
-											<td><a href="#" onclick="goDetail('${questionList.q_seq}');">${questionList.q_contents}</a></td>
+											<td><a href="#" onclick="goDetail('${itemList.item_no}');">${itemList.item_title}</a></td>
 											
 											<td align="center">
-												<c:if test="${questionList.q_type == 1}"><span style="color: red">O/X</span></c:if>
-												<c:if test="${questionList.q_type == 2}"><span style="color: red">객관식</span></c:if>
+												<c:if test="${itemList.item_type == 1}"><span style="color: red">O/X</span></c:if>
+												<c:if test="${itemList.item_type == 2}"><span style="color: red">객관식</span></c:if>
+												<c:if test="${itemList.item_type == 3}"><span style="color: red">주관식</span></c:if>
 											</td>
 											
 											<td align="center">
 												<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
-													<c:if test="${questionList.c_seq == categoryList.c_seq}">
-														<span style="color: red">${categoryList.c_name}</span>
+													<c:if test="${itemList.category_no == categoryList.category_no}">
+														<span style="color: red">${categoryList.category_name}</span>
 													</c:if>
 												</c:forEach>
 											</td>
 											
-											<td align="center">${questionList.reg_id}</td>
-											<td align="center">${fn:substring(questionList.reg_date,0,10)}</td>
+											<td align="center">${itemList.reg_id}</td>
+											<td align="center">${fn:substring(itemList.reg_date,0,10)}</td>
 										</tr>
 									</c:forEach>
 								</c:if>
 								
-								<c:if test="${empty questionList}">
+								<c:if test="${empty itemList}">
 									<tr>
 										<td colspan="6"><center>등록된 문제 정보가 없습니다.</center></td>
 									</tr>
@@ -89,18 +90,18 @@
 		</div>
 	</div>
 
-	<%@ include file="footer.jsp"%>
+	<%@ include file="../common/footer.jsp"%>
 
 	<script type="text/javascript">
 	
-		function goDetail(q_seq) { //상세보기 페이지 이동
-			$("#q_seq").val(q_seq);
-			$("#listForm").attr("action", "questionDetail");
+		function goDetail(item_no) { //상세보기 페이지 이동
+			$("#item_no").val(item_no);
+			$("#listForm").attr("action", "itemDetail.daou");
 			$("#listForm").submit();
 		}
 
 		function goReg() { // 등록페이지 이동
-			location.href = "questionRegForm";
+			location.href = "itemRegForm.daou";
 		}
 
 
@@ -145,7 +146,7 @@
 			} else {
 				$.ajax({
 					type : "POST",
-					url : "deleteChkQuestion",
+					url : "deleteChkItem.daou",
 					data : {
 						"rowid" : rowid
 					},
@@ -153,7 +154,7 @@
 					success : function(data) {
 						if (data == "success") {
 							alert("삭제되었습니다.");
-							location.href = location.href;
+							location.href = "itemList.daou";
 						} else if (data == "error") {
 							alert("삭제에 실패하였습니다. \n다시 시도해주세요.");
 							return;
@@ -187,7 +188,7 @@
 
 		
 		function goCtgList() { // 카테고리관리 페이지 이동 (팝업창 띄우기)
-			var popUrl = "categoryList"; //팝업창에 출력될 페이지 URL
+			var popUrl = "categoryList.daou"; //팝업창에 출력될 페이지 URL
 			var popOption = "width=500, height=360, resizable=no, scrollbars=no, status=no, ,scrollbars=yes"; //팝업창 옵션(optoin)
 
 			window.open(popUrl, "", popOption);

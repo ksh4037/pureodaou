@@ -1,38 +1,37 @@
-package com.daou.pd.admin.question;
+package com.daou.pd.admin.item;
 
 import java.util.List;
 
-public class QuestionVO {
+public class ItemVO {
 
-	private int q_seq;
-	private String q_contents;
-	private String q_type;
+	private int item_no;
+	private String item_title;
+	private String item_contents;
+	private String item_type;
 	private String reg_id;
 	private String reg_date;
 	private String upt_id;
 	private String upt_date;
 	private String use_yn;
+
+	
 	private List<OptionVO> ovo;
 
-	// private List<OptionVO> ovo;
 
 	// 몇 번째가 정답인지 받아오는 변수
 	private int answer_no;
 
 	// 카테고리
-	private int c_seq;
-	private String c_name;
+	private int category_no;
+	private String category_name;
 
 	// 검색
 	private String scType;
 	private String srch_input;
 
-	/*
-	 * public List<OptionVO> getOvo() { return ovo; }
-	 * 
-	 * public void setOvo(List<OptionVO> ovo) { this.ovo = ovo; }
-	 */
 
+	
+	
 	public String getReg_id() {
 		return reg_id;
 	}
@@ -89,52 +88,12 @@ public class QuestionVO {
 		this.answer_no = answer_no;
 	}
 
-	public int getQ_seq() {
-		return q_seq;
-	}
-
-	public void setQ_seq(int q_seq) {
-		this.q_seq = q_seq;
-	}
-
-	public String getQ_contents() {
-		return q_contents;
-	}
-
-	public void setQ_contents(String q_contents) {
-		this.q_contents = q_contents;
-	}
-
-	public String getQ_type() {
-		return q_type;
-	}
-
-	public void setQ_type(String q_type) {
-		this.q_type = q_type;
-	}
-
 	public String getUse_yn() {
 		return use_yn;
 	}
 
 	public void setUse_yn(String use_yn) {
 		this.use_yn = use_yn;
-	}
-
-	public int getC_seq() {
-		return c_seq;
-	}
-
-	public void setC_seq(int c_seq) {
-		this.c_seq = c_seq;
-	}
-
-	public String getC_name() {
-		return c_name;
-	}
-
-	public void setC_name(String c_name) {
-		this.c_name = c_name;
 	}
 
 	public List<OptionVO> getOvo() {
@@ -144,5 +103,55 @@ public class QuestionVO {
 	public void setOvo(List<OptionVO> ovo) {
 		this.ovo = ovo;
 	}
+
+	public int getItem_no() {
+		return item_no;
+	}
+
+	public void setItem_no(int item_no) {
+		this.item_no = item_no;
+	}
+
+	public String getItem_title() {
+		return item_title;
+	}
+
+	public void setItem_title(String item_title) {
+		this.item_title = item_title;
+	}
+
+	public String getItem_contents() {
+		return item_contents;
+	}
+
+	public void setItem_contents(String item_contents) {
+		this.item_contents = item_contents;
+	}
+
+	public String getItem_type() {
+		return item_type;
+	}
+
+	public void setItem_type(String item_type) {
+		this.item_type = item_type;
+	}
+
+	public int getCategory_no() {
+		return category_no;
+	}
+
+	public void setCategory_no(int category_no) {
+		this.category_no = category_no;
+	}
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+	
+	
 
 }

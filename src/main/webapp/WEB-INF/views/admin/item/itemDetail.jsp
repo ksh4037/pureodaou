@@ -7,15 +7,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+<%@ include file="../common/import.jsp"%>
 <body>
 
 	<div class="container-fluid">
 		<div class="row content">
-			<%@ include file="lnb.jsp"%>
+			<%@ include file="../common/lnb.jsp"%>
 
 			<form name="detailKeyInfo" id="detailKeyInfo" method="post">
-				<input type="hidden" name="q_seq" value="${questionDetail.q_seq}" />
+				<input type="hidden" name="item_no" value="${itemDetail.item_no}" />
 			</form>
 
 			<div class="col-sm-9">
@@ -31,34 +31,44 @@
 					<table class="table">
 						<tr>
 							<td>문제</td>
-							<td>${questionDetail.q_contents}</td>
+							<td>${itemDetail.item_title}</td>
 						</tr>
+						
+						<tr>
+							<td>보충자료</td>
+							<td>${itemDetail.item_contents}</td>
+						</tr>
+						
 
 						<tr>
 							<td>문제유형</td>
 							<td>
-								<c:if test="${questionDetail.q_type == 1}">
+								<c:if test="${itemDetail.item_type == 1}">
 									<span style="color: red">O/X </span>
 								</c:if> 
 								
-								<c:if test="${questionDetail.q_type == 2}">
+								<c:if test="${itemDetail.item_type == 2}">
 									<span style="color: red">객관식</span>
+								</c:if>
+								
+								<c:if test="${itemDetail.item_type == 3}">
+									<span style="color: red">주관식</span>
 								</c:if>
 							</td>
 						</tr>
 
 						<tr>
-							<td>문제유형</td>
+							<td>카테고리</td>
 							<td>
 								<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
-									<c:if test="${questionDetail.c_seq == categoryList.c_seq}">
-										<span style="color:red">${categoryList.c_name}</span>
+									<c:if test="${itemDetail.category_no == categoryList.category_no}">
+										<span style="color:red">${categoryList.category_name}</span>
 									</c:if>
 								</c:forEach>
 							</td>
 						</tr>
 
-						<c:if test="${questionDetail.q_type == '1'}">
+						<c:if test="${itemDetail.item_type == '1'}">
 							<tr>
 								<td>보기</td>
 								<td>
@@ -70,34 +80,44 @@
 							</tr>
 						</c:if>
 
-						<c:if test="${questionDetail.q_type == '2'}">
+						<c:if test="${itemDetail.item_type == '2'}">
 						
 							<c:forEach items="${optionDetail}" var="optionDetail" varStatus="status">
-								<c:if test="${optionDetail.answer_yn == 'Y'}">
+								<c:if test="${optionDetail.correct_yn == 'Y'}">
 									<tr>
 										<td><span style="color: red">정답</span></td>
-										<td><span>${optionDetail.o_contents}</span></td>
+										<td><span>${optionDetail.option_contents}</span></td>
 									</tr>
 								</c:if>
 
-								<c:if test="${optionDetail.answer_yn == 'N'}">
+								<c:if test="${optionDetail.correct_yn == 'N'}">
 									<tr>
 										<td>보기</td>
-										<td><span>${optionDetail.o_contents}</span></td>
+										<td><span>${optionDetail.option_contents}</span></td>
 									</tr>
 								</c:if>
 							</c:forEach>
-							
+						</c:if>
+						
+						<c:if test="${itemDetail.item_type == '3'}">
+							<tr>
+								<td>정답</td>
+								<td>
+									<c:forEach items="${optionDetail}" var="optionDetail" varStatus="status">
+										${optionDetail.option_contents}
+									</c:forEach>
+								</td>
+							</tr>
 						</c:if>
 
 						<tr>
 							<td>작성자</td>
-							<td>${questionDetail.reg_id}</td>
+							<td>${itemDetail.reg_id}</td>
 						</tr>
 						
 						<tr>
 							<td>작성일자</td>
-							<td>${fn:substring(questionDetail.reg_date,0,16)}</td>
+							<td>${fn:substring(itemDetail.reg_date,0,16)}</td>
 						</tr>
 					</table>
 
@@ -112,15 +132,15 @@
 		</div>
 	</div>
 
-	<%@ include file="footer.jsp"%>
+<%@ include file="../common/footer.jsp"%>
 
 	<script type="text/javascript">
 		function goList() {
-			location.href = "questionList";
+			location.href = "itemList.daou";
 		}
 
 		function goUpdtForm() {
-			$("#detailKeyInfo").attr("action", "questionUpdtForm");
+			$("#detailKeyInfo").attr("action", "itemUpdtForm.daou");
 			$("#detailKeyInfo").submit();
 		}
 
@@ -131,13 +151,13 @@
 
 				$.ajax({
 					type : "POST",
-					url : "deleteQuestion",
+					url : "deleteItem.daou",
 					data : queryString,
 					async : false,
 					success : function(data) {
 						if (data == "success") {
 							alert("삭제되었습니다.");
-							location.href = "questionList";
+							location.href = "itemList.daou";
 						} else if (data == "error") {
 							alert("삭제에 실패하였습니다. \n다시 시도해주세요.");
 							return;

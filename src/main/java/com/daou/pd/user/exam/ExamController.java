@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.daou.pd.admin.question.OptionVO;
-import com.daou.pd.admin.question.QuestionVO;
+import com.daou.pd.admin.item.OptionVO;
+import com.daou.pd.admin.item.ItemVO;
 
 @Controller
 public class ExamController {
+	/*
 	String id = "90100";// 임시 아이디와 회차
 //	int degree = 1;
 	@Autowired
@@ -71,8 +72,8 @@ public class ExamController {
 
 		int cnt = examService.getPersence(id, degree);
 		if (cnt == 0) {
-			List<QuestionVO> list = examService.getProblem(ox_num, obj_num);
-			for (QuestionVO pVO : list) {
+			List<ItemVO> list = examService.getProblem(ox_num, obj_num);
+			for (ItemVO pVO : list) {
 				List<OptionVO> oplist = examService.getOpList(pVO.getQ_seq());
 				List<OptionVO> oplist2 = new ArrayList<OptionVO>();
 				if (oplist.size() > 2) {// 객관식 보기 섞기
@@ -94,7 +95,7 @@ public class ExamController {
 
 			List<ExamVO> examList = new ArrayList<ExamVO>();
 
-			for (QuestionVO pVO : list) {
+			for (ItemVO pVO : list) {
 				ExamVO eVO = new ExamVO();
 				eVO.setExam_test_no(degree);
 				eVO.setReg_id(id);
@@ -119,11 +120,11 @@ public class ExamController {
 		String id = getSessionId(req);
 //		String id = "90100";
 		ModelAndView mav = new ModelAndView("user/exam/examTest");
-		List<QuestionVO> plist = examService.getExam(id, degree);
+		List<ItemVO> plist = examService.getExam(id, degree);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("reg_id", id);
 		map.put("exam_test_no", degree);
-		for (QuestionVO pVO : plist) {
+		for (ItemVO pVO : plist) {
 			if (pVO.getQ_type().equals("2")) {
 				map.put("problem_seq", pVO.getQ_seq());
 				List<OptionVO> olist = examService.getExamOption(map);
@@ -187,5 +188,5 @@ public class ExamController {
 		HttpSession session = req.getSession(false);
 		String id = (String) session.getAttribute("e_id");
 		return id;
-	}
+	}*/
 }

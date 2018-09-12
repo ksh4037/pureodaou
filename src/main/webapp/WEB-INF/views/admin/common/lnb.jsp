@@ -10,7 +10,7 @@
 	<hr style="height: 2px; background-color: white">
 
 	<ul class="nav nav-pills nav-stacked">
-		<li><a href="#" onclick="goList('questionList');" id="question_li">문제관리</a>
+		<li><a href="#" onclick="goList('itemList');" id="item_li">문제관리</a>
 
 		</li>
 
