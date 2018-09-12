@@ -4,8 +4,11 @@
 	
 $(document).ready(function() {
 	
+
+	
+	// ----- 에디터 가져오기 ----
 	$('.summernote').summernote({
-		         height : 300, // 기본 높이값
+		         height : 500, // 기본 높이값
 		         minHeight : null, // 최소 높이값(null은 제한 없음)
 		         maxHeight : null, // 최대 높이값(null은 제한 없음)
 		         focus : true, // 페이지가 열릴때 포커스를 지정함
@@ -13,7 +16,23 @@ $(document).ready(function() {
 		      });
 	
 
+	$('.summernote').summernote({
+  	toolbar: [
+	    // [groupName, [list of button]]
+	    ['style', ['bold', 'italic', 'underline', 'clear']],
+	    ['font', ['strikethrough', 'superscript', 'subscript']],
+	    ['fontsize', ['fontsize']],
+	    ['color', ['color']],
+	    ['para', ['ul', 'ol', 'paragraph']],
+	    ['height', ['height']]
+	  ]
+	 });
+	//-------------------------------
+	
+	
+	
 	var path = window.location.href;
+	
 	if(path.indexOf("admin/question") != -1) {
 		$("#question_li").addClass("active_1"); 
 		$("#exam_li").removeClass("active_1"); 

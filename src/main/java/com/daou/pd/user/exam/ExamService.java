@@ -3,13 +3,13 @@ package com.daou.pd.user.exam;
 import java.util.HashMap;
 import java.util.List;
 
-import com.daou.pd.admin.question.OptionVO;
-import com.daou.pd.admin.question.QuestionVO;
+import com.daou.pd.admin.item.OptionVO;
+import com.daou.pd.admin.item.ItemVO;
 
 public interface ExamService {
 	public int test();
 
-	public List<QuestionVO> getProblem(int ox, int obj);
+	public List<ItemVO> getProblem(int ox, int obj);
 
 	public void tempRegist(List<ExamVO> exam);
 
@@ -27,7 +27,7 @@ public interface ExamService {
 
 	public void insertExam(List<ExamVO> examList);
 
-	public List<QuestionVO> getExam(String id, int degree);
+	public List<ItemVO> getExam(String id, int degree);
 
 	public List<OptionVO> getExamOption(HashMap<String, Object> map);
 
