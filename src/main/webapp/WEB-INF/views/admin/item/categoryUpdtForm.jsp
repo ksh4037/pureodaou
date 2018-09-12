@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+<%@ include file="../common/import.jsp"%>
 <body>
 	<div class="container">
 		<h2 style="color: #5bc0de">카테고리 등록 페이지</h2>

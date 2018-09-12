@@ -7,12 +7,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+<%@ include file="../common/import.jsp"%>
 <body>
 
 	<div class="container-fluid">
 		<div class="row content">
-			<%@ include file="lnb.jsp"%>
+			<%@ include file="../common/lnb.jsp"%>
 
 			<form name="detailKeyInfo" id="detailKeyInfo" method="post">
 				<input type="hidden" name="item_no" value="${itemDetail.item_no}" />
@@ -118,7 +118,7 @@
 		</div>
 	</div>
 
-	<%@ include file="footer.jsp"%>
+<%@ include file="../common/footer.jsp"%>
 
 	<script type="text/javascript">
 		function goList() {

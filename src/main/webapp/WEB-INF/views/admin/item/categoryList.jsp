@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+<%@ include file="../common/import.jsp"%>
 <body>
 
 	<div class="container">

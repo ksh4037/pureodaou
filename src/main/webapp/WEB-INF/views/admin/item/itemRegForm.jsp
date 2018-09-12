@@ -9,12 +9,12 @@
 
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+	<%@ include file="../common/import.jsp"%>
 <body>
 
 	<div class="container-fluid">
 		<div class="row content">
-			<%@ include file="lnb.jsp"%>
+			<%@ include file="../common/lnb.jsp"%>
 
 			<div class="col-sm-9">
 				<h4 class="s_title" style="padding-top: 25px; padding-bottom: 15px">
@@ -196,7 +196,7 @@
 		</div>
 	</div>
 
-	<%@ include file="footer.jsp"%>
+<%@ include file="../common/footer.jsp"%>
 
 	<script type="text/javascript">
 		// 문항추가버튼 클릭시
