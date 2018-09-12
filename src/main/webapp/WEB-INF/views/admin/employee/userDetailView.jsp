@@ -51,24 +51,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="row content">
-			<div class="col-sm-4 sidenav">
-				<div align="center">
-					<img src="../resources/img/logo2.png" width="235px"
-						style="padding-top: 20px;" />
-				</div>
-				<hr style="height: 2px; background-color: white">
-				<ul class="nav nav-pills nav-stacked">
-					<li><a href="#" onclick="goList('problemList');"
-						id="problem_li">문제관리</a></li>
-					<li><a href="#" id="exam_li">문제출제</a></li>
-					<li><a href="#" onclick="goList('employeeList');"
-						id="member_li">회원관리</a></li>
-					<li><a href="#" id="write_li">기록관리</a></li>
-					<li><a href="#" onclick="goList('boardList');" id="board_li">게시판관리</a></li>
-				</ul>
-				<br>
-			</div>
-
+				<%@ include file="../common/lnb.jsp"%>
 			<div class="col-sm-9">
 				<h4 class="s_title" style="padding-top: 25px; padding-left: 15px">
 					<span class="span-font">Home > 회원관리</span>
@@ -112,13 +95,6 @@
 				</div>
 			</div>
 		</div>
-		
-	<footer class="container-fluid">
-		<p>
-			개인정보처리방침 | 개인정보무단수집거부 | 이메일주소무단수집거부 | 윤리경영우)16878 경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층   대표전화 : 070-8707-1000   사업자등록번호 : 220-81-02810   대표이사: 김윤덕ⓒ 2018 DAOU Tech., INC. All rights reserved. </p>
-		  
-		<p>다우기술 인턴 과제 : 풀어다우</p>
-	</footer>
-
+				<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

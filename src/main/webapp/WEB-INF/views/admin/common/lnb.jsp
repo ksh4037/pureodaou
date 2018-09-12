@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script type="text/javascript">
+function goList(path) {
+
+	if (path == "itemList") {
+		location.href = "itemList.daou";
+	} else if (path == "employeeList") {
+		location.href = "employeeList.daou";
+	} else if (path == "boardList") {
+		location.href = "boardList.daou";
+	}
+}
+</script>
 
 <div class="col-sm-4 sidenav">
 	<div align="center">
