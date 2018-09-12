@@ -362,7 +362,6 @@
 						success : function(data) {
 							alert("수정되었습니다.");
 							location.href = "itemList.daou";
-
 						},
 						error : function(data) {
 							alert("수정에 실패하였습니다.");
