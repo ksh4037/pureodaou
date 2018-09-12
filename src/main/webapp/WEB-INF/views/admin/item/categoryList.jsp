@@ -18,8 +18,8 @@
 			<span class="span-font">풀어다우 서비스의 문제 카테고리 정보입니다.</span>
 		</p>
 
-		<form name="clistForm" id="clistForm" method="post" action="categoryDetail">
-			<input type="hidden" name="c_seq" id="c_seq" /> 
+		<form name="clistForm" id="clistForm" method="post" action="categoryDetail.daou">
+			<input type="hidden" name="category_no" id="category_no" /> 
 			<input type="hidden" name="caller" value="detail" />
 			<table class="table">
 				<thead>
@@ -34,9 +34,9 @@
 					<c:if test="${!empty categoryList}">
 						<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
 							<tr>
-								<td><input type="checkbox" name="del_check" id="del_check"value="${categoryList.c_seq}"></td>
+								<td><input type="checkbox" name="del_check" id="del_check"value="${categoryList.category_no}"></td>
 								<td>${status.index+1}</td>
-								<td><a href="javascript:void(0);" onclick="goDetail('${categoryList.c_seq}');">${categoryList.c_name}</a></td>
+								<td><a href="javascript:void(0);" onclick="goDetail('${categoryList.category_no}');">${categoryList.category_name}</a></td>
 							</tr>
 						</c:forEach>
 					</c:if>
@@ -57,13 +57,13 @@
 
 
 	<script type="text/javascript">
-		function goDetail(c_seq) {
-			$("#c_seq").val(c_seq);
+		function goDetail(category_no) {
+			$("#category_no").val(category_no);
 			document.clistForm.submit();
 		}
 
 		function goCtgRegForm() {
-			location.href = "categoryRegForm";
+			location.href = "categoryRegForm.daou";
 		}
 
 		function goDel() {
@@ -107,7 +107,7 @@
 			} else {
 				$.ajax({
 					type : "POST",
-					url : "deleteChkCategory",
+					url : "deleteChkCategory.daou",
 					data : {
 						"rowid" : rowid
 					},

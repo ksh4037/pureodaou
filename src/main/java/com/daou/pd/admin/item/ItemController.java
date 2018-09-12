@@ -83,6 +83,7 @@ public class ItemController {
 					ovo.setOption_contents(option_contents[i]);
 					o_result += itemService.optionReg(ovo);
 				}
+				
 
 				if (i_result == 1 && o_result >= 1) {
 					msg = "success";
@@ -173,7 +174,7 @@ public class ItemController {
 		int i_update_result = 0;
 		int o_delete_result = 0;
 		int o_reg_result = 0;
-
+		
 		try {
 			if (ivo.getItem_type().equals("1")) { // O/X 저장
 

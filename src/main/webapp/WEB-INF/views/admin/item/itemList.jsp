@@ -50,7 +50,7 @@
 										<tr>
 											<td><input type="checkbox" name="del_check" id="del_check" value="${itemList.item_no}"></td>
 											<td align="left">${status.index+1}</td>
-											<td><a href="#" onclick="goDetail('${itemList.item_no}');">${itemList.item_title}</a></td>
+											<td><a href="#" onclick="goDetail('${itemList.item_no}');">${itemList.item_contents}</a></td>
 											
 											<td align="center">
 												<c:if test="${itemList.item_type == 1}"><span style="color: red">O/X</span></c:if>

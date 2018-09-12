@@ -41,7 +41,7 @@
 
 							<tr>
 								<td width="7%">문제</td>
-								<td><textarea class="form-control" id="item_contents" name="item_contents" rows="20" cols="100"> </textarea></td>
+								<td><textarea class="form-control" id="item_contents" name="item_contents" rows="20" cols="170"> </textarea></td>
 							</tr>
 
 							<tr>
@@ -99,7 +99,7 @@
 						<table class="table table-hover">
 							<tr>
 								<td width="7%">문제</td>
-								<td><textarea id="item_contents" name="item_contents" rows="20" cols="200"></textarea></td>
+								<td><textarea class="form-control" id="item_contents" name="item_contents" rows="20" cols="170"></textarea></td>
 							</tr>
 
 							<tr>
@@ -112,7 +112,6 @@
 												<option value="${categoryList.category_no}">${categoryList.category_name}</option>
 											</c:forEach>
 										</select>
-										
 									</c:if> 
 									
 									<c:if test="${empty categoryList}">
@@ -176,7 +175,7 @@
 					</div>
 				</form>
 				
-				<form name="long_writeForm" id="long_writeForm" method="post" style="display:none">
+				<form name="short_writeForm" id="short_writeForm" method="post" style="display:none">
 				
 				</form>
 
@@ -271,13 +270,13 @@
 
 					$.ajax({
 						type : "POST",
-						url : "questionReg",
+						url : "itemReg.daou",
 						data : queryString,
 						async : false,
 						success : function(data) {
 							if (data == "success") {
 								alert("등록되었습니다.");
-								location.href = "questionList";
+								location.href = "itemList.daou";
 							} else if (data == "error") {
 								alert("등록에 실패하였습니다.");
 								return;
@@ -294,7 +293,7 @@
 		}
 
 		function goList() {
-			location.href = "questionList";
+			location.href = "itemList.daou";
 		}
 
 		function goInputCheck() {
@@ -303,13 +302,13 @@
 
 			if ($("#ch_writeForm").css('display') == 'block') {
 
-				if ($('#ch_writeForm [name="q_contents"]').val().trim() == "") {
+				if ($('#ch_writeForm [name="item_contents"]').val().trim() == "") {
 					alert("문제가 입력되지 않았습니다.");
 					input_check = false;
 				}
 
 				if (input_check == true) {
-					if ($('#ch_writeForm [name="c_seq"]').val() == '') {
+					if ($('#ch_writeForm [name="category_seq"]').val() == '') {
 						alert("카테고리가 선택되지 않았습니다.");
 						input_check = false;
 						return input_check;
@@ -317,8 +316,8 @@
 				}
 
 				if (input_check == true) {
-					for (var i = 0; i < $('#ch_writeForm [name="o_contents"]').length; i++) {
-						if ($('#ch_writeForm [name="o_contents"]')[i].value == '') {
+					for (var i = 0; i < $('#ch_writeForm [name="option_contents"]').length; i++) {
+						if ($('#ch_writeForm [name="option_contents"]')[i].value == '') {
 							alert((i + 1) + "번째 보기가 입력되지 않았습니다.");
 							input_check = false;
 							return input_check;
@@ -346,13 +345,13 @@
 
 			else if ($("#ox_writeForm").css('display') == 'block') {
 
-				if ($('#ox_writeForm [name="q_contents"]').val().trim() == "") {
+				if ($('#ox_writeForm [name="item_contents"]').val().trim() == "") {
 					alert("문제가 입력되지 않았습니다.");
 					input_check = false;
 				}
 
 				if (input_check == true) {
-					if ($('#ox_writeForm [name="c_seq"]').val() == '') {
+					if ($('#ox_writeForm [name="category_seq"]').val() == '') {
 						alert("카테고리가 선택되지 않았습니다.");
 						input_check = false;
 						return input_check;
@@ -360,7 +359,7 @@
 				}
 
 				if (input_check == true) {
-					if ($(':radio[name="o_contents"]:checked').length < 1) {
+					if ($(':radio[name="option_contents"]:checked').length < 1) {
 						alert('O/X 정답을 선택해주세요');
 						input_check = false;
 						return input_check;

@@ -31,7 +31,7 @@
 					<table class="table">
 						<tr>
 							<td>문제</td>
-							<td>${itemDetail.item_title}</td>
+							<td>${itemDetail.item_contents}</td>
 						</tr>
 
 						<tr>
