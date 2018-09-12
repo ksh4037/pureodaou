@@ -42,10 +42,17 @@
 								<tr>
 									<td width="7%">문제</td>
 									<td>
-										<textarea id="item_contents" name="item_contents" class="form-control" rows="20" cols="200">${itemDetail.item_contents}</textarea>
+										<textarea id="item_title" name="item_title" class="form-control" rows="20" cols="200">${itemDetail.item_title}</textarea>
 									</td>
 								</tr>
 
+								<tr>
+									<td width="7%">보충자료</td>
+									<td>
+										<textarea id="item_contents" name="item_contents" class="form-control summernote" rows="20" cols="200">${itemDetail.item_contents}</textarea>
+									</td>
+								</tr>
+								
 								<tr>
 									<td width="7%">카테고리</td>
 									<td>
@@ -105,7 +112,14 @@
 								<tr>
 									<td width="7%">문제</td>
 									<td>
-										<textarea id="item_contents" name="item_contents" class="form-control" rows="20" cols="200">${itemDetail.item_contents}</textarea>
+										<textarea id="item_title" name="item_title" class="form-control" rows="10" cols="200">${itemDetail.item_title}</textarea>
+									</td>
+								</tr>
+								
+								<tr>
+									<td width="7%">보충자료</td>
+									<td>
+										<textarea id="item_contents" name="item_contents" class="form-control summernote" rows="20" cols="200">${itemDetail.item_contents}</textarea>
 									</td>
 								</tr>
 
@@ -278,7 +292,7 @@
 
 			if (form_type == 'choice') {
 
-				if ($('#ch_writeForm [name="item_contents"]').val().trim() == "") {
+				if ($('#ch_writeForm [name="item_title"]').val().trim() == "") {
 					alert("문제가 입력되지 않았습니다.");
 					input_check = false;
 				}
@@ -321,7 +335,7 @@
 
 			if (form_type == 'ox') {
 
-				if ($('#ox_writeForm [name="item_contents"]').val().trim() == "") {
+				if ($('#ox_writeForm [name="item_title"]').val().trim() == "") {
 					alert("문제가 입력되지 않았습니다.");
 					input_check = false;
 				}

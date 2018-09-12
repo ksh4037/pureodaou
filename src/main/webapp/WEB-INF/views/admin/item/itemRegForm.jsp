@@ -41,9 +41,15 @@
 
 							<tr>
 								<td width="7%">문제</td>
-								<td><textarea class="form-control" id="item_contents" name="item_contents" rows="20" cols="170"> </textarea></td>
+								<td><textarea class="form-control" id="item_title" name="item_title" rows="10" cols="170"> </textarea></td>
 							</tr>
-
+			
+			
+							<tr>
+								<td width="7%">보충자료</td>
+								<td><textarea class="form-control summernote" id="item_contents" name="item_contents" rows="20" cols="170"> </textarea></td>
+							</tr>
+							
 							<tr>
 								<td width="7%">카테고리</td>
 								<td>
@@ -99,8 +105,15 @@
 						<table class="table table-hover">
 							<tr>
 								<td width="7%">문제</td>
-								<td><textarea class="form-control" id="item_contents" name="item_contents" rows="20" cols="170"></textarea></td>
+								<td><textarea class="form-control" id="item_title" name="item_title" rows="10" cols="170"> </textarea></td>
 							</tr>
+			
+			
+							<tr>
+								<td width="7%">보충자료</td>
+								<td><textarea class="form-control summernote" id="item_contents" name="item_contents" rows="20" cols="170"> </textarea></td>
+							</tr>
+							
 
 							<tr>
 								<td width="7%">카테고리</td>
@@ -226,7 +239,6 @@
 		}
 
 		function goReg() {
-
 			var input_check = goInputCheck();
 
 			if (input_check == true) {
@@ -286,7 +298,9 @@
 							alert("등록에 실패하였습니다.");
 						}
 					});
-				}
+				} 
+				
+				
 			} else {
 				return;
 			}
@@ -302,13 +316,13 @@
 
 			if ($("#ch_writeForm").css('display') == 'block') {
 
-				if ($('#ch_writeForm [name="item_contents"]').val().trim() == "") {
+				if ($('#ch_writeForm [name="item_title"]').val().trim() == "") {
 					alert("문제가 입력되지 않았습니다.");
 					input_check = false;
 				}
 
 				if (input_check == true) {
-					if ($('#ch_writeForm [name="category_seq"]').val() == '') {
+					if ($('#ch_writeForm [name="category_no"]').val() == '') {
 						alert("카테고리가 선택되지 않았습니다.");
 						input_check = false;
 						return input_check;
@@ -345,13 +359,13 @@
 
 			else if ($("#ox_writeForm").css('display') == 'block') {
 
-				if ($('#ox_writeForm [name="item_contents"]').val().trim() == "") {
+				if ($('#ox_writeForm [name="item_title"]').val().trim() == '') {
 					alert("문제가 입력되지 않았습니다.");
 					input_check = false;
 				}
 
 				if (input_check == true) {
-					if ($('#ox_writeForm [name="category_seq"]').val() == '') {
+					if ($('#ox_writeForm [name="category_no"]').val() == '') {
 						alert("카테고리가 선택되지 않았습니다.");
 						input_check = false;
 						return input_check;
@@ -370,6 +384,8 @@
 
 			return input_check;
 		}
+		
+	
 	</script>
 
 </body>

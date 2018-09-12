@@ -5,7 +5,7 @@ import java.util.List;
 public class ItemVO {
 
 	private int item_no;
-	private int item_title;
+	private String item_title;
 	private String item_contents;
 	private String item_type;
 	private String reg_id;
@@ -112,11 +112,11 @@ public class ItemVO {
 		this.item_no = item_no;
 	}
 
-	public int getItem_title() {
+	public String getItem_title() {
 		return item_title;
 	}
 
-	public void setItem_title(int item_title) {
+	public void setItem_title(String item_title) {
 		this.item_title = item_title;
 	}
 

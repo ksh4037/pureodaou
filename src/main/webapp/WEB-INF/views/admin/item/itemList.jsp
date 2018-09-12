@@ -50,7 +50,7 @@
 										<tr>
 											<td><input type="checkbox" name="del_check" id="del_check" value="${itemList.item_no}"></td>
 											<td align="left">${status.index+1}</td>
-											<td><a href="#" onclick="goDetail('${itemList.item_no}');">${itemList.item_contents}</a></td>
+											<td><a href="#" onclick="goDetail('${itemList.item_no}');">${itemList.item_title}</a></td>
 											
 											<td align="center">
 												<c:if test="${itemList.item_type == 1}"><span style="color: red">O/X</span></c:if>
@@ -153,7 +153,7 @@
 					success : function(data) {
 						if (data == "success") {
 							alert("삭제되었습니다.");
-							location.href = location.href;
+							location.href = "itemList.daou";
 						} else if (data == "error") {
 							alert("삭제에 실패하였습니다. \n다시 시도해주세요.");
 							return;
