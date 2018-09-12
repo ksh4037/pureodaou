@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%
-	if (session.getAttribute("e_id") == null) {
+	if (session.getAttribute("emp_id") == null) {
 		response.sendRedirect("UserLogout");
 	}
 %>
@@ -26,27 +26,25 @@
 <script type="text/javascript">
 	
 		function goExamMain(){
-			$("#menu").attr("action", "user/examMain.do");
+			$("#menu").attr("action", "user/examMain.daou");
 			$("#menu").submit();
 		}
 		function goExamRecord(){
-			$("#menu").attr("action", "examRecord");
+			$("#menu").attr("action", "examRecord.daou");
 			$("#menu").submit();
 		}
 	
 		function goUserBoard(){
-			$("#menu").attr("action", "userBoard");
+			$("#menu").attr("action", "userBoard.daou");
 			$("#menu").submit();
 		}
 		function goUserLogout(){
-			location.href="userLogout";
+			location.href="userLogout.daou";
 		}
-		function userUptForm(){
-			$("#userUpdt_btn").val("e_id")
-			 $("#userUpdt_btn").attr("action", "userUpdtForm");
-			 $("#userUpdt_btn").submit();
+		function userUptForm(emp_id){
+			$("#emp_id").val(emp_id);
+			document.user_list.submit();
 		}
-			
 	</script>
 </head>
 <body>
@@ -54,15 +52,16 @@
 		<div class="content-header">
 			<h4 style="color: #fff">Home</h4>
 			<hr>
-			<input class="btn btn-default" type="submit" id="logout_btn"
-				value="로그아웃" onclick="goUserLogout();"> <input
-				class="btn btn-default" type="submit" name="userUpdt_btn"
-				id="userUpdt_btn" value="개인정보 수정"
-				onclick="userUptForm(<%=session.getAttribute("e_id")%>);">
+			<input class="btn btn-default" type="submit" id="logout_btn" value="로그아웃" onclick="goUserLogout();">
+			<form id="user_list" name="user_list" method="post" action="userUpdtForm.daou"> 
+				<input type="hidden" name="emp_id" id="emp_id">
+				<button type="button" class="btn btn-default" onclick="userUptForm(<%=session.getAttribute("emp_id")%>);">개인정보 수정</button>	 
+			</form>
+
 		</div>
 		<div class="content-body">
 			<h2>
-				<span class="body-font"><%=session.getAttribute("e_id")%>님
+				<span class="body-font"><%=session.getAttribute("emp_id")%>님
 					환영합니다!</span>
 			</h2>
 			<h5></h5>

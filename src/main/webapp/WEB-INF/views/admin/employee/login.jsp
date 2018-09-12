@@ -20,22 +20,22 @@
 
 <script type="text/javascript">
 	function goLogin() {
-		if ($("#e_id").val().length < 1) {
+		if ($("#emp_id").val().length < 1) {
 			alert("아이디를 입력해주세요.");
-		} else if ($("#e_pw").val().length < 1) {
+		} else if ($("#emp_pw").val().length < 1) {
 			alert("비밀번호를 입력해주세요.");
 		} else {
 			var formDataList = $("form[name=login]").serialize();
 
 			$.ajax({
 				type : "POST",
-				url : "goLogin",
+				url : "goLogin.daou",
 				data : formDataList,
 				async : false,
 				success : function(data) {
 					if (data == 'success') {
 						alert("로그인되었습니다.");
-						location.href = "employeeList";
+						location.href = "employeeList.daou";
 					} else if (data == 'IDfail') {
 						alert("등록되지 않은 사원번호입니다.");
 					} else {
@@ -60,14 +60,13 @@
 				<thead></thead>
 				<tbody>
 					<tr>
-						<td><label class="control-label col-sm-2" for="e_id">아이디:</label></td>
-						<td><input type="text" class="form-control" id="e_id"
-							placeholder="사원번호를 입력하세요." name="e_id" size=100></td>
+						<td><label class="control-label col-sm-2" for="emp_id">아이디:</label></td>
+						<td><input type="text" class="form-control" id="emp_id"
+							placeholder="사원번호를 입력하세요." name="emp_id" size=100></td>
 					</tr>
 					<tr>
-						<td><label class="control-label col-sm-2" for="e_pw">패스워드:</label></td>
-						<td><input type="password" class="form-control" id="e_pw"
-							placeholder="비밀번호를 입력하세요." name="e_pw" size=100></td>
+						<td><label class="control-label col-sm-2" for="emp_pw">패스워드:</label></td>
+						<td><input type="password" class="form-control" onkeypress="if(event.keyCode==13) {goLogin();}" id="emp_pw" placeholder="비밀번호를 입력하세요." name="emp_pw" size=100 ></td>
 					</tr>
 				</tbody>
 			</table>

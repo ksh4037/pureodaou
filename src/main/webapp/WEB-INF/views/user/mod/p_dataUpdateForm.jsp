@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%
-	if (session.getAttribute("e_id") == null) {
+	if (session.getAttribute("emp_id") == null) {
 		response.sendRedirect("goUserLogout");
 	}
 %>
@@ -27,17 +27,22 @@
 	function userUpdt() {
 		var input_check = true;
 
-		if ($("#e_name").val() == '') {
+		if ($("#emp_name").val() == '') {
 			input_check = false;
 			alert("이름은 필수 입력사항 입니다.");
 			return;
 		}
-		if ($("#e_dep").val() == '') {
+		if ($("#emp_dep").val() == '') {
 			input_check = false;
 			alert("부서는 필수 입력사항 입니다.");
 			return;
 		}
-		if ($("#e_tel").val() == '') {
+		if ($("#emp_grade").val() == '') {
+			input_check = false;
+			alert("직급은 필수 입력사항 입니다.");
+			return;
+		}
+		if ($("#emp_tel").val() == '') {
 			input_check = false;
 			alert("전화번호는 필수 입력사항 입니다.");
 			return;
@@ -47,13 +52,13 @@
 			var formDataList = $("form[name=updtForm]").serialize();
 			$.ajax({
 				type : "POST",
-				url : "userUpdt",
+				url : "userUpdt.daou",
 				data : formDataList,
 				async : false,
 				success : function(data) {
 					if (data == 'success') {
 						alert("수정되었습니다.");
-						location.href = "userMain";
+						location.href = "userMain.daou";
 					} else {
 						alert('수정 실패!');
 					}
@@ -68,7 +73,7 @@
 	}
 
 	function backUserMain() {
-		location.href = "userMain";
+		location.href = "userMain.daou";
 	}
 </script>
 <style>
@@ -100,7 +105,7 @@
 		</div>
 		<div class="content-body">
 			<h2>
-				<span class="body-font"><%=session.getAttribute("e_id")%>님
+				<span class="body-font"><%=session.getAttribute("emp_id")%>님
 					환영합니다!</span>
 			</h2>
 			<h5></h5>
@@ -113,37 +118,46 @@
 					<tbody>
 						<tr>
 							<th scope="row">사번</th>
-							<td><input type="hidden" id="e_id" name="e_id"
-								value="${memberView.e_id}" class="form-control"> <label>${memberView.e_id}</label>
+							<td><input type="hidden" id="emp_id" name="emp_id"
+								value="${memberView.emp_id}" class="form-control"> <label>${memberView.emp_id}</label>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">이름</th>
-							<td><input type="text" id="e_name"
-								value="${memberView.e_name}" name="e_name" class="form-control"></td>
+							<td><input type="text" id="emp_name"
+								value="${memberView.emp_name}" name="emp_name" class="form-control"></td>
 						</tr>
 						<tr>
 							<th scope="row">부서</th>
-							<td><select id="e_dep" name="e_dep" class="form-control">
+							<td><select id="emp_dep" name="emp_dep" class="form-control">
 									<c:forEach var="item" items="${deptList}">
-										<option value="${item.dept_no}"
-											<c:if test="${memberView.e_dep == item.dept_no}"> selected </c:if>>${item.dept_name}</option>
+											<option value="${item.quiz_cfg_code}"
+												<c:if test="${memberView.emp_dept == item.quiz_cfg_code}"> selected </c:if>>${item.quiz_cfg_code_name}</option>
+									</c:forEach>
+							</select></td>
+						</tr>
+						<tr>
+							<th scope="row">직급</th>
+							<td><select id="emp_grade" name="emp_grade" class="form-control">
+									<c:forEach var="item" items="${gradeList}">
+											<option value="${item.quiz_cfg_code}"
+												<c:if test="${memberView.emp_grade == item.quiz_cfg_code}"> selected </c:if>>${item.quiz_cfg_code_name}</option>
 									</c:forEach>
 							</select></td>
 						</tr>
 						<tr>
 							<th scope="row">전화전호</th>
-							<td><input type="text" id="e_tel"
-								value="${memberView.e_tel}" name="e_tel" class="form-control"></td>
+							<td><input type="text" id="emp_tel"
+								value="${memberView.emp_tel}" name="emp_tel" class="form-control"></td>
 						</tr>
 						<tr>
 							<th scope="row">비밀번호</th>
-							<td><input type="password" id="e_pw"
-								value="${memberView.e_pw}" name="e_pw" class="form-control"></td>
+							<td><input type="password" id="emp_pw"
+								value="${memberView.emp_pw}" name="emp_pw" class="form-control"></td>
 						</tr>
 						<tr>
 							<th scope="row">비밀번호 확인</th>
-							<td><input type="password" id="e_pw_check" name="e_pw_check"
+							<td><input type="password" id="emp_pw_check" name="emp_pw_check"
 								class="form-control"></td>
 						</tr>
 					</tbody>

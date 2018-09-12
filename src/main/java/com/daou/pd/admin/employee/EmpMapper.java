@@ -10,11 +10,15 @@ public interface EmpMapper {
 
 	public void insertMember(EmpVO evo) throws Exception;
 
-	public int deleteMember(String e_id);
+	public int deleteMember(String emp_id);
 
 	public EmpVO memberView(EmpVO evo);
+	
+	public HashMap<String,Object> memberViewAll(String emp_id);
 
 	public List<EmpVO> deptList();
+
+	public List<EmpVO> gradeList();
 
 	public void updateMember(EmpVO evo) throws Exception;
 

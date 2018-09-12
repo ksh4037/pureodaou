@@ -41,22 +41,27 @@
 	function goInsert() {
 		var input_check = true;
 
-		if ($("#e_id").val() == '') {
+		if ($("#emp_id").val() == '') {
 			input_check = false;
 			alert("아이디는 필수 입력사항 입니다.");
 			return;
 		}
-		if ($("#e_name").val() == '') {
+		if ($("#emp_name").val() == '') {
 			input_check = false;
 			alert("이름은 필수 입력사항 입니다.");
 			return;
 		}
-		if ($("#e_dep").val() == '') {
+		if ($("#emp_dept").val() == '') {
 			input_check = false;
 			alert("부서는 필수 입력사항 입니다.");
 			return;
 		}
-		if ($("#e_tel").val() == '') {
+		if ($("#emp_grade").val() == '') {
+			input_check = false;
+			alert("직급은 필수 입력사항 입니다.");
+			return;
+		}
+		if ($("#emp_tel").val() == '') {
 			input_check = false;
 			alert("전화번호는 필수 입력사항 입니다.");
 			return;
@@ -69,16 +74,20 @@
 
 		if (input_check == true) {
 			var formDataList = $("form[name=regForm]").serialize();
-
+			if ($("#check_result").val() != 'success') {
+				input_check = false;
+				alert("아이디 중복확인을 해주세요.");
+				return;
+			}
 			$.ajax({
 				type : "POST",
-				url : "employeeReg",
+				url : "employeeReg.daou",
 				data : formDataList,
 				async : false,
 				success : function(data) {
 					if (data == 'success') {
 						alert("등록되었습니다.");
-						location.href = "employeeList";
+						location.href = "employeeList.daou";
 					} else {
 						alert('등록 실패하였습니다.');
 					}
@@ -93,18 +102,18 @@
 	}
 
 	function goBackUser() {
-		location.href = "employeeList";
+		location.href = "employeeList.daou";
 	}
 
 	function duplicateCheck() {
-		var id = $("#e_id").val();
-		if ($("#e_id").val() == '') {
+		var id = $("#emp_id").val();
+		if ($("#emp_id").val() == '') {
 			alert('아이디를 입력해주세요.');
 		} else {
 			$.ajax({
 				type : "POST",
-				url : "employeeIdCheck",
-				data : $("#e_id"),
+				url : "employeeIdCheck.daou",
+				data : $("#emp_id"),
 				async : false,
 				success : function(data) {
 					if (data == 'success') {
@@ -165,7 +174,7 @@
 								<th scope="row">ID</th>
 								<td>
 									<div>
-										<input type="text" id="e_id" name="e_id" class="form-control"
+										<input type="text" id="emp_id" name="emp_id" class="form-control"
 											style="width: 1000px; margin-right: 10px; display: inline-block">
 										<input type="button" id="btn_id_check" name="btn_id_check"
 											class="btn btn-default" onclick="duplicateCheck();"
@@ -176,20 +185,28 @@
 							</tr>
 							<tr>
 								<th scope="row">이름</th>
-								<td><input type="text" id="e_name" name="e_name"
+								<td><input type="text" id="emp_name" name="emp_name"
 									class="form-control"></td>
 							</tr>
 							<tr>
 								<th scope="row">부서</th>
-								<td><select id="e_dep" name="e_dep" class="form-control">
+								<td><select id="emp_dept" name="emp_dept" class="form-control">
 										<c:forEach var="item" items="${deptList}">
-											<option value="${item.dept_no}">${item.dept_name}</option>
+											<option value="${item.quiz_cfg_code}">${item.quiz_cfg_code_name}</option>
+										</c:forEach>
+								</select></td>
+							</tr>
+							<tr>
+								<th scope="row">직급</th>
+								<td><select id="emp_grade" name="emp_grade" class="form-control">
+										<c:forEach var="item" items="${gradeList}">
+											<option value="${item.quiz_cfg_code}">${item.quiz_cfg_code_name}</option>
 										</c:forEach>
 								</select></td>
 							</tr>
 							<tr>
 								<th scope="row">전화전호</th>
-								<td><input type="text" id="e_tel" name="e_tel"
+								<td><input type="text" id="emp_tel" name="emp_tel"
 									class="form-control"></td>
 							</tr>
 						</tbody>

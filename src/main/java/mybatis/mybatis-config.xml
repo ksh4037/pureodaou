@@ -8,8 +8,8 @@
 		<typeAlias alias="empVO"
 			type="com.daou.pd.admin.employee.EmpVO"></typeAlias>
 			
-		<typeAlias alias="deptVO"
-			type="com.daou.pd.admin.employee.DeptVO"></typeAlias>
+		<typeAlias alias="configVO"
+			type="com.daou.pd.admin.employee.ConfigVO"></typeAlias>
 			
 		<typeAlias alias="boardVO"
 			type="com.daou.pd.admin.board.BoardVO"></typeAlias>

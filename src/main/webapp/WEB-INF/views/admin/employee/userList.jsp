@@ -4,8 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
-	if (session.getAttribute("e_id") == null) {
-		response.sendRedirect("login");
+	if (session.getAttribute("emp_id") == null) {
+		response.sendRedirect("login.daou");
 	}
 %>
 
@@ -56,7 +56,7 @@
 				return;
 			}
 		}
-		$("#user_list").attr("action", "employeeRegForm");
+		$("#user_list").attr("action", "employeeRegForm.daou");
 		$("#user_list").submit();
 	}
 
@@ -71,7 +71,7 @@
 		}
 		$.ajax({
 			type : "POST",
-			url : "employeeDlt",
+			url : "employeeDlt.daou",
 			data : {
 				"list" : list
 			},
@@ -79,7 +79,7 @@
 			success : function(data) {
 				if (data == 'success') {
 					alert("삭제되었습니다.");
-					location.href = "employeeList";
+					location.href = "employeeList.daou";
 				} else {
 					alert('삭제 실패하였습니다.');
 				}
@@ -90,25 +90,27 @@
 		});
 	}
 
-	function goUpdtForm(e_id) {
-		$("#e_id").val(e_id);
-		document.user_list.submit();
-
+	function userDetailView(emp_id) {
+		
+		$("#emp_id").val(emp_id);
+		$("#user_list").submit();
+		
+		
 	}
 
 	function goList(path) {
 
 		if (path == "problemList") {
-			location.href = "problemList";
+			location.href = "problemList.daou";
 		} else if (path == "employeeList") {
-			location.href = "employeeList";
+			location.href = "employeeList.daou";
 		} else if (path == "boardList") {
-			location.href = "boardList";
+			location.href = "boardList.daou";
 		}
 	}
 
 	function goLogout() {
-		location.href = "login";
+		location.href = "login.daou";
 	}
 </script>
 </head>
@@ -153,10 +155,10 @@
 					<span class="span-font">회원 리스트</span>
 				</h2>
 				<p>
-					<span class="span-font">풀어다우 서비스의 회원 리스트 입니다.</span> <br></br>
-				<form id="user_list" name="user_list" method="post"
-					action="employeeUpdtForm">
-					<input type="hidden" name="e_id" id="e_id">
+				<span class="span-font">풀어다우 서비스의 회원 리스트 입니다.</span> <br></br>
+					
+				<form id="user_list" name="user_list" method="post" action="userDetailView.daou">
+					<input type="hidden" id="emp_id" name ="emp_id">
 					<table class="table">
 						<thead>
 							<tr>
@@ -164,26 +166,25 @@
 								<th>ID</th>
 								<th>이름</th>
 								<th>부서</th>
-								<th>전화번호</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="item" items="${memberList}">
 								<tr>
-									<td><input type="checkbox" name="del_check"
-										value="${item.e_id}">
-									<td><a href="#" onclick="goUpdtForm('${item.e_id}');">${item.e_id}</a></td>
-									<td>${item.e_name}</td>
-									<td>${item.dept_name}</td>
-									<td>${item.e_tel}</td>
+									<td><input type="checkbox" name="del_check" value="${item.emp_id}">
+									<td>
+										<a href="#" onclick="userDetailView('${item.emp_id}');">${item.emp_id}</a>
+									</td>
+									<td>${item.emp_name}</td>
+									<td>${item.d_quiz_cfg_code_name}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 					<div class="btn_area">
 						<input type="submit" id="reg_btn" class="btn btn-default"
-							value="등록" onclick="goReg(); return false;"> <input
-							type="submit" id="del_btn" class="btn btn-default" value="삭제 "
+							value="등록" onclick="goReg(); return false;"> 
+						<input type="submit" id="del_btn" class="btn btn-default" value="삭제 "
 							onclick="goDel(); return false;">
 					</div>
 				</form>
