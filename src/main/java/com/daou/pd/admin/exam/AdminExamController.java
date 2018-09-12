@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ExamController {
+public class AdminExamController {
 	@Autowired
-	@Resource(name = "examService")
-	private ExamService examService;
+	@Resource(name = "adminExamService")
+	private AdminExamService adminExamService;
 
 	@RequestMapping(value = "admin/examList.daou")
 	public ModelAndView itemList(HttpServletRequest request, HttpServletResponse response) {

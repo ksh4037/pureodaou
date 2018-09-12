@@ -8,11 +8,12 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
-@Component("examService")
-public class ExamServiceImpl implements ExamService {
+@Component("adminExamService")
+public class AdminExamServiceImpl implements AdminExamService {
 	@Resource(name = "sqlSession")
+	
 	private SqlSession sqlSession;
-	private ExamMapper examMapper;
+	private AdminExamMapper examMapper;
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
