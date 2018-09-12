@@ -1,43 +1,29 @@
 package com.daou.pd.user.exam;
 
-import java.sql.Date;
-
 public class ExamVO {
-	private int exam_no;
-	private int exam_degree; // 회차
-	private String exam_take_id; // 응시자
-	private String exam_teke_date;
-	private int exam_retake_degree;// 재시험 회차
-	private int exam_left_time;
-	private int exam_score;
-	private String exam_status;
-	private String exam_final_yn;
-	private ExamDetailVO detail;
+	private int exam_degree;
+	private String exam_start_date;
+	private String exam_end_date;
+	private int exam_ox_num;
+	private int exam_obj_num;
+	private int exam_short_num;
+	private int exam_pass_score;
+	private ExamUserVO userVO;
 
 	public ExamVO() {
 	}
 
-	public ExamVO(int exam_no, int exam_degree, String exam_take_id, String exam_teke_date, int exam_retake_degree,
-			int exam_left_time, int exam_score, String exam_status, String exam_final_yn, ExamDetailVO detail) {
+	public ExamVO(int exam_degree, String exam_start_date, String exam_end_date, int exam_ox_num, int exam_obj_num,
+			int exam_short_num, int exam_pass_score, ExamUserVO userVO) {
 		super();
-		this.exam_no = exam_no;
 		this.exam_degree = exam_degree;
-		this.exam_take_id = exam_take_id;
-		this.exam_teke_date = exam_teke_date;
-		this.exam_retake_degree = exam_retake_degree;
-		this.exam_left_time = exam_left_time;
-		this.exam_score = exam_score;
-		this.exam_status = exam_status;
-		this.exam_final_yn = exam_final_yn;
-		this.detail = detail;
-	}
-
-	public int getExam_no() {
-		return exam_no;
-	}
-
-	public void setExam_no(int exam_no) {
-		this.exam_no = exam_no;
+		this.exam_start_date = exam_start_date;
+		this.exam_end_date = exam_end_date;
+		this.exam_ox_num = exam_ox_num;
+		this.exam_obj_num = exam_obj_num;
+		this.exam_short_num = exam_short_num;
+		this.exam_pass_score = exam_pass_score;
+		this.userVO = userVO;
 	}
 
 	public int getExam_degree() {
@@ -48,76 +34,60 @@ public class ExamVO {
 		this.exam_degree = exam_degree;
 	}
 
-	public String getExam_take_id() {
-		return exam_take_id;
+	public String getExam_start_date() {
+		return exam_start_date;
 	}
 
-	public void setExam_take_id(String exam_take_id) {
-		this.exam_take_id = exam_take_id;
+	public void setExam_start_date(String exam_start_date) {
+		this.exam_start_date = exam_start_date;
 	}
 
-	public String getExam_teke_date() {
-		return exam_teke_date;
+	public String getExam_end_date() {
+		return exam_end_date;
 	}
 
-	public void setExam_teke_date(String exam_teke_date) {
-		this.exam_teke_date = exam_teke_date;
+	public void setExam_end_date(String exam_end_date) {
+		this.exam_end_date = exam_end_date;
 	}
 
-	public int getExam_retake_degree() {
-		return exam_retake_degree;
+	public int getExam_ox_num() {
+		return exam_ox_num;
 	}
 
-	public void setExam_retake_degree(int exam_retake_degree) {
-		this.exam_retake_degree = exam_retake_degree;
+	public void setExam_ox_num(int exam_ox_num) {
+		this.exam_ox_num = exam_ox_num;
 	}
 
-	public int getExam_left_time() {
-		return exam_left_time;
+	public int getExam_obj_num() {
+		return exam_obj_num;
 	}
 
-	public void setExam_left_time(int exam_left_time) {
-		this.exam_left_time = exam_left_time;
+	public void setExam_obj_num(int exam_obj_num) {
+		this.exam_obj_num = exam_obj_num;
 	}
 
-	public int getExam_score() {
-		return exam_score;
+	public int getExam_short_num() {
+		return exam_short_num;
 	}
 
-	public void setExam_score(int exam_score) {
-		this.exam_score = exam_score;
+	public void setExam_short_num(int exam_short_num) {
+		this.exam_short_num = exam_short_num;
 	}
 
-	public String getExam_status() {
-		return exam_status;
+	public int getExam_pass_score() {
+		return exam_pass_score;
 	}
 
-	public void setExam_status(String exam_status) {
-		this.exam_status = exam_status;
+	public void setExam_pass_score(int exam_pass_score) {
+		this.exam_pass_score = exam_pass_score;
 	}
 
-	public String getExam_final_yn() {
-		return exam_final_yn;
+	public ExamUserVO getUserVO() {
+		return userVO;
 	}
 
-	public void setExam_final_yn(String exam_final_yn) {
-		this.exam_final_yn = exam_final_yn;
-	}
-
-	public ExamDetailVO getDetail() {
-		return detail;
-	}
-
-	public void setDetail(ExamDetailVO detail) {
-		this.detail = detail;
-	}
-
-	@Override
-	public String toString() {
-		return "ExamVO [exam_no=" + exam_no + ", exam_degree=" + exam_degree + ", exam_take_id=" + exam_take_id
-				+ ", exam_teke_date=" + exam_teke_date + ", exam_retake_degree=" + exam_retake_degree
-				+ ", exam_left_time=" + exam_left_time + ", exam_score=" + exam_score + ", exam_status=" + exam_status
-				+ ", exam_final_yn=" + exam_final_yn + ", detail=" + detail + "]";
+	public void setUserVO(ExamUserVO userVO) {
+		this.userVO = userVO;
 	}
 
 }

@@ -43,19 +43,19 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public void tempRegist(List<ExamVO> exam) {
+	public void tempRegist(List<ExamUserVO> exam) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List<ExamVO> getTemp(String reg_id) {
+	public List<ExamUserVO> getTemp(String reg_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void regist(List<ExamVO> exam) {
+	public void regist(List<ExamUserVO> exam) {
 		// TODO Auto-generated method stub
 
 	}
@@ -87,8 +87,8 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public void insertExam(List<ExamVO> examList) {
-		HashMap<String, List<ExamVO>> map = new HashMap<String, List<ExamVO>>();
+	public void insertExam(List<ExamUserVO> examList) {
+		HashMap<String, List<ExamUserVO>> map = new HashMap<String, List<ExamUserVO>>();
 		map.put("examList", examList);
 		examMapper = sqlSession.getMapper(ExamMapper.class);
 		examMapper.insertExam(map);
@@ -110,13 +110,13 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public List<ExamListVO> getexamList() {
+	public List<ExamVO> getexamList() {
 		examMapper = sqlSession.getMapper(ExamMapper.class);
 		return examMapper.getExamList();
 	}
 
 	@Override
-	public ExamListVO getQnum(int degree) {
+	public ExamVO getQnum(int degree) {
 		examMapper = sqlSession.getMapper(ExamMapper.class);
 		return examMapper.getQnum(degree);
 	}

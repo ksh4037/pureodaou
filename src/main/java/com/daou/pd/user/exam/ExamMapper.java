@@ -20,15 +20,15 @@ public interface ExamMapper {
 
 	public Integer getPersence(HashMap<String, Object> map);
 
-	public void insertExam(HashMap<String, List<ExamVO>> map);
+	public void insertExam(HashMap<String, List<ExamUserVO>> map);
 
 	public List<ItemVO> getexamList(Map<String, Object> map);
 
 	public List<OptionVO> getoptionList(HashMap<String, Object> map);
 
-	public List<ExamListVO> getExamList();
+	public List<ExamVO> getExamList();
 
-	public ExamListVO getQnum(int exam_test_no);
+	public ExamVO getQnum(int exam_test_no);
 
 	public List<String> getExamStatus(HashMap<String, Object> map);
 

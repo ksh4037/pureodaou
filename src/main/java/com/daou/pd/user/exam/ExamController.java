@@ -32,7 +32,7 @@ public class ExamController {
 	@RequestMapping(value = "user/exam/examMain.daou")
 	public ModelAndView test() {
 		ModelAndView mav = new ModelAndView("user/exam/examMain");
-		List<ExamListVO> elist = examService.getexamList();
+		List<ExamVO> elist = examService.getexamList();
 		mav.addObject("elist", elist);
 		return mav;
 	}
@@ -42,7 +42,7 @@ public class ExamController {
 		String id = getSessionId(req);
 //		String id = "90100";
 		int degree = Integer.parseInt(str);
-		ExamListVO listVO = examService.getQnum(degree);
+		ExamVO listVO = examService.getQnum(degree);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("listVO", listVO);
 		HashMap<String, Object> map = new HashMap<String, Object>();

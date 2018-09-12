@@ -11,11 +11,11 @@ public interface ExamService {
 
 	public List<ItemVO> getProblem(int ox, int obj);
 
-	public void tempRegist(List<ExamVO> exam);
+	public void tempRegist(List<ExamUserVO> exam);
 
-	public List<ExamVO> getTemp(String reg_id);
+	public List<ExamUserVO> getTemp(String reg_id);
 
-	public void regist(List<ExamVO> exam);
+	public void regist(List<ExamUserVO> exam);
 
 	public void grading(String reg_id, int test_no);
 
@@ -25,15 +25,15 @@ public interface ExamService {
 
 	public int getPersence(String id, int degree);
 
-	public void insertExam(List<ExamVO> examList);
+	public void insertExam(List<ExamUserVO> examList);
 
 	public List<ItemVO> getExam(String id, int degree);
 
 	public List<OptionVO> getExamOption(HashMap<String, Object> map);
 
-	public List<ExamListVO> getexamList();
+	public List<ExamVO> getexamList();
 
-	public ExamListVO getQnum(int degree);
+	public ExamVO getQnum(int degree);
 
 	public List<String> getExamStatus(HashMap<String, Object> map);
 
