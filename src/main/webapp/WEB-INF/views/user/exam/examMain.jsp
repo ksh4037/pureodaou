@@ -60,7 +60,7 @@
 			alert('평가 기간이 아닙니다');
 			return false;
 		}
-		location.href="${pageContext.request.contextPath}/user/examStart.do?degree="+degree;
+		/* location.href="${pageContext.request.contextPath}/user/examStart.do?degree="+degree; */
 	}
 </script>
 </head>
@@ -79,22 +79,24 @@
 			<table class="table table-hover">
 				<tr style="background-color: #DDDDDD">
 					<th>회차</th>
-					<th>카테고리</th>
+					<th>과목</th>
 					<th>기간</th>
-					<th>유형</th>
-					<th>총점</th>
+					<th>남은시간</th>
+					<th>합격기준</th>
+					<th>상태</th>
 					<th>평가</th>
 				</tr>
 				<c:forEach items="${elist }" var="e">
 					<tr>
-						<td>${e.exam_test_no }</td>
-						<td>정보보안</td>
-						<td>${e.s_date }~${e.e_date }</td>
-						<td>평가</td>
-						<td>100</td>
-						<td><input class="btn btn-primary" id="${e.exam_test_no }"
+						<td>${e.exam_degree }</td>
+						<td>${e.category_name }</td>
+						<td>${e.exam_start_date }~${e.exam_end_date }</td>
+						<td>${e.exam_left_time }</td>
+						<td>${e.exam_pass_score }점</td>
+						<td>${e.quiz_cfg_code_name }</td>
+						<td><input class="btn btn-primary" id="${e.exam_degree }"
 							type="button" value="참여하기"
-							onclick="javascript:go(${e.exam_test_no}, '${e.s_date }', '${e.e_date }')"></td>
+							onclick="javascript:go(${e.exam_degree}, '${e.exam_start_date }', '${e.exam_end_date }')"></td>
 					</tr>
 				</c:forEach>
 			</table>

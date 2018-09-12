@@ -8,7 +8,7 @@ public class ExamVO {
 	private int exam_obj_num;
 	private int exam_short_num;
 	private int exam_pass_score;
-	private ExamUserVO userVO;
+	private ExamUserVO uservo;
 
 	public ExamVO() {
 	}
@@ -23,7 +23,7 @@ public class ExamVO {
 		this.exam_obj_num = exam_obj_num;
 		this.exam_short_num = exam_short_num;
 		this.exam_pass_score = exam_pass_score;
-		this.userVO = userVO;
+		this.uservo = userVO;
 	}
 
 	public int getExam_degree() {
@@ -82,12 +82,12 @@ public class ExamVO {
 		this.exam_pass_score = exam_pass_score;
 	}
 
-	public ExamUserVO getUserVO() {
-		return userVO;
+	public ExamUserVO getUservo() {
+		return uservo;
 	}
 
-	public void setUserVO(ExamUserVO userVO) {
-		this.userVO = userVO;
+	public void setUservo(ExamUserVO uservo) {
+		this.uservo = uservo;
 	}
 
 }

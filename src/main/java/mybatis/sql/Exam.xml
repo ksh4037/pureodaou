@@ -3,98 +3,53 @@
 	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.daou.pd.user.exam.ExamMapper">
-<!--  
-	<select id="test" resultType="Integer">
-		select a from test where a=1
-	</select>
 
-	<select id="getCount" parameterType="Integer"
-		resultType="Integer">
-		select count(*) from problem_info where type = #{type}
-	</select>
-
-	<select id="getOption" resultType="optionVO"
-		parameterType="Integer">
-		select * from option_info where problem_seq =
-		#{problem_seq}
-	</select>
-
-	<select id="getOxList" resultType="problemVO"
-		parameterType="Integer">
-		select * from problem_info where type=1 and delete_yn='N' order by rand()
-		limit #{cnt}
-	</select>
-
-	<select id="getObjList" resultType="problemVO"
-		parameterType="Integer">
-		select * from problem_info where type=2 and delete_yn='N' order by rand()
-		limit #{cnt}
-	</select>
-
-	<select id="getPersence" parameterType="hashmap"
-		resultType="Integer">
-		select count(*) from exam_info where reg_id = #{reg_id} and
-		exam_test_no = #{exam_test_no}
-	</select>
-
-	<insert id="insertExam" parameterType="java.util.Map">
-		insert into exam_info (exam_test_no, problem_seq, reg_id, option1,
-		option2, option3, option4, reg_date) values
-		<foreach collection="examList" item="exam" separator=",">
-			(#{exam.exam_test_no}, #{exam.problem_seq}, #{exam.reg_id},
-			#{exam.option1, jdbcType=INTEGER}, #{exam.option2, jdbcType=INTEGER}
-			,#{exam.option3, jdbcType=INTEGER}, #{exam.option4,
-			jdbcType=INTEGER}, sysdate())
-		</foreach>
-	</insert>
-
-	<select id="getexamList" parameterType="hashmap"
-		resultType="problemVO">
-		select distinct p.* from exam_info e, problem_info p where
-		p.problem_seq = e.problem_seq and e.reg_id = #{reg_id} and
-		e.exam_test_no = #{exam_test_no}
-	</select>
-
-	<select id="getoptionList" parameterType="hashmap"
-		resultType="optionVO">
-		select o.* from option_info o, exam_info e where
-		o.option_seq in (
-		(select option1 from exam_info where reg_id =
-		#{reg_id} and exam_test_no = #{exam_test_no} and problem_seq =
-		#{problem_seq}),
-		(select option2 from exam_info where reg_id =
-		#{reg_id} and exam_test_no = #{exam_test_no} and problem_seq =
-		#{problem_seq}),
-		(select option3 from exam_info where reg_id =
-		#{reg_id} and exam_test_no = #{exam_test_no} and problem_seq =
-		#{problem_seq}),
-		(select option4 from exam_info where reg_id =
-		#{reg_id} and exam_test_no = #{exam_test_no} and problem_seq =
-		#{problem_seq})
-		) and e.problem_seq = #{problem_seq} and e.reg_id =
-		#{reg_id} and e.exam_test_no = #{exam_test_no}
-	</select>
-	<select id="getExamList" resultType="examlistVO">
-		select exam_test_no,
-		date_format(s_date, '%Y-%m-%d')
-		s_date, date_format(e_date, '%Y-%m-%d')
-		e_date from exam_list order by
-		exam_test_no desc
-	</select>
-	<select id="getQnum" parameterType="Integer"
+	<select id="getExamList" parameterType="String"
 		resultType="examlistVO">
-		select * from exam_list where exam_test_no =
-		#{exam_test_no}
+		SELECT c.category_name, u.exam_degree, u.exam_retake_degree, u.exam_left_time,
+		q.exam_start_date, q.exam_end_date, q.exam_pass_score, g.quiz_cfg_code_name
+		FROM quiz_user_exam u, quiz_exam q , quiz_category c, quiz_config g
+		WHERE g.quiz_cfg_code = u.exam_status and q.exam_category = c.category_no and q.exam_degree = u.exam_degree and u.exam_take_id = #{id} and
+		u.exam_final_yn = 'Y'
+		ORDER BY u.exam_degree desc
 	</select>
-	<select id="getExamStatus" resultType="String"
-		parameterType="hashmap">
-		select distinct correct from exam_info where reg_id =
-		#{reg_id} and exam_test_no = #{exam_test_no}
-	</select>
-	<update id="markAnswer" parameterType="hashmap">
-		update exam_info set e_answer = #{answer}
-		where reg_id = #{reg_id} and exam_test_no = #{degree} and problem_seq =
-		#{problem}
-	</update>
-	-->
+	<!-- <select id="test" resultType="Integer"> select a from test where a=1 
+		</select> <select id="getCount" parameterType="Integer" resultType="Integer"> 
+		select count(*) from problem_info where type = #{type} </select> <select 
+		id="getOption" resultType="optionVO" parameterType="Integer"> select * from 
+		option_info where problem_seq = #{problem_seq} </select> <select id="getOxList" 
+		resultType="problemVO" parameterType="Integer"> select * from problem_info 
+		where type=1 and delete_yn='N' order by rand() limit #{cnt} </select> <select 
+		id="getObjList" resultType="problemVO" parameterType="Integer"> select * 
+		from problem_info where type=2 and delete_yn='N' order by rand() limit #{cnt} 
+		</select> <select id="getPersence" parameterType="hashmap" resultType="Integer"> 
+		select count(*) from exam_info where reg_id = #{reg_id} and exam_test_no 
+		= #{exam_test_no} </select> <insert id="insertExam" parameterType="java.util.Map"> 
+		insert into exam_info (exam_test_no, problem_seq, reg_id, option1, option2, 
+		option3, option4, reg_date) values <foreach collection="examList" item="exam" 
+		separator=","> (#{exam.exam_test_no}, #{exam.problem_seq}, #{exam.reg_id}, 
+		#{exam.option1, jdbcType=INTEGER}, #{exam.option2, jdbcType=INTEGER} ,#{exam.option3, 
+		jdbcType=INTEGER}, #{exam.option4, jdbcType=INTEGER}, sysdate()) </foreach> 
+		</insert> <select id="getexamList" parameterType="hashmap" resultType="problemVO"> 
+		select distinct p.* from exam_info e, problem_info p where p.problem_seq 
+		= e.problem_seq and e.reg_id = #{reg_id} and e.exam_test_no = #{exam_test_no} 
+		</select> <select id="getoptionList" parameterType="hashmap" resultType="optionVO"> 
+		select o.* from option_info o, exam_info e where o.option_seq in ( (select 
+		option1 from exam_info where reg_id = #{reg_id} and exam_test_no = #{exam_test_no} 
+		and problem_seq = #{problem_seq}), (select option2 from exam_info where reg_id 
+		= #{reg_id} and exam_test_no = #{exam_test_no} and problem_seq = #{problem_seq}), 
+		(select option3 from exam_info where reg_id = #{reg_id} and exam_test_no 
+		= #{exam_test_no} and problem_seq = #{problem_seq}), (select option4 from 
+		exam_info where reg_id = #{reg_id} and exam_test_no = #{exam_test_no} and 
+		problem_seq = #{problem_seq}) ) and e.problem_seq = #{problem_seq} and e.reg_id 
+		= #{reg_id} and e.exam_test_no = #{exam_test_no} </select> <select id="getExamList" 
+		resultType="examlistVO"> select exam_test_no, date_format(s_date, '%Y-%m-%d') 
+		s_date, date_format(e_date, '%Y-%m-%d') e_date from exam_list order by exam_test_no 
+		desc </select> <select id="getQnum" parameterType="Integer" resultType="examlistVO"> 
+		select * from exam_list where exam_test_no = #{exam_test_no} </select> <select 
+		id="getExamStatus" resultType="String" parameterType="hashmap"> select distinct 
+		correct from exam_info where reg_id = #{reg_id} and exam_test_no = #{exam_test_no} 
+		</select> <update id="markAnswer" parameterType="hashmap"> update exam_info 
+		set e_answer = #{answer} where reg_id = #{reg_id} and exam_test_no = #{degree} 
+		and problem_seq = #{problem} </update> -->
 </mapper>	 

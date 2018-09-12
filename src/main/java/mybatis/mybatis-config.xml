@@ -7,28 +7,32 @@
 	<typeAliases>
 		<typeAlias alias="empVO"
 			type="com.daou.pd.admin.employee.EmpVO"></typeAlias>
-			
+
 		<typeAlias alias="deptVO"
 			type="com.daou.pd.admin.employee.DeptVO"></typeAlias>
-			
+
 		<typeAlias alias="boardVO"
 			type="com.daou.pd.admin.board.BoardVO"></typeAlias>
-			
+
 		<typeAlias alias="itemVO"
 			type="com.daou.pd.admin.item.ItemVO"></typeAlias>
-			
+
 		<typeAlias alias="optionVO"
 			type="com.daou.pd.admin.item.OptionVO"></typeAlias>
-			
+
+		<typeAlias alias="examUserVO"
+			type="com.daou.pd.user.exam.ExamUserVO"></typeAlias>
+
 		<typeAlias alias="examVO"
 			type="com.daou.pd.user.exam.ExamVO"></typeAlias>
-			
+		<typeAlias alias="examDetailVO"
+			type="com.daou.pd.user.exam.ExamDetailVO"></typeAlias>
 		<typeAlias alias="examlistVO"
 			type="com.daou.pd.user.exam.ExamListVO"></typeAlias>
-			
+
 		<typeAlias alias="markVO"
 			type="com.daou.pd.user.exam.MarkVO"></typeAlias>
-			
+
 		<typeAlias alias="userVO" type="com.daou.pd.user.mod.UserVO"></typeAlias>
 		<typeAlias type="java.util.HashMap" alias="HashMap" />
 	</typeAliases>
