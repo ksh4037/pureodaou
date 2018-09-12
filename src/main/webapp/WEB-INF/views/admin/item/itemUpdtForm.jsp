@@ -184,6 +184,75 @@
 						</div>
 					</form>
 				</c:if>
+				
+				
+				
+				<c:if test="${itemDetail.item_type == '3' }">
+					<form name="short_writeForm" id="short_writeForm" method="post">
+						<input type="hidden" name="item_no" value="${itemDetail.item_no}" /> 
+						<input type="hidden" name="item_type" value="3" />
+						<div class="container">
+							<h2 class="span-font">주관식 문제 수정 페이지</h2>
+							<p class="span-font">풀어다우 주관식 문제 수정 페이지 입니다.</p>
+
+							<table class="table table-hover">
+
+								<tr>
+									<td width="7%">문제유형</td>
+									<td>
+										<span style="color: red">주관식</span>
+									</td>
+								</tr>
+
+								<tr>
+									<td width="7%">문제</td>
+									<td>
+										<textarea id="item_title" name="item_title" class="form-control" rows="10" cols="170">${itemDetail.item_title}</textarea>
+									</td>
+								</tr>
+
+								<tr>
+									<td width="7%">보충자료</td>
+									<td>
+										<textarea id="item_contents" name="item_contents" class="form-control summernote">${itemDetail.item_contents}</textarea>
+									</td>
+								</tr>
+								
+								<tr>
+									<td width="7%">카테고리</td>
+									<td>
+										<select name="category_no" id="category_no" class="form-control" style="width: 200px; height: 40px;">
+											<option value="">카테고리 선택</option>
+											<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
+												<option value="${categoryList.category_no}" <c:if test="${itemDetail.category_no == categoryList.category_no}">selected</c:if>>${categoryList.category_name}</option>
+											</c:forEach>
+										</select>
+									</td>
+								</tr>
+
+
+								<tr>
+									<td>정답</td>
+									<td>
+										<c:forEach items="${optionDetail}" var="optionDetail" varStatus="status">
+											<textarea class="form-control" id="option_contents" name="option_contents" rows="10" cols="170" >${optionDetail.option_contents}</textarea>
+					        			</c:forEach>
+					        		</td>
+								</tr>
+							</table>
+
+							<table class="table table-hover">
+								<tr>
+									<td>
+										<input type="button" value="취소" onclick="goList();" class="btn btn-default" style="float: right" /> 
+										<input type="button" value="수정" onclick="goUpdt('short'); return false;" class="btn btn-default" style="float: right; margin-right: 5px" />
+									</td>
+								</tr>
+							</table>
+						</div>
+					</form>
+				</c:if>
+				
 			</div>
 		</div>
 	</div>
@@ -279,6 +348,28 @@
 					});
 
 				}
+				
+				
+				if (form_type == 'short') {
+
+					var queryString = $("form[name=short_writeForm]").serialize();
+
+					$.ajax({
+						type : "POST",
+						url : "itemUpdt.daou",
+						data : queryString,
+						async : false,
+						success : function(data) {
+							alert("수정되었습니다.");
+							location.href = "itemList.daou";
+
+						},
+						error : function(data) {
+							alert("수정에 실패하였습니다.");
+						}
+					});
+
+				}
 			} else {
 				return;
 			}
@@ -350,6 +441,31 @@
 				if (input_check == true) {
 					if ($(':radio[name="option_contents"]:checked').length < 1) {
 						alert('O/X 정답을 선택해주세요');
+						input_check = false;
+						return input_check;
+					}
+				}
+			}
+			
+			
+			if (form_type == 'short') {
+
+				if ($('#short_writeForm [name="item_title"]').val().trim() == "") {
+					alert("문제가 입력되지 않았습니다.");
+					input_check = false;
+				}
+
+				if (input_check == true) {
+					if ($('#short_writeForm [name="category_no"]').val() == '') {
+						alert("카테고리가 선택되지 않았습니다.");
+						input_check = false;
+						return input_check;
+					}
+				}
+
+				if (input_check == true) {
+					if ($('#short_writeForm [name="option_contents"]').val() == ''){
+						alert("정답이 입력되지 않았습니다.");
 						input_check = false;
 						return input_check;
 					}

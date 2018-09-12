@@ -189,7 +189,63 @@
 				</form>
 				
 				<form name="short_writeForm" id="short_writeForm" method="post" style="display:none">
-				
+					<input type="hidden" name="item_type" value="3" />
+					<div class="container">
+						<h2 class="span-font">주관식 문제 등록 페이지</h2>
+						<p class="span-font">풀어다우 주관식 문제 등록 페이지 입니다.</p>
+
+						<table class="table table-hover">
+
+							<tr>
+								<td width="7%">문제</td>
+								<td><textarea class="form-control" id="item_title" name="item_title" rows="7" cols="170"> </textarea></td>
+							</tr>
+			
+			
+							<tr>
+								<td width="7%">보충자료</td>
+								<td><textarea class="form-control summernote" id="item_contents" name="item_contents" > </textarea></td>
+							</tr>
+							
+							<tr>
+								<td width="7%">카테고리</td>
+								<td>
+								
+									<c:if test="${!empty categoryList}">
+										<select name="category_no" id="category_no" class="form-control" style="width: 200px; height: 40px;">
+											<option value="">카테고리 선택</option>
+											<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
+												<option value="${categoryList.category_no}">${categoryList.category_name}</option>
+											</c:forEach>
+										</select>
+									</c:if> 
+									
+									<c:if test="${empty categoryList}">
+										<select name="category_no" id="category_no" class="form-control" style="width: 200px; height: 40px;">
+											<option value="">카테고리 정보가 없습니다.<option>
+										</select>
+									</c:if>
+									
+								</td>
+							</tr>
+
+							<tr>
+								<td>정답</td>
+								<td>
+									<textarea class="form-control" id="option_contents" name="option_contents" rows="10" cols="170"></textarea>
+								</td>
+							</tr>
+						</table>
+
+						<table class="table table-hover">
+							<tr>
+								<td>
+									<input type="button" value="취소" onclick="goList();" class="btn btn-default" style="float: right" /> 
+									<input type="button" value="등록" onclick="goReg(); return false;" class="btn btn-default" style="float: right; margin-right: 5px" />
+								</td>
+							</tr>
+						</table>
+					</div>
 				</form>
 
 			</div>
@@ -227,15 +283,28 @@
 		function typeChange(type) {
 			if (type == '1') {
 				document.ch_writeForm.reset();
+				document.short_writeForm.reset();
 				$("#ch_writeForm").css('display', 'none');
+				$("#short_writeForm").css('display', 'none');
 				$("#ox_writeForm").css('display', 'block');
 			}
 
 			if (type == '2') {
 				document.ox_writeForm.reset();
+				document.short_writeForm.reset();
 				$("#ox_writeForm").css('display', 'none');
+				$("#short_writeForm").css('display', 'none');
 				$("#ch_writeForm").css('display', 'block');
 			}
+			
+			if (type == '3') {
+				document.ox_writeForm.reset();
+				document.ch_writeForm.reset();
+				$("#ox_writeForm").css('display', 'none');
+				$("#ch_writeForm").css('display', 'none');
+				$("#short_writeForm").css('display', 'block');
+			}
+			
 		}
 
 		function goReg() {
@@ -279,6 +348,30 @@
 				if ($("#ox_writeForm").css('display') == 'block') {
 
 					var queryString = $("form[name=ox_writeForm]").serialize();
+
+					$.ajax({
+						type : "POST",
+						url : "itemReg.daou",
+						data : queryString,
+						async : false,
+						success : function(data) {
+							if (data == "success") {
+								alert("등록되었습니다.");
+								location.href = "itemList.daou";
+							} else if (data == "error") {
+								alert("등록에 실패하였습니다.");
+								return;
+							}
+						},
+						error : function(data) {
+							alert("등록에 실패하였습니다.");
+						}
+					});
+				} 
+				
+				if ($("#short_writeForm").css('display') == 'block') {
+
+					var queryString = $("form[name=short_writeForm]").serialize();
 
 					$.ajax({
 						type : "POST",
@@ -382,6 +475,33 @@
 
 			}
 
+			
+			
+			else if ($("#short_writeForm").css('display') == 'block') {
+
+				if ($('#short_writeForm [name="item_title"]').val().trim() == '') {
+					alert("문제가 입력되지 않았습니다.");
+					input_check = false;
+				}
+
+				if (input_check == true) {
+					if ($('#short_writeForm [name="category_no"]').val() == '') {
+						alert("카테고리가 선택되지 않았습니다.");
+						input_check = false;
+						return input_check;
+					}
+				}
+				
+				if (input_check == true) {
+					if ($('#short_writeForm [name="option_contents"]').val() == ''){
+						alert("정답이 입력되지 않았습니다.");
+						input_check = false;
+						return input_check;
+					}
+				}
+			}
+			
+			
 			return input_check;
 		}
 		

@@ -35,7 +35,7 @@
 						</tr>
 						
 						<tr>
-							<td>문제</td>
+							<td>보충자료</td>
 							<td>${itemDetail.item_contents}</td>
 						</tr>
 						
@@ -50,11 +50,15 @@
 								<c:if test="${itemDetail.item_type == 2}">
 									<span style="color: red">객관식</span>
 								</c:if>
+								
+								<c:if test="${itemDetail.item_type == 3}">
+									<span style="color: red">주관식</span>
+								</c:if>
 							</td>
 						</tr>
 
 						<tr>
-							<td>문제유형</td>
+							<td>카테고리</td>
 							<td>
 								<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
 									<c:if test="${itemDetail.category_no == categoryList.category_no}">
@@ -93,7 +97,17 @@
 									</tr>
 								</c:if>
 							</c:forEach>
-							
+						</c:if>
+						
+						<c:if test="${itemDetail.item_type == '3'}">
+							<tr>
+								<td>정답</td>
+								<td>
+									<c:forEach items="${optionDetail}" var="optionDetail" varStatus="status">
+										${optionDetail.option_contents}
+									</c:forEach>
+								</td>
+							</tr>
 						</c:if>
 
 						<tr>

@@ -71,7 +71,7 @@ public class ItemController {
 		int o_result = 0; // 보기가 잘 저장되었는지 쿼리 리턴값을 받아오는 변수
 
 		try {
-			if (ivo.getItem_type().equals("1")) { // O/X 저장
+			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X 주관식 저장
 
 				i_result = itemService.itemReg(ivo);
 				int item_no = itemService.selectItemSeq();
@@ -79,11 +79,8 @@ public class ItemController {
 				ovo.setItem_no(item_no);
 				ovo.setCorrect_yn("Y");
 
-				for (int i = 0; i < option_contents.length; i++) {
-					ovo.setOption_contents(option_contents[i]);
-					o_result += itemService.optionReg(ovo);
-				}
-				
+				ovo.setOption_contents(option_contents[0]);
+				o_result += itemService.optionReg(ovo);
 
 				if (i_result == 1 && o_result >= 1) {
 					msg = "success";
@@ -176,7 +173,7 @@ public class ItemController {
 		int o_reg_result = 0;
 		
 		try {
-			if (ivo.getItem_type().equals("1")) { // O/X 저장
+			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X , 주관식 저장
 
 				i_update_result = itemService.itemUpdt(ivo);
 				o_delete_result = itemService.deleteOption(ivo.getItem_no());
@@ -184,10 +181,8 @@ public class ItemController {
 				ovo.setItem_no(ivo.getItem_no());
 				ovo.setCorrect_yn("Y");
 
-				for (int i = 0; i < option_contents.length; i++) {
-					ovo.setOption_contents(option_contents[i]);
-					o_reg_result += itemService.optionReg(ovo);
-				}
+				ovo.setOption_contents(option_contents[0]);
+				o_reg_result += itemService.optionReg(ovo);
 
 				if (i_update_result >= 1 && o_delete_result >= 1 && o_reg_result >= 1) {
 					msg = "success";

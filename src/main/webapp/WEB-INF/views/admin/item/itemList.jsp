@@ -55,6 +55,7 @@
 											<td align="center">
 												<c:if test="${itemList.item_type == 1}"><span style="color: red">O/X</span></c:if>
 												<c:if test="${itemList.item_type == 2}"><span style="color: red">객관식</span></c:if>
+												<c:if test="${itemList.item_type == 3}"><span style="color: red">주관식</span></c:if>
 											</td>
 											
 											<td align="center">
