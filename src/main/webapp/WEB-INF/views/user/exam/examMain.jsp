@@ -60,7 +60,7 @@
 			alert('평가 기간이 아닙니다');
 			return false;
 		}
-		/* location.href="${pageContext.request.contextPath}/user/examStart.do?degree="+degree; */
+		location.href="${pageContext.request.contextPath}/user/examStart.do?degree="+degree;
 	}
 </script>
 </head>

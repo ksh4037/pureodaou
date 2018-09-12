@@ -1,5 +1,6 @@
 package com.daou.pd.user.exam;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -25,20 +26,26 @@ public class ExamController {
 
 	@RequestMapping(value = "user/exam/examlist.daou")
 	public ModelAndView examlist(HttpServletRequest req) {
-//		HttpSession session = req.getSession();
+//		HttpSession session = req.getSession(false);
 //		String id = (String)session.getAttribute("emp_id");
 		String id = "90634";
 		ModelAndView mav = new ModelAndView("user/exam/examMain");
-		mav.addObject("category", "보안");
 		mav.addObject("elist", examService.getExamList(id));
 
 		return mav;
 	}
 
-	@RequestMapping(value = "/user/exam/examStart.daou")
+	@RequestMapping(value = "/user/exam/examIntro.daou")
 	public ModelAndView examStart(@RequestParam("degree") String str, HttpServletRequest req) {
-		String id = getSessionId(req);
+//		String id = getSessionId(req);
+		int degree = Integer.parseInt(str);
 		ModelAndView mav = new ModelAndView();
+		String id = "90634";
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("reg_id", id);
+		map.put("exam_degree", degree);
+		mav.addObject("intro", examService.getIntro(map));
+
 		return mav;
 	}
 
@@ -48,7 +55,7 @@ public class ExamController {
 		return null;
 	}
 
-	@RequestMapping(value = "/user/exam/getExam.do")
+	@RequestMapping(value = "/user/exam/getExam.daou")
 	public ModelAndView getExam(HttpServletRequest req) {// 아직 보기 순서 안섞임
 		int degree = (Integer) req.getAttribute("degree");
 		String id = getSessionId(req);

@@ -1,5 +1,6 @@
 package com.daou.pd.user.exam;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -21,6 +22,14 @@ public class ExamServiceImpl implements ExamService {
 	public List<ExamListVO> getExamList(String id) {
 		examMapper = sqlSession.getMapper(ExamMapper.class);
 		return examMapper.getExamList(id);
+	}
+
+	@Override
+	public ExamVO getIntro(HashMap<String, Object> map) {
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		ExamVO evo = examMapper.getIntro(map);
+		evo.setUservo(examMapper.getSubIntro(map));
+		return evo;
 	}
 
 }

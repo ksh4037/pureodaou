@@ -2,6 +2,7 @@ package com.daou.pd.user.exam;
 
 public class ExamVO {
 	private int exam_degree;
+	private String exam_category;
 	private String exam_start_date;
 	private String exam_end_date;
 	private int exam_ox_num;
@@ -88,6 +89,14 @@ public class ExamVO {
 
 	public void setUservo(ExamUserVO uservo) {
 		this.uservo = uservo;
+	}
+
+	public String getExam_category() {
+		return exam_category;
+	}
+
+	public void setExam_category(String exam_category) {
+		this.exam_category = exam_category;
 	}
 
 }
