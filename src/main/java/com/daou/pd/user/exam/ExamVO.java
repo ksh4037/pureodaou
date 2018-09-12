@@ -3,120 +3,121 @@ package com.daou.pd.user.exam;
 import java.sql.Date;
 
 public class ExamVO {
-	private int exam_test_no; // 회차
-	private String reg_id; // 응시자
-	private int problem_seq;// 시퀀스
-	private int option1; // 보기1
-	private int option2; // 보기2
-	private int option3; // 보기3
-	private int option4; // 보기4
-	private String e_answer; // 체크한 답
-	private String correct; // 정답여부
-	private Date reg_date; // 응시날짜
+	private int exam_no;
+	private int exam_degree; // 회차
+	private String exam_take_id; // 응시자
+	private String exam_teke_date;
+	private int exam_retake_degree;// 재시험 회차
+	private int exam_left_time;
+	private int exam_score;
+	private String exam_status;
+	private String exam_final_yn;
+	private ExamDetailVO detail;
 
 	public ExamVO() {
 	}
 
-	public ExamVO(int exam_test_no, String reg_id, int problem_seq, int option1, int option2, int option3, int option4,
-			String e_answer, String correct, Date reg_date) {
+	public ExamVO(int exam_no, int exam_degree, String exam_take_id, String exam_teke_date, int exam_retake_degree,
+			int exam_left_time, int exam_score, String exam_status, String exam_final_yn, ExamDetailVO detail) {
 		super();
-		this.exam_test_no = exam_test_no;
-		this.reg_id = reg_id;
-		this.problem_seq = problem_seq;
-		this.option1 = option1;
-		this.option2 = option2;
-		this.option3 = option3;
-		this.option4 = option4;
-		this.e_answer = e_answer;
-		this.correct = correct;
-		this.reg_date = reg_date;
+		this.exam_no = exam_no;
+		this.exam_degree = exam_degree;
+		this.exam_take_id = exam_take_id;
+		this.exam_teke_date = exam_teke_date;
+		this.exam_retake_degree = exam_retake_degree;
+		this.exam_left_time = exam_left_time;
+		this.exam_score = exam_score;
+		this.exam_status = exam_status;
+		this.exam_final_yn = exam_final_yn;
+		this.detail = detail;
 	}
 
-	public int getExam_test_no() {
-		return exam_test_no;
+	public int getExam_no() {
+		return exam_no;
 	}
 
-	public void setExam_test_no(int exam_test_no) {
-		this.exam_test_no = exam_test_no;
+	public void setExam_no(int exam_no) {
+		this.exam_no = exam_no;
 	}
 
-	public String getReg_id() {
-		return reg_id;
+	public int getExam_degree() {
+		return exam_degree;
 	}
 
-	public void setReg_id(String reg_id) {
-		this.reg_id = reg_id;
+	public void setExam_degree(int exam_degree) {
+		this.exam_degree = exam_degree;
 	}
 
-	public int getProblem_seq() {
-		return problem_seq;
+	public String getExam_take_id() {
+		return exam_take_id;
 	}
 
-	public void setProblem_seq(int problem_seq) {
-		this.problem_seq = problem_seq;
+	public void setExam_take_id(String exam_take_id) {
+		this.exam_take_id = exam_take_id;
 	}
 
-	public int getOption1() {
-		return option1;
+	public String getExam_teke_date() {
+		return exam_teke_date;
 	}
 
-	public void setOption1(int option1) {
-		this.option1 = option1;
+	public void setExam_teke_date(String exam_teke_date) {
+		this.exam_teke_date = exam_teke_date;
 	}
 
-	public int getOption2() {
-		return option2;
+	public int getExam_retake_degree() {
+		return exam_retake_degree;
 	}
 
-	public void setOption2(int option2) {
-		this.option2 = option2;
+	public void setExam_retake_degree(int exam_retake_degree) {
+		this.exam_retake_degree = exam_retake_degree;
 	}
 
-	public int getOption3() {
-		return option3;
+	public int getExam_left_time() {
+		return exam_left_time;
 	}
 
-	public void setOption3(int option3) {
-		this.option3 = option3;
+	public void setExam_left_time(int exam_left_time) {
+		this.exam_left_time = exam_left_time;
 	}
 
-	public int getOption4() {
-		return option4;
+	public int getExam_score() {
+		return exam_score;
 	}
 
-	public void setOption4(int option4) {
-		this.option4 = option4;
+	public void setExam_score(int exam_score) {
+		this.exam_score = exam_score;
 	}
 
-	public String getE_answer() {
-		return e_answer;
+	public String getExam_status() {
+		return exam_status;
 	}
 
-	public void setE_answer(String e_answer) {
-		this.e_answer = e_answer;
+	public void setExam_status(String exam_status) {
+		this.exam_status = exam_status;
 	}
 
-	public String getCorrect() {
-		return correct;
+	public String getExam_final_yn() {
+		return exam_final_yn;
 	}
 
-	public void setCorrect(String correct) {
-		this.correct = correct;
+	public void setExam_final_yn(String exam_final_yn) {
+		this.exam_final_yn = exam_final_yn;
 	}
 
-	public Date getReg_date() {
-		return reg_date;
+	public ExamDetailVO getDetail() {
+		return detail;
 	}
 
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
+	public void setDetail(ExamDetailVO detail) {
+		this.detail = detail;
 	}
 
 	@Override
 	public String toString() {
-		return "ExamVO [exam_test_no=" + exam_test_no + ", reg_id=" + reg_id + ", problem_seq=" + problem_seq
-				+ ", option1=" + option1 + ", option2=" + option2 + ", option3=" + option3 + ", option4=" + option4
-				+ ", e_answer=" + e_answer + ", correct=" + correct + ", reg_date=" + reg_date + "]";
+		return "ExamVO [exam_no=" + exam_no + ", exam_degree=" + exam_degree + ", exam_take_id=" + exam_take_id
+				+ ", exam_teke_date=" + exam_teke_date + ", exam_retake_degree=" + exam_retake_degree
+				+ ", exam_left_time=" + exam_left_time + ", exam_score=" + exam_score + ", exam_status=" + exam_status
+				+ ", exam_final_yn=" + exam_final_yn + ", detail=" + detail + "]";
 	}
 
 }

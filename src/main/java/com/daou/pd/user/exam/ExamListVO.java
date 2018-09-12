@@ -1,68 +1,90 @@
 package com.daou.pd.user.exam;
 
 public class ExamListVO {
-	private int exam_test_no;
-	private String s_date;
-	private String e_date;
-	private int ox_num;
-	private int obj_num;
+	private int exam_degree;
+	private String exam_start_date;
+	private String exam_end_date;
+	private int exam_ox_num;
+	private int exam_obj_num;
+	private int exam_short_num;
+	private int exam_pass_score;
 
 	public ExamListVO() {
 	}
 
-	public ExamListVO(int exam_test_no, String s_date, String e_date, int ox_num, int obj_num) {
+	public ExamListVO(int exam_degree, String exam_start_date, String exam_end_date, int exam_ox_num, int exam_obj_num,
+			int exam_short_num, int exam_pass_score) {
 		super();
-		this.exam_test_no = exam_test_no;
-		this.s_date = s_date;
-		this.e_date = e_date;
-		this.ox_num = ox_num;
-		this.obj_num = obj_num;
+		this.exam_degree = exam_degree;
+		this.exam_start_date = exam_start_date;
+		this.exam_end_date = exam_end_date;
+		this.exam_ox_num = exam_ox_num;
+		this.exam_obj_num = exam_obj_num;
+		this.exam_short_num = exam_short_num;
+		this.exam_pass_score = exam_pass_score;
 	}
 
-	public int getExam_test_no() {
-		return exam_test_no;
+	public int getExam_degree() {
+		return exam_degree;
 	}
 
-	public void setExam_test_no(int exam_test_no) {
-		this.exam_test_no = exam_test_no;
+	public void setExam_degree(int exam_degree) {
+		this.exam_degree = exam_degree;
 	}
 
-	public String getS_date() {
-		return s_date;
+	public String getExam_start_date() {
+		return exam_start_date;
 	}
 
-	public void setS_date(String s_date) {
-		this.s_date = s_date;
+	public void setExam_start_date(String exam_start_date) {
+		this.exam_start_date = exam_start_date;
 	}
 
-	public String getE_date() {
-		return e_date;
+	public String getExam_end_date() {
+		return exam_end_date;
 	}
 
-	public void setE_date(String e_date) {
-		this.e_date = e_date;
+	public void setExam_end_date(String exam_end_date) {
+		this.exam_end_date = exam_end_date;
 	}
 
-	public int getOx_num() {
-		return ox_num;
+	public int getExam_ox_num() {
+		return exam_ox_num;
 	}
 
-	public void setOx_num(int ox_num) {
-		this.ox_num = ox_num;
+	public void setExam_ox_num(int exam_ox_num) {
+		this.exam_ox_num = exam_ox_num;
 	}
 
-	public int getObj_num() {
-		return obj_num;
+	public int getExam_obj_num() {
+		return exam_obj_num;
 	}
 
-	public void setObj_num(int obj_num) {
-		this.obj_num = obj_num;
+	public void setExam_obj_num(int exam_obj_num) {
+		this.exam_obj_num = exam_obj_num;
+	}
+
+	public int getExam_short_num() {
+		return exam_short_num;
+	}
+
+	public void setExam_short_num(int exam_short_num) {
+		this.exam_short_num = exam_short_num;
+	}
+
+	public int getExam_pass_score() {
+		return exam_pass_score;
+	}
+
+	public void setExam_pass_score(int exam_pass_score) {
+		this.exam_pass_score = exam_pass_score;
 	}
 
 	@Override
 	public String toString() {
-		return "ExamListVO [exam_test_no=" + exam_test_no + ", s_date=" + s_date + ", e_date=" + e_date + ", ox_num="
-				+ ox_num + ", obj_num=" + obj_num + "]";
+		return "ExamListVO [exam_degree=" + exam_degree + ", exam_start_date=" + exam_start_date + ", exam_end_date="
+				+ exam_end_date + ", exam_ox_num=" + exam_ox_num + ", exam_obj_num=" + exam_obj_num
+				+ ", exam_short_num=" + exam_short_num + ", exam_pass_score=" + exam_pass_score + "]";
 	}
 
 }
