@@ -35,7 +35,7 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th align="center"><input type="checkbox" id="allCheck" onclick="allChk(this);" /></th>
+									<th align="center"><input type="checkbox" id="allCheck" onclick="allChk(this, 'item');" /></th>
 									<th align="center">No.</th>
 									<th align="center" width="35%">문제내용</th>
 									<th><center>문제유형</center></th>
