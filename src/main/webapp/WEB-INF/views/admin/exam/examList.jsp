@@ -55,7 +55,7 @@
 
 	<script type="text/javascript">
 		function goReg(){
-			location.href="examReg.daou";
+			location.href="examRegForm.daou";
 		}
 	</script>
 </body>
