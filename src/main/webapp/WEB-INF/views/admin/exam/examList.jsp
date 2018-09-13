@@ -39,13 +39,13 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>등록된 문제 정보가 없습니다.</td>
+									<td>등록된 출제 정보가 없습니다.</td>
 								</tr>
 							</tbody>
 						</table>
 					</form>
 
-					<input type="button" value="출제하기" onclick="goReg();" class="btn btn-default" style="float: right; margin-right: 5px" />
+				 	<p align="center"> <input type="button" value="출제하기" onclick="goReg();" class="btn btn-danger"/>  </p>
 				</div>
 			</div>
 		</div>
