@@ -18,7 +18,7 @@
 		)
 	</insert>
 	
-	
+
 	<select id="selectExamTarget" resultType="empVO">
 		select emp_id
 		from employee

@@ -43,8 +43,8 @@
 							<tr>
 								<th scope="row">시험기간 설정</th>
 								<td>
-									<input type="text" name="exam_start_date" id="exam_start_date" class="form-control"  placeholder="시작일자를 지정하세요." style="float:left; width:20%; margin-right:15px;"> 
-									<input type="text" name="exam_end_date" id="exam_end_date" class="form-control"  placeholder="종료일자를 지정하세요."style="float:left; width:20%; margin-right:15px;"> 		
+									<input type="text" name="exam_start_date" id="exam_start_date" class="form-control"  placeholder="시작일자를 지정하세요." style="float:left; width:20%; margin-right:15px;" readonly> 
+									<input type="text" name="exam_end_date" id="exam_end_date" class="form-control"  placeholder="종료일자를 지정하세요."style="float:left; width:20%; margin-right:15px;" readonly> 		
 								</td>
 							
 							</tr>
@@ -52,7 +52,7 @@
 							<tr>
 								<th scope="row">합격 커트라인 점수</th>
 								<td>
-									<input type="text" name="exam_pass_score" id="exam_pass_score" class="form-control" name="score" style="width:5%;float:left"/> &nbsp;&nbsp;점 
+									<input type="text" name="exam_pass_score" id="exam_pass_score" class="form-control" name="score" style="width:5%;float:left" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' maxlength="3"/> &nbsp;&nbsp;점 
 								</td>
 							</tr>
 							
@@ -60,7 +60,7 @@
 							<tr style="height:70px">
 								<th scope="row">부서</th>
 								<td>
-									<input type="checkbox" value="all" name="exam_category"> 전체&nbsp;&nbsp;
+									<input type="checkbox" onclick="allChk(this, 'dept');" > 전체&nbsp;&nbsp;
 									<c:forEach var="item" items="${deptList}">
 										<input type="checkbox" name="emp_dept" id="emp_dept" value="${item.quiz_cfg_code}"> ${item.quiz_cfg_code_name} &nbsp;&nbsp;
 									</c:forEach>
@@ -71,7 +71,7 @@
 							<tr style="height:70px">
 								<th scope="row">직급</th>
 								<td>
-									<input type="checkbox" value="all"> 전체&nbsp;&nbsp;
+									<input type="checkbox" onclick="allChk(this, 'grade');"> 전체&nbsp;&nbsp;
 									<c:forEach var="item" items="${gradeList}">
 										<input type="checkbox" name="emp_grade" id="emp_grade" value="${item.quiz_cfg_code}"> ${item.quiz_cfg_code_name} &nbsp;&nbsp;
 									</c:forEach>
@@ -82,9 +82,9 @@
 							<tr>
 								<th scope="row">유형별 문제 수<br>(총 20문항)</th>
 								<td>
-								<div style="float:left"><p style="margin-left:20%">O/X</p> <input type="text" name="exam_ox_num" id="exam_ox_num" class="form-control" name="score" style="width:50%" /></div>
-								<div style="float:left"><p style="margin-left:15%">객관식</p> <input type="text" name="exam_obj_num" id="exam_obj_num" class="form-control" name="score" style="width:50%" /></div>
-								<div style="float:left"><p style="margin-left:15%">주관식</p> <input type="text" name="exam_short_num" id="exam_short_num" class="form-control" name="score" style="width:50%" /></div>
+								<div style="float:left"><p style="margin-left:20%">O/X</p> <input type="text" name="exam_ox_num" id="exam_ox_num" class="form-control" name="score" style="width:50%" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' maxlength="2"/></div>
+								<div style="float:left"><p style="margin-left:15%">객관식</p> <input type="text" name="exam_obj_num" id="exam_obj_num" class="form-control" name="score" style="width:50%" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' maxlength="2"/></div>
+								<div style="float:left"><p style="margin-left:15%">주관식</p> <input type="text" name="exam_short_num" id="exam_short_num" class="form-control" name="score" style="width:50%" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' maxlength="2"/></div>
 								</td>
 							</tr>
 						</table>
@@ -111,6 +111,63 @@
 		}
 		
 		function goReg(){
+			
+			if($("#exam_category").val() == ''  || $("#exam_category").val() == undefined){
+				alert('카테고리가 선택되지 않았습니다.');
+				return;
+			}
+			
+			if($("#exam_start_date").val() == ''  || $("#exam_start_date").val() == undefined){
+				alert('시작일자가 설정되지 않았습니다.');
+				return;
+			}
+			
+			if($("#exam_end_date").val() == ''  || $("#exam_end_date").val() == undefined){
+				alert('종료일자가 설정되지 않았습니다.');
+				return;
+			}
+			
+			
+			if($("#exam_pass_score").val() == ''  || $("#exam_pass_score").val() == undefined){
+				alert('합격 점수가 입력되지 않았습니다.');
+				return;
+			}
+			
+			if(parseInt($("#exam_pass_score").val()) > 100){
+				alert('총점은 100점 기준입니다.');
+				return;
+			}
+			
+			if($("input[name=emp_dept]:checked").val() == '' || $("input[name=emp_dept]:checked").val() == undefined){
+				alert('부서가 선택되지 않았습니다.');
+				return;
+			}
+			
+			if($("input[name=emp_grade]:checked").val() == '' || $("input[name=emp_grade]:checked").val() == undefined){
+				alert('직급이 선택되지 않았습니다.');
+				return;
+			}
+	
+			if($("#exam_ox_num").val() == ''  || $("#exam_ox_num").val() == undefined){
+				alert('O/X 문제 개수가 입력되지 않았습니다.');
+				return;
+			}
+			
+			if($("#exam_obj_num").val() == ''  || $("#exam_obj_num").val() == undefined){
+				alert('객관식 문제 개수가 입력되지 않았습니다.');
+				return;
+			}
+			
+			if($("#exam_short_num").val() == ''  || $("#exam_short_num").val() == undefined){
+				alert('주관식 문제 개수가 입력되지 않았습니다.');
+				return;
+			}
+			
+			if(parseInt($("#exam_ox_num").val()) + parseInt($("#exam_obj_num").val()) + parseInt($("#exam_short_num").val()) != 20){
+				alert('문제의 총 개수는 총 20문항 이어야 합니다.\유형별 문제 수를 다시 입력해주세요.');
+				return;
+			}
+
 			var queryString = $("form[name=exam_reg_form]").serialize();
 
 			$.ajax({
@@ -131,7 +188,11 @@
 					alert("등록에 실패하였습니다.");
 				}
 			});
+			
+			
+			
 		}
+		
 	</script>
 	
 	
