@@ -43,7 +43,7 @@
 		where quiz_cfg_code_group = 'grade'
 	</select>
 	
-	<update id="updateMember" parameterType="userVO">
+	<update id="updateMember" parameterType="userVO" >
 		update employee
 		set
 		emp_name = #{emp_name},
