@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.daou.pd.admin.item.ItemVO;
+
 @Controller
 public class AdminExamController {
 	@Autowired
@@ -26,4 +28,10 @@ public class AdminExamController {
 		return mav;
 	}
 
+	
+	@RequestMapping(value = "admin/examRegForm.daou")
+	public ModelAndView itemRegForm(HttpServletRequest request, HttpServletResponse response, ItemVO ivo) {
+		ModelAndView mav = new ModelAndView("admin/exam/examRegForm");
+		return mav;
+	}
 }

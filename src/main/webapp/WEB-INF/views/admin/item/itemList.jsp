@@ -168,23 +168,6 @@
 			}
 		}
 
-		function allChk(obj) {  //라디오버튼 전체선택
-			var chkObj = document.getElementsByName("del_check");
-			var rowCnt = chkObj.length - 1;
-			var check = obj.checked;
-			if (check) {
-				for (var i = 0; i <= rowCnt; i++) {
-					if (chkObj[i].type == "checkbox")
-						chkObj[i].checked = true;
-				}
-			} else {
-				for (var i = 0; i <= rowCnt; i++) {
-					if (chkObj[i].type == "checkbox") {
-						chkObj[i].checked = false;
-					}
-				}
-			}
-		}
 
 		
 		function goCtgList() { // 카테고리관리 페이지 이동 (팝업창 띄우기)

@@ -54,7 +54,9 @@
 	<%@ include file="../common/footer.jsp"%>
 
 	<script type="text/javascript">
-	
+		function goReg(){
+			location.href="examReg.daou";
+		}
 	</script>
 </body>
 </html>
