@@ -18,7 +18,7 @@
 
 			<div class="col-sm-9">
 				<h4 class="s_title" style="padding-top: 25px; padding-bottom: 15px">
-					<span class="span-font">Home > 문제관리</span>
+					<span class="span-font">Home > 문제관리 </span>
 				</h4>
 				<hr>
 				<br>
