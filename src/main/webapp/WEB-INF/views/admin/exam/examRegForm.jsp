@@ -31,7 +31,7 @@
 								<th scope="row" width="15%">카테고리 설정</th>
 								<td>
 									<select id="exam_category"  name="exam_category" class="form-control" style="float:left; width:25%;">
-									<option value="">카테고리를 선택하세요.</option>
+									<option value="">카테고리를 선택하세요. </option>
 										<c:forEach var="item" items="${categoryList}">
 											<option value="${item.category_no}">${item.category_name}</option>
 										</c:forEach>
