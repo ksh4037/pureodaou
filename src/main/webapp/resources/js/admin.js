@@ -4,10 +4,8 @@
 
 
 $(function(){
-
-    $("#datepicker1").datepicker();
-    $("#datepicker2").datepicker();
-
+    $("#exam_start_date").datepicker();
+    $("#exam_end_date").datepicker();
 });
 
 
