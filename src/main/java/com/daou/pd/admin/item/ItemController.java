@@ -67,11 +67,11 @@ public class ItemController {
 		ModelAndView mav = new ModelAndView("admin/item/result");
 
 		String msg = "";
-		int i_result = 0; // 문제가 잘 저장되었는지 쿼리 리턴값을 받아오는 변수
-		int o_result = 0; // 보기가 잘 저장되었는지 쿼리 리턴값을 받아오는 변수
+		int i_result = 0;
+		int o_result = 0;
 
 		try {
-			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X 주관식 저장
+			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X 二쇨��떇 ���옣
 
 				i_result = itemService.itemReg(ivo);
 				int item_no = itemService.selectItemSeq();
@@ -88,7 +88,7 @@ public class ItemController {
 					msg = "error";
 				}
 
-			} else if (ivo.getItem_type().equals("2")) { // 객관식 저장
+			} else if (ivo.getItem_type().equals("2")) { // 媛앷��떇 ���옣
 
 				i_result = itemService.itemReg(ivo);
 				int item_no = itemService.selectItemSeq();
@@ -97,7 +97,7 @@ public class ItemController {
 
 				for (int i = 0; i < option_contents.length; i++) {
 
-					if (i == ivo.getAnswer_no()) { // 정답인 보기의 위치
+					if (i == ivo.getAnswer_no()) { // �젙�떟�씤 蹂닿린�쓽 �쐞移�
 						ovo.setCorrect_yn("Y");
 					} else {
 						ovo.setCorrect_yn("N");
@@ -173,7 +173,7 @@ public class ItemController {
 		int o_reg_result = 0;
 		
 		try {
-			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X , 주관식 저장
+			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X , 二쇨��떇 ���옣
 
 				i_update_result = itemService.itemUpdt(ivo);
 				o_delete_result = itemService.deleteOption(ivo.getItem_no());
@@ -190,7 +190,7 @@ public class ItemController {
 					msg = "error";
 				}
 
-			} else if (ivo.getItem_type().equals("2")) { // 객관식 저장
+			} else if (ivo.getItem_type().equals("2")) { // 媛앷��떇 ���옣
 
 				i_update_result = itemService.itemUpdt(ivo);
 				o_delete_result = itemService.deleteOption(ivo.getItem_no());
@@ -199,7 +199,7 @@ public class ItemController {
 
 				for (int i = 0; i < option_contents.length; i++) {
 
-					if (i == ivo.getAnswer_no()) { // 첫 번째가 정답이니까
+					if (i == ivo.getAnswer_no()) { // 泥� 踰덉㎏媛� �젙�떟�씠�땲源�
 						ovo.setCorrect_yn("Y");
 					} else {
 						ovo.setCorrect_yn("N");

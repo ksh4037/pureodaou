@@ -1,0 +1,395 @@
+[33mcommit 590031999eb726ceb9a35cbc833acd3b166e30ac[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31mpd/master[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Wed Sep 12 16:18:55 2018 +0900
+
+    fixing,,,
+
+[33mcommit 4913e075652d1ee99c3a95c89c026a7338784aba[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Wed Sep 12 15:08:19 2018 +0900
+
+    where is my mental
+
+[33mcommit fd0967ca148d6cf86faa68ec7dd87f51766c293f[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Wed Sep 12 11:23:25 2018 +0900
+
+    before change
+
+[33mcommit 8e179279bbc9aca6c710baaba2bac7ab5a3bfa0c[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Wed Sep 12 11:16:06 2018 +0900
+
+    wow
+
+[33mcommit 4e74a1747f463b534ca938ba8305cb1acbce2c4d[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Wed Sep 12 10:44:46 2018 +0900
+
+    merge complete
+
+[33mcommit f2d8f642c3a0a25ffba9d5837674c90a95bed5b4[m
+Merge: 051ef51 7f195c3
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Wed Sep 12 10:42:05 2018 +0900
+
+    Merge branch 'master' of https://github.com/JIWOONG-KIM/pureodaou
+
+[33mcommit 051ef51f628ef56c361ab9d5b55287aad9dd3ccb[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Wed Sep 12 10:38:10 2018 +0900
+
+    edit erd
+
+[33mcommit 7f195c30b1a6f42c992b764399bc3b172cf7ce02[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Wed Sep 12 10:32:09 2018 +0900
+
+    20180912
+
+[33mcommit 700faade39eb9083cecf97b6aae6e1cd2a36c813[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Wed Sep 12 10:29:14 2018 +0900
+
+    20180912
+
+[33mcommit 889ace1c5492cdc96e00a8f1dc7c1fc40b61d088[m
+Merge: a9ac2ac 866546d
+Author: suho-kim <ohs342@naver.com>
+Date:   Wed Sep 12 10:27:56 2018 +0900
+
+    Merge branch 'master' of https://github.com/JIWOONG-KIM/pureodaou
+    
+    Conflicts:
+            src/main/java/com/daou/pd/admin/question/QuestionController.java
+            src/main/webapp/resources/summernote/lang/summernote-ar-AR.js
+            src/main/webapp/resources/summernote/lang/summernote-ar-AR.min.js
+            src/main/webapp/resources/summernote/lang/summernote-bg-BG.js
+            src/main/webapp/resources/summernote/lang/summernote-bg-BG.min.js
+            src/main/webapp/resources/summernote/lang/summernote-ca-ES.js
+            src/main/webapp/resources/summernote/lang/summernote-ca-ES.min.js
+            src/main/webapp/resources/summernote/lang/summernote-cs-CZ.js
+            src/main/webapp/resources/summernote/lang/summernote-cs-CZ.min.js
+            src/main/webapp/resources/summernote/lang/summernote-da-DK.js
+            src/main/webapp/resources/summernote/lang/summernote-da-DK.min.js
+            src/main/webapp/resources/summernote/lang/summernote-de-DE.js
+            src/main/webapp/resources/summernote/lang/summernote-de-DE.min.js
+            src/main/webapp/resources/summernote/lang/summernote-el-GR.js
+            src/main/webapp/resources/summernote/lang/summernote-el-GR.min.js
+            src/main/webapp/resources/summernote/lang/summernote-es-ES.js
+            src/main/webapp/resources/summernote/lang/summernote-es-ES.min.js
+            src/main/webapp/resources/summernote/lang/summernote-es-EU.js
+            src/main/webapp/resources/summernote/lang/summernote-es-EU.min.js
+            src/main/webapp/resources/summernote/lang/summernote-fa-IR.js
+            src/main/webapp/resources/summernote/lang/summernote-fa-IR.min.js
+            src/main/webapp/resources/summernote/lang/summernote-fi-FI.js
+            src/main/webapp/resources/summernote/lang/summernote-fi-FI.min.js
+            src/main/webapp/resources/summernote/lang/summernote-fr-FR.js
+            src/main/webapp/resources/summernote/lang/summernote-fr-FR.min.js
+            src/main/webapp/resources/summernote/lang/summernote-gl-ES.js
+            src/main/webapp/resources/summernote/lang/summernote-gl-ES.min.js
+            src/main/webapp/resources/summernote/lang/summernote-he-IL.js
+            src/main/webapp/resources/summernote/lang/summernote-he-IL.min.js
+            src/main/webapp/resources/summernote/lang/summernote-hr-HR.js
+            src/main/webapp/resources/summernote/lang/summernote-hr-HR.min.js
+            src/main/webapp/resources/summernote/lang/summernote-hu-HU.js
+            src/main/webapp/resources/summernote/lang/summernote-hu-HU.min.js
+            src/main/webapp/resources/summernote/lang/summernote-id-ID.js
+            src/main/webapp/resources/summernote/lang/summernote-id-ID.min.js
+            src/main/webapp/resources/summernote/lang/summernote-it-IT.js
+            src/main/webapp/resources/summernote/lang/summernote-it-IT.min.js
+            src/main/webapp/resources/summernote/lang/summernote-ja-JP.js
+            src/main/webapp/resources/summernote/lang/summernote-ja-JP.min.js
+            src/main/webapp/resources/summernote/lang/summernote-ko-KR.js
+            src/main/webapp/resources/summernote/lang/summernote-ko-KR.min.js
+            src/main/webapp/resources/summernote/lang/summernote-lt-LT.js
+            src/main/webapp/resources/summernote/lang/summernote-lt-LT.min.js
+            src/main/webapp/resources/summernote/lang/summernote-lt-LV.js
+            src/main/webapp/resources/summernote/lang/summernote-lt-LV.min.js
+            src/main/webapp/resources/summernote/lang/summernote-mn-MN.js
+            src/main/webapp/resources/summernote/lang/summernote-mn-MN.min.js
+            src/main/webapp/resources/summernote/lang/summernote-nb-NO.js
+            src/main/webapp/resources/summernote/lang/summernote-nb-NO.min.js
+            src/main/webapp/resources/summernote/lang/summernote-nl-NL.js
+            src/main/webapp/resources/summernote/lang/summernote-nl-NL.min.js
+            src/main/webapp/resources/summernote/lang/summernote-pl-PL.js
+            src/main/webapp/resources/summernote/lang/summernote-pl-PL.min.js
+            src/main/webapp/resources/summernote/lang/summernote-pt-BR.js
+            src/main/webapp/resources/summernote/lang/summernote-pt-BR.min.js
+            src/main/webapp/resources/summernote/lang/summernote-pt-PT.js
+            src/main/webapp/resources/summernote/lang/summernote-pt-PT.min.js
+            src/main/webapp/resources/summernote/lang/summernote-ro-RO.js
+            src/main/webapp/resources/summernote/lang/summernote-ro-RO.min.js
+            src/main/webapp/resources/summernote/lang/summernote-ru-RU.js
+            src/main/webapp/resources/summernote/lang/summernote-ru-RU.min.js
+            src/main/webapp/resources/summernote/lang/summernote-sk-SK.js
+            src/main/webapp/resources/summernote/lang/summernote-sk-SK.min.js
+            src/main/webapp/resources/summernote/lang/summernote-sl-SI.js
+            src/main/webapp/resources/summernote/lang/summernote-sl-SI.min.js
+            src/main/webapp/resources/summernote/lang/summernote-sr-RS-Latin.js
+            src/main/webapp/resources/summernote/lang/summernote-sr-RS-Latin.min.js
+            src/main/webapp/resources/summernote/lang/summernote-sr-RS.js
+            src/main/webapp/resources/summernote/lang/summernote-sr-RS.min.js
+            src/main/webapp/resources/summernote/lang/summernote-sv-SE.js
+            src/main/webapp/resources/summernote/lang/summernote-sv-SE.min.js
+            src/main/webapp/resources/summernote/lang/summernote-ta-IN.js
+            src/main/webapp/resources/summernote/lang/summernote-ta-IN.min.js
+            src/main/webapp/resources/summernote/lang/summernote-th-TH.js
+            src/main/webapp/resources/summernote/lang/summernote-th-TH.min.js
+            src/main/webapp/resources/summernote/lang/summernote-tr-TR.js
+            src/main/webapp/resources/summernote/lang/summernote-tr-TR.min.js
+            src/main/webapp/resources/summernote/lang/summernote-uk-UA.js
+            src/main/webapp/resources/summernote/lang/summernote-uk-UA.min.js
+            src/main/webapp/resources/summernote/lang/summernote-vi-VN.js
+            src/main/webapp/resources/summernote/lang/summernote-vi-VN.min.js
+            src/main/webapp/resources/summernote/lang/summernote-zh-CN.js
+            src/main/webapp/resources/summernote/lang/summernote-zh-CN.min.js
+            src/main/webapp/resources/summernote/lang/summernote-zh-TW.js
+            src/main/webapp/resources/summernote/lang/summernote-zh-TW.min.js
+            src/main/webapp/resources/summernote/summernote-bs4.js
+            src/main/webapp/resources/summernote/summernote-bs4.min.js
+            src/main/webapp/resources/summernote/summernote-lite.js
+            src/main/webapp/resources/summernote/summernote.js
+            src/main/webapp/resources/summernote/summernote.min.js
+            target/classes/com/daou/pd/admin/question/QuestionController.class
+
+[33mcommit a9ac2ac4c646dfa1a2c4a42b3d596e6caecf66cd[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Wed Sep 12 10:27:33 2018 +0900
+
+    20180912
+
+[33mcommit c18719764bd817296e0360c0246352bb3e7a2378[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 16:37:54 2018 +0900
+
+    test
+
+[33mcommit 866546dee997ca331362f2b57fe699ae5cd96007[m
+Merge: 182ab4a a3d67dc
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Tue Sep 11 16:37:07 2018 +0900
+
+    Merge branch 'master' of https://github.com/JIWOONG-KIM/pureodaou
+
+[33mcommit 182ab4af4cfba5dc1d67ec41b1c34b1380798cbe[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Tue Sep 11 16:36:55 2018 +0900
+
+    add summernote lib
+
+[33mcommit a3d67dcd0fe82c1c2a0e437a7d2ed0371e6f06e8[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 16:36:40 2018 +0900
+
+    editor 추가
+
+[33mcommit f3fa463e6f186a32a2f3d95439ddbbb0b97841af[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 16:26:19 2018 +0900
+
+    test
+
+[33mcommit cdd39f6ebaba12421bd267dbfdc144209344bf1d[m
+Merge: f566eb8 0af6181
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 16:24:30 2018 +0900
+
+    Merge branch 'master' of https://github.com/JIWOONG-KIM/pureodaou
+
+[33mcommit 0af61819c5e87ebd738c7a882b2390a4a42dbbe1[m
+Merge: 8dce247 978967a
+Author: nch <user@DAOU-NCH>
+Date:   Tue Sep 11 16:22:47 2018 +0900
+
+    Merge branch 'master' of https://github.com/JIWOONG-KIM/pureodaou
+    
+    Conflicts:
+            target/m2e-wtp/web-resources/META-INF/maven/com.daou/pureodaou/pom.properties
+
+[33mcommit 8dce24707c398eb021af09fbf23f7e1f06f8845f[m
+Author: nch <user@DAOU-NCH>
+Date:   Tue Sep 11 16:21:31 2018 +0900
+
+    test
+
+[33mcommit f566eb8424a2eb94076f7f0bc7cec9d2da3add27[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 16:20:30 2018 +0900
+
+    test
+
+[33mcommit 38b022615a0ce50f783c5ae5c9472e15df3b355b[m
+Merge: dc499d6 978967a
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 16:19:01 2018 +0900
+
+    Merge branch 'master' of https://github.com/JIWOONG-KIM/pureodaou
+
+[33mcommit 81f18771478beeb1c4da44af52002693cb44ff5d[m
+Author: nch <user@DAOU-NCH>
+Date:   Tue Sep 11 16:18:21 2018 +0900
+
+    exam.jsp 수정
+
+[33mcommit 84853a17b92e173ac7bebe42431f71e4f32a807c[m
+Author: nch <user@DAOU-NCH>
+Date:   Tue Sep 11 16:16:45 2018 +0900
+
+    test commit 채현
+
+[33mcommit 978967a7f72d56aa8f08b577e35f9db73edd2825[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Tue Sep 11 16:14:11 2018 +0900
+
+    edit erd
+
+[33mcommit dc499d675b75c2b643314e027e9104140aeb1699[m
+Merge: 8476e3a 10c7d6f
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 13:08:53 2018 +0900
+
+    Merge branch 'master' of https://github.com/JIWOONG-KIM/pureodaou
+    
+    Conflicts:
+            src/main/java/com/daou/pd/admin/question/QuestionVO.java
+            target/classes/com/daou/pd/admin/question/QuestionVO.class
+
+[33mcommit 8476e3af0f263f101c2b21f0a42187377d3672b4[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 13:04:28 2018 +0900
+
+    변경사항 commit
+
+[33mcommit 10c7d6f1eed6f9da5e3458e0142b81b5f5678657[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Tue Sep 11 12:59:34 2018 +0900
+
+    fix redline
+
+[33mcommit 2097f9bf1fcb2ba0ca41c40b1b987a7b1526361d[m
+Merge: 392e5f1 97a413a
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Tue Sep 11 11:50:08 2018 +0900
+
+    Merge branch 'master' of https://github.com/JIWOONG-KIM/pureodaou
+
+[33mcommit 392e5f1247a6756ad9f2daac9423f61c6d66d861[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Tue Sep 11 11:50:02 2018 +0900
+
+    asd
+
+[33mcommit 97a413a57ae4132aa342c5c148004b2a44c27765[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 11:43:48 2018 +0900
+
+    오류 추가 수정0911 11:43)
+
+[33mcommit a931d4136bcba841781d49e0df56ee5821fd1d79[m
+Merge: adac715 6dfa6ac
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Tue Sep 11 11:41:48 2018 +0900
+
+    remove
+
+[33mcommit adac71512b05ed055256685b2aac880f147a7c85[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Tue Sep 11 11:32:01 2018 +0900
+
+    no
+
+[33mcommit 6dfa6ac50a940f6edb96758f98131b7409c9ac15[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 11:24:47 2018 +0900
+
+    테이블 수정으로 인한 수정
+
+[33mcommit 184ba53e0919f2494f65e0023204ecb74d28c66e[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Tue Sep 11 11:24:32 2018 +0900
+
+    테이블 수정으로인한 수정(20180911)
+
+[33mcommit 90921a6961176a7652ac234fe99990c6f0572f99[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Mon Sep 10 16:18:51 2018 +0900
+
+    관리자 페이지 css 작업 완료!!
+
+[33mcommit 386cc011582a8813cc78f453b34427a55cac698e[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Mon Sep 10 16:13:34 2018 +0900
+
+    grading.jsp delete
+
+[33mcommit 2c1f7dfa35ea6f137c08511af112796222848205[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Mon Sep 10 16:13:19 2018 +0900
+
+    16:13
+
+[33mcommit 45af97861f905dc226dbc520936540a06bbd6aa1[m
+Merge: a202af0 6978816
+Author: suho-kim <ohs342@naver.com>
+Date:   Mon Sep 10 16:12:19 2018 +0900
+
+    Merge branch 'master' of https://github.com/JIWOONG-KIM/pureodaou
+
+[33mcommit 6978816608d710538d1b024fb0ef3ef6088f7dfc[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Mon Sep 10 16:07:33 2018 +0900
+
+    add grading page
+
+[33mcommit a202af0776b164532d4b1e846bc90a4b148bf889[m
+Merge: f3532f0 ec13c35
+Author: suho-kim <ohs342@naver.com>
+Date:   Mon Sep 10 16:03:54 2018 +0900
+
+    Merge branch 'master' of https://github.com/JIWOONG-KIM/pureodaou
+    
+    Conflicts:
+            src/main/webapp/WEB-INF/web.xml
+
+[33mcommit ec13c358a70b255ebaac7ac05104a4b194d9fce1[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Mon Sep 10 16:02:13 2018 +0900
+
+    fix web.xml
+
+[33mcommit f3532f09459f1e3e826d5118cf31c9cd229d721c[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Mon Sep 10 16:00:02 2018 +0900
+
+    test
+
+[33mcommit 8c1dac11e6c62d5be50854a6b68972a0c6b5f3eb[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Mon Sep 10 15:54:44 2018 +0900
+
+    annotation
+
+[33mcommit 25aaec49418c0f045e7619aa5e6ae1e934a6db11[m
+Author: suho-kim <ohs342@naver.com>
+Date:   Mon Sep 10 15:50:19 2018 +0900
+
+    test
+
+[33mcommit 68210366539b041a8ade97202785096537bd28f2[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Mon Sep 10 13:53:41 2018 +0900
+
+    before prst
+
+[33mcommit fce43430666760ae4f7653e60a268cca0b47b85a[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Sun Sep 9 19:38:47 2018 +0900
+
+    merge complete
+
+[33mcommit 032c9aa713206be49cb80b416d3bf77bcef4a4cc[m
+Author: JIWOONG-KIM <dhfmsths15@naver.com>
+Date:   Sun Sep 9 18:39:18 2018 +0900
+
+    jw sh merge

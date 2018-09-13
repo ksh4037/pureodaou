@@ -1,122 +1,102 @@
 package com.daou.pd.user.exam;
 
-import java.sql.Date;
-
 public class ExamVO {
-	private int exam_test_no; // 회차
-	private String reg_id; // 응시자
-	private int problem_seq;// 시퀀스
-	private int option1; // 보기1
-	private int option2; // 보기2
-	private int option3; // 보기3
-	private int option4; // 보기4
-	private String e_answer; // 체크한 답
-	private String correct; // 정답여부
-	private Date reg_date; // 응시날짜
+	private int exam_degree;
+	private String exam_category;
+	private String exam_start_date;
+	private String exam_end_date;
+	private int exam_ox_num;
+	private int exam_obj_num;
+	private int exam_short_num;
+	private int exam_pass_score;
+	private ExamUserVO uservo;
 
 	public ExamVO() {
 	}
 
-	public ExamVO(int exam_test_no, String reg_id, int problem_seq, int option1, int option2, int option3, int option4,
-			String e_answer, String correct, Date reg_date) {
+	public ExamVO(int exam_degree, String exam_start_date, String exam_end_date, int exam_ox_num, int exam_obj_num,
+			int exam_short_num, int exam_pass_score, ExamUserVO userVO) {
 		super();
-		this.exam_test_no = exam_test_no;
-		this.reg_id = reg_id;
-		this.problem_seq = problem_seq;
-		this.option1 = option1;
-		this.option2 = option2;
-		this.option3 = option3;
-		this.option4 = option4;
-		this.e_answer = e_answer;
-		this.correct = correct;
-		this.reg_date = reg_date;
+		this.exam_degree = exam_degree;
+		this.exam_start_date = exam_start_date;
+		this.exam_end_date = exam_end_date;
+		this.exam_ox_num = exam_ox_num;
+		this.exam_obj_num = exam_obj_num;
+		this.exam_short_num = exam_short_num;
+		this.exam_pass_score = exam_pass_score;
+		this.uservo = userVO;
 	}
 
-	public int getExam_test_no() {
-		return exam_test_no;
+	public int getExam_degree() {
+		return exam_degree;
 	}
 
-	public void setExam_test_no(int exam_test_no) {
-		this.exam_test_no = exam_test_no;
+	public void setExam_degree(int exam_degree) {
+		this.exam_degree = exam_degree;
 	}
 
-	public String getReg_id() {
-		return reg_id;
+	public String getExam_start_date() {
+		return exam_start_date;
 	}
 
-	public void setReg_id(String reg_id) {
-		this.reg_id = reg_id;
+	public void setExam_start_date(String exam_start_date) {
+		this.exam_start_date = exam_start_date;
 	}
 
-	public int getProblem_seq() {
-		return problem_seq;
+	public String getExam_end_date() {
+		return exam_end_date;
 	}
 
-	public void setProblem_seq(int problem_seq) {
-		this.problem_seq = problem_seq;
+	public void setExam_end_date(String exam_end_date) {
+		this.exam_end_date = exam_end_date;
 	}
 
-	public int getOption1() {
-		return option1;
+	public int getExam_ox_num() {
+		return exam_ox_num;
 	}
 
-	public void setOption1(int option1) {
-		this.option1 = option1;
+	public void setExam_ox_num(int exam_ox_num) {
+		this.exam_ox_num = exam_ox_num;
 	}
 
-	public int getOption2() {
-		return option2;
+	public int getExam_obj_num() {
+		return exam_obj_num;
 	}
 
-	public void setOption2(int option2) {
-		this.option2 = option2;
+	public void setExam_obj_num(int exam_obj_num) {
+		this.exam_obj_num = exam_obj_num;
 	}
 
-	public int getOption3() {
-		return option3;
+	public int getExam_short_num() {
+		return exam_short_num;
 	}
 
-	public void setOption3(int option3) {
-		this.option3 = option3;
+	public void setExam_short_num(int exam_short_num) {
+		this.exam_short_num = exam_short_num;
 	}
 
-	public int getOption4() {
-		return option4;
+	public int getExam_pass_score() {
+		return exam_pass_score;
 	}
 
-	public void setOption4(int option4) {
-		this.option4 = option4;
+	public void setExam_pass_score(int exam_pass_score) {
+		this.exam_pass_score = exam_pass_score;
 	}
 
-	public String getE_answer() {
-		return e_answer;
+	public ExamUserVO getUservo() {
+		return uservo;
 	}
 
-	public void setE_answer(String e_answer) {
-		this.e_answer = e_answer;
+	public void setUservo(ExamUserVO uservo) {
+		this.uservo = uservo;
 	}
 
-	public String getCorrect() {
-		return correct;
+	public String getExam_category() {
+		return exam_category;
 	}
 
-	public void setCorrect(String correct) {
-		this.correct = correct;
-	}
-
-	public Date getReg_date() {
-		return reg_date;
-	}
-
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
-	}
-
-	@Override
-	public String toString() {
-		return "ExamVO [exam_test_no=" + exam_test_no + ", reg_id=" + reg_id + ", problem_seq=" + problem_seq
-				+ ", option1=" + option1 + ", option2=" + option2 + ", option3=" + option3 + ", option4=" + option4
-				+ ", e_answer=" + e_answer + ", correct=" + correct + ", reg_date=" + reg_date + "]";
+	public void setExam_category(String exam_category) {
+		this.exam_category = exam_category;
 	}
 
 }

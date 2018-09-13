@@ -2,13 +2,14 @@
 	pageEncoding="UTF-8"%>
 <script type="text/javascript">
 function goList(path) {
-
 	if (path == "itemList") {
 		location.href = "itemList.daou";
 	} else if (path == "employeeList") {
 		location.href = "employeeList.daou";
 	} else if (path == "boardList") {
 		location.href = "boardList.daou";
+	} else if (path == "examList") {
+		location.href = "examList.daou";
 	}
 }
 </script>
@@ -22,15 +23,11 @@ function goList(path) {
 	<hr style="height: 2px; background-color: white">
 
 	<ul class="nav nav-pills nav-stacked">
-		<li><a href="#" onclick="goList('itemList');" id="item_li">문제관리</a>
+		<li><a href="#" onclick="goList('itemList');" id="item_li">문제관리</a></li>
 
-		</li>
+		<li><a href="#" onclick="goList('examList');"  id="exam_li">문제출제</a></li>
 
-		<li><a href="#" id="exam_li">문제출제</a></li>
-
-		<li><a href="#" onclick="goList('employeeList');" id="member_li">회원관리</a>
-
-		</li>
+		<li><a href="#" onclick="goList('employeeList');" id="member_li">회원관리</a></li>
 
 		<li><a href="#" id="write_li">기록관리</a></li>
 
