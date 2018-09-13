@@ -12,7 +12,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("e_id") == null) {
+		if (session.getAttribute("emp_id") == null) {
 			response.sendRedirect(request.getContextPath() + "/login.do");
 			return false;
 		} else {
