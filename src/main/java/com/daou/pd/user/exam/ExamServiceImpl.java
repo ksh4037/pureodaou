@@ -48,13 +48,31 @@ public class ExamServiceImpl implements ExamService {
 	@Override
 	public List<ItemVO> getItemList(HashMap<String, Integer> map) {
 		examMapper = sqlSession.getMapper(ExamMapper.class);
-		return examMapper.getItemList(map);
+		List<ItemVO> list = examMapper.getOX(map);
+		list.addAll(examMapper.getObj(map));
+		list.addAll(examMapper.getShort(map));
+
+		return list;
 	}
 
 	@Override
 	public List<OptionVO> getOption(int item_no) {
-		// TODO Auto-generated method stub
-		return null;
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		return examMapper.getOptionList(item_no);
+	}
+
+	@Override
+	public void makeTest(List<ExamDetailVO> list) {
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		/*Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);*/
+		examMapper.makeTest(list);
+	}
+
+	@Override
+	public Integer getExamNo(String id) {
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		return examMapper.getExamNo(id);
 	}
 
 }
