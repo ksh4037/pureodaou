@@ -4,7 +4,6 @@
 
 $(document).ready(function() {
 	
-	$("#datepicker").datepicker();
 	
 	// ----- 에디터 가져오기 ----
 	$('.summernote').summernote({
