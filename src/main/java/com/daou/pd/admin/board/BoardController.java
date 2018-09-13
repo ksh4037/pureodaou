@@ -19,8 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "admin")
 public class BoardController {
+	/*
+	
 	@Autowired
 	@Resource(name = "boardService")
 	private BoardService boardService;
@@ -35,22 +36,15 @@ public class BoardController {
 	}
 
 
-	/*@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String springMVC(ModelMap modelMap) {
-		List<List<Map<Object, Object>>> canvasjsDataList = boardService.getExamChartData();
-		modelMap.addAttribute("dataPointsList", canvasjsDataList);
+		List<List<Map<Object, Object>>> ExamDataList = boardService.getBoardVO();
+		modelMap.addAttribute("dataPointsList", ExamDataList);
 		return "chart";
 	}
-	*/
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	@RequestMapping(value = "admin/goBackBoard")
 	public ModelAndView goBackUser(HttpServletRequest request, HttpServletResponse response, BoardVO bvo) {
@@ -60,5 +54,6 @@ public class BoardController {
 		// mav.addObject("memberList", memberList);
 		return mav;
 	}
+	*/
 
 }
