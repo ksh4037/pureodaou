@@ -33,7 +33,6 @@ public class EmpController {
 		int fullCheckResult = empService.selectAdmin(evo);
 		int IdCheckResult = empService.employeeIdCheck(evo);
 
-		System.out.println("결과 : " + fullCheckResult);
 		ModelAndView mav = new ModelAndView("admin/employee/result");
 
 		if (IdCheckResult != 1) {
@@ -55,15 +54,13 @@ public class EmpController {
 	public ModelAndView logout(HttpSession session) {
 		session.invalidate();
 		ModelAndView mav = new ModelAndView();
-		System.out.println("로그아웃?");
-		String msg = "로그아웃!";
-		mav.addObject("msg", msg);
 		mav.setViewName("admin/login");
 		return mav;
 	}
 
 	@RequestMapping(value = "admin/employeeList.daou")
 	public ModelAndView goUser(HttpServletRequest request, HttpServletResponse response, EmpVO evo) throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/employee/userList");
 		
@@ -89,7 +86,6 @@ public class EmpController {
 		evo.setEmp_pw("daou" + evo.getEmp_id());
 		evo.setEmp_type(2);
 		evo.setUse_yn("Y");
-		System.out.println("등록!");
 		empService.insertMember(evo);
 		mav.addObject("resultCode", "success");
 		return mav;
@@ -119,7 +115,6 @@ public class EmpController {
 		mav.setViewName("admin/employee/userDetailView");
 		
 		HashMap<String,Object> memberViewAll = empService.memberViewAll(evo.getEmp_id());
-		System.out.println("evo.getEmp_id()" + evo.getEmp_id());
 		mav.addObject("memberViewAll", memberViewAll);
 		return mav;
 	}
@@ -145,7 +140,6 @@ public class EmpController {
 	@RequestMapping(value = "admin/employeeUpdt.daou")
 	public ModelAndView goUpdate(HttpServletRequest request, HttpServletResponse response, EmpVO evo) {
 		ModelAndView mav = new ModelAndView("admin/employee/result");
-		System.out.println("아이디 : " + evo.getEmp_id());
 		try {
 			empService.updateMember(evo);
 			mav.addObject("resultCode", "success");
