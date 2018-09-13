@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="../common/import.jsp"%>
+
 <body>
 	<div class="container-fluid">
 		<div class="row content">
@@ -31,53 +32,56 @@
 						<table class="table table-hover">
 
 							<tr>
-								<td width="7%">카테고리 설정</td>
+								<td width="15%">카테고리 설정</td>
 								<td>
-									<select>
-										<option></option>
-										<option></option>
-										<option></option>
-										<option></option>
-									</select>
-								
+									<select name="category_no">
+										<option>test1</option>
+										<option>test2</option>
+										<option>test3</option>
+										<option>test4</option>
+									</select>								
 								</td>
 							</tr>
 			
-			
 							<tr>
-								<td width="7%">시험기간</td>
+								<td width="7%">시험기간 설정</td>
 								<td>
-									<p class="mb3"><input type="text" id="datepicker">   ~ </p>
-									<p class="mb3"><input type="text" id="datepicker">  	</p>
+									<input type="text" id="datepicker1">   ~ 
+									<input type="text" id="datepicker2">  	
 								</td>
 							</tr>
 
 							<tr>
-								<td>정답</td>
+								<td>합격 점수</td>
 								<td>
 									<input type="radio" value="O" name="option_contents" /> O 
 									<input type="radio" value="X" name="option_contents" /> X
 								</td>
 							</tr>
+							
+							<tr>
+								<td>유형별 문제 수</td>
+								<td>
+									<input type="radio" value="O" name="option_contents" /> O 
+									<input type="radio" value="X" name="option_contents" /> X
+								</td>
+							</tr>
+							
 						</table>
 
 						<table class="table table-hover">
 							<tr>
 								<td>
 									<input type="button" value="취소" onclick="goList();" class="btn btn-default" style="float: right" /> 
-									<input type="button" value="등록" onclick="goReg(); return false;" class="btn btn-default" style="float: right; margin-right: 5px" />
+									<input type="button" value="출제하기" onclick="goReg(); return false;" class="btn btn-default" style="float: right; margin-right: 5px" />
 								</td>
 							</tr>
 						</table>
 					</div>
 				</form>
-
-
-					<input type="button" value="출제하기" onclick="goReg();" class="btn btn-default" style="float: right; margin-right: 5px" />
 				</div>
 			</div>
 		</div>
-	</div>
 
 	<%@ include file="../common/footer.jsp"%>
 

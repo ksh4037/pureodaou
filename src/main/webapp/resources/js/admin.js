@@ -2,9 +2,18 @@
  * 
  */
 
+
+$(function(){
+
+    $("#datepicker1").datepicker();
+    $("#datepicker2").datepicker();
+
+});
+
+
+
 $(document).ready(function() {
 	
-	$("#datepicker").datepicker();
 	
 	// ----- 에디터 가져오기 ----
 	$('.summernote').summernote({
@@ -68,7 +77,6 @@ $(document).ready(function() {
 	}
 
 });
-
 
 
 
