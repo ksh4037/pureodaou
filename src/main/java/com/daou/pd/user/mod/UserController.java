@@ -51,7 +51,6 @@ public class UserController {
 	public ModelAndView userLogout(HttpSession session) {
 		session.invalidate();
 		ModelAndView mav = new ModelAndView();
-		System.out.println("로그아웃!");
 		mav.setViewName("user/mod/userLogin");
 		return mav;
 	}
@@ -82,7 +81,6 @@ public class UserController {
 	@RequestMapping(value = "userUpdt.daou")
 	public ModelAndView userUpdt(HttpServletRequest request, HttpServletResponse response, UserVO uvo) {
 		ModelAndView mav = new ModelAndView("user/mod/result");
-		System.out.println("아이디 : " + uvo.getEmp_id());
 		try {
 			userService.updateMember(uvo);
 			mav.addObject("resultCode", "success");
