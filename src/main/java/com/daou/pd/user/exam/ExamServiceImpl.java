@@ -2,6 +2,7 @@ package com.daou.pd.user.exam;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -64,9 +65,9 @@ public class ExamServiceImpl implements ExamService {
 	@Override
 	public void makeTest(List<ExamDetailVO> list) {
 		examMapper = sqlSession.getMapper(ExamMapper.class);
-		/*Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list);*/
-		examMapper.makeTest(list);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		examMapper.makeTest(map);
 	}
 
 	@Override
