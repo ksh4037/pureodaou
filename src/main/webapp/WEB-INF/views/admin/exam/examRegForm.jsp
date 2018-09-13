@@ -22,28 +22,56 @@
 				</h4>
 				<hr>
 				<br>
-				<div class="container">
-					<h2>
-						<span class="span-font">출제리스트121212</span>
-					</h2>
-					<p>
-						<span class="span-font">풀어다우 서비스의 출제정보입니다.</span>
-					</p>
 
-					<form name="listForm" id="listForm" method="post">
-						<table class="table">
-							<thead>
-								<tr>
-									<th align="center">No.</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>등록된 문제 정보가 없습니다.</td>
-								</tr>
-							</tbody>
+				<form name="exam_reg_form" id="exam_reg_form" method="post">
+					<div class="container">
+						<h2 class="span-font">출제정보 페이지</h2>
+						<p class="span-font">풀어다우 출제 등록 페이지 입니다.</p>
+
+						<table class="table table-hover">
+
+							<tr>
+								<td width="7%">카테고리 설정</td>
+								<td>
+									<select>
+										<option></option>
+										<option></option>
+										<option></option>
+										<option></option>
+									</select>
+								
+								</td>
+							</tr>
+			
+			
+							<tr>
+								<td width="7%">시험기간</td>
+								<td>
+									<p class="mb3"><input type="text" id="datepicker">   ~ </p>
+									<p class="mb3"><input type="text" id="datepicker">  	</p>
+								</td>
+							</tr>
+
+							<tr>
+								<td>정답</td>
+								<td>
+									<input type="radio" value="O" name="option_contents" /> O 
+									<input type="radio" value="X" name="option_contents" /> X
+								</td>
+							</tr>
 						</table>
-					</form>
+
+						<table class="table table-hover">
+							<tr>
+								<td>
+									<input type="button" value="취소" onclick="goList();" class="btn btn-default" style="float: right" /> 
+									<input type="button" value="등록" onclick="goReg(); return false;" class="btn btn-default" style="float: right; margin-right: 5px" />
+								</td>
+							</tr>
+						</table>
+					</div>
+				</form>
+
 
 					<input type="button" value="출제하기" onclick="goReg();" class="btn btn-default" style="float: right; margin-right: 5px" />
 				</div>

@@ -110,7 +110,7 @@
 			
 			
 							<tr>
-								<td width="7%">보충자료</td>
+								<td width="7%">보충자료<br>(50kb 이하)</td>
 								<td><textarea class="form-control summernote" id="item_contents" name="item_contents" rows="20" cols="170"> </textarea></td>
 							</tr>
 							
@@ -203,7 +203,7 @@
 			
 			
 							<tr>
-								<td width="7%">보충자료</td>
+								<td width="7%">보충자료<br>(50kb 이하)</td>
 								<td><textarea class="form-control summernote" id="item_contents" name="item_contents" > </textarea></td>
 							</tr>
 							
