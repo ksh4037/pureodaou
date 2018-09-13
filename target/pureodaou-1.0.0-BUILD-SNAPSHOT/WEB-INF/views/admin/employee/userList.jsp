@@ -1,112 +1,168 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+	if (session.getAttribute("emp_id") == null) {
+		response.sendRedirect("login.daou");
+	}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>사용자 관리</title>
-<style>	
- 		.btn_area {text-align:center;}
- 		.btn {height: 35px; text-align:center;}
- 		.table_form {height:150px; width: 500px; margin:100px auto; 
- 					border:1px solid #444444; border-collapse: collapse;}
- 		.table_form tfoot {text-align: center;}
- 		th, td{
- 			border: 1px solid #444444;
- 			padding:10px;
- 		}
- 		.cap {padding: 10px;}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/js/admin.js"></script>
+
+<link href="../resources/css/admin.css" rel="stylesheet" type="text/css">
+
+
+<style>
+.table {
+	width: 90%;
+	padding: 30px;
+	margin-left: 30px;
+	margin-bottom: 30px;
+}
+
+.btn {
+	margin-right: 10px;
+}
+
+.btn_area {
+	float: right;
+	margin-top: 10px;
+	margin-right: 10%;
+}
 </style>
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
+	function goReg() {
 
-	function goReg(){
-		
 		var values = document.getElementsByName("del_check");
-		
-		for(var i=0;i < values.length;i++){
-			if(values[i].checked == true){
+
+		for (var i = 0; i < values.length; i++) {
+			if (values[i].checked == true) {
 				alert('체크박스가 클릭되어 등록페이지 이용이 제한됩니다.');
 				return;
 			}
 		}
-		$("#user_list").attr("action", "goReg");
+		$("#user_list").attr("action", "employeeRegForm.daou");
 		$("#user_list").submit();
 	}
-	
-	function goDel(){
+
+	function goDel() {
 		var values = document.getElementsByName("del_check");
-		var list =  new Array();
-		
-		for(var i=0;i < values.length;i++){
-			if(values[i].checked == true){
+		var list = new Array();
+
+		for (var i = 0; i < values.length; i++) {
+			if (values[i].checked == true) {
 				list[i] = values[i].value;
 			}
 		}
 		$.ajax({
-			type : "POST",
-			url : "goDel",
-			data :  {"list" : list},
-			async: false,
-			success : function(data){
-			    if(data=='success'){
-			    	alert("삭제되었습니다.");
-			    	location.href= "goBackUser";
-			    }else{
-			    	alert('삭제 실패하였습니다.');
-			    }
+			type : "POST",
+			url : "employeeDlt.daou",
+			data : {
+				"list" : list
 			},
-			error : function(data){
+			async : false,
+			success : function(data) {
+				if (data == 'success') {
+					alert("삭제되었습니다.");
+					location.href = "employeeList.daou";
+				} else {
+					alert('삭제 실패하였습니다.');
+				}
+			},
+			error : function(data) {
 				alert('삭제 실패하였습니다.');
 			}
 		});
 	}
-	
-	function goUptForm(e_id){
-		$("#e_id").val(e_id);
-		document.user_list.submit();
+
+	function userDetailView(emp_id) {
+		
+		$("#emp_id").val(emp_id);
+		$("#user_list").submit();
+		
+		
+	}
+
+	function goLogout() {
+		location.href = "login.daou";
 	}
 </script>
-
 </head>
+
 <body>
-<form id ="user_list" name="user_list" method="post" action="goUptForm">
-<input type="hidden" name="e_id" id="e_id">
-	<table class="table_form">
-	<caption class="cap">사용자 리스트</caption>
-	<thead>
-			<tr>
-				<th>  </th>
-				<th>ID</th>
-			    <th>이름</th>
-			    <th>부서</th>
-			    <th>전화번호</th>
-			    <th>비밀번호</th>
-			</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="item" items="${memberList}">
-			<tr>
-				<td><input type="checkbox" name="del_check" value="${item.e_id}">
-			    <td><a href="#" onclick="goUptForm('${item.e_id}');">${item.e_id}</a></td>
-			    <td>${item.e_name}</td>
-			    <td>
-			    ${item.e_dep}
-			    </td>
-			    <td>${item.e_tel}</td>
-			    <td>${item.e_pw}</td>
-		    </tr>
-	 	</c:forEach>
-	 
-	</tbody>
-	</table>
-    <div class="btn_area">
-    	<input type="submit" id="reg_btn" class="btn" value="등록" onclick="goReg(); return false;">
-    	<input type="submit" id="del_btn" class="btn" value="삭제 " onclick="goDel(); return false;"> 
-    </div>
-</form>
+
+	<div class="container-fluid">
+		<div class="row content">
+			<%@ include file="../common/lnb.jsp"%>
+
+			<div class="col-sm-9">
+				<h4 class="s_title" style="padding-top: 25px; padding-left: 15px">
+					<span class="span-font">Home > 회원관리</span>
+				</h4>
+				<input style="float: right" type="submit" id="logout_btn"
+					class="btn btn-default" value="로그아웃"
+					onclick="goLogout(); return false;"> <br>
+				<hr>
+				<br>
+				<h2>
+					<span class="span-font">회원 리스트</span>
+				</h2>
+				<p>
+				<span class="span-font">풀어다우 서비스의 회원 리스트 입니다.</span> <br></br>
+					
+				<form id="user_list" name="user_list" method="post" action="userDetailView.daou">
+					<input type="hidden" id="emp_id" name ="emp_id">
+					<table class="table">
+						<thead>
+							<tr>
+								<th></th>
+								<th>ID</th>
+								<th>이름</th>
+								<th>부서</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="item" items="${memberList}">
+								<tr>
+									<td><input type="checkbox" name="del_check" value="${item.emp_id}">
+									<td>
+										<a href="#" onclick="userDetailView('${item.emp_id}');">${item.emp_id}</a>
+									</td>
+									<td>${item.emp_name}</td>
+									<td>${item.d_quiz_cfg_code_name}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<div class="btn_area">
+						<input type="submit" id="reg_btn" class="btn btn-default"
+							value="등록" onclick="goReg(); return false;"> 
+						<input type="submit" id="del_btn" class="btn btn-default" value="삭제 "
+							onclick="goDel(); return false;">
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+
+	<%@ include file="../common/footer.jsp"%>
+
 </body>
 </html>

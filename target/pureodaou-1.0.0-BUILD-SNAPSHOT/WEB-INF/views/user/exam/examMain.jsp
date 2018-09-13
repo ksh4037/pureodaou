@@ -18,10 +18,48 @@
 }
 </style>
 <script type="text/javascript">
-	/* $('.btn').on.click(function(){
-		
-	}) */
-	var go = function(degree){
+ 	var xmlHttp;
+ 	var srvTime = function() {
+	    try {
+	        //FF, Opera, Safari, Chrome
+	        xmlHttp = new XMLHttpRequest();
+	    }
+	    catch (err1) {
+	        //IE
+	        try {
+	            xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
+	        }
+	        catch (err2) {
+	            try {
+	                xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
+	            }
+	            catch (eerr3) {
+	                //AJAX not supported, use CPU time.
+	                alert("AJAX not supported");
+	            }
+	        }
+	    }
+	    xmlHttp.open('HEAD', window.location.href.toString(), false);
+	    xmlHttp.setRequestHeader("Content-Type", "text/html");
+	    xmlHttp.send('');
+	    return xmlHttp.getResponseHeader("Date");
+	}
+	
+	var parse = function(str) {
+	    var y = str.substr(0,4);
+	    var m = str.substr(5,2);
+	    var d = str.substr(8,2);
+	    
+	    return new Date(y,m-1,d);
+	}
+	
+	var go = function(degree, s_date, e_date){
+		var st = srvTime();
+		var date = new Date(st);
+		if(parse(s_date) > date || date > parse(e_date)){
+			alert('평가 기간이 아닙니다');
+			return false;
+		}
 		location.href="${pageContext.request.contextPath}/user/examStart.do?degree="+degree;
 	}
 </script>
@@ -41,21 +79,24 @@
 			<table class="table table-hover">
 				<tr style="background-color: #DDDDDD">
 					<th>회차</th>
-					<th>카테고리</th>
+					<th>과목</th>
 					<th>기간</th>
-					<th>유형</th>
-					<th>점수</th>
+					<th>남은시간</th>
+					<th>합격기준</th>
+					<th>상태</th>
 					<th>평가</th>
 				</tr>
 				<c:forEach items="${elist }" var="e">
 					<tr>
-						<td>${e.exam_test_no }</td>
-						<td>정보보안</td>
-						<td>${e.s_date }~${e.e_date }</td>
-						<td>평가</td>
-						<td></td>
-						<td><input class="btn btn-primary" id="${e.exam_test_no }"
-							type="button" value="참여하기" onclick="javascript:go(${e.exam_test_no})"></td>
+						<td>${e.exam_degree }</td>
+						<td>${e.category_name }</td>
+						<td>${e.exam_start_date }~${e.exam_end_date }</td>
+						<td>${e.exam_left_time }</td>
+						<td>${e.exam_pass_score }점</td>
+						<td>${e.quiz_cfg_code_name }</td>
+						<td><input class="btn btn-primary" id="${e.exam_degree }"
+							type="button" value="참여하기"
+							onclick="javascript:go(${e.exam_degree}, '${e.exam_start_date }', '${e.exam_end_date }')"></td>
 					</tr>
 				</c:forEach>
 			</table>

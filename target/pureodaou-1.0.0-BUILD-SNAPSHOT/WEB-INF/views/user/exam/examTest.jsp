@@ -60,19 +60,18 @@ input[type=radio] {
 	}
 	document.onkeydown = LockF5;
 	
-	var submitFunction = function(degree) {
-		if($('.mark').html()<10){
-			alert('아직 모든 문제를 풀지 않으셨습니다');
-			return false;
-		}
-		alert('제출');
+	var insertanswer = function(degree, type){
 		var answer = new Array();
 		$('input[type=radio]:checked').each(function(){
 			data = new Object();
 			data['problem'] = $(this).attr('id');
 			data['answer'] = $(this).val();
+			data['degree'] = degree;
 			answer.push(data);
 		});
+		/* data = new Object();
+		data['type'] = degree;
+		answer.push(data); */
 		var jsonEncode = JSON.stringify(answer);
 		 $.ajax({
 			url : '${pageContext.request.contextPath}/user/exam/regist.do',
@@ -82,12 +81,35 @@ input[type=radio] {
 			processData : true,
 			contentType :'application/json; charset=UTF-8',
 			success : function(data) {
-				alert('제출 되었습니다');
+				if(data=='success'){
+					if(type==1)
+						alert('제출 성공했습니다');
+					else if(type==2)
+						alert('임시저장 성공');
+					location.href="${pageContext.request.contextPath}/"
+				}else if(data=='fail'){
+					alert('제출에 실패샜습니다');
+				}else{
+					alert('오류');
+				}
 			},
 			error : function() {
 				alert('제출 실패');
 			}
 		});
+	}
+	
+	var submitFunction = function(degree, type) {
+		if(type == 1){
+			if($('.mark').html()<10){
+				alert('아직 모든 문제를 풀지 않으셨습니다');
+				return false;
+			}
+			insertanswer(degree, type);
+		}else if(type==2) {
+			insertanswer(degree, type);
+		}
+		
 	}
 
 	$(function(){
@@ -165,9 +187,10 @@ input[type=radio] {
 	</div>
 	<div class="footer">
 		<span class="mark">0</span>/10 <input class="btn btn-primary"
-			type="button" value="임시저장" id="tempstrg"> <input
-			class="btn btn-primary" type="button" value="제출하기"
-			onclick="javascript:submitFunction(${map.exam_test_no })">
+			type="button" value="임시저장" id="tempstrg"
+			onclick="javascript:submitFunction(${map.exam_test_no}, 2)">
+		<input class="btn btn-primary" type="button" value="제출하기"
+			onclick="javascript:submitFunction(${map.exam_test_no }, 1)">
 	</div>
 </body>
 </html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daou.pd.admin.employee.EmpMapper">
+	
+	<select id="selectAdmin" parameterType="empVO" resultType="Integer">
+		select count(*) from employee
+		where e_id = #{e_id}
+		and e_pw = #{e_pw}
+		and e_type = 1
+	</select>
+	
+	<select id="employeeIdCheck" parameterType="empVO" resultType="Integer">
+		select count(*) from employee
+		where e_id = #{e_id}
+	</select>
+	
+	
+	<select id="memberList" parameterType="empVO" resultType="HashMap">
+		select e.e_id, e.e_name, d.dept_name, e.e_tel 
+		from employee e left join dept d
+		on e.e_dep = d.dept_no
+		where e_type = 2
+	</select>
+		
+	<insert id="insertMember"  parameterType="empVO">
+		insert into employee(e_id, e_name, e_dep, e_tel, e_pw, e_type)
+		values
+		(
+		#{e_id},
+		#{e_name},
+		#{e_dep},
+		#{e_tel},
+		#{e_pw},
+		#{e_type}
+		)
+	</insert>
+	
+	<delete id="deleteMember"  parameterType="String">
+		delete from employee
+		where e_id = #{e_id}
+	</delete>
+	
+	<select id="memberView" parameterType="empVO" resultType="empVO">
+		select *
+		from employee
+		where e_id = #{e_id}
+	</select>
+	
+	
+	<select id="deptList" resultType="configVO">
+		select dept_no, dept_name 
+		from dept
+	</select>
+	
+	
+	<update id="updateMember"  parameterType="empVO" >
+		update employee
+		set
+		e_name = #{e_name},
+		e_dep = #{e_dep},
+		e_tel = #{e_tel}
+		where e_id = #{e_id}	
+	</update>
+	
+	
+</mapper>	 
