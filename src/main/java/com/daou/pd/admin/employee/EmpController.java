@@ -20,13 +20,13 @@ public class EmpController {
 	@Resource(name = "EmpService")
 	private EmpService empService;
 
-	@RequestMapping(value = "admin/login")
+	@RequestMapping(value = "admin/login.daou")
 	public ModelAndView goLoginPage() {
 		ModelAndView mav = new ModelAndView("admin/employee/login");
 		return mav;
 	}
 
-	@RequestMapping(value = "admin/goLogin")
+	@RequestMapping(value = "admin/goLogin.daou")
 	public ModelAndView goLogin(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			EmpVO evo) {
 
@@ -39,8 +39,11 @@ public class EmpController {
 		if (IdCheckResult != 1) {
 			mav.addObject("resultCode", "IDfail");
 		} else if (fullCheckResult == 1) {
-			session.setAttribute("e_id", evo.getE_id());
-			session.setAttribute("e_name", evo.getE_name());
+			session.setAttribute("emp_id", evo.getEmp_id());
+			session.setAttribute("emp_name", evo.getEmp_name());
+			
+			
+			
 			mav.addObject("resultCode", "success");
 		} else {
 			mav.addObject("resultCode", "PWfail");
@@ -48,7 +51,7 @@ public class EmpController {
 		return mav;
 	}
 
-	@RequestMapping(value = "admin/logout")
+	@RequestMapping(value = "admin/logout.daou")
 	public ModelAndView logout(HttpSession session) {
 		session.invalidate();
 		ModelAndView mav = new ModelAndView();
@@ -59,36 +62,40 @@ public class EmpController {
 		return mav;
 	}
 
-	@RequestMapping(value = "admin/employeeList")
+	@RequestMapping(value = "admin/employeeList.daou")
 	public ModelAndView goUser(HttpServletRequest request, HttpServletResponse response, EmpVO evo) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/employee/userList");
+		
 		List<HashMap<String, Object>> memberList = empService.memberList();
 		mav.addObject("memberList", memberList);
 		return mav;
 	}
 
-	@RequestMapping(value = "admin/employeeRegForm")
+	@RequestMapping(value = "admin/employeeRegForm.daou")
 	public ModelAndView goReg(HttpServletRequest request, HttpServletResponse response, EmpVO evo) {
 		ModelAndView mav = new ModelAndView();
 		List<EmpVO> deptList = empService.deptList();
+		List<EmpVO> gradeList = empService.gradeList();
 		mav.setViewName("admin/employee/userRegForm");
 		mav.addObject("deptList", deptList);
+		mav.addObject("gradeList", gradeList);
 		return mav;
 	}
 
-	@RequestMapping(value = "admin/employeeReg")
+	@RequestMapping(value = "admin/employeeReg.daou")
 	public ModelAndView goInsert(EmpVO evo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView("admin/employee/result");
-		evo.setE_pw("daou" + evo.getE_id());
-		evo.setE_type(2);
+		evo.setEmp_pw("daou" + evo.getEmp_id());
+		evo.setEmp_type(2);
+		evo.setUse_yn("Y");
 		System.out.println("등록!");
 		empService.insertMember(evo);
 		mav.addObject("resultCode", "success");
 		return mav;
 	}
 
-	@RequestMapping(value = "admin/employeeDlt")
+	@RequestMapping(value = "admin/employeeDlt.daou")
 	public ModelAndView goDel(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "list[]") String[] delList) throws Exception {
 
@@ -103,27 +110,42 @@ public class EmpController {
 		}
 		return mav;
 	}
+	
+	
+	@RequestMapping(value = "admin/userDetailView.daou")
+	public ModelAndView userDetailView(HttpServletRequest request, HttpServletResponse response, EmpVO evo) {
 
-	@RequestMapping(value = "admin/employeeUpdtForm")
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("admin/employee/userDetailView");
+		
+		HashMap<String,Object> memberViewAll = empService.memberViewAll(evo.getEmp_id());
+		System.out.println("evo.getEmp_id()" + evo.getEmp_id());
+		mav.addObject("memberViewAll", memberViewAll);
+		return mav;
+	}
+
+	@RequestMapping(value = "admin/employeeUpdtForm.daou")
 	public ModelAndView employeeUpdtForm(HttpServletRequest request, HttpServletResponse response, EmpVO evo) {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("admin/employee/userUpdateForm");
 
-		System.out.println("evo.getE_id()" + evo.getE_id());
 		List<EmpVO> deptList = empService.deptList();
-
+		List<EmpVO> gradeList = empService.gradeList();
+		
 		EmpVO memberView = empService.memberView(evo);
+	
 		mav.addObject("memberView", memberView);
 		mav.addObject("deptList", deptList);
+		mav.addObject("gradeList", gradeList);
 
 		return mav;
 	}
 
-	@RequestMapping(value = "admin/employeeUpdt")
+	@RequestMapping(value = "admin/employeeUpdt.daou")
 	public ModelAndView goUpdate(HttpServletRequest request, HttpServletResponse response, EmpVO evo) {
 		ModelAndView mav = new ModelAndView("admin/employee/result");
-		System.out.println("아이디 : " + evo.getE_id());
+		System.out.println("아이디 : " + evo.getEmp_id());
 		try {
 			empService.updateMember(evo);
 			mav.addObject("resultCode", "success");
@@ -134,7 +156,7 @@ public class EmpController {
 		return mav;
 	}
 
-	@RequestMapping(value = "admin/employeeIdCheck")
+	@RequestMapping(value = "admin/employeeIdCheck.daou")
 	public ModelAndView employeeIdCheck(HttpServletRequest request, HttpServletResponse response, EmpVO evo) {
 		ModelAndView mav = new ModelAndView("admin/employee/result");
 

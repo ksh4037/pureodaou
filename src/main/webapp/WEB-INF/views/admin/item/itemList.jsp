@@ -9,12 +9,12 @@
 
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+<%@ include file="../common/import.jsp"%>
 <body>
 	<div class="container-fluid">
 		<div class="row content">
 
-			<%@ include file="lnb.jsp"%>
+		<%@ include file="../common/lnb.jsp"%>
 
 			<div class="col-sm-9">
 				<h4 class="s_title" style="padding-top: 25px; padding-bottom: 15px">
@@ -55,6 +55,7 @@
 											<td align="center">
 												<c:if test="${itemList.item_type == 1}"><span style="color: red">O/X</span></c:if>
 												<c:if test="${itemList.item_type == 2}"><span style="color: red">객관식</span></c:if>
+												<c:if test="${itemList.item_type == 3}"><span style="color: red">주관식</span></c:if>
 											</td>
 											
 											<td align="center">
@@ -89,7 +90,7 @@
 		</div>
 	</div>
 
-	<%@ include file="footer.jsp"%>
+	<%@ include file="../common/footer.jsp"%>
 
 	<script type="text/javascript">
 	
@@ -153,7 +154,7 @@
 					success : function(data) {
 						if (data == "success") {
 							alert("삭제되었습니다.");
-							location.href = location.href;
+							location.href = "itemList.daou";
 						} else if (data == "error") {
 							alert("삭제에 실패하였습니다. \n다시 시도해주세요.");
 							return;
@@ -167,23 +168,6 @@
 			}
 		}
 
-		function allChk(obj) {  //라디오버튼 전체선택
-			var chkObj = document.getElementsByName("del_check");
-			var rowCnt = chkObj.length - 1;
-			var check = obj.checked;
-			if (check) {
-				for (var i = 0; i <= rowCnt; i++) {
-					if (chkObj[i].type == "checkbox")
-						chkObj[i].checked = true;
-				}
-			} else {
-				for (var i = 0; i <= rowCnt; i++) {
-					if (chkObj[i].type == "checkbox") {
-						chkObj[i].checked = false;
-					}
-				}
-			}
-		}
 
 		
 		function goCtgList() { // 카테고리관리 페이지 이동 (팝업창 띄우기)

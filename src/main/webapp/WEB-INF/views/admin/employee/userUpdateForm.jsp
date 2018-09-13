@@ -22,17 +22,22 @@
 	function goUpdate() {
 		var input_check = true;
 
-		if ($("#e_name").val() == '') {
+		if ($("#emp_name").val() == '') {
 			input_check = false;
 			alert("이름은 필수 입력사항 입니다.");
 			return;
 		}
-		if ($("#e_dep").val() == '') {
+		if ($("#emp_dep").val() == '') {
 			input_check = false;
 			alert("부서는 필수 입력사항 입니다.");
 			return;
 		}
-		if ($("#e_tel").val() == '') {
+		if ($("#emp_grade").val() == '') {
+			input_check = false;
+			alert("직급은 필수 입력사항 입니다.");
+			return;
+		}
+		if ($("#emp_tel").val() == '') {
 			input_check = false;
 			alert("전화번호는 필수 입력사항 입니다.");
 			return;
@@ -42,13 +47,13 @@
 			var formDataList = $("form[name=uptForm]").serialize();
 			$.ajax({
 				type : "POST",
-				url : "employeeUpdt",
+				url : "employeeUpdt.daou",
 				data : formDataList,
 				async : false,
 				success : function(data) {
 					if (data == 'success') {
 						alert("수정되었습니다.");
-						location.href = "employeeList";
+						location.href = "employeeList.daou";
 					} else {
 						alert('수정 실패!');
 					}
@@ -63,7 +68,7 @@
 	}
 
 	function goBackUser() {
-		location.href = "employeeList";
+		location.href = "employeeList.daou";
 	}
 </script>
 <style>
@@ -90,23 +95,7 @@
 
 	<div class="container-fluid">
 		<div class="row content">
-			<div class="col-sm-4 sidenav">
-				<div align="center">
-					<img src="../resources/img/logo2.png" width="235px"
-						style="padding-top: 20px;" />
-				</div>
-				<hr style="height: 2px; background-color: white">
-				<ul class="nav nav-pills nav-stacked">
-					<li><a href="#" onclick="goList('problemList');"
-						id="problem_li">문제관리</a></li>
-					<li><a href="#" id="exam_li">문제출제</a></li>
-					<li><a href="#" onclick="goList('employeeList');"
-						id="member_li">회원관리</a></li>
-					<li><a href="#" id="write_li">기록관리</a></li>
-					<li><a href="#" onclick="goList('boardList');" id="board_li">게시판관리</a></li>
-				</ul>
-				<br>
-			</div>
+				<%@ include file="../common/lnb.jsp"%>
 
 			<div class="col-sm-9">
 				<h4 class="s_title" style="padding-top: 25px; padding-left: 15px">
@@ -125,31 +114,38 @@
 						<tbody>
 							<tr>
 								<th scope="row">사번</th>
-								<td><input type="hidden" id="e_id" name="e_id"
-									value="${memberView.e_id}" class="form-control"> <label>${memberView.e_id}</label>
+								<td><input type="hidden" id="emp_id" name="emp_id"
+									value="${memberView.emp_id}" class="form-control"> <label>${memberView.emp_id}</label>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">이름</th>
-								<td><input type="text" id="e_name"
-									value="${memberView.e_name}" name="e_name" class="form-control"></td>
+								<td><input type="text" id="emp_name"
+									value="${memberView.emp_name}" name="emp_name" class="form-control"></td>
 							</tr>
 
 							<tr>
 								<th scope="row">부서</th>
-								<td><select id="e_dep" name="e_dep" class="form-control">
+								<td><select id="emp_dept" name="emp_dept" class="form-control">
 										<c:forEach var="item" items="${deptList}">
-											<option value="${item.dept_no}"
-												<c:if test="${memberView.e_dep == item.dept_no}"> selected </c:if>>${item.dept_name}</option>
+											<option value="${item.quiz_cfg_code}"
+												<c:if test="${memberView.emp_dept == item.quiz_cfg_code}"> selected </c:if>>${item.quiz_cfg_code_name}</option>
 										</c:forEach>
 								</select></td>
 							</tr>
-
-
+							<tr>
+								<th scope="row">직급</th>
+								<td><select id="emp_grade" name="emp_grade" class="form-control">
+										<c:forEach var="item" items="${gradeList}">
+											<option value="${item.quiz_cfg_code}"
+												<c:if test="${memberView.emp_grade == item.quiz_cfg_code}"> selected </c:if>>${item.quiz_cfg_code_name}</option>
+										</c:forEach>
+								</select></td>
+							</tr>
 							<tr>
 								<th scope="row">전화전호</th>
 								<td><input type="text" id="e_tel"
-									value="${memberView.e_tel}" name="e_tel" class="form-control"></td>
+									value="${memberView.emp_tel}" name="emp_tel" class="form-control"></td>
 							</tr>
 
 						</tbody>
@@ -166,12 +162,7 @@
 		</div>
 	</div>
 
-	<footer class="container-fluid">
-		<p>
-			개인정보처리방침 | 개인정보무단수집거부 | 이메일주소무단수집거부 | 윤리경영우)16878 경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층   대표전화 : 070-8707-1000   사업자등록번호 : 220-81-02810   대표이사: 김윤덕ⓒ 2018 DAOU Tech., INC. All rights reserved. </p>
-		  
-		<p>다우기술 인턴 과제 : 풀어다우</p>
-	</footer>
+	<%@ include file="../common/footer.jsp"%>
 
 </body>
 </html>

@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+<%@ include file="../common/import.jsp"%>
 <body>
 
 
@@ -20,7 +20,7 @@
 					<td>
 						<div class="form-group">
 							<label for="inputdefault">카테고리명 </label> 
-							<input type="text" class="form-control" id="c_name" name="c_name" placeholder="카테고리명을 입력해주세요." />
+							<input type="text" class="form-control" id="category_name" name="category_name" placeholder="카테고리명을 입력해주세요." />
 						</div>
 					</td>
 				</tr>
@@ -45,13 +45,13 @@
 
 			$.ajax({
 				type : "POST",
-				url : "categoryReg",
+				url : "categoryReg.daou",
 				data : queryString,
 				async : false,
 				success : function(data) {
 					if (data == "success") {
 						alert("등록되었습니다.");
-						location.href = "categoryList";
+						location.href = "categoryList.daou";
 					} else if (data == "error") {
 						alert("등록에 실패하였습니다.");
 						return;
@@ -65,7 +65,7 @@
 		}
 
 		function goList() {
-			location.href = "categoryList";
+			location.href = "categoryList.daou";
 		}
 	</script>
 </body>

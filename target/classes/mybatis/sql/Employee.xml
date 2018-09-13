@@ -49,7 +49,7 @@
 	</select>
 	
 	
-	<select id="deptList" resultType="deptVO">
+	<select id="deptList" resultType="configVO">
 		select dept_no, dept_name 
 		from dept
 	</select>

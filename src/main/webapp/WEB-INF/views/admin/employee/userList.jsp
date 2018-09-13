@@ -4,8 +4,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
-	if (session.getAttribute("e_id") == null) {
-		response.sendRedirect("login");
+	if (session.getAttribute("emp_id") == null) {
+		response.sendRedirect("login.daou");
 	}
 %>
 
@@ -56,7 +56,7 @@
 				return;
 			}
 		}
-		$("#user_list").attr("action", "employeeRegForm");
+		$("#user_list").attr("action", "employeeRegForm.daou");
 		$("#user_list").submit();
 	}
 
@@ -71,7 +71,7 @@
 		}
 		$.ajax({
 			type : "POST",
-			url : "employeeDlt",
+			url : "employeeDlt.daou",
 			data : {
 				"list" : list
 			},
@@ -79,7 +79,7 @@
 			success : function(data) {
 				if (data == 'success') {
 					alert("삭제되었습니다.");
-					location.href = "employeeList";
+					location.href = "employeeList.daou";
 				} else {
 					alert('삭제 실패하였습니다.');
 				}
@@ -90,25 +90,16 @@
 		});
 	}
 
-	function goUpdtForm(e_id) {
-		$("#e_id").val(e_id);
-		document.user_list.submit();
-
-	}
-
-	function goList(path) {
-
-		if (path == "problemList") {
-			location.href = "problemList";
-		} else if (path == "employeeList") {
-			location.href = "employeeList";
-		} else if (path == "boardList") {
-			location.href = "boardList";
-		}
+	function userDetailView(emp_id) {
+		
+		$("#emp_id").val(emp_id);
+		$("#user_list").submit();
+		
+		
 	}
 
 	function goLogout() {
-		location.href = "login";
+		location.href = "login.daou";
 	}
 </script>
 </head>
@@ -117,28 +108,7 @@
 
 	<div class="container-fluid">
 		<div class="row content">
-			<div class="col-sm-4 sidenav">
-				<div align="center">
-					<img src="../resources/img/logo2.png" width="235px"
-						style="padding-top: 20px;" />
-				</div>
-				<hr style="height: 2px; background-color: white">
-				<ul class="nav nav-pills nav-stacked">
-
-					<li><a href="#" onclick="goList('problemList');"
-						id="problem_li">문제관리</a></li>
-
-					<li><a href="#" id="exam_li">문제출제</a></li>
-
-					<li><a href="#" onclick="goList('employeeList');"
-						id="member_li">회원관리</a></li>
-
-					<li><a href="#" id="write_li">기록관리</a></li>
-
-					<li><a href="#" onclick="goList('boardList');" id="board_li">게시판관리</a></li>
-				</ul>
-				<br>
-			</div>
+			<%@ include file="../common/lnb.jsp"%>
 
 			<div class="col-sm-9">
 				<h4 class="s_title" style="padding-top: 25px; padding-left: 15px">
@@ -153,10 +123,10 @@
 					<span class="span-font">회원 리스트</span>
 				</h2>
 				<p>
-					<span class="span-font">풀어다우 서비스의 회원 리스트 입니다.</span> <br></br>
-				<form id="user_list" name="user_list" method="post"
-					action="employeeUpdtForm">
-					<input type="hidden" name="e_id" id="e_id">
+				<span class="span-font">풀어다우 서비스의 회원 리스트 입니다.</span> <br></br>
+					
+				<form id="user_list" name="user_list" method="post" action="userDetailView.daou">
+					<input type="hidden" id="emp_id" name ="emp_id">
 					<table class="table">
 						<thead>
 							<tr>
@@ -164,26 +134,25 @@
 								<th>ID</th>
 								<th>이름</th>
 								<th>부서</th>
-								<th>전화번호</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="item" items="${memberList}">
 								<tr>
-									<td><input type="checkbox" name="del_check"
-										value="${item.e_id}">
-									<td><a href="#" onclick="goUpdtForm('${item.e_id}');">${item.e_id}</a></td>
-									<td>${item.e_name}</td>
-									<td>${item.dept_name}</td>
-									<td>${item.e_tel}</td>
+									<td><input type="checkbox" name="del_check" value="${item.emp_id}">
+									<td>
+										<a href="#" onclick="userDetailView('${item.emp_id}');">${item.emp_id}</a>
+									</td>
+									<td>${item.emp_name}</td>
+									<td>${item.d_quiz_cfg_code_name}</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 					<div class="btn_area">
 						<input type="submit" id="reg_btn" class="btn btn-default"
-							value="등록" onclick="goReg(); return false;"> <input
-							type="submit" id="del_btn" class="btn btn-default" value="삭제 "
+							value="등록" onclick="goReg(); return false;"> 
+						<input type="submit" id="del_btn" class="btn btn-default" value="삭제 "
 							onclick="goDel(); return false;">
 					</div>
 				</form>
@@ -193,12 +162,7 @@
 		</div>
 	</div>
 
-	<footer class="container-fluid">
-		<p>
-			개인정보처리방침 | 개인정보무단수집거부 | 이메일주소무단수집거부 | 윤리경영우)16878 경기도 용인시 수지구 디지털벨리로 81 다우디지털스퀘어 6층   대표전화 : 070-8707-1000   사업자등록번호 : 220-81-02810   대표이사: 김윤덕ⓒ 2018 DAOU Tech., INC. All rights reserved. </p>
-		  
-		<p>다우기술 인턴 과제 : 풀어다우</p>
-	</footer>
+	<%@ include file="../common/footer.jsp"%>
 
 </body>
 </html>

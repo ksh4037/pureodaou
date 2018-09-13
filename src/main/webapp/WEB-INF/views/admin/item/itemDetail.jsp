@@ -7,12 +7,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+<%@ include file="../common/import.jsp"%>
 <body>
 
 	<div class="container-fluid">
 		<div class="row content">
-			<%@ include file="lnb.jsp"%>
+			<%@ include file="../common/lnb.jsp"%>
 
 			<form name="detailKeyInfo" id="detailKeyInfo" method="post">
 				<input type="hidden" name="item_no" value="${itemDetail.item_no}" />
@@ -30,9 +30,15 @@
 					<br>
 					<table class="table">
 						<tr>
-							<td>문제</td>
+							<td style="width:10%">문제</td>
 							<td>${itemDetail.item_title}</td>
 						</tr>
+						
+						<tr>
+							<td>보충자료</td>
+							<td>${itemDetail.item_contents}</td>
+						</tr>
+						
 
 						<tr>
 							<td>문제유형</td>
@@ -44,11 +50,15 @@
 								<c:if test="${itemDetail.item_type == 2}">
 									<span style="color: red">객관식</span>
 								</c:if>
+								
+								<c:if test="${itemDetail.item_type == 3}">
+									<span style="color: red">주관식</span>
+								</c:if>
 							</td>
 						</tr>
 
 						<tr>
-							<td>문제유형</td>
+							<td>카테고리</td>
 							<td>
 								<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
 									<c:if test="${itemDetail.category_no == categoryList.category_no}">
@@ -87,7 +97,17 @@
 									</tr>
 								</c:if>
 							</c:forEach>
-							
+						</c:if>
+						
+						<c:if test="${itemDetail.item_type == '3'}">
+							<tr>
+								<td>정답</td>
+								<td>
+									<c:forEach items="${optionDetail}" var="optionDetail" varStatus="status">
+										${optionDetail.option_contents}
+									</c:forEach>
+								</td>
+							</tr>
 						</c:if>
 
 						<tr>
@@ -112,7 +132,7 @@
 		</div>
 	</div>
 
-	<%@ include file="footer.jsp"%>
+<%@ include file="../common/footer.jsp"%>
 
 	<script type="text/javascript">
 		function goList() {

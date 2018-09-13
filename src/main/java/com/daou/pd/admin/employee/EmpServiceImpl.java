@@ -45,9 +45,9 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public int deleteMember(String e_id) {
+	public int deleteMember(String emp_id) {
 		empMapper = sqlSession.getMapper(EmpMapper.class);
-		return empMapper.deleteMember(e_id);
+		return empMapper.deleteMember(emp_id);
 	}
 
 	@Override
@@ -57,9 +57,21 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
+	public HashMap<String,Object> memberViewAll(String emp_id) {
+		empMapper = sqlSession.getMapper(EmpMapper.class);
+		return empMapper.memberViewAll(emp_id);
+	}
+	
+	@Override
 	public List<EmpVO> deptList() {
 		empMapper = sqlSession.getMapper(EmpMapper.class);
 		return empMapper.deptList();
+	}
+	
+	@Override
+	public List<EmpVO> gradeList() {
+		empMapper = sqlSession.getMapper(EmpMapper.class);
+		return empMapper.gradeList();
 	}
 
 	@Override

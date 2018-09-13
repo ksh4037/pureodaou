@@ -7,19 +7,19 @@
 
 <!DOCTYPE html>
 <html>
-<%@ include file="import.jsp"%>
+<%@ include file="../common/import.jsp"%>
 <body>
 	<div class="container">
 		<h2 style="color: #5bc0de">카테고리 등록 페이지</h2>
 		<p class="span-font">카테고리 등록 페이지 입니다.</p>
 		<form name="clistForm" method="post" action="catgoryUpdt">
-			<input type="hidden" id="c_seq" name="c_seq" value="${categoryDetail.c_seq}">
+			<input type="hidden" id="category_no" name="category_no" value="${categoryDetail.category_no}">
 			<table class="table table-hover">
 				<tr>
 					<td>
 						<div class="form-group">
 							<label for="inputdefault">카테고리명 </label> 
-							<input type="text" class="form-control" id="c_name" name="c_name" placeholder="카테고리명을 입력해주세요." value="${categoryDetail.c_name}" />
+							<input type="text" class="form-control" id="category_name" name="category_name" placeholder="카테고리명을 입력해주세요." value="${categoryDetail.category_name}" />
 						</div>
 					</td>
 				</tr>
@@ -38,7 +38,7 @@
 
 	<script type="text/javascript">
 		function goList() {
-			location.href = "categoryList";
+			location.href = "categoryList.daou";
 		}
 
 		function goUpdt() {
@@ -46,13 +46,13 @@
 
 			$.ajax({
 				type : "POST",
-				url : "categoryUpdt",
+				url : "categoryUpdt.daou",
 				data : queryString,
 				async : false,
 				success : function(data) {
 					if (data == "success") {
 						alert("수정되었습니다.");
-						location.href = "categoryList";
+						location.href = "categoryList.daou";
 					} else if (data == "error") {
 						alert("수정에 실패하였습니다.");
 						return;
