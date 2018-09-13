@@ -103,7 +103,7 @@
 <body>
 <%@ include file="../common/lnb.jsp"%>
 <p>hello</p>
-	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+	<div id="chartContainer" style="height: 370px; width: 100%;">  </div>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<%@ include file="../common/footer.jsp"%>
 </body>
