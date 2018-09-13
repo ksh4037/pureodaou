@@ -18,14 +18,14 @@ public class ItemVO {
 	private List<OptionVO> ovo;
 
 
-	// 몇 번째가 정답인지 받아오는 변수
+	// 紐� 踰덉㎏媛� �젙�떟�씤吏� 諛쏆븘�삤�뒗 蹂��닔
 	private int answer_no;
 
-	// 카테고리
+	// 移댄뀒怨좊━
 	private int category_no;
 	private String category_name;
 
-	// 검색
+	// 寃��깋
 	private String scType;
 	private String srch_input;
 
