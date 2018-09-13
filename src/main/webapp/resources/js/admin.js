@@ -2,6 +2,16 @@
  * 
  */
 
+
+$(function(){
+
+    $("#datepicker1").datepicker();
+    $("#datepicker2").datepicker();
+
+});
+
+
+
 $(document).ready(function() {
 	
 	
@@ -67,7 +77,6 @@ $(document).ready(function() {
 	}
 
 });
-
 
 
 
