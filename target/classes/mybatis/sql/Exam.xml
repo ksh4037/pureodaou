@@ -19,23 +19,31 @@
 		ORDER BY u.exam_degree desc
 	</select>
 
-	<select id="getIntro" parameterType="Integer"
+	<select id="getIntro" parameterType="hashmap"
 		resultType="examVO">
-		SELECT c.category_name as 'exam_category', e.exam_ox_num,
+		SELECT c.category_name as 'category_name', e.exam_ox_num,
 		e.exam_obj_num, e.exam_short_num, e.exam_pass_score
 		FROM quiz_exam e,
 		quiz_category c
 		WHERE e.exam_category = c.category_no and exam_degree =
 		#{exam_degree}
 	</select>
-	<select id="getSubIntro" parameterType="Integer"
+	<select id="getSubIntro" parameterType="hashmap"
 		resultType="examUserVO">
-		SELECT e.exam_left_time, g.quiz_cfg_code_name as
-		'exam_status', e.exam_no
+		SELECT u.exam_left_time, g.quiz_cfg_code_name as
+		'exam_status', u.exam_no
 		FROM quiz_user_exam u, quiz_config g
 		WHERE u.exam_status = g.quiz_cfg_code
-		and e.exam_degree = #{degree} and exam_take_id = #{reg_id}
+		and u.exam_degree = #{degree} and u.exam_take_id = #{reg_id}
 	</select>
+	
+	<select id="checkDegree" parameterType="hashmap" resultType="Integer">
+		SELECT count(exam_degree)
+		FROM quiz_exam_detail
+		WHERE exam_degree = #{degree} and exam_take_id = #{id}
+	</select>
+	
+	<select id="getItemList" parameterMap=""></select>
 	<!-- <select id="test" resultType="Integer"> select a from test where a=1 
 		</select> <select id="getCount" parameterType="Integer" resultType="Integer"> 
 		select count(*) from problem_info where type = #{type} </select> <select 

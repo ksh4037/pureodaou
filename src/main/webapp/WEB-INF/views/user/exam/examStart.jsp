@@ -49,7 +49,7 @@ var startexam = function(degree,ox,obj,short_num){
 				</tr>
 				<tr>
 					<th>제출상태</th>
-					<td>${status }</td>
+					<td>${intro.uservo.exam_status }</td>
 				</tr>
 				<tr>
 					<th>점수</th>
@@ -58,28 +58,28 @@ var startexam = function(degree,ox,obj,short_num){
 			</table>
 			<table class="table table-bordered">
 				<tr>
-					<th colspan="3">평가유형</th>
+					<th colspan="2">평가유형</th>
 					<th>문항수</th>
 					<th>배점</th>
 					<th>총점</th>
 					<th>비고</th>
 				</tr>
 				<tr>
-					<th rowspan="2">과제</th>
+					<th rowspan="3">과제</th>
 					<th>OX형</th>
-					<td>${listVO.exam_ox_num }</td>
+					<td>${intro.exam_ox_num }</td>
 					<td>10</td>
-					<td rowspan="2">100</td>
-					<td rowspan="2">각 과제의 총점이 60점 미만(100점 만점 기준)의 경우 불합격</td>
+					<td rowspan="3">100</td>
+					<td rowspan="3">각 과제의 총점이 60점 미만(100점 만점 기준)의 경우 불합격</td>
 				</tr>
 				<tr>
 					<th>객관식</th>
-					<td>${listVO.exam_obj_num }</td>
+					<td>${intro.exam_obj_num }</td>
 					<td>10</td>
 				</tr>
 				<tr>
 					<th>주관식</th>
-					<td>${listVO.exam_short_num }</td>
+					<td>${intro.exam_short_num }</td>
 					<td>10</td>
 				</tr>
 			</table>
