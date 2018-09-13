@@ -18,4 +18,8 @@ public interface ExamService {
 
 	List<OptionVO> getOption(int item_no);
 
+	void makeTest(List<ExamDetailVO> list);
+	
+	Integer getExamNo(String id);
+
 }

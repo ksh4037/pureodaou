@@ -30,8 +30,8 @@ table {
 }
 </style>
 <script>
-var startexam = function(degree,ox,obj,short_num){
-	location.href="${pageContext.request.contextPath}/user/examTest.do?degree="+degree+"&ox_num="+ox+"&obj_num="+obj+"&short_num="+short_num;
+var startexam = function(degree,ox,obj,short_num, exam_category){
+	location.href="${pageContext.request.contextPath}/user/exam/getExam.daou?degree="+degree+"&ox_num="+ox+"&obj_num="+obj+"&short_num="+short_num+"&category="+exam_category;
 }
 </script>
 </head>
@@ -45,7 +45,7 @@ var startexam = function(degree,ox,obj,short_num){
 			<table class="table table-bordered">
 				<tr>
 					<th>카테고리</th>
-					<td>정보 보안</td>
+					<td>${intro.category_name }</td>
 				</tr>
 				<tr>
 					<th>제출상태</th>
@@ -93,7 +93,7 @@ var startexam = function(degree,ox,obj,short_num){
 				</ul>
 			</div>
 			<input class="btn btn-primary" type="button" value="평가 시작하기"
-				onclick="javascript:startexam(${listVO.exam_degree},${listVO.exam_ox_num },${listVO.exam_obj_num },${listVO.exam_short_num })">
+				onclick="javascript:startexam(${intro.exam_degree},${intro.exam_ox_num },${intro.exam_obj_num },${intro.exam_short_num }, ${intro.exam_category})">
 		</div>
 	</div>
 </body>
