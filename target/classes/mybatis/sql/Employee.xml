@@ -6,62 +6,76 @@
 	
 	<select id="selectAdmin" parameterType="empVO" resultType="Integer">
 		select count(*) from employee
-		where e_id = #{e_id}
-		and e_pw = #{e_pw}
-		and e_type = 1
+		where emp_id = #{emp_id}
+		and emp_pw = #{emp_pw}
+		and emp_type = 1 and use_yn = 'Y'
 	</select>
 	
 	<select id="employeeIdCheck" parameterType="empVO" resultType="Integer">
 		select count(*) from employee
-		where e_id = #{e_id}
+		where emp_id = #{emp_id}
 	</select>
 	
 	
 	<select id="memberList" parameterType="empVO" resultType="HashMap">
-		select e.e_id, e.e_name, d.dept_name, e.e_tel 
-		from employee e left join dept d
-		on e.e_dep = d.dept_no
-		where e_type = 2
+		select e.emp_id, e.emp_name, d.quiz_cfg_code_name as d_quiz_cfg_code_name
+		from employee e left join quiz_config d
+		on e.emp_dept = d.quiz_cfg_code
+		where emp_type = 2
 	</select>
 		
 	<insert id="insertMember"  parameterType="empVO">
-		insert into employee(e_id, e_name, e_dep, e_tel, e_pw, e_type)
+		insert into employee(emp_id, emp_name, emp_dept, emp_pw, emp_tel, emp_type, emp_grade, use_yn)
 		values
 		(
-		#{e_id},
-		#{e_name},
-		#{e_dep},
-		#{e_tel},
-		#{e_pw},
-		#{e_type}
+		#{emp_id},
+		#{emp_name},
+		#{emp_dept},
+		#{emp_pw},
+		#{emp_tel},
+		#{emp_type},
+		#{emp_grade},
+		#{use_yn}
 		)
 	</insert>
 	
 	<delete id="deleteMember"  parameterType="String">
 		delete from employee
-		where e_id = #{e_id}
+		where emp_id = #{emp_id}
 	</delete>
 	
-	<select id="memberView" parameterType="empVO" resultType="empVO">
-		select *
-		from employee
-		where e_id = #{e_id}
+	<select id="memberViewAll" parameterType="String" resultType="HashMap">
+		select e.emp_id, e.emp_name, d.quiz_cfg_code_name as d_quiz_cfg_code_name, e.emp_tel, g.quiz_cfg_code_name as g_quiz_cfg_code_name
+		from employee e, quiz_config d, quiz_config g
+		where emp_id = #{emp_id} and (e.emp_dept = d.quiz_cfg_code and e.emp_grade = g.quiz_cfg_code)
 	</select>
 	
+	<select id="memberView" parameterType="empVO" resultType="empVO">
+		select emp_id, emp_name, emp_dept, emp_tel, emp_grade
+		from employee
+		where emp_id = #{emp_id}
+	</select>
 	
 	<select id="deptList" resultType="configVO">
-		select dept_no, dept_name 
-		from dept
+		select quiz_cfg_code, quiz_cfg_code_name 
+		from quiz_config
+		where quiz_cfg_code_group = 'dept'
 	</select>
 	
+	<select id="gradeList" resultType="configVO">
+		select quiz_cfg_code, quiz_cfg_code_name 
+		from quiz_config
+		where quiz_cfg_code_group = 'grade'
+	</select>
 	
 	<update id="updateMember"  parameterType="empVO" >
 		update employee
 		set
-		e_name = #{e_name},
-		e_dep = #{e_dep},
-		e_tel = #{e_tel}
-		where e_id = #{e_id}	
+		emp_name = #{emp_name},
+		emp_dept = #{emp_dept},
+		emp_tel = #{emp_tel},
+		emp_grade = #{emp_grade}
+		where emp_id = #{emp_id}	
 	</update>
 	
 	
