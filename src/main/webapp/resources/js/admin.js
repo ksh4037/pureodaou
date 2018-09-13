@@ -4,7 +4,7 @@
 
 $(document).ready(function() {
 	
-
+	$("#datepicker").datepicker();
 	
 	// ----- 에디터 가져오기 ----
 	$('.summernote').summernote({
@@ -28,9 +28,7 @@ $(document).ready(function() {
 	  ]
 	 });
 	//-------------------------------
-	
-	
-	
+
 	var path = window.location.href;
 	
 	if(path.indexOf("admin/item") != -1) {
@@ -70,6 +68,9 @@ $(document).ready(function() {
 	}
 
 });
+
+
+
 
 
 
