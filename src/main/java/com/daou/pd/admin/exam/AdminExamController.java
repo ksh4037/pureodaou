@@ -18,6 +18,7 @@ import com.daou.pd.admin.employee.EmpService;
 import com.daou.pd.admin.employee.EmpVO;
 import com.daou.pd.admin.item.ItemService;
 import com.daou.pd.admin.item.ItemVO;
+import com.daou.pd.user.exam.ExamVO;
 
 @Controller
 public class AdminExamController {
@@ -59,25 +60,39 @@ public class AdminExamController {
 	
 	
 	@RequestMapping(value = "admin/examReg.daou")
-	public void examReg(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "exam_category") String[] exam_category, 
-			@RequestParam(value = "emp_grade") String[] emp_grade) {
+	public ModelAndView examReg(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "emp_dept") String[] emp_dept, 
+			@RequestParam(value = "emp_grade") String[] emp_grade, ExamVO evo) {
 		
-		
-		System.out.println();
-		/*
-		ModelAndView mav = new ModelAndView("admin/exam/examRegForm");
-		List<EmpVO> deptList = empService.deptList();
-		List<EmpVO> gradeList = empService.gradeList();
-		
-		List<ItemVO> categoryList = itemService.categoryList();
+		ModelAndView mav = new ModelAndView("admin/exam/result");
+		String msg = "";
+		int result = adminExamService.examReg(evo);
 
-		mav.addObject("categoryList", categoryList);
+		List<EmpVO> targetEmpIdList = null;
+		EmpVO pvo = new EmpVO();
 		
-		mav.addObject("deptList", deptList);
-		mav.addObject("gradeList", gradeList);
+		for(int i=0;i < emp_dept.length; i++) {   // 출제할 때 설정한 직급과 부서에 해당하는 직원의 사원번호 가져오기
+			for(int j=0; j < emp_grade.length; j++) {
+				pvo.setEmp_dept(emp_dept[i]);
+				pvo.setEmp_grade(emp_grade[j]);
+				targetEmpIdList = adminExamService.selectExamTarget(pvo);
+			}
+		}
 		
-		return mav;*/
+		for(int i = 0 ; i < targetEmpIdList.size(); i++) {   // 해당 직원들을 시험테이블에 insert
+			adminExamService.userExamReg(targetEmpIdList.get(i).getEmp_id());
+		}
+		
+		
+		if(result == 1) {
+			msg = "success";
+		} else {
+			msg = "error";
+		}
+		
+		mav.addObject("resultCode", msg);
+		return mav;
+		
 	}
 	
 	
