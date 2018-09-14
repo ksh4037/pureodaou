@@ -18,20 +18,21 @@ public class ItemVO {
 	private List<OptionVO> ovo;
 
 
-	// 紐� 踰덉㎏媛� �젙�떟�씤吏� 諛쏆븘�삤�뒗 蹂��닔
+	// 정답의 인덱스를 보관하는 변수
 	private int answer_no;
 
-	// 移댄뀒怨좊━
+	// 카테고리 정보
 	private int category_no;
 	private String category_name;
 
-	// 寃��깋
+	// 검색 키워드 변수
 	private String scType;
 	private String srch_input;
 
 
 	
 	
+
 	public String getReg_id() {
 		return reg_id;
 	}

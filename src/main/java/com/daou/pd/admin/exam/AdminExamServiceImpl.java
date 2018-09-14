@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.daou.pd.admin.employee.EmpVO;
 import com.daou.pd.admin.item.ItemMapper;
 import com.daou.pd.admin.item.ItemVO;
+import com.daou.pd.user.exam.ExamUserVO;
 import com.daou.pd.user.exam.ExamVO;
 
 @Component("adminExamService")
@@ -42,5 +43,19 @@ public class AdminExamServiceImpl implements AdminExamService {
 		examMapper = sqlSession.getMapper(AdminExamMapper.class);
 		return examMapper.userExamReg(emp_id);
 	}
+	
+	@Override
+	public List<ExamVO> examList() {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.examList();
+	}
+	
+	/*
+	@Override
+	public List<ExamUserVO> recordList() {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.recordList();
+	}
+	*/
 	
 }

@@ -1,7 +1,5 @@
 package com.daou.pd.user.exam;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.daou.pd.admin.item.ItemVO;
-import com.daou.pd.admin.item.OptionVO;
-
 @Controller
 public class ExamController {
 
@@ -31,50 +26,66 @@ public class ExamController {
 
 	@RequestMapping(value = "user/exam/examlist.daou")
 	public ModelAndView examlist(HttpServletRequest req) {
-//		HttpSession session = req.getSession(false);
-//		String id = (String)session.getAttribute("emp_id");
-		String id = "90634";
+		String id = getSessionId(req);
+		System.out.println(id);
+//		String id = "90634";
 		ModelAndView mav = new ModelAndView("user/exam/examMain");
 		mav.addObject("elist", examService.getExamList(id));
-
 		return mav;
 	}
 
 	@RequestMapping(value = "/user/exam/examIntro.daou")
 	public ModelAndView examStart(@RequestParam("degree") String str, HttpServletRequest req) {
-//		String id = getSessionId(req);
+		String id = getSessionId(req);
 		int degree = Integer.parseInt(str);
 		ModelAndView mav = new ModelAndView();
-		String id = "90634";
+//		String id = "90634";
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("reg_id", id);
 		map.put("exam_degree", degree);
-		ExamVO ev = examService.getIntro(map);
-		mav.addObject("intro", ev);
-		mav.setViewName("user/exam/examStart");
+		mav.addObject("intro", examService.getIntro(map));
+
 		return mav;
 	}
 
+<<<<<<< HEAD
 	@RequestMapping(value = "/user/exam/getExam.daou")
-	public String examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
+	public ModelAndView examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
 			@RequestParam("obj_num") String obj, @RequestParam("short_num") String short_n,
-			@RequestParam("category") String category, HttpServletRequest req, @RequestParam("examNo") String examNo) {
+			@RequestParam("category") String category, HttpServletRequest req, @RequestParam("examNo") String examNo,
+			@RequestParam("categoryName") String categoryName) {
 		int degree = Integer.parseInt(str);
 		int ox_num = Integer.parseInt(ox);
 		int obj_num = Integer.parseInt(obj);
 		int short_num = Integer.parseInt(short_n);
 		int exam_category = Integer.parseInt(category);
-//		String id = getSessionId(req);
-		String id = "90634";
+		String id = getSessionId(req);
+//		String id = "90634";
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("degree", degree);
 		map.put("id", id);
-//		int exam_no = examService.getExamNo(id);
 		int exam_no = Integer.parseInt(examNo);
+		int left_time = examService.getTime(exam_no);
 		if (examService.checkDegree(map) == 0) {
 			makeExam(ox_num, obj_num, short_num, exam_category, exam_no);
 		}
-		return null;
+		List<ItemVO> itemList = examService.getExam(exam_no);
+		map = new HashMap<String, Object>();
+		List<OptionVO> olist = null;
+		map.put("exam_no", exam_no);
+		for (ItemVO item : itemList) {
+			map.put("item_no", item.getItem_no());
+			olist = examService.getExamOptions(map);
+			item.setOvo(olist);
+			map.remove("item_no");
+		}
+		map.put("left_time", left_time);
+		map.put("degree", degree);
+		map.put("categoryName", categoryName);
+		ModelAndView mav = new ModelAndView("user/exam/examTest");
+		mav.addObject("info", map);
+		mav.addObject("itemList", itemList);
+		return mav;
 	}
 
 	private void makeExam(int ox_num, int obj_num, int short_num, int exam_category, int exam_no) {
@@ -112,6 +123,10 @@ public class ExamController {
 			detail.setExam_no(exam_no);
 			List<OptionVO> ol = item.getOvo();
 			if (item.getOvo().size() > 1) {
+				for (OptionVO ov : ol) {
+					if (ov.getCorrect_yn().equals("Y"))
+						detail.setExam_detail_correct(Integer.toString(ov.getOption_no()));
+				}
 				detail.setExam_detail_option1(ol.get(0).getOption_no());
 				detail.setExam_detail_option2(ol.get(1).getOption_no());
 				detail.setExam_detail_option3(ol.get(2).getOption_no());
@@ -119,14 +134,20 @@ public class ExamController {
 				dlist.add(detail);
 			} else {
 				detail.setExam_detail_option1(ol.get(0).getOption_no());
+				detail.setExam_detail_correct(ol.get(0).getOption_contents());
 				dlist.add(detail);
 			}
 		}
 
 		examService.makeTest(dlist);
+=======
+	@RequestMapping(value = "/user/exam/examTest.daou")
+	public String examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
+			@RequestParam("obj_num") String obj, HttpServletRequest req) {
+		return null;
 	}
 
-	@RequestMapping(value = "/user/exam/getQuestion.daou")
+	@RequestMapping(value = "/user/exam/getExam.daou")
 	public ModelAndView getExam(HttpServletRequest req) {// 아직 보기 순서 안섞임
 		int degree = (Integer) req.getAttribute("degree");
 		String id = getSessionId(req);
@@ -137,29 +158,53 @@ public class ExamController {
 	public ModelAndView tempStorage(HttpServletRequest req) {
 		String id = getSessionId(req);
 		return null;
+>>>>>>> 2a5ef80316e10edd46b7712cafd123901ec695da
 	}
 
 	@RequestMapping(value = "/user/exam/regist.do")
 	@ResponseBody
-	public ModelAndView regist(HttpServletRequest req, @RequestBody List<MarkVO> list) {
+	public ModelAndView regist(HttpServletRequest req, @RequestBody List<MarkVO> list,
+			@RequestParam("type") String type) {
 		ModelAndView mav = new ModelAndView("user/exam/markResult");
-		return null;
-	}
-
-	@RequestMapping(value = "/user/exam/recordlist.do")
-	public ModelAndView getRecord(HttpServletRequest req, String degree) {
 		String id = getSessionId(req);
-		ModelAndView mav = new ModelAndView();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("answerList", list);
+		map.put("id", id);
 
+		examService.markAnswer(map);
+		mav.addObject("result", "success");
+
+		map = new HashMap<String, Object>();
+		map.put("id", id);
+		int exam_no = list.get(0).getExam_no();
+		map.put("exam_no", exam_no);
+		if ("2".equals(type)) {
+			map.put("exam_status", "status02");
+			examService.changeStatus(map);
+		} else if ("1".equals(type)) {
+			map.put("exam_status", "status03");
+			grading(exam_no);
+			examService.changeStatus(map);
+		}
 		return mav;
 	}
 
-	private void grading(int degree) {
+	private void grading(int exam_no) {
+		List<MarkVO> mlist = examService.getAnswerSheet(exam_no);
+		for (MarkVO m : mlist) {
+			if(!m.getItem_type().equals("3")) {
+				if(m.getExam_detail_correct().equals(m.getExam_detail_answer()))
+					m.setCorrect_yn("Y");
+				else
+					m.setCorrect_yn("N");
+			}
+		}
+		examService.grading(mlist);
 	}
 
 	private String getSessionId(HttpServletRequest req) {
 		HttpSession session = req.getSession(false);
-		String id = (String) session.getAttribute("e_id");
+		String id = (String) session.getAttribute("emp_id");
 		return id;
 	}
 }

@@ -18,6 +18,7 @@ import com.daou.pd.admin.employee.EmpService;
 import com.daou.pd.admin.employee.EmpVO;
 import com.daou.pd.admin.item.ItemService;
 import com.daou.pd.admin.item.ItemVO;
+import com.daou.pd.user.exam.ExamUserVO;
 import com.daou.pd.user.exam.ExamVO;
 
 @Controller
@@ -38,8 +39,11 @@ public class AdminExamController {
 	public ModelAndView itemList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("admin/exam/examList");
 		
+		List<ItemVO> categoryList = itemService.categoryList();
+		List<ExamVO> examList = adminExamService.examList();
 		
-		
+		mav.addObject("categoryList", categoryList);
+		mav.addObject("examList", examList);
 		
 		return mav;
 	}
@@ -73,6 +77,7 @@ public class AdminExamController {
 		String msg = "";
 		int exam_reg_result = adminExamService.examReg(evo);
 
+	
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		data.put("emp_dept", emp_dept);
 		data.put("emp_grade",emp_grade);
@@ -91,6 +96,31 @@ public class AdminExamController {
 		
 		mav.addObject("resultCode", msg);
 		return mav;
-		
 	}
+	
+	@RequestMapping(value = "admin/examListExcel.daou")
+	public ModelAndView examListExcel(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("Dddd");
+		ModelAndView mav = new ModelAndView("admin/exam/examListExcel");
+		
+		List<ItemVO> categoryList = itemService.categoryList();
+		List<ExamVO> examList = adminExamService.examList();
+		
+		mav.addObject("categoryList", categoryList);
+		mav.addObject("examList", examList);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "admin/recordList.daou")
+	public ModelAndView recordList(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("admin/exam/recordList");
+		
+		//List<ExamUserVO> recordList = adminExamService.recordList();
+	//	mav.addObject("recordList", recordList);
+		
+		return mav;
+	}
+
+	
 }

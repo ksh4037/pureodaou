@@ -30,8 +30,13 @@ table {
 }
 </style>
 <script>
-var startexam = function(degree,ox,obj,short_num, exam_category, exam_no){
-	location.href="${pageContext.request.contextPath}/user/exam/getExam.daou?degree="+degree+"&ox_num="+ox+"&obj_num="+obj+"&short_num="+short_num+"&category="+exam_category+"&examNo="+exam_no;
+<<<<<<< HEAD
+var startexam = function(degree,ox,obj,short_num, exam_category, exam_no, category_name){
+	location.href="${pageContext.request.contextPath}/user/exam/getExam.daou?degree="+degree+"&ox_num="+ox+"&obj_num="+obj+"&short_num="+short_num+"&category="+exam_category+"&examNo="+exam_no+"&categoryName="+category_name;
+=======
+var startexam = function(degree,ox,obj,short_num){
+	location.href="${pageContext.request.contextPath}/user/examTest.do?degree="+degree+"&ox_num="+ox+"&obj_num="+obj+"&short_num="+short_num;
+>>>>>>> 2a5ef80316e10edd46b7712cafd123901ec695da
 }
 </script>
 </head>
@@ -44,12 +49,17 @@ var startexam = function(degree,ox,obj,short_num, exam_category, exam_no){
 			style="border-style: solid; border-width: 1px; padding: 25px; text-align: center;">
 			<table class="table table-bordered">
 				<tr>
-					<th>카테고리</th>
+<<<<<<< HEAD
+					<th>과목</th>
 					<td>${intro.category_name }</td>
+=======
+					<th>카테고리</th>
+					<td>정보 보안</td>
+>>>>>>> 2a5ef80316e10edd46b7712cafd123901ec695da
 				</tr>
 				<tr>
 					<th>제출상태</th>
-					<td>${intro.uservo.exam_status }</td>
+					<td>${status }</td>
 				</tr>
 				<tr>
 					<th>점수</th>
@@ -58,28 +68,28 @@ var startexam = function(degree,ox,obj,short_num, exam_category, exam_no){
 			</table>
 			<table class="table table-bordered">
 				<tr>
-					<th colspan="2">평가유형</th>
+					<th colspan="3">평가유형</th>
 					<th>문항수</th>
 					<th>배점</th>
 					<th>총점</th>
 					<th>비고</th>
 				</tr>
 				<tr>
-					<th rowspan="3">과제</th>
+					<th rowspan="2">과제</th>
 					<th>OX형</th>
-					<td>${intro.exam_ox_num }</td>
+					<td>${listVO.exam_ox_num }</td>
 					<td>10</td>
-					<td rowspan="3">100</td>
-					<td rowspan="3">각 과제의 총점이 60점 미만(100점 만점 기준)의 경우 불합격</td>
+					<td rowspan="2">100</td>
+					<td rowspan="2">각 과제의 총점이 60점 미만(100점 만점 기준)의 경우 불합격</td>
 				</tr>
 				<tr>
 					<th>객관식</th>
-					<td>${intro.exam_obj_num }</td>
+					<td>${listVO.exam_obj_num }</td>
 					<td>10</td>
 				</tr>
 				<tr>
 					<th>주관식</th>
-					<td>${intro.exam_short_num }</td>
+					<td>${listVO.exam_short_num }</td>
 					<td>10</td>
 				</tr>
 			</table>
@@ -93,7 +103,11 @@ var startexam = function(degree,ox,obj,short_num, exam_category, exam_no){
 				</ul>
 			</div>
 			<input class="btn btn-primary" type="button" value="평가 시작하기"
-				onclick="javascript:startexam(${intro.exam_degree},${intro.exam_ox_num },${intro.exam_obj_num },${intro.exam_short_num }, ${intro.exam_category}, ${intro.uservo.exam_no })">
+<<<<<<< HEAD
+				onclick="javascript:startexam(${intro.exam_degree},${intro.exam_ox_num },${intro.exam_obj_num },${intro.exam_short_num }, ${intro.exam_category}, ${intro.uservo.exam_no }, '${intro.category_name }')">
+=======
+				onclick="javascript:startexam(${listVO.exam_degree},${listVO.exam_ox_num },${listVO.exam_obj_num },${listVO.exam_short_num })">
+>>>>>>> 2a5ef80316e10edd46b7712cafd123901ec695da
 		</div>
 	</div>
 </body>

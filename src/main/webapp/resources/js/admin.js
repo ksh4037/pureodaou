@@ -72,6 +72,13 @@ $(document).ready(function() {
 		$("#member_li").removeClass("active_1"); 
 		$("#write_li").removeClass("active_1"); 
 	}
+	if(path.indexOf("admin/record") != -1) {
+		$("#record_li").addClass("active_1"); 
+		$("#exam_li").removeClass("active_1"); 
+		$("#board_li").removeClass("active_1"); 
+		$("#item_li").removeClass("active_1"); 
+		$("#member_li").removeClass("active_1"); 
+	}
 
 });
 

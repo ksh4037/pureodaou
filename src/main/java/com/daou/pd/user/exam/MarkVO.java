@@ -1,47 +1,62 @@
 package com.daou.pd.user.exam;
 
 public class MarkVO {
-	private int problem;
-	private String answer;
-	private int degree;
+	private int item_no;
+	private String exam_detail_answer;
+	private int exam_no;
+	private String exam_detail_correct;
+	private String correct_yn;
+	private String item_type;
 
 	public MarkVO() {
 	}
 
-	public MarkVO(int problem, String answer, int degree) {
-		super();
-		this.problem = problem;
-		this.answer = answer;
-		this.degree = degree;
+	public int getItem_no() {
+		return item_no;
 	}
 
-	public int getProblem() {
-		return problem;
+	public void setItem_no(int item_no) {
+		this.item_no = item_no;
 	}
 
-	public void setProblem(int problem) {
-		this.problem = problem;
+	public String getExam_detail_answer() {
+		return exam_detail_answer;
 	}
 
-	public String getAnswer() {
-		return answer;
+	public void setExam_detail_answer(String exam_detail_answer) {
+		this.exam_detail_answer = exam_detail_answer;
 	}
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public int getExam_no() {
+		return exam_no;
 	}
 
-	public int getDegree() {
-		return degree;
+	public void setExam_no(int exam_no) {
+		this.exam_no = exam_no;
 	}
 
-	public void setDegree(int degree) {
-		this.degree = degree;
+	public String getExam_detail_correct() {
+		return exam_detail_correct;
 	}
 
-	@Override
-	public String toString() {
-		return "MarkVO [problem=" + problem + ", answer=" + answer + ", degree=" + degree + "]";
+	public void setExam_detail_correct(String exam_detail_correct) {
+		this.exam_detail_correct = exam_detail_correct;
+	}
+
+	public String getCorrect_yn() {
+		return correct_yn;
+	}
+
+	public void setCorrect_yn(String correct_yn) {
+		this.correct_yn = correct_yn;
+	}
+
+	public String getItem_type() {
+		return item_type;
+	}
+
+	public void setItem_type(String item_type) {
+		this.item_type = item_type;
 	}
 
 }

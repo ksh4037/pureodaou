@@ -2,15 +2,11 @@ package com.daou.pd.user.exam;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
-
-import com.daou.pd.admin.item.ItemVO;
-import com.daou.pd.admin.item.OptionVO;
 
 @Component("examService")
 public class ExamServiceImpl implements ExamService {
@@ -36,6 +32,7 @@ public class ExamServiceImpl implements ExamService {
 		return evo;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public int checkDegree(HashMap<String, Object> map) {
 		examMapper = sqlSession.getMapper(ExamMapper.class);
@@ -75,4 +72,55 @@ public class ExamServiceImpl implements ExamService {
 		return examMapper.getExamNo(id);
 	}
 
+	@Override
+	public List<ItemVO> getExam(int exam_no) {
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		return examMapper.getExam(exam_no);
+	}
+
+	@Override
+	public List<OptionVO> getExamOptions(HashMap<String, Object> map) {
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		return examMapper.getExamOptions(map);
+	}
+
+	@Override
+	public int getTime(int exam_no) {
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		return examMapper.getTime(exam_no);
+	}
+
+	@Override
+	public int markAnswer(HashMap<String, Object> map) {
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		List<MarkVO> mlist = (List<MarkVO>) map.get("answerList");
+		for (MarkVO m : mlist) {
+			examMapper.markAnswer(m);
+		}
+		return 0;
+	}
+
+	@Override
+	public void changeStatus(HashMap<String, Object> map) {
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		examMapper.changeStatus(map);
+	}
+
+	@Override
+	public void grading(List<MarkVO> mlist) {
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		for (MarkVO m : mlist) {
+			if (m.getCorrect_yn() != null)
+				examMapper.grading(m);
+		}
+	}
+
+	@Override
+	public List<MarkVO> getAnswerSheet(int exam_no) {
+		examMapper = sqlSession.getMapper(ExamMapper.class);
+		return examMapper.getAnswerSheet(exam_no);
+	}
+
+=======
+>>>>>>> 2a5ef80316e10edd46b7712cafd123901ec695da
 }

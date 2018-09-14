@@ -121,4 +121,11 @@
 		set use_yn = 'N'
 		where category_no = #{category_no}
 	</delete>
+	
+	
+	<select id="listcnt" resultType="int">
+		select count(*)
+		from quiz_items
+	</select>
+	
 </mapper>	 

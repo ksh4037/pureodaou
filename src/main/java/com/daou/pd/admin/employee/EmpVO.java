@@ -2,7 +2,7 @@ package com.daou.pd.admin.employee;
 
 public class EmpVO {
 
-	// 사원테이블
+
 	private String emp_id;
 	private String emp_name;
 	private String emp_dept;

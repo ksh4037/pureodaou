@@ -42,4 +42,12 @@
 		)
 	</insert>
 
+
+	<select id="examList" resultType="ExamVO">
+		select exam_degree, exam_category, exam_start_date, exam_end_date,
+			   exam_ox_num, exam_obj_num, exam_short_num, exam_pass_score
+		from quiz_exam
+	</select>
+	
+	
 </mapper>	 

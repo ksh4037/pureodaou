@@ -26,7 +26,7 @@
 <script type="text/javascript">
 	
 		function goExamMain(){
-			$("#menu").attr("action", "user/examMain.daou");
+			$("#menu").attr("action", "user/exam/examlist.daou");
 			$("#menu").submit();
 		}
 		function goExamRecord(){

@@ -14,5 +14,9 @@ public interface AdminExamService {
 	public List<String> selectExamTarget(HashMap<String, Object> data);
 	
 	public int userExamReg(String emp_id);
+	
+	public List<ExamVO> examList();
+	
+//	public List<ExamUserVO> recordList();
 
 }

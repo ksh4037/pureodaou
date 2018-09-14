@@ -35,5 +35,7 @@ public interface ItemService {
 	public int categoryUpdt(ItemVO ivo);
 
 	public int deleteCategory(int category_no);
+	
+
 
 }

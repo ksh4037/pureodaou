@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
+
 @Component("itemService")
 public class ItemServiceImpl implements ItemService {
 	@Resource(name = "sqlSession")
