@@ -30,8 +30,8 @@ table {
 }
 </style>
 <script>
-var startexam = function(degree,ox,obj,short_num, exam_category){
-	location.href="${pageContext.request.contextPath}/user/exam/getExam.daou?degree="+degree+"&ox_num="+ox+"&obj_num="+obj+"&short_num="+short_num+"&category="+exam_category;
+var startexam = function(degree,ox,obj,short_num, exam_category, exam_no){
+	location.href="${pageContext.request.contextPath}/user/exam/getExam.daou?degree="+degree+"&ox_num="+ox+"&obj_num="+obj+"&short_num="+short_num+"&category="+exam_category+"&examNo="+exam_no;
 }
 </script>
 </head>
@@ -93,7 +93,7 @@ var startexam = function(degree,ox,obj,short_num, exam_category){
 				</ul>
 			</div>
 			<input class="btn btn-primary" type="button" value="평가 시작하기"
-				onclick="javascript:startexam(${intro.exam_degree},${intro.exam_ox_num },${intro.exam_obj_num },${intro.exam_short_num }, ${intro.exam_category})">
+				onclick="javascript:startexam(${intro.exam_degree},${intro.exam_ox_num },${intro.exam_obj_num },${intro.exam_short_num }, ${intro.exam_category}, ${intro.uservo.exam_no })">
 		</div>
 	</div>
 </body>

@@ -39,7 +39,7 @@
 		FROM quiz_user_exam u, quiz_config g
 		WHERE
 		u.exam_status = g.quiz_cfg_code
-		and u.exam_degree = #{degree} and
+		and u.exam_degree = #{exam_degree} and
 		u.exam_take_id = #{reg_id}
 	</select>
 

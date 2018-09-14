@@ -52,7 +52,6 @@ public class ExamServiceImpl implements ExamService {
 		List<ItemVO> list = examMapper.getOX(map);
 		list.addAll(examMapper.getObj(map));
 		list.addAll(examMapper.getShort(map));
-
 		return list;
 	}
 

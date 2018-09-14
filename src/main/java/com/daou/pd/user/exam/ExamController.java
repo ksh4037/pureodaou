@@ -49,7 +49,8 @@ public class ExamController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("reg_id", id);
 		map.put("exam_degree", degree);
-		mav.addObject("intro", examService.getIntro(map));
+		ExamVO ev = examService.getIntro(map);
+		mav.addObject("intro", ev);
 		mav.setViewName("user/exam/examStart");
 		return mav;
 	}
@@ -57,7 +58,7 @@ public class ExamController {
 	@RequestMapping(value = "/user/exam/getExam.daou")
 	public String examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
 			@RequestParam("obj_num") String obj, @RequestParam("short_num") String short_n,
-			@RequestParam("category") String category, HttpServletRequest req) {
+			@RequestParam("category") String category, HttpServletRequest req, @RequestParam("examNo") String examNo) {
 		int degree = Integer.parseInt(str);
 		int ox_num = Integer.parseInt(ox);
 		int obj_num = Integer.parseInt(obj);
@@ -68,45 +69,11 @@ public class ExamController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("degree", degree);
 		map.put("id", id);
-		int exam_no = examService.getExamNo(id);
+//		int exam_no = examService.getExamNo(id);
+		int exam_no = Integer.parseInt(examNo);
 		if (examService.checkDegree(map) == 0) {
-			makeExam(ox_num, obj_num, short_num, exam_category, ++exam_no);
+			makeExam(ox_num, obj_num, short_num, exam_category, exam_no);
 		}
-//		int cnt = examService.getPersence(id, degree);
-//		if (cnt == 0) {
-//			List<ItemVO> list = examService.getProblem(ox_num, obj_num);
-//			for (ItemVO pVO : list) {
-//				List<OptionVO> oplist = examService.getOpList(pVO.getItem_no());
-//				List<OptionVO> oplist2 = new ArrayList<OptionVO>();
-//				if (oplist.size() > 2) {// 객관식 보기 섞기
-//					for (OptionVO oVO : oplist) {
-//						if (oVO.getCorrect_yn().equals("Y")) {
-//							oplist2.add(oVO);
-//						}
-//					}
-//					for (OptionVO oVO : oplist) {
-//						if (oVO.getCorrect_yn().equals("N")) {
-//							if (oplist2.size() < 4)
-//								oplist2.add(oVO);
-//						}
-//					}
-//				}
-//				Collections.shuffle(oplist2);
-//				pVO.setOvo(oplist2);
-//			}
-//
-//			List<ExamDetailVO> examList = new ArrayList<ExamDetailVO>();
-
-		/*
-		 * for (ItemVO pVO : list) { ExamDetailVO eVO = new ExamDetailVO();
-		 * eVO.setExam_degree(degree); eVO.setExam_take_id(id);
-		 * eVO.set(pVO.getItem_no()); List<OptionVO> oplist = pVO.getOvo(); if
-		 * (oplist.size() > 2) { eVO.setOption1(oplist.get(0).getOption_no());
-		 * eVO.setOption2(oplist.get(1).getOption_no());
-		 * eVO.setOption3(oplist.get(2).getOption_no());
-		 * eVO.setOption4(oplist.get(3).getOption_no()); } examList.add(eVO); }
-		 * examService.insertExam(examList);
-		 */
 		return null;
 	}
 
@@ -152,6 +119,7 @@ public class ExamController {
 				dlist.add(detail);
 			} else {
 				detail.setExam_detail_option1(ol.get(0).getOption_no());
+				dlist.add(detail);
 			}
 		}
 
