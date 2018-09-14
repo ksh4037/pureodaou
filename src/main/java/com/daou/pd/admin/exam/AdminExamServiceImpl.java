@@ -32,9 +32,9 @@ public class AdminExamServiceImpl implements AdminExamService {
 
 
 	@Override
-	public List<EmpVO> selectExamTarget(EmpVO pvo) {
+	public  List<String> selectExamTarget(HashMap<String, Object> data) {
 		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.selectExamTarget(pvo);
+		return examMapper.selectExamTarget(data);
 	}
 
 	@Override

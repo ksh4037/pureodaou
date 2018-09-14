@@ -16,7 +16,7 @@
 		<%@ include file="../common/lnb.jsp"%>
 			<div class="col-sm-9">
 				<h4 class="s_title" style="padding-top:25px; padding-bottom:15px">
-					<span class="span-font">Home > 출제관리</span>
+					<span class="span-font">Home > 출제관리 </span>
 				</h4>
 				<hr><br>
 
@@ -73,14 +73,14 @@
 								<td>
 									<input type="checkbox" onclick="allChk(this, 'grade');"> 전체&nbsp;&nbsp;
 									<c:forEach var="item" items="${gradeList}">
-										<input type="checkbox" name="emp_grade" id="emp_grade" value="${item.quiz_cfg_code}"> ${item.quiz_cfg_code_name} &nbsp;&nbsp;
+										<input type="checkbox" name="emp_grade" id="emp_grade" value="${item.quiz_cfg_code}" > ${item.quiz_cfg_code_name} &nbsp;&nbsp;
 									</c:forEach>
 								</td>
 							</tr>
 
 							
 							<tr>
-								<th scope="row">유형별 문제 수<br>(총 20문항)</th>
+								<th scope="row">유형별 문제 수<br>(총 20문항)<br>(문제당 5점)</th>
 								<td>
 								<div style="float:left"><p style="margin-left:20%">O/X</p> <input type="text" name="exam_ox_num" id="exam_ox_num" class="form-control" name="score" style="width:50%" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' maxlength="2"/></div>
 								<div style="float:left"><p style="margin-left:15%">객관식</p> <input type="text" name="exam_obj_num" id="exam_obj_num" class="form-control" name="score" style="width:50%" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' maxlength="2"/></div>

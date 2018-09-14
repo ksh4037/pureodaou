@@ -11,7 +11,7 @@ public interface AdminExamService {
 
 	public int examReg(ExamVO evo);
 	
-	public List<EmpVO> selectExamTarget(EmpVO pvo);
+	public List<String> selectExamTarget(HashMap<String, Object> data);
 	
 	public int userExamReg(String emp_id);
 

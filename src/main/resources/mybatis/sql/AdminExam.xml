@@ -19,11 +19,17 @@
 	</insert>
 	
 
-	<select id="selectExamTarget" resultType="empVO">
+	<select id="selectExamTarget" resultType="String">
 		select emp_id
 		from employee
-		where emp_dept = #{emp_dept}
-		and emp_grade = #{emp_grade}
+		where emp_dept in
+			<foreach collection="emp_dept" open="(" close=")" separator="," item="dept">
+				#{dept}	
+			</foreach> 
+		and emp_grade in
+			<foreach collection="emp_grade" open="(" close=")" separator="," item="grade">
+				#{grade}	
+			</foreach>
 		and emp_type = 2
 	</select>
 	
