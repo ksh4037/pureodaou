@@ -97,14 +97,18 @@
 		item_no = #{item_no}
 	</select>
 
-	<insert id="makeTest" parameterType="java.util.List">
-		INSERT INTO quiz_exam_detail (exam_no, item_no, exam_detail_option1, exam_detail_option2, exam_detail_option3, exam_detail_option4)
-		values
+	<insert id="makeTest" parameterType="java.util.Map">
+		INSERT INTO quiz_exam_detail (exam_no, item_no, exam_detail_option1,
+		exam_detail_option2, exam_detail_option3, exam_detail_option4) values
 		<foreach collection="list" item="exam" separator=",">
-			(#{exam.exam_no}, #{exam.item_no}, #{exam.exam_detail_option1, jdbcType=INTEGER}, #{exam.exam_detail_option2, jdbcType=INTEGER}
+			(#{exam.exam_no}, #{exam.item_no}, #{exam.exam_detail_option1,
+			jdbcType=INTEGER}, #{exam.exam_detail_option2, jdbcType=INTEGER}
 			,#{exam.exam_detail_option3, jdbcType=INTEGER},
-			#{exam.exam_detail_option4, jdbcType=INTEGER})
+			#{exam.exam_detail_option4, jdbcType=INTEGER} )
 		</foreach>
+		<!-- insert into quiz_exam_detail (exam_no, item_no, exam_detail_option1, exam_detail_option2, exam_detail_option3, exam_detail_option4)
+			values
+			<foreach collection="list"></foreach> -->
 	</insert>
 	<!-- <select id="test" resultType="Integer"> select a from test where a=1 
 		</select> <select id="getCount" parameterType="Integer" resultType="Integer"> 

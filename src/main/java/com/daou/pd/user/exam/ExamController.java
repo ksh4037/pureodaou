@@ -140,17 +140,21 @@ public class ExamController {
 		}
 		Collections.shuffle(list);
 		for (ItemVO item : list) {
+			ExamDetailVO detail = new ExamDetailVO();
+			detail.setItem_no(item.getItem_no());
+			detail.setExam_no(exam_no);
+			List<OptionVO> ol = item.getOvo();
 			if (item.getOvo().size() > 1) {
-				ExamDetailVO detail = new ExamDetailVO();
-				detail.setItem_no(item.getItem_no());
-				detail.setExam_no(exam_no);
-				List<OptionVO> ol = item.getOvo();
 				detail.setExam_detail_option1(ol.get(0).getOption_no());
 				detail.setExam_detail_option2(ol.get(1).getOption_no());
 				detail.setExam_detail_option3(ol.get(2).getOption_no());
 				detail.setExam_detail_option4(ol.get(3).getOption_no());
+				dlist.add(detail);
+			} else {
+				detail.setExam_detail_option1(ol.get(0).getOption_no());
 			}
 		}
+
 		examService.makeTest(dlist);
 	}
 
