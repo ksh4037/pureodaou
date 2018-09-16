@@ -3,13 +3,15 @@ package com.daou.pd.user.exam;
 import java.util.HashMap;
 import java.util.List;
 
+import com.daou.pd.admin.item.ItemVO;
+import com.daou.pd.admin.item.OptionVO;
+
 public interface ExamService {
 
 	List<ExamListVO> getExamList(String id);
 
 	ExamVO getIntro(HashMap<String, Object> map);
 
-<<<<<<< HEAD
 	int checkDegree(HashMap<String, Object> map);
 
 	List<ItemVO> getItemList(HashMap<String, Integer> map);
@@ -34,6 +36,4 @@ public interface ExamService {
 
 	List<MarkVO> getAnswerSheet(int exam_no);
 
-=======
->>>>>>> 2a5ef80316e10edd46b7712cafd123901ec695da
 }

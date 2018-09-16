@@ -1,5 +1,7 @@
 package com.daou.pd.user.exam;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.daou.pd.admin.item.ItemVO;
+import com.daou.pd.admin.item.OptionVO;
 
 @Controller
 public class ExamController {
@@ -48,7 +53,6 @@ public class ExamController {
 		return mav;
 	}
 
-<<<<<<< HEAD
 	@RequestMapping(value = "/user/exam/getExam.daou")
 	public ModelAndView examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
 			@RequestParam("obj_num") String obj, @RequestParam("short_num") String short_n,
@@ -140,25 +144,6 @@ public class ExamController {
 		}
 
 		examService.makeTest(dlist);
-=======
-	@RequestMapping(value = "/user/exam/examTest.daou")
-	public String examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
-			@RequestParam("obj_num") String obj, HttpServletRequest req) {
-		return null;
-	}
-
-	@RequestMapping(value = "/user/exam/getExam.daou")
-	public ModelAndView getExam(HttpServletRequest req) {// 아직 보기 순서 안섞임
-		int degree = (Integer) req.getAttribute("degree");
-		String id = getSessionId(req);
-		return null;
-	}
-
-	@RequestMapping(value = "user/exam/tempstrg")
-	public ModelAndView tempStorage(HttpServletRequest req) {
-		String id = getSessionId(req);
-		return null;
->>>>>>> 2a5ef80316e10edd46b7712cafd123901ec695da
 	}
 
 	@RequestMapping(value = "/user/exam/regist.do")
@@ -192,8 +177,8 @@ public class ExamController {
 	private void grading(int exam_no) {
 		List<MarkVO> mlist = examService.getAnswerSheet(exam_no);
 		for (MarkVO m : mlist) {
-			if(!m.getItem_type().equals("3")) {
-				if(m.getExam_detail_correct().equals(m.getExam_detail_answer()))
+			if (!m.getItem_type().equals("3")) {
+				if (m.getExam_detail_correct().equals(m.getExam_detail_answer()))
 					m.setCorrect_yn("Y");
 				else
 					m.setCorrect_yn("N");

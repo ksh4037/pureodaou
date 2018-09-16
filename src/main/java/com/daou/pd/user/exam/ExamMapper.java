@@ -2,6 +2,10 @@ package com.daou.pd.user.exam;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.daou.pd.admin.item.ItemVO;
+import com.daou.pd.admin.item.OptionVO;
 
 public interface ExamMapper {
 
@@ -10,7 +14,6 @@ public interface ExamMapper {
 	ExamVO getIntro(HashMap<String, Object> map);
 
 	ExamUserVO getSubIntro(HashMap<String, Object> map);
-<<<<<<< HEAD
 
 	Integer checkDegree(HashMap<String, Object> map);
 
@@ -39,7 +42,4 @@ public interface ExamMapper {
 	void grading(MarkVO m);
 
 	List<MarkVO> getAnswerSheet(int exam_no);
-
-=======
->>>>>>> 2a5ef80316e10edd46b7712cafd123901ec695da
 }

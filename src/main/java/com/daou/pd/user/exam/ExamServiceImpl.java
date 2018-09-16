@@ -2,11 +2,15 @@ package com.daou.pd.user.exam;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
+
+import com.daou.pd.admin.item.ItemVO;
+import com.daou.pd.admin.item.OptionVO;
 
 @Component("examService")
 public class ExamServiceImpl implements ExamService {
@@ -32,7 +36,6 @@ public class ExamServiceImpl implements ExamService {
 		return evo;
 	}
 
-<<<<<<< HEAD
 	@Override
 	public int checkDegree(HashMap<String, Object> map) {
 		examMapper = sqlSession.getMapper(ExamMapper.class);
@@ -121,6 +124,4 @@ public class ExamServiceImpl implements ExamService {
 		return examMapper.getAnswerSheet(exam_no);
 	}
 
-=======
->>>>>>> 2a5ef80316e10edd46b7712cafd123901ec695da
 }
