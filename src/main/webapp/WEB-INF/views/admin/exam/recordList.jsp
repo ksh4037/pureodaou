@@ -31,6 +31,9 @@
 					</p>
 
 					<form name="listForm" id="listForm" method="post">
+						<input type="hidden" name="exam_degree" id="exam_degree"/>
+						<input type="hidden" name="exam_take_id" id="exam_take_id"/>
+						
 						<table class="table">
 							<thead>
 								<tr>
@@ -58,7 +61,11 @@
 										<tr>
 											<td class="r_td_style">${recordList.exam_degree}회차</td>
 											<td class="r_td_style">${recordList.emp_name}</td>
-											<td class="r_td_style">${recordList.exam_score}점 </td>
+											<td class="r_td_style">
+												<c:if test="${empty recordList.exam_score}">-</c:if>
+												<c:if test="${!empty recordList.exam_score}">${recordList.exam_score}점</c:if>
+											</td>
+											
 											<td class="r_td_style">${recordList.exam_retake_degree}회</td>
 											<td class="r_td_style">${fn:substring(recordList.exam_take_date,0,10)}</td>
 											
@@ -71,14 +78,14 @@
 											</td>
 											
 											<td class="r_td_style">
-											 <div align="center"> 
-												<c:if test="${recordList.exam_status == 'status03'}">
-													<input type="button" value="채점하기" class="btn btn-primary"/>
-												</c:if>
-												<c:if test="${recordList.exam_status != 'status03'}">
-													<span style="color:red;">-</span>
-												</c:if>
-											</div>
+												<div align="center"> 
+													<c:if test="${recordList.exam_status == 'status03'}">
+														<input type="button" value="채점하기" onclick="goGrade('${recordList.exam_degree}','${recordList.exam_take_id}');" class="btn btn-primary"/>
+													</c:if>
+													<c:if test="${recordList.exam_status != 'status03'}">
+														<span style="color:red;">-</span>
+													</c:if>
+												</div>
 											</td>
 										</tr>
 									</tbody>
@@ -104,6 +111,14 @@
 		function getExcel(){
 		    location.href="examListExcel.daou";
 		}
+		
+		function goGrade(exam_degree, exam_take_id){
+			$("#exam_degree").val(exam_degree);
+			$("#exam_take_id").val(exam_take_id);
+			$("#listForm").attr("action", "recordGradeForm.daou");
+			$("#listForm").submit();
+		}
+		
 	</script>
 </body>
 </html>

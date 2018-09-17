@@ -125,6 +125,26 @@ public class AdminExamController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = "admin/recordGradeForm.daou")
+	public ModelAndView recordGradeForm(HttpServletRequest request, HttpServletResponse response, ExamUserVO euvo) {
+		ModelAndView mav = new ModelAndView("admin/exam/recordGradeForm");
+		
+		List<HashMap<String,Object>> shortExamList = adminExamService.getShortExamList(euvo);
+		mav.addObject("shortExamList", shortExamList);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "admin/recordGrade.daou")
+	public void recordGrade(HttpServletRequest request, HttpServletResponse response, ExamUserVO euvo,
+			@RequestParam(value = "correct_yn") String[] correct_yn) {
+		
+		for(int i =0; i<correct_yn.length; i++) {
+			System.out.println("correct_yn[i] : "+correct_yn[i]);
+		}
+		
+	}
 
 	
 }

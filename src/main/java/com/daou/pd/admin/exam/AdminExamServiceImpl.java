@@ -65,5 +65,12 @@ public class AdminExamServiceImpl implements AdminExamService {
 		return examMapper.statusCodeList();
 	}
 	
+	@Override
+	public List<HashMap<String, Object>> getShortExamList(ExamUserVO euvo) {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.getShortExamList(euvo);
+	}
+	
+	
 	
 }
