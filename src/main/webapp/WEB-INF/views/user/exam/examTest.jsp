@@ -217,7 +217,7 @@ input[type=radio] {
 								</div>
 								<div style="padding: 20px;">
 									<textarea class="shortanswer" id="${item.item_no }" rows="2"
-										cols="30" style="width: 100%;" placeholder="정답을 적어주십시오"></textarea>
+										cols="30" style="width: 100%;" placeholder="정답을 적어주십시오" value="${mark[status].exam_detail_answer }"></textarea>
 								</div>
 							</div>
 						</c:when>

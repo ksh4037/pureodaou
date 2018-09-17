@@ -45,7 +45,7 @@ table {
 				</tr>
 				<tr>
 					<th>제출상태</th>
-					<td>${intro.uservo.status_name }</td>
+					<td>${intro.uservo.exam_status }</td>
 				</tr>
 				<tr>
 					<th>남은시간</th>
@@ -98,7 +98,7 @@ table {
 					type="hidden" name="examNo" value="${intro.uservo.exam_no }">
 				<input type="hidden" name="categoryName"
 					value="${intro.category_name }"> <input type="hidden"
-					name="exma_status" value="${intro.uservo.status }"> <input
+					name="exma_status" value="${intro.uservo.exam_status }"> <input
 					type="submit" class="btn btn-primary" value="평가 시작하기">
 			</form>
 		</div>
