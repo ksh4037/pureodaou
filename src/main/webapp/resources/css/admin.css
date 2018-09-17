@@ -21,6 +21,13 @@
     	width:18%;
     }
 
+	.r_th_style{
+		float:center;
+	}
+	
+	.r_td_style{
+		height:50px;
+	}
     
     footer {
       background-color: #555;

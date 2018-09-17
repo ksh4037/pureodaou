@@ -3,6 +3,7 @@ package com.daou.pd.admin.exam;
 import java.util.HashMap;
 import java.util.List;
 
+import com.daou.pd.admin.employee.ConfigVO;
 import com.daou.pd.admin.employee.EmpVO;
 import com.daou.pd.admin.item.OptionVO;
 import com.daou.pd.user.exam.ExamUserVO;
@@ -18,6 +19,8 @@ public interface AdminExamService {
 	
 	public List<ExamVO> examList();
 	
-	public List<ExamUserVO> recordList();
+	public List<HashMap<String, Object>> recordList();
+	
+	public List<ConfigVO> statusCodeList();
 
 }

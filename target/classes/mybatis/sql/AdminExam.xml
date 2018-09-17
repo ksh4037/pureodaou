@@ -49,11 +49,19 @@
 		from quiz_exam
 	</select>
 	
-	<select id="recordList" resultType="examUserVO">
-		select exam_no, exam_degree, exam_take_id, exam_take_date, exam_retake_degree, exam_status,
-			   exam_final_yn, exam_score
-		from quiz_user_exam
+	<select id="recordList" resultType="hashmap">
+		select q.exam_no, q.exam_degree, q.exam_take_id, q.exam_take_date, q.exam_retake_degree, q.exam_status,
+			   q.exam_final_yn, q.exam_score, e.emp_name
+		from quiz_user_exam q left outer join employee e
+		on q.exam_take_id = e.emp_id
+		and e.use_yn = 'Y'
+		order by q.exam_degree desc, q.exam_take_id desc
 	</select>
 	
+	<select id="statusCodeList" resultType="configVO">
+		select quiz_cfg_code, quiz_cfg_code_name
+		from quiz_config
+		where quiz_cfg_code like 'status%'
+	</select>
 	
 </mapper>	 

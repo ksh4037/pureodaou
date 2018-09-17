@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.daou.pd.admin.employee.ConfigVO;
 import com.daou.pd.admin.employee.EmpService;
 import com.daou.pd.admin.employee.EmpVO;
 import com.daou.pd.admin.item.ItemService;
@@ -116,8 +117,11 @@ public class AdminExamController {
 	public ModelAndView recordList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("admin/exam/recordList");
 		
-		List<ExamUserVO> recordList = adminExamService.recordList();
+		List<HashMap<String, Object>> recordList = adminExamService.recordList();
+		List<ConfigVO> statusCodeList = adminExamService.statusCodeList();
+		
 		mav.addObject("recordList", recordList);
+		mav.addObject("statusCodeList", statusCodeList);
 		
 		return mav;
 	}
