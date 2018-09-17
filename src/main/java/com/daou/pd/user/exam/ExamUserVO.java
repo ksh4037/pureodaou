@@ -9,25 +9,11 @@ public class ExamUserVO {
 	private int exam_left_time;
 	private int exam_score;
 	private String exam_status;
+	private String status_name;
 	private String exam_final_yn;
 	private ExamDetailVO detail;
 
 	public ExamUserVO() {
-	}
-
-	public ExamUserVO(int exam_no, int exam_degree, String exam_take_id, String exam_take_date, int exam_retake_degree,
-			int exam_left_time, int exam_score, String exam_status, String exam_final_yn, ExamDetailVO detail) {
-		super();
-		this.exam_no = exam_no;
-		this.exam_degree = exam_degree;
-		this.exam_take_id = exam_take_id;
-		this.exam_take_date = exam_take_date;
-		this.exam_retake_degree = exam_retake_degree;
-		this.exam_left_time = exam_left_time;
-		this.exam_score = exam_score;
-		this.exam_status = exam_status;
-		this.exam_final_yn = exam_final_yn;
-		this.detail = detail;
 	}
 
 	public int getExam_no() {
@@ -108,6 +94,14 @@ public class ExamUserVO {
 
 	public void setDetail(ExamDetailVO detail) {
 		this.detail = detail;
+	}
+
+	public String getStatus_name() {
+		return status_name;
+	}
+
+	public void setStatus_name(String status_name) {
+		this.status_name = status_name;
 	}
 
 	@Override

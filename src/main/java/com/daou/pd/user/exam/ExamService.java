@@ -36,4 +36,6 @@ public interface ExamService {
 
 	List<MarkVO> getAnswerSheet(int exam_no);
 
+	List<MarkVO> getMark(int exam_no);
+
 }
