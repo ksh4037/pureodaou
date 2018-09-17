@@ -197,7 +197,6 @@
 						for(var i = 0 ; i<data.length; i++){
 							$("#textappend").append('<td>'+data[i].item_no+'</td>');
 							
-							
 						}
 					},
 					error : function(data) {

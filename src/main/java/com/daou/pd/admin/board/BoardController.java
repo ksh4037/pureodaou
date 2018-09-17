@@ -81,8 +81,8 @@ public class BoardController {
 				
 				System.out.println("examPercent"+examPercent);
 				System.out.println("passPercent"+passPercent);
-				float ep = Float.parseFloat(examPercent);
-				float pp =Float.parseFloat(passPercent);
+				//float ep = Float.parseFloat(examPercent);
+				//float pp =Float.parseFloat(passPercent);
 				map.put("examPercent", examPercent);
 				map.put("examTargetAll", Integer.toString(examTargetAll));
 				map.put("examTargetDo", Integer.toString(examTargetDo));
