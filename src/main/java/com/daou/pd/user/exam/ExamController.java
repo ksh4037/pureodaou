@@ -51,7 +51,7 @@ public class ExamController {
 	public ModelAndView examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
 			@RequestParam("obj_num") String obj, @RequestParam("short_num") String short_n,
 			@RequestParam("category") String category, HttpServletRequest req, @RequestParam("examNo") String examNo,
-			@RequestParam("categoryName") String categoryName, String status) {
+			@RequestParam("categoryName") String categoryName, @RequestParam("exam_status")String exam_status) {
 		int degree = Integer.parseInt(str);
 		int ox_num = Integer.parseInt(ox);
 		int obj_num = Integer.parseInt(obj);
@@ -78,7 +78,11 @@ public class ExamController {
 			item.setOvo(olist);
 			map.remove("item_no");
 		}
-		if (status.equals("status02")) {
+		
+		System.out.println(exam_status);
+		
+		if (exam_status.equals("status02")) {
+			System.out.println("답가져오기");
 			map.put("mark", examService.getAnswerSheet(exam_no));
 		}
 		map.put("left_time", left_time);
