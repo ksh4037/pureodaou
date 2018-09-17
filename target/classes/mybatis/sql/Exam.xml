@@ -159,7 +159,4 @@
 		FROM quiz_exam_detail e, quiz_item i
 		WHERE e.item_no = i.item_no and e.exam_no = #{exam_no}
 	</select>
-<!-- 		WHERE u.exam_status = g.quiz_cfg_code
-		and e.exam_degree = #{degree} and exam_take_id = #{reg_id}
-	</select> -->
 </mapper>	 
