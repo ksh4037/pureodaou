@@ -129,13 +129,13 @@
 		select a.item_no, a.fail_count, b.total_count, (a.fail_count/b.total_count) as result
         from
 			 (select qed.item_no,count(qed.item_no) as fail_count
-				from quiz_exam_detail qed left join quiz_user_exam que
+				from quiz_exam_detail qed inner join quiz_user_exam que
 				on qed.exam_no = que.exam_no
 				where que.exam_degree = 2 and qed.correct_yn = 'N'
 				group by qed.item_no ) a left outer join 
         
 			(select qed.item_no,count(qed.item_no) as total_count
-				from quiz_exam_detail qed left join quiz_user_exam que
+				from quiz_exam_detail qed inner join quiz_user_exam que
 				on qed.exam_no = que.exam_no
 				where que.exam_degree = 2
 				group by qed.item_no ) b 
