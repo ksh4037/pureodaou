@@ -128,8 +128,10 @@ public class ExamController {
 			List<OptionVO> ol = item.getOvo();
 			if (item.getOvo().size() > 1) {
 				for (OptionVO ov : ol) {
-					if (ov.getCorrect_yn().equals("Y"))
+					if (ov.getCorrect_yn().equals("Y")) {
 						detail.setExam_detail_correct(Integer.toString(ov.getOption_no()));
+						System.out.println("Y");
+					}
 				}
 				detail.setExam_detail_option1(ol.get(0).getOption_no());
 				detail.setExam_detail_option2(ol.get(1).getOption_no());

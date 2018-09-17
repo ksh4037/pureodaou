@@ -28,10 +28,10 @@
 		WHERE e.exam_category = c.category_no and exam_degree =
 		#{exam_degree}
 	</select>
-	<select id="getSubIntro" parameterType="Integer"
+	<select id="getSubIntro" parameterType="hashmap"
 		resultType="examUserVO">
-		SELECT e.exam_left_time, g.quiz_cfg_code_name as
-		'exam_status', e.exam_no
+		SELECT u.exam_left_time, g.quiz_cfg_code_name as
+		'exam_status', u.exam_no
 		FROM quiz_user_exam u, quiz_config g
 		WHERE
 		u.exam_status = g.quiz_cfg_code
