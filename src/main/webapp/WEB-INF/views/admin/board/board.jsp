@@ -111,7 +111,7 @@
 					
 					<br>
 					<button type="button" class="btn btn-default" onclick="wrongPercent(); return false;">오답률 보기</button>
-						<table class="table" style="margin-top:30px; margin-left:20px">
+						<table id="textappend" class="table" style="margin-top:30px; margin-left:20px">
 							<thead>
 								<tr>
 									<th>순위</th>
@@ -122,7 +122,9 @@
 								</tr>
 							</thead>
 							<tbody>
-							<tr>
+							
+									
+							<!-- <tr>
 							<td><input type="text" id="img"></td>
 							<td><input type="text" id="result_table"></td>
 							</tr>
@@ -139,13 +141,13 @@
 										<div id="textappend">
 										
 										</div>
-										<!--  <td>
+										 <td>
 										</td>
 										<td>${item.emp_name}</td>
-										<td>${item.d_quiz_cfg_code_name}</td>-->
+										<td>${item.d_quiz_cfg_code_name}</td>
 										<td><input type="text" id="setCount" style="border:0px; text-align:right; width:40px"></td>
 									</tr>
-							</c:forEach>
+							</c:forEach>-->
 							</tbody>
 						</table>
 					</div>
@@ -194,10 +196,21 @@
 					async : false,
 					success : function(data) {
 						console.log(data);
-						for(var i = 0 ; i<data.length; i++){
-							$("#textappend").append('<td>'+data[i].item_no+'</td>');
+						
+						  $.each(data,function(index,item){
+								  var cell= '';
 							
-						}
+	
+									cell += '<tr><td width="60px">'+(index+1)+'</td>';
+									cell += '<td><input type="text" class="form-control" id="item_no" name="item_no" value="'+item.item_no+'"/></td>';
+									cell += '<td><input type="text" class="form-control" id="fail_count" name="fail_count" value="'+item.fail_count+'" /></td>';
+									cell += '<td><input type="text" class="form-control" id="total_count" name="total_count" value="'+item.total_count+'"/></td>';
+									cell += '<td><input type="text" class="form-control" id="result" name="result" value="'+item.result*100+'" /></td><th>%</th></tr>';
+									 $("#textappend").append(cell);
+									 
+						  });
+					
+			                  
 					},
 					error : function(data) {
 						alert("에러 발생!");	
