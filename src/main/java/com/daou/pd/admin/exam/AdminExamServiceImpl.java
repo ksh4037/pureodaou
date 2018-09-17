@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
+import com.daou.pd.admin.employee.ConfigVO;
 import com.daou.pd.admin.employee.EmpVO;
 import com.daou.pd.admin.item.ItemMapper;
 import com.daou.pd.admin.item.ItemVO;
@@ -52,9 +53,16 @@ public class AdminExamServiceImpl implements AdminExamService {
 	
 	
 	@Override
-	public List<ExamUserVO> recordList() {
+	public List<HashMap<String, Object>> recordList() {
 		examMapper = sqlSession.getMapper(AdminExamMapper.class);
 		return examMapper.recordList();
+	}
+	
+	
+	@Override
+	public List<ConfigVO> statusCodeList() {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.statusCodeList();
 	}
 	
 	

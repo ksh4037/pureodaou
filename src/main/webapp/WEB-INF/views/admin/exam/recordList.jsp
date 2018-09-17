@@ -34,21 +34,20 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th style="width:10%">회차</th>
-									<th style="width:10%">응시자</th>
-									<th style="width:20%">응시일</th>
-									<th style="width:10%">재시험회차</th>
-									<th style="width:20%">상태</th>
-									<th style="width:10%" >최종결과</th>
-									<th style="width:10%">점수</th>
-									<th style="width:20%">주관식 채점</th>
+									<th class="r_th_style">회차</th>
+									<th class="r_th_style">응시자</th>
+									<th class="r_th_style">점수</th>
+									<th class="r_th_style">재시험회차</th>
+									<th class="r_th_style">응시일</th>
+									<th class="r_th_style">최종결과</th>
+									<th class="r_th_style">주관식 채점</th>
 								</tr>
 							</thead>
 									
-							<c:if test="${empty examList}">
+							<c:if test="${empty recordList}">
 								<tbody>
 									<tr>
-										<td colspan="8" align="center">등록된 기록 정보가 없습니다.</td>
+										<td colspan="7" align="center">등록된 기록 정보가 없습니다.</td>
 									</tr>
 								</tbody>
 							</c:if>
@@ -57,14 +56,30 @@
 								<c:forEach items="${recordList}" var="recordList" varStatus="status">
 									<tbody>
 										<tr>
-											<td>${recordList.exam_degree}회차</td>
-											<td>${recordList.exam_take_id}</td>
-											<td>${recordList.exam_take_date}</td>
-											<td>${recordList.exam_retake_degree}</td>
-											<td>${recordList.exam_status}개</td>	
-											<td>${recordList.exam_final_yn}개</td>
-											<td>${recordList.exam_score}개</td>
-											<td><input type="button" value="채점하기" class="btn btn-primary"/></td>
+											<td class="r_td_style">${recordList.exam_degree}회차</td>
+											<td class="r_td_style">${recordList.emp_name}</td>
+											<td class="r_td_style">${recordList.exam_score}점 </td>
+											<td class="r_td_style">${recordList.exam_retake_degree}회</td>
+											<td class="r_td_style">${fn:substring(recordList.exam_take_date,0,10)}</td>
+											
+											<td class="r_td_style">
+												<c:if test="${!empty statusCodeList}">
+													<c:forEach items="${statusCodeList}" var="statusCodeList" varStatus="status">
+														<c:if test="${recordList.exam_status == statusCodeList.quiz_cfg_code}">${statusCodeList.quiz_cfg_code_name }</c:if>
+													</c:forEach>
+												</c:if>
+											</td>
+											
+											<td class="r_td_style">
+											 <div align="center"> 
+												<c:if test="${recordList.exam_status == 'status03'}">
+													<input type="button" value="채점하기" class="btn btn-primary"/>
+												</c:if>
+												<c:if test="${recordList.exam_status != 'status03'}">
+													<span style="color:red;">-</span>
+												</c:if>
+											</div>
+											</td>
 										</tr>
 									</tbody>
 								</c:forEach>
@@ -72,7 +87,6 @@
 						</table>
 					</form>
  					<p align="center"> 
-				 		<input type="button" value="출제하기" onclick="goReg();" class="btn btn-danger"/> 
 				 		<input type="button" value="엑셀 다운로드" onclick="getExcel();" class="btn btn-success"/> 
 				 	</p>
 			</div>
