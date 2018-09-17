@@ -17,5 +17,6 @@ public interface AdminExamMapper {
 	public  List<ExamVO> examList();
 	public  List<HashMap<String, Object>> recordList();
 	public  List<ConfigVO> statusCodeList();
+	public  List<HashMap<String, Object>> getShortExamList(ExamUserVO euvo);
 	
 }

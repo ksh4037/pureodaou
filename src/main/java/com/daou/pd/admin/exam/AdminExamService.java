@@ -22,5 +22,7 @@ public interface AdminExamService {
 	public List<HashMap<String, Object>> recordList();
 	
 	public List<ConfigVO> statusCodeList();
+	
+	public List<HashMap<String, Object>> getShortExamList(ExamUserVO euvo);
 
 }
