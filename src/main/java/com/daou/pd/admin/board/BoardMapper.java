@@ -1,5 +1,6 @@
 package com.daou.pd.admin.board;
 
+import java.util.HashMap;
 import java.util.List;
 import com.daou.pd.user.exam.ExamVO;
 
@@ -17,6 +18,12 @@ public interface BoardMapper {
 	
 	public int selectPass(ExamVO exvo);
 	
+	public int deptAverage(ExamVO exvo);
+	
+	public int gradeAverage(ExamVO exvo);
+	
 	public int selectSetCount(ExamVO exvo);
+	
+	public List<HashMap<String,Object>> rankWrongCount(ExamVO exvo);
 
 }

@@ -3,6 +3,7 @@ package com.daou.pd.admin.board;
 
 import javax.annotation.Resource;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -59,13 +60,30 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.selectPass(exvo);
 	}
 	
-	@Override
-	public int selectSetCount(ExamVO exvo) {
-		boardMapper = sqlSession.getMapper(BoardMapper.class);
-		return boardMapper.selectSetCount(exvo);
-	}
 	
-
+	@Override
+		public int deptAverage(ExamVO exvo) {
+			boardMapper = sqlSession.getMapper(BoardMapper.class);
+			return boardMapper.deptAverage(exvo);
+		}
+		
+		@Override
+		public int gradeAverage(ExamVO exvo) {
+			boardMapper = sqlSession.getMapper(BoardMapper.class);
+			return boardMapper.gradeAverage(exvo);
+		}
+		
+		@Override
+		public int selectSetCount(ExamVO exvo) {
+			boardMapper = sqlSession.getMapper(BoardMapper.class);
+			return boardMapper.selectSetCount(exvo);
+		}
+		
+		
+		public List<HashMap<String,Object>> rankWrongCount(ExamVO exvo){
+			boardMapper = sqlSession.getMapper(BoardMapper.class);
+			return boardMapper.rankWrongCount(exvo);
+		}
 	
 	/*public void setBoardDAO(BoardDAO boardDAO) {
 		this.boardDAO = boardDAO;
