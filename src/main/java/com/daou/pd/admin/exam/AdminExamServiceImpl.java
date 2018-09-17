@@ -50,12 +50,12 @@ public class AdminExamServiceImpl implements AdminExamService {
 		return examMapper.examList();
 	}
 	
-	/*
+	
 	@Override
 	public List<ExamUserVO> recordList() {
 		examMapper = sqlSession.getMapper(AdminExamMapper.class);
 		return examMapper.recordList();
 	}
-	*/
+	
 	
 }

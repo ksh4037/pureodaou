@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.daou.pd.admin.employee.EmpVO;
 import com.daou.pd.admin.item.OptionVO;
+import com.daou.pd.user.exam.ExamUserVO;
 import com.daou.pd.user.exam.ExamVO;
 
 public interface AdminExamService {
@@ -17,6 +18,6 @@ public interface AdminExamService {
 	
 	public List<ExamVO> examList();
 	
-//	public List<ExamUserVO> recordList();
+	public List<ExamUserVO> recordList();
 
 }

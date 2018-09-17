@@ -18,16 +18,16 @@
 
 			<div class="col-sm-9">
 				<h4 class="s_title" style="padding-top: 25px; padding-bottom: 15px">
-					<span class="span-font">Home > 출제관리</span>
+					<span class="span-font">Home > 기록관리</span>
 				</h4>
 				<hr>
 				<br>
 				<div class="container">	
 					<h2>
-						<span class="span-font">출제리스트</span>
+						<span class="span-font">기록리스트</span>
 					</h2>
 					<p>
-						<span class="span-font">풀어다우 서비스의 출제정보입니다.</span>
+						<span class="span-font">풀어다우 서비스의 기록정보입니다.</span>
 					</p>
 
 					<form name="listForm" id="listForm" method="post">
@@ -35,56 +35,49 @@
 							<thead>
 								<tr>
 									<th style="width:10%">회차</th>
-									<th style="width:10%">카테고리</th>
-									<th style="width:20%">시작일자</th>
-									<th style="width:20%">종료일자</th>
-									<th style="width:10%">객관식</th>
-									<th style="width:10%">주관식</th>
-									<th style="width:10%" >O/X</th>
-									<th style="width:10%">합격기준점수</th>
+									<th style="width:10%">응시자</th>
+									<th style="width:20%">응시일</th>
+									<th style="width:10%">재시험회차</th>
+									<th style="width:20%">상태</th>
+									<th style="width:10%" >최종결과</th>
+									<th style="width:10%">점수</th>
+									<th style="width:20%">주관식 채점</th>
 								</tr>
 							</thead>
 									
 							<c:if test="${empty examList}">
 								<tbody>
 									<tr>
-										<td colspan="8">등록된 출제 정보가 없습니다.</td>
+										<td colspan="8" align="center">등록된 기록 정보가 없습니다.</td>
 									</tr>
 								</tbody>
 							</c:if>
 
-							<c:if test="${!empty examList}">
-								<c:forEach items="${examList}" var="examList" varStatus="status">
+							<c:if test="${!empty recordList}">
+								<c:forEach items="${recordList}" var="recordList" varStatus="status">
 									<tbody>
 										<tr>
-											<td>${examList.exam_degree}회차</td>
-											<td>
-												<c:if test="${!empty categoryList}">
-													<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
-														<c:if test="${examList.exam_category == categoryList.category_no}">${categoryList.category_name}</c:if>	
-													</c:forEach>
-												</c:if>
-											</td>
-											<td>${examList.exam_start_date}</td>
-											<td>${examList.exam_end_date}</td>
-											<td>${examList.exam_ox_num}개</td>	
-											<td>${examList.exam_obj_num}개</td>
-											<td>${examList.exam_short_num}개</td>
-											<td>${examList.exam_pass_score}점</td>
+											<td>${recordList.exam_degree}회차</td>
+											<td>${recordList.exam_take_id}</td>
+											<td>${recordList.exam_take_date}</td>
+											<td>${recordList.exam_retake_degree}</td>
+											<td>${recordList.exam_status}개</td>	
+											<td>${recordList.exam_final_yn}개</td>
+											<td>${recordList.exam_score}개</td>
+											<td><input type="button" value="채점하기" class="btn btn-primary"/></td>
 										</tr>
 									</tbody>
 								</c:forEach>
 							</c:if>
 						</table>
 					</form>
-
-				 	<p align="center"> 
+ 					<p align="center"> 
 				 		<input type="button" value="출제하기" onclick="goReg();" class="btn btn-danger"/> 
 				 		<input type="button" value="엑셀 다운로드" onclick="getExcel();" class="btn btn-success"/> 
 				 	</p>
-				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<%@ include file="../common/footer.jsp"%>

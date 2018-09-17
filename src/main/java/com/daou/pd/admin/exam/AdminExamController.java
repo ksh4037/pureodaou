@@ -116,8 +116,8 @@ public class AdminExamController {
 	public ModelAndView recordList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("admin/exam/recordList");
 		
-		//List<ExamUserVO> recordList = adminExamService.recordList();
-	//	mav.addObject("recordList", recordList);
+		List<ExamUserVO> recordList = adminExamService.recordList();
+		mav.addObject("recordList", recordList);
 		
 		return mav;
 	}
