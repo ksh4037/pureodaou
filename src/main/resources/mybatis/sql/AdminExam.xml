@@ -49,5 +49,11 @@
 		from quiz_exam
 	</select>
 	
+	<select id="recordList" resultType="examUserVO">
+		select exam_no, exam_degree, exam_take_id, exam_take_date, exam_retake_degree, exam_status,
+			   exam_final_yn, exam_score
+		from quiz_user_exam
+	</select>
+	
 	
 </mapper>	 
