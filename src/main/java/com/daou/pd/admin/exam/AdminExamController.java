@@ -19,6 +19,7 @@ import com.daou.pd.admin.employee.EmpService;
 import com.daou.pd.admin.employee.EmpVO;
 import com.daou.pd.admin.item.ItemService;
 import com.daou.pd.admin.item.ItemVO;
+import com.daou.pd.user.exam.ExamDetailVO;
 import com.daou.pd.user.exam.ExamUserVO;
 import com.daou.pd.user.exam.ExamVO;
 
@@ -137,14 +138,32 @@ public class AdminExamController {
 	}
 	
 	@RequestMapping(value = "admin/recordGrade.daou")
-	public void recordGrade(HttpServletRequest request, HttpServletResponse response, ExamUserVO euvo,
-			@RequestParam(value = "correct_yn") String[] correct_yn) {
+	public void recordGrade(HttpServletRequest request, HttpServletResponse response, ExamDetailVO euvo) {
 		
-		for(int i =0; i<correct_yn.length; i++) {
-			System.out.println("correct_yn[i] : "+correct_yn[i]);
-		}
-		
-	}
-
 	
+	      String[] arr_item_index = request.getParameterValues("item_index");
+	      String[] arr_correct_yn = request.getParameterValues("correct_yn");
+	      String[] exam_detail_comment = request.getParameterValues("exam_detail_comment");
+	      String[] exam_no = request.getParameterValues("exam_no");
+	      
+	      String item_index = "";
+	      String correct_yn = "";
+	      String comment = "";
+	      String examno = "";
+	      
+	      for(int i =0; i < arr_item_index.length; i++) {
+	    	  euvo.setExam_detail_no(Integer.parseInt(arr_item_index[i]));
+	    	  euvo.setCorrect_yn(arr_correct_yn[i]);
+	    	  euvo.setExam_no(Integer.parseInt(exam_no[i]));
+	    	  
+	    	  
+	    /*	  
+	    	  euvo.getExam_no
+	    	  comment = exam_detail_comment[i];
+
+	    	  
+	    	  int shortExamList = adminExamService.updtExamCorrectYn();*/
+
+	      }
+	}
 }

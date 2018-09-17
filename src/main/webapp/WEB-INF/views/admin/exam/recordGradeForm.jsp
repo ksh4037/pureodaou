@@ -26,73 +26,78 @@
 					<div class="container">
 						<h2 class="span-font">주관식 채점 페이지</h2>
 						<p class="span-font">풀어다우 주관식 채점 페이지 입니다.</p>
-
-						<table class="table table-hover">
-						<c:if test="${!empty shortExamList}">
-							<c:forEach items="${shortExamList}" var="shortExamList" varStatus="status">
-							
-								<tr>
-									<td width="7%">문제유형</td>
-									<td>
-										<span style="color: red">주관식</span>
-									</td>
-								</tr>
-							
-								<tr>
-									<td width="7%">문제</td>
-									<td>
-										<textarea id="item_title" name="item_title" class="form-control" rows="10"  readonly>${shortExamList.item_title}</textarea>
-									</td>
-								</tr>
-	
-								<tr>
-									<td width="7%">보충자료<br>(50kb 이하)</td>
-									<td>
-										<textarea id="item_contents" name="item_contents" class="form-control summernote">${shortExamList.item_contents}</textarea>
-									</td>
-								</tr>
-									
-								<tr>
-									<td>사용자의 <br> 정답</td>
-									<td>
-										<textarea id="item_contents" name="item_contents" class="form-control" rows="10" readonly>${shortExamList.exam_detail_answer}</textarea>
-						       		</td>
-								</tr>
-								
-								<tr>
-									<td>실제 정답</td>
-									<td>
-										<textarea id="item_contents" name="item_contents" class="form-control" rows="10" readonly>${shortExamList.exam_detail_correct}</textarea>
-						       		</td>
-								</tr>
-								
-								<tr>
-									<td>코멘트</td>
-									<td>
-										<textarea id="item_contents" name="item_contents" class="form-control" rows="10" readonly></textarea>
-						       		</td>
-								</tr>
-								
-								<tr>
-									<td>정답 유무</td>
-									<td>
-										<input type="radio" name="correct_yn" value="Y${shortExamList.exam_detail_no}"> 정답
-										<input type="radio" name="correct_yn" value="N${shortExamList.exam_detail_no}"> 오답
-						       		</td>
-								</tr>
-								
-								<tr height="50">
-									<td colspan="2">
-								</tr>
-							</c:forEach>
-						</c:if>	
-											
-						<c:if test="${empty shortExamList}">
-							<tr>
-								<td colspan="2"> 주관식이 없습니다. </td>
-							</tr>
-						</c:if>
 						
+						<table class="table table-hover">
+							<c:if test="${!empty shortExamList}">
+								<c:forEach items="${shortExamList}" var="shortExamList" varStatus="status">
+									<input type="text" name="exam_no" id="exam_no" value="${shortExamList.exam_no}">
+									<input type="text" name="item_index" value="${shortExamList.exam_detail_no}">
+									<tr>
+										<td width="7%">문제유형</td>
+										<td>
+											<span style="color: red">주관식</span>
+										</td>
+									</tr>
+								
+									<tr>
+										<td width="7%">문제</td>
+										<td>
+											<textarea id="item_title" name="item_title" class="form-control" rows="10"  readonly>${shortExamList.item_title}</textarea>
+										</td>
+									</tr>
+		
+									<tr>
+										<td width="7%">보충자료<br>(50kb 이하)</td>
+										<td>
+											<c:if test="${empty shortExamList.item_contents}">
+												해당 문제는 보충자료가 없습니다.
+											</c:if>
+											<c:if test="${!empty shortExamList.item_contents}">
+												${shortExamList.item_contents}
+											</c:if>
+										</td>
+									</tr>
+										
+									<tr>
+										<td>사용자의 <br> 정답</td>
+										<td>
+											<textarea id="exam_detail_answer" name="exam_detail_answer" class="form-control" rows="10" readonly>${shortExamList.exam_detail_answer}</textarea>
+							       		</td>
+									</tr>
+									
+									<tr>
+										<td>실제 정답</td>
+										<td>
+											<textarea id="exam_detail_correct" name="exam_detail_correct" class="form-control" rows="10" readonly>${shortExamList.exam_detail_correct}</textarea>
+							       		</td>
+									</tr>
+									
+									<tr>
+										<td>코멘트</td>
+										<td>
+											<textarea id="exam_detail_comment" name="exam_detail_comment" class="form-control" rows="10"></textarea>
+							       		</td>
+									</tr>
+									
+									<tr>
+										<td>정답 유무</td>
+										<td>
+											<input type="radio" name="correct_yn_${shortExamList.exam_detail_no}" class="red_correct_yn" value="Y" index="${shortExamList.exam_detail_no}"> 정답
+											<input type="radio" name="correct_yn_${shortExamList.exam_detail_no}" class="red_correct_yn" value="N" index="${shortExamList.exam_detail_no}"> 오답
+											<input type="text" name="correct_yn" id="correct_yn" index="${shortExamList.exam_detail_no}"/>
+							       		</td>
+									</tr>
+									
+									<tr height="50">
+										<td colspan="2">
+									</tr>
+								</c:forEach>
+							</c:if>					
+							<c:if test="${empty shortExamList}">
+								<tr>
+									<td colspan="2"> 주관식이 없습니다. </td>
+								</tr>
+							</c:if>
 						</table>
 						
 						
@@ -114,9 +119,16 @@
 	<%@ include file="../common/footer.jsp"%>
 	
 	<script type="text/javascript">		
+	
+		$(".red_correct_yn").click(function(){
+			 var this_index = $(this).attr("index");
+			 var this_value = $(this).val();
+
+			 $("input[name='correct_yn'][index='"+this_index+"']").val(this_value);
+		}); 
+		
 			
 		function goUpdt(){
-		
 			var queryString = $("form[name=recordGradeForm]").serialize();
 
 			$.ajax({
@@ -138,7 +150,6 @@
 					return;
 				}
 			});
-
 		}
 	</script>
 </body>
