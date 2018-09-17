@@ -4,7 +4,7 @@ public class ExamUserVO {
 	private int exam_no;
 	private int exam_degree; // 회차
 	private String exam_take_id; // 응시자
-	private String exam_teke_date;
+	private String exam_take_date;
 	private int exam_retake_degree;// 재시험 회차
 	private int exam_left_time;
 	private int exam_score;
@@ -15,13 +15,13 @@ public class ExamUserVO {
 	public ExamUserVO() {
 	}
 
-	public ExamUserVO(int exam_no, int exam_degree, String exam_take_id, String exam_teke_date, int exam_retake_degree,
+	public ExamUserVO(int exam_no, int exam_degree, String exam_take_id, String exam_take_date, int exam_retake_degree,
 			int exam_left_time, int exam_score, String exam_status, String exam_final_yn, ExamDetailVO detail) {
 		super();
 		this.exam_no = exam_no;
 		this.exam_degree = exam_degree;
 		this.exam_take_id = exam_take_id;
-		this.exam_teke_date = exam_teke_date;
+		this.exam_take_date = exam_take_date;
 		this.exam_retake_degree = exam_retake_degree;
 		this.exam_left_time = exam_left_time;
 		this.exam_score = exam_score;
@@ -54,12 +54,12 @@ public class ExamUserVO {
 		this.exam_take_id = exam_take_id;
 	}
 
-	public String getExam_teke_date() {
-		return exam_teke_date;
+	public String getExam_take_date() {
+		return exam_take_date;
 	}
 
-	public void setExam_teke_date(String exam_teke_date) {
-		this.exam_teke_date = exam_teke_date;
+	public void setExam_take_date(String exam_take_date) {
+		this.exam_take_date = exam_take_date;
 	}
 
 	public int getExam_retake_degree() {
@@ -113,7 +113,7 @@ public class ExamUserVO {
 	@Override
 	public String toString() {
 		return "ExamVO [exam_no=" + exam_no + ", exam_degree=" + exam_degree + ", exam_take_id=" + exam_take_id
-				+ ", exam_teke_date=" + exam_teke_date + ", exam_retake_degree=" + exam_retake_degree
+				+ ", exam_take_date=" + exam_take_date + ", exam_retake_degree=" + exam_retake_degree
 				+ ", exam_left_time=" + exam_left_time + ", exam_score=" + exam_score + ", exam_status=" + exam_status
 				+ ", exam_final_yn=" + exam_final_yn + ", detail=" + detail + "]";
 	}
