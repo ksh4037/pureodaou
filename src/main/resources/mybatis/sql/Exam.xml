@@ -31,7 +31,7 @@
 	<select id="getSubIntro" parameterType="hashmap"
 		resultType="examUserVO">
 		SELECT u.exam_left_time, g.quiz_cfg_code_name as
-		'exam_status', u.exam_no
+		'status_name', u.exam_no, exam_status
 		FROM quiz_user_exam u, quiz_config g
 		WHERE
 		u.exam_status = g.quiz_cfg_code
