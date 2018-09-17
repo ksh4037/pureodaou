@@ -60,21 +60,29 @@ input[type=radio] {
 	}
 	document.onkeydown = LockF5;
 	
-	var insertanswer = function(degree, type){
+	var insertanswer = function(exam_no, type){
 		var answer = new Array();
 		$('input[type=radio]:checked').each(function(){
 			data = new Object();
-			data['problem'] = $(this).attr('id');
-			data['answer'] = $(this).val();
-			data['degree'] = degree;
+			data['item_no'] = $(this).attr('id');
+			data['exam_detail_answer'] = $(this).val();
+			data['exam_no'] = exam_no;
 			answer.push(data);
+		});
+		
+		$('textarea').each(function(){
+				data = new Object();
+				data['item_no'] = $(this).attr('id');
+				data['exam_detail_answer'] = $(this).val();
+				data['exam_no'] = exam_no;
+				answer.push(data);
 		});
 		/* data = new Object();
 		data['type'] = degree;
 		answer.push(data); */
 		var jsonEncode = JSON.stringify(answer);
 		 $.ajax({
-			url : '${pageContext.request.contextPath}/user/exam/regist.do',
+			url : '${pageContext.request.contextPath}/user/exam/regist.do?type='+type,
 			datatype:'json',
 			method : 'post',
 			data : jsonEncode,
@@ -120,6 +128,13 @@ input[type=radio] {
 			});
 			$('.mark').html(cnt);
 		});
+		
+		$('.item_contents').each(function(){
+			if($(this).html().trim()==''){
+				$(this).attr('style','display:none');
+			}
+		});
+		
 	});
 </script>
 </head>
@@ -129,18 +144,17 @@ input[type=radio] {
 		<div class="topbox"
 			style="background-color: #114a9b; color: white; font-size: 16px; padding: 10px;">
 			<ul>
-				<li>${map.exam_test_no }회차과제</li>
-				<li>카테고리 : 정보보안</li>
-				<li>기간 : 2018-09-01 ~ 2018-09-10</li>
+				<li>회차 : ${info.degree }</li>
+				<li>과목 : ${info.categoryName}</li>
 			</ul>
 		</div>
 		<form id="f">
 			<div class="midbox"
 				style="border-style: solid; border-width: 1px; padding: 25px; margin-bottom: 60px;">
 
-				<c:forEach items="${pList }" var="pVO" varStatus="status">
+				<c:forEach items="${itemList }" var="item" varStatus="status">
 					<c:choose>
-						<c:when test="${pVO.type eq '1'}">
+						<c:when test="${item.item_type eq '1'}">
 							<div>
 								<div
 									style="border-style: solid; border-width: 1px; padding: 20px">
@@ -150,17 +164,20 @@ input[type=radio] {
 											style="color: white; background-color: #114a9b; border-radius: 15px; padding: 7px; margin: 5px;">OX형
 											: 10점</div>
 									</div>
-									<div style="padding-left: 20px;">${pVO.problem }</div>
+									<div style="padding-left: 20px;">${item.item_title }</div>
+									<div class="item_contents"
+										style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
+										${item.item_contents }</div>
 								</div>
 								<div style="padding: 20px;">
-									<input id="${pVO.problem_seq }" type="radio"
+									<input id="${item.item_no }" type="radio"
 										name="${status.count }" value="O">O<br> <input
-										id="${pVO.problem_seq }" type="radio" name="${status.count }"
+										id="${item.item_no }" type="radio" name="${status.count }"
 										value="X">X
 								</div>
 							</div>
 						</c:when>
-						<c:when test="${pVO.type eq '2' }">
+						<c:when test="${item.item_type eq '2' }">
 							<div>
 								<div
 									style="border-style: solid; border-width: 1px; padding: 20px">
@@ -170,13 +187,37 @@ input[type=radio] {
 											style="color: white; background-color: #114a9b; border-radius: 15px; padding: 7px; margin: 5px;">객관식
 											: 10점</div>
 									</div>
-									<div style="padding-left: 20px;">${pVO.problem }</div>
+									<div style="padding-left: 20px;">${item.item_title }</div>
+									<div class="item_contents"
+										style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
+										${item.item_contents }</div>
 								</div>
 								<div style="padding: 20px;">
-									<c:forEach items="${pVO.ovo }" var="op" varStatus="status2">
-										<input id="${pVO.problem_seq }" type="radio"
-											name="${status.count }" value="${op.option_seq }">(${status2.count}) ${op.option_contents }<br>
+									<c:forEach items="${item.ovo }" var="op" varStatus="status2">
+										<input id="${item.item_no }" type="radio"
+											name="${status.count }" value="${op.option_no }">(${status2.count}) ${op.option_contents }<br>
 									</c:forEach>
+								</div>
+							</div>
+						</c:when>
+						<c:when test="${item.item_type eq '3' }">
+							<div>
+								<div
+									style="border-style: solid; border-width: 1px; padding: 20px">
+									<span style="font-size: 30px; color: orange;">${status.count }</span>
+									<div style="display: inline-block;">
+										<div
+											style="color: white; background-color: #114a9b; border-radius: 15px; padding: 7px; margin: 5px;">객관식
+											: 10점</div>
+									</div>
+									<div style="padding-left: 20px;">${item.item_title }</div>
+									<div class="item_contents"
+										style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
+										${item.item_contents }</div>
+								</div>
+								<div style="padding: 20px;">
+									<textarea class="shortanswer" id="${item.item_no }" rows="2"
+										cols="30" style="width: 100%;" placeholder="정답을 적어주십시오"></textarea>
 								</div>
 							</div>
 						</c:when>
@@ -186,11 +227,11 @@ input[type=radio] {
 		</form>
 	</div>
 	<div class="footer">
-		<span class="mark">0</span>/10 <input class="btn btn-primary"
-			type="button" value="임시저장" id="tempstrg"
-			onclick="javascript:submitFunction(${map.exam_test_no}, 2)">
+		<span class="timer">${info.left_time }</span> <span class="mark">0</span>/10
+		<input class="btn btn-primary" type="button" value="임시저장"
+			id="tempstrg" onclick="javascript:submitFunction(${info.exam_no}, 2)">
 		<input class="btn btn-primary" type="button" value="제출하기"
-			onclick="javascript:submitFunction(${map.exam_test_no }, 1)">
+			onclick="javascript:submitFunction(${info.exam_no}, 1)">
 	</div>
 </body>
 </html>

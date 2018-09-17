@@ -10,6 +10,8 @@ function goList(path) {
 		location.href = "boardList.daou";
 	} else if (path == "examList") {
 		location.href = "examList.daou";
+	} else if (path == "recordList") {
+		location.href = "recordList.daou";
 	}
 }
 </script>
@@ -22,16 +24,16 @@ function goList(path) {
 
 	<hr style="height: 2px; background-color: white">
 
-	<ul class="nav nav-pills nav-stacked">
+	<ul class="nav nav-pills nav-stacked" id="controlLnb">
 		<li><a href="#" onclick="goList('itemList');" id="item_li">문제관리</a></li>
 
 		<li><a href="#" onclick="goList('examList');"  id="exam_li">문제출제</a></li>
 
 		<li><a href="#" onclick="goList('employeeList');" id="member_li">회원관리</a></li>
 
-		<li><a href="#" id="write_li">기록관리</a></li>
+		<li><a href="#" onclick="goList('recordList');" id="record_li">기록관리</a></li>
 
-		<li><a href="#" onclick="goList('boardList');" id="board_li">게시판관리</a>
+		<li><a href="#" onclick="goList('boardList');" id="board_li">현황 보기</a>
 
 		</li>
 	</ul>

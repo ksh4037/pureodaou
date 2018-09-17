@@ -94,9 +94,18 @@
 						<td>${e.exam_left_time }</td>
 						<td>${e.exam_pass_score }점</td>
 						<td>${e.quiz_cfg_code_name }</td>
-						<td><input class="btn btn-primary" id="${e.exam_degree }"
-							type="button" value="참여하기"
-							onclick="javascript:go(${e.exam_degree}, '${e.exam_start_date }', '${e.exam_end_date }')"></td>
+						<td>
+						<c:choose>
+							<c:when test="${e.exam_status=='status01' || e.exam_status=='status02'}">
+								<input class="btn btn-primary" id="${e.exam_degree }"
+									type="button" value="참여하기"
+									onclick="javascript:go(${e.exam_degree}, '${e.exam_start_date }', '${e.exam_end_date }')">						
+							</c:when>
+							<c:otherwise>
+								-
+							</c:otherwise>
+						</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

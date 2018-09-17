@@ -9,7 +9,7 @@
 		SELECT c.category_name, u.exam_degree,
 		u.exam_retake_degree, u.exam_left_time,
 		q.exam_start_date,
-		q.exam_end_date, q.exam_pass_score, g.quiz_cfg_code_name
+		q.exam_end_date, q.exam_pass_score, g.quiz_cfg_code_name, u.exam_status
 		FROM
 		quiz_user_exam u, quiz_exam q , quiz_category c, quiz_config g
 		WHERE
@@ -21,7 +21,7 @@
 
 	<select id="getIntro" parameterType="Integer"
 		resultType="examVO">
-		SELECT c.category_name as 'exam_category', e.exam_ox_num,
+		SELECT c.category_name as 'category_name', e.exam_ox_num, e.exam_category, e.exam_degree,
 		e.exam_obj_num, e.exam_short_num, e.exam_pass_score
 		FROM quiz_exam e,
 		quiz_category c
@@ -87,7 +87,7 @@
 
 	<select id="getOptionList" parameterType="Integer"
 		resultType="optionVO">
-		SELECT option_no, correct_yn
+		SELECT option_no, correct_yn, option_contents
 		FROM quiz_item_option
 		WHERE
 		item_no = #{item_no}
@@ -95,14 +95,13 @@
 
 	<insert id="makeTest" parameterType="java.util.Map">
 		INSERT INTO quiz_exam_detail (exam_no, item_no, exam_detail_option1,
-		exam_detail_option2, exam_detail_option3, exam_detail_option4) values
-		<foreach collection="list" item="exam" separator=",">
+		exam_detail_option2, exam_detail_option3, exam_detail_option4, exam_detail_correct) values
+		<foreach collection="dlist" item="exam" separator=",">
 			(#{exam.exam_no}, #{exam.item_no}, #{exam.exam_detail_option1,
 			jdbcType=INTEGER}, #{exam.exam_detail_option2, jdbcType=INTEGER}
 			,#{exam.exam_detail_option3, jdbcType=INTEGER},
-			#{exam.exam_detail_option4, jdbcType=INTEGER} )
+			#{exam.exam_detail_option4, jdbcType=INTEGER}, #{exam.exam_detail_correct} )
 		</foreach>
-
 	</insert>
 	
 	<select id="getExam" parameterType="Integer" resultType="itemVO">
@@ -115,16 +114,16 @@
 		SELECT option_no, option_contents, correct_yn
 		FROM quiz_item_option
 		WHERE option_no in (
-			(SELECT exam_detail_option1 
+			(SELECT distinct exam_detail_option1 
 			FROM quiz_exam_detail
 			WHERE item_no = #{item_no} and exam_no = #{exam_no}),
-			(SELECT exam_detail_option2
+			(SELECT distinct exam_detail_option2
 			FROM quiz_exam_detail
 			WHERE item_no = #{item_no} and exam_no = #{exam_no}),
-			(SELECT exam_detail_option3 
+			(SELECT distinct exam_detail_option3 
 			FROM quiz_exam_detail
 			WHERE item_no = #{item_no} and exam_no = #{exam_no}),
-			(SELECT exam_detail_option4 
+			(SELECT distinct exam_detail_option4 
 			FROM quiz_exam_detail
 			WHERE item_no = #{item_no} and exam_no = #{exam_no})
 		)
@@ -151,7 +150,7 @@
 	<update id="grading">
 		UPDATE quiz_exam_detail
 		SET correct_yn = #{correct_yn}
-		WHERE item_no = #{item_no} exam_no = #{exam_no}
+		WHERE item_no = #{item_no} and exam_no = #{exam_no}
 	</update>
 	
 	<select id="getAnswerSheet" parameterType="Integer" resultType="markVO">

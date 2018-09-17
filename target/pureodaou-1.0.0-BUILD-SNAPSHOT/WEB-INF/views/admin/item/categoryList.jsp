@@ -24,7 +24,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th><input type="checkbox" id="allCheck" onclick="allChk(this);" /></th>
+						<th><input type="checkbox" id="allCheck" onclick="allChk(this,'category');" /></th>
 						<th>No.</th>
 						<th>카테고리명</th>
 					</tr>

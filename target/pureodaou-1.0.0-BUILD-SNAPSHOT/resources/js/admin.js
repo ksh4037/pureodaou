@@ -2,9 +2,15 @@
  * 
  */
 
+
+$(function(){  //datepicker 설정
+    $("#exam_start_date").datepicker();
+    $("#exam_end_date").datepicker();
+});
+
+
+
 $(document).ready(function() {
-	
-	$("#datepicker").datepicker();
 	
 	// ----- 에디터 가져오기 ----
 	$('.summernote').summernote({
@@ -66,16 +72,24 @@ $(document).ready(function() {
 		$("#member_li").removeClass("active_1"); 
 		$("#write_li").removeClass("active_1"); 
 	}
+	if(path.indexOf("admin/record") != -1) {
+		$("#record_li").addClass("active_1"); 
+		$("#exam_li").removeClass("active_1"); 
+		$("#board_li").removeClass("active_1"); 
+		$("#item_li").removeClass("active_1"); 
+		$("#member_li").removeClass("active_1"); 
+	}
 
 });
 
 
 
-
-
-
-function allChk(obj) {  //라디오버튼 전체선택
-	var chkObj = document.getElementsByName("del_check");
+function allChk(obj, type) {  //라디오버튼 전체선택 
+	var chkObj 
+	if(type == 'dept') {chkObj = document.getElementsByName("emp_dept");}
+	if(type == 'grade'){chkObj = document.getElementsByName("emp_grade");}
+	if(type == 'category' || type == 'item'){chkObj = document.getElementsByName("del_check");}
+	
 	var rowCnt = chkObj.length - 1;
 	var check = obj.checked;
 	if (check) {
@@ -90,4 +104,25 @@ function allChk(obj) {  //라디오버튼 전체선택
 			}
 		}
 	}
+}
+
+
+function onlyNumber(event){  // 숫자만 입력받기
+    event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+        return;
+    else
+        return false;
+}
+ 
+
+
+function removeChar(event) { // 문자입력한경우 지우기
+    event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+        return;
+    else
+        event.target.value = event.target.value.replace(/[^0-9]/g, "");
 }

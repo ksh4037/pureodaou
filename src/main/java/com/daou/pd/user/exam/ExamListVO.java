@@ -6,6 +6,7 @@ public class ExamListVO {
 	private String exam_start_date;
 	private String exam_end_date;
 	private int exam_pass_score;
+	private String exam_status;
 
 	private int exam_retake_degree;
 	private int exam_left_time;
@@ -73,6 +74,18 @@ public class ExamListVO {
 
 	public void setQuiz_cfg_code_name(String quiz_cfg_code_name) {
 		this.quiz_cfg_code_name = quiz_cfg_code_name;
+	}
+
+	public String getExam_status() {
+		return exam_status;
+	}
+
+	public void setExam_status(String exam_status) {
+		this.exam_status = exam_status;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
 	}
 
 }
