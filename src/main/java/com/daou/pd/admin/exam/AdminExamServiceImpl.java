@@ -12,6 +12,7 @@ import com.daou.pd.admin.employee.ConfigVO;
 import com.daou.pd.admin.employee.EmpVO;
 import com.daou.pd.admin.item.ItemMapper;
 import com.daou.pd.admin.item.ItemVO;
+import com.daou.pd.user.exam.ExamDetailVO;
 import com.daou.pd.user.exam.ExamUserVO;
 import com.daou.pd.user.exam.ExamVO;
 
@@ -71,6 +72,40 @@ public class AdminExamServiceImpl implements AdminExamService {
 		return examMapper.getShortExamList(euvo);
 	}
 	
+	@Override
+	public int updtExamDetail(ExamDetailVO euvo) {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.updtExamDetail(euvo);
+	}
 	
+	@Override
+	public int selectTotalCorrectYn(ExamDetailVO euvo) {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.selectTotalCorrectYn(euvo);
+	}
+	
+	@Override
+	public int updtExamScore(ExamUserVO evo) {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.updtExamScore(evo);
+	}
+	
+	@Override
+	public int selectPassScore(ExamUserVO evo) {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.selectPassScore(evo);
+	}
+	
+	@Override
+	public int finalExamUpdate(ExamUserVO evo) {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.finalExamUpdate(evo);
+	}
+	
+	@Override
+	public int insertFailUser(ExamUserVO evo) {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.insertFailUser(evo);
+	}
 	
 }
