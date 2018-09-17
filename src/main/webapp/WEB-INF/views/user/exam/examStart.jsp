@@ -29,11 +29,6 @@ table {
 	border-color: #999999;
 }
 </style>
-<script>
-var startexam = function(degree,ox,obj,short_num, exam_category, exam_no, category_name){
-	location.href="${pageContext.request.contextPath}/user/exam/getExam.daou?degree="+degree+"&ox_num="+ox+"&obj_num="+obj+"&short_num="+short_num+"&category="+exam_category+"&examNo="+exam_no+"&categoryName="+category_name;
-}
-</script>
 </head>
 <body>
 	<div style="padding-left: 25%; padding-right: 25%; padding-top: 20px;">
@@ -50,37 +45,37 @@ var startexam = function(degree,ox,obj,short_num, exam_category, exam_no, catego
 				</tr>
 				<tr>
 					<th>제출상태</th>
-					<td>${status }</td>
+					<td>${intro.uservo.exam_status }</td>
 				</tr>
 				<tr>
-					<th>점수</th>
-					<td></td>
+					<th>남은시간</th>
+					<td>${intro.uservo.exam_left_time }</td>
 				</tr>
 			</table>
 			<table class="table table-bordered">
 				<tr>
-					<th colspan="3">평가유형</th>
+					<th colspan="2">평가유형</th>
 					<th>문항수</th>
 					<th>배점</th>
 					<th>총점</th>
 					<th>비고</th>
 				</tr>
 				<tr>
-					<th rowspan="2">과제</th>
+					<th rowspan="3">과제</th>
 					<th>OX형</th>
-					<td>${listVO.exam_ox_num }</td>
+					<td>${intro.exam_ox_num }</td>
 					<td>10</td>
-					<td rowspan="2">100</td>
-					<td rowspan="2">각 과제의 총점이 60점 미만(100점 만점 기준)의 경우 불합격</td>
+					<td rowspan="3">100</td>
+					<td rowspan="3">각 과제의 총점이 60점 미만(100점 만점 기준)의 경우 불합격</td>
 				</tr>
 				<tr>
 					<th>객관식</th>
-					<td>${listVO.exam_obj_num }</td>
+					<td>${intro.exam_obj_num }</td>
 					<td>10</td>
 				</tr>
 				<tr>
 					<th>주관식</th>
-					<td>${listVO.exam_short_num }</td>
+					<td>${intro.exam_short_num }</td>
 					<td>10</td>
 				</tr>
 			</table>
@@ -93,8 +88,17 @@ var startexam = function(degree,ox,obj,short_num, exam_category, exam_no, catego
 					<li>최종제출 버튼을 클릭하셔야 과제 제출이 완료 됩니다.</li>
 				</ul>
 			</div>
-			<input class="btn btn-primary" type="button" value="평가 시작하기"
-				onclick="javascript:startexam(${intro.exam_degree},${intro.exam_ox_num },${intro.exam_obj_num },${intro.exam_short_num }, ${intro.exam_category}, ${intro.uservo.exam_no }, '${intro.category_name }')">
+			<form method="post" action="/user/exam/getExam.daou">
+				<input type="hidden" name="degree" value="${intro.exam_degree}">
+				<input type="hidden" name="ox_num" value="${intro.exam_ox_num }">
+				<input type="hidden" name="obj_num" value="${intro.exam_obj_num }">
+				<input type="hidden" name="short_num" value="${intro.exam_short_num }">
+				<input type="hidden" name="category" value="${intro.exam_category}">
+				<input type="hidden" name="examNo" value="${intro.uservo.exam_no }">
+				<input type="hidden" name="categoryName" value="${intro.category_name }">
+				
+				<input type="submit" class="btn btn-primary" value="평가 시작하기">
+			</form>
 		</div>
 	</div>
 </body>

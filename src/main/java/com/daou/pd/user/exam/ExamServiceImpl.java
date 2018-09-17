@@ -65,7 +65,7 @@ public class ExamServiceImpl implements ExamService {
 	public void makeTest(List<ExamDetailVO> list) {
 		examMapper = sqlSession.getMapper(ExamMapper.class);
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list);
+		map.put("dlist", list);
 		examMapper.makeTest(map);
 	}
 

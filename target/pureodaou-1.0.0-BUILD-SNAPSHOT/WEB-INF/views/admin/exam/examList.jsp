@@ -22,7 +22,7 @@
 				</h4>
 				<hr>
 				<br>
-				<div class="container">
+				<div class="container">	
 					<h2>
 						<span class="span-font">출제리스트</span>
 					</h2>
@@ -34,18 +34,54 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th align="center">No.</th>
+									<th style="width:10%">회차</th>
+									<th style="width:10%">카테고리</th>
+									<th style="width:20%">시작일자</th>
+									<th style="width:20%">종료일자</th>
+									<th style="width:10%">객관식</th>
+									<th style="width:10%">주관식</th>
+									<th style="width:10%" >O/X</th>
+									<th style="width:10%">합격기준점수</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>등록된 문제 정보가 없습니다.</td>
-								</tr>
-							</tbody>
+									
+							<c:if test="${empty examList}">
+								<tbody>
+									<tr>
+										<td colspan="8">등록된 출제 정보가 없습니다.</td>
+									</tr>
+								</tbody>
+							</c:if>
+
+							<c:if test="${!empty examList}">
+								<c:forEach items="${examList}" var="examList" varStatus="status">
+									<tbody>
+										<tr>
+											<td>${examList.exam_degree}회차</td>
+											<td>
+												<c:if test="${!empty categoryList}">
+													<c:forEach items="${categoryList}" var="categoryList" varStatus="status">
+														<c:if test="${examList.exam_category == categoryList.category_no}">${categoryList.category_name}</c:if>	
+													</c:forEach>
+												</c:if>
+											</td>
+											<td>${examList.exam_start_date}</td>
+											<td>${examList.exam_end_date}</td>
+											<td>${examList.exam_ox_num}개</td>	
+											<td>${examList.exam_obj_num}개</td>
+											<td>${examList.exam_short_num}개</td>
+											<td>${examList.exam_pass_score}점</td>
+										</tr>
+									</tbody>
+								</c:forEach>
+							</c:if>
 						</table>
 					</form>
 
-					<input type="button" value="출제하기" onclick="goReg();" class="btn btn-default" style="float: right; margin-right: 5px" />
+				 	<p align="center"> 
+				 		<input type="button" value="출제하기" onclick="goReg();" class="btn btn-danger"/> 
+				 		<input type="button" value="엑셀 다운로드" onclick="getExcel();" class="btn btn-success"/> 
+				 	</p>
 				</div>
 			</div>
 		</div>
@@ -56,6 +92,10 @@
 	<script type="text/javascript">
 		function goReg(){
 			location.href="examRegForm.daou";
+		}
+		
+		function getExcel(){
+		    location.href="examListExcel.daou";
 		}
 	</script>
 </body>

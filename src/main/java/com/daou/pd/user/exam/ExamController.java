@@ -22,9 +22,6 @@ import com.daou.pd.admin.item.OptionVO;
 
 @Controller
 public class ExamController {
-
-//	String id = "90100";// 임시 아이디와 회차
-//	int degree = 1;
 	@Autowired
 	@Resource(name = "examService")
 	private ExamService examService;
@@ -32,8 +29,6 @@ public class ExamController {
 	@RequestMapping(value = "user/exam/examlist.daou")
 	public ModelAndView examlist(HttpServletRequest req) {
 		String id = getSessionId(req);
-		System.out.println(id);
-//		String id = "90634";
 		ModelAndView mav = new ModelAndView("user/exam/examMain");
 		mav.addObject("elist", examService.getExamList(id));
 		return mav;
@@ -43,8 +38,7 @@ public class ExamController {
 	public ModelAndView examStart(@RequestParam("degree") String str, HttpServletRequest req) {
 		String id = getSessionId(req);
 		int degree = Integer.parseInt(str);
-		ModelAndView mav = new ModelAndView();
-//		String id = "90634";
+		ModelAndView mav = new ModelAndView("user/exam/examStart");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("reg_id", id);
 		map.put("exam_degree", degree);
@@ -63,11 +57,12 @@ public class ExamController {
 		int obj_num = Integer.parseInt(obj);
 		int short_num = Integer.parseInt(short_n);
 		int exam_category = Integer.parseInt(category);
+
 		String id = getSessionId(req);
-//		String id = "90634";
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("degree", degree);
 		map.put("id", id);
+
 		int exam_no = Integer.parseInt(examNo);
 		int left_time = examService.getTime(exam_no);
 		if (examService.checkDegree(map) == 0) {
@@ -130,7 +125,6 @@ public class ExamController {
 				for (OptionVO ov : ol) {
 					if (ov.getCorrect_yn().equals("Y")) {
 						detail.setExam_detail_correct(Integer.toString(ov.getOption_no()));
-						System.out.println("Y");
 					}
 				}
 				detail.setExam_detail_option1(ol.get(0).getOption_no());
@@ -144,7 +138,6 @@ public class ExamController {
 				dlist.add(detail);
 			}
 		}
-
 		examService.makeTest(dlist);
 	}
 

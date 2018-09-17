@@ -1,0 +1,67 @@
+<?xregml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daou.pd.admin.exam.AdminExamMapper">
+
+	<insert id="examReg" parameterType="examVO">
+		insert into quiz_exam(exam_start_date, exam_end_date, exam_ox_num, exam_obj_num,
+							  exam_short_num, exam_pass_score, exam_category)
+		values(
+			STR_TO_DATE(#{exam_start_date}, '%m/%d/%Y'),
+			STR_TO_DATE(#{exam_end_date}, '%m/%d/%Y'),
+			#{exam_ox_num},
+			#{exam_obj_num},
+			#{exam_short_num},
+			#{exam_pass_score},
+			#{exam_category} 
+		)
+	</insert>
+	
+
+	<select id="selectExamTarget" resultType="String">
+		select emp_id
+		from employee
+		where emp_dept in
+			<foreach collection="emp_dept" open="(" close=")" separator="," item="dept">
+				#{dept}	
+			</foreach> 
+		and emp_grade in
+			<foreach collection="emp_grade" open="(" close=")" separator="," item="grade">
+				#{grade}	
+			</foreach>
+		and emp_type = 2
+	</select>
+	
+	
+	<insert id="userExamReg" parameterType="String">
+		insert into quiz_user_exam(exam_degree, exam_take_id)
+		values(
+			(select max(exam_degree) from quiz_exam),
+			#{emp_id}
+		)
+	</insert>
+
+
+	<select id="examList" resultType="ExamVO">
+		select exam_degree, exam_category, exam_start_date, exam_end_date,
+			   exam_ox_num, exam_obj_num, exam_short_num, exam_pass_score
+		from quiz_exam
+	</select>
+	
+	<select id="recordList" resultType="hashmap">
+		select q.exam_no, q.exam_degree, q.exam_take_id, q.exam_take_date, q.exam_retake_degree, q.exam_status,
+			   q.exam_final_yn, q.exam_score, e.emp_name
+		from quiz_user_exam q left outer join employee e
+		on q.exam_take_id = e.emp_id
+		and e.use_yn = 'Y'
+		order by q.exam_degree desc, q.exam_take_id desc
+	</select>
+	
+	<select id="statusCodeList" resultType="configVO">
+		select quiz_cfg_code, quiz_cfg_code_name
+		from quiz_config
+		where quiz_cfg_code like 'status%'
+	</select>
+	
+</mapper>	 
