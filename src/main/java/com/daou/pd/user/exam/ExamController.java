@@ -108,13 +108,16 @@ public class ExamController {
 			List<OptionVO> olist2 = new ArrayList<OptionVO>();
 			if (olist.size() > 1) {
 				for (OptionVO op : olist) {
-					if (op.getCorrect_yn().equals("Y"))
+					if (op.getCorrect_yn().equals("Y")) {
 						olist2.add(op);
+						break;
+					}
 				}
 				for (OptionVO op : olist) {
 					if (op.getCorrect_yn().equals("N"))
-						if (olist2.size() < 4)
+						if (olist2.size() < 4) {
 							olist2.add(op);
+						}
 				}
 				Collections.shuffle(olist2);
 				item.setOvo(olist2);
@@ -132,6 +135,7 @@ public class ExamController {
 				for (OptionVO ov : ol) {
 					if (ov.getCorrect_yn().equals("Y")) {
 						detail.setExam_detail_correct(Integer.toString(ov.getOption_no()));
+						break;
 					}
 				}
 				detail.setExam_detail_option1(ol.get(0).getOption_no());
@@ -148,7 +152,7 @@ public class ExamController {
 		examService.makeTest(dlist);
 	}
 
-	@RequestMapping(value = "/user/exam/regist.do")
+	@RequestMapping(value = "/user/exam/regist.daou")
 	@ResponseBody
 	public ModelAndView regist(HttpServletRequest req, @RequestBody List<MarkVO> list,
 			@RequestParam("type") String type) {
@@ -194,9 +198,25 @@ public class ExamController {
 		String id = (String) session.getAttribute("emp_id");
 		return id;
 	}
-
-	/*
-	 * private List<MarkVO> getMark(int exam_no, String id) {
-	 * examService.getMark(exam_no, id); return null; }
-	 */
+	
+	
+	@RequestMapping(value="/user/exam/recordList.daou")
+	public ModelAndView getResultList(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("user/exam/recordList");
+		String id = getSessionId(req);
+		List<ExamListVO> list =  examService.getRecordList(id);
+		mav.addObject("rList", list);
+		return mav;
+	}
+	
+	@RequestMapping(value="/user/exam/wrongAnswerNote.daou")
+	public ModelAndView WrongAnswerNote(@RequestParam("examNo")String examNo) {
+		ModelAndView mav = new ModelAndView("user/exam/wrongAnswerNote");
+		List<MarkVO> mlist = examService.getAnswerSheet(Integer.parseInt(examNo));
+		List<ItemVO> ilist = examService.getTestNote(Integer.parseInt(examNo));
+		
+		mav.addObject("mlist",mlist);
+		mav.addObject("ilist",ilist);
+		return null;
+	}
 }

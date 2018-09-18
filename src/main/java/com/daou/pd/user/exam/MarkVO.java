@@ -7,6 +7,7 @@ public class MarkVO {
 	private String exam_detail_correct;
 	private String correct_yn;
 	private String item_type;
+	private String exam_deatil_comment;
 
 	public MarkVO() {
 	}
@@ -57,6 +58,14 @@ public class MarkVO {
 
 	public void setItem_type(String item_type) {
 		this.item_type = item_type;
+	}
+
+	public String getExam_deatil_comment() {
+		return exam_deatil_comment;
+	}
+
+	public void setExam_deatil_comment(String exam_deatil_comment) {
+		this.exam_deatil_comment = exam_deatil_comment;
 	}
 
 }

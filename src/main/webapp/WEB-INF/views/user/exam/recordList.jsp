@@ -17,14 +17,7 @@
 	border-top-right-radius: 7px;
 }
 </style>
-<script type="text/javascript">
-	/* $('.btn').on.click(function(){
-		
-	}) */
-	var go = function(degree) {
-		location.href = "";
-	}
-</script>
+
 </head>
 <body>
 	<div style="padding-left: 25%; padding-right: 25%; padding-top: 20px;">
@@ -41,33 +34,45 @@
 			<table class="table table-hover">
 				<tr style="background-color: #DDDDDD">
 					<th>회차</th>
-					<th>카테고리</th>
-					<th>본 날짜</th>
-					<th>유형</th>
+					<th>재시험회차</th>
+					<th>과목</th>
 					<th>점수</th>
+					<th>합격여부</th>
 					<th>오답노트</th>
 				</tr>
-				<c:forEach items="${elist }" var="e">
+				<c:forEach items="${rList }" var="r">
 					<tr>
-						<td>$</td>
-						<td>정보보안</td>
-						<td></td>
-						<td>평가</td>
-						<td>100</td>
-						<c:choose>
-							<c:if test="">
-								<td>미완료</td>
-							</c:if>
-							<c:otherwise>
-								<td><input class="btn btn-primary" id="${e.exam_test_no }"
-									type="button" value="" onclick="javascript:go()"></td>
+						<td>${r.exam_degree }회</td>
+						<td><c:choose>
+								<c:when test="${r.exam_retake_degree >0}">
+								${r.exam_retake_degree }차
+							</c:when>
+								<c:otherwise>
+								-
 							</c:otherwise>
+							</c:choose></td>
+						<td>${r.category_name }</td>
+						<td>${r.exam_score }</td>
+						<c:choose>
+							<c:when test="${r.exam_status == 'status04'}">
+								<td style="color: red;">불합격</td>
+							</c:when>
+							<c:when test="${r.exam_status == 'status05' }">
+								<td style="color: blue;">합격</td>
+							</c:when>
 						</c:choose>
+						<td><input class="btn btn-primary" id="${r.exam_no }"
+							type="button" value="오답노트" onclick="javascript:go(${r.exam_no})"></td>
 
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
 	</div>
+	<script>
+	var go = function(examNo) {
+		location.href = "${pageContext.request.contextPath}/user/exam/wrongAnswerNote.daou?type="+examNo;
+	}
+	</script>
 </body>
 </html>
