@@ -130,8 +130,8 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public List<String> getWrongNoteOptions(HashMap<String, String> map) {
-		return examMapper().getWrongNoteOptions(map);
+	public List<String> getMark(MarkVO mark) {
+		return examMapper().getMark(mark);
 	}
 
 

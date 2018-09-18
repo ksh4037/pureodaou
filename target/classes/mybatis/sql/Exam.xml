@@ -183,9 +183,9 @@
 		ORDER BY d.exam_detail_no
 	</select>
 	
-	<!-- <select id="getWrongNoteOptions" resultType="String" parameterMap="hashmap">
+	<select id="getMark" resultType="String" parameterType="markVO">
 		SELECT option_contents
 		FROM quiz_item_option
 		WHERE option_no in (#{exam_detail_answer},#{exam_detail_correct})
-	</select> -->
+	</select>
 </mapper>	 

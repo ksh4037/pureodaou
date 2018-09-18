@@ -47,5 +47,5 @@ public interface ExamMapper {
 
 	List<ItemVO> getTestNote(int exam_no);
 
-	List<String> getWrongNoteOptions(HashMap<String, String> map);
+	List<String> getMark(MarkVO mark);
 }

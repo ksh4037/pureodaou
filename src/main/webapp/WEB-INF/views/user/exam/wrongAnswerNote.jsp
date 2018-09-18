@@ -57,18 +57,27 @@ input[type=radio] {
 									: 10점</div>
 							</div>
 							<div style="padding-left: 20px;">${item.item_title }</div>
-							<c:if test="${!empty item.item_contents }">
+							<c:if test="${!item.item_contents == ''}">
 								<div class="item_contents"
 								style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
 								${item.item_contents }</div>
 							</c:if>
 						</div>
+						<c:choose>
+						<c:when test="${mlist[status.count-1].correct_yn=='N' }">
+						<div style="padding: 20px; color: red;">틀렸습니다!</div>
 						<div style="padding: 20px; width:100%; color: red;">제출 : ${mlist[status.count-1].exam_detail_answer }</div>
-						<div style="padding: 20px; width:100%; color: blue;">답 : ${mlist[status.count-1].exam_detail_correct }</div>
+						</c:when>
+						<c:when test="${mlist[status.count-1].correct_yn=='Y' }">
+						<div style="padding: 20px; color: blue;">정답입니다!</div>
+						</c:when>
+						</c:choose>
+						<div style="padding: 20px; width:100%; color: blue;">정답 : ${mlist[status.count-1].exam_detail_correct }</div>
 						<c:if test="${!empty mlist[status.count].exam_detail_comment }">
 						<div style="padding: 20px; width:100%;">해설 : ${mlist[status.count-1].exam_detail_comment }</div>
 						</c:if>
 					</div>
+					<hr>
 				</c:forEach>
 			</div>
 		</form>
