@@ -24,9 +24,9 @@
 		<div class="topbox"
 			style="background-color: #114a9b; color: white; font-size: 16px; padding: 10px;">
 			<ul>
+				<li>${id }님의 과제 목록 입니다.</li>
 				<li>각 평가의 점수와 답안을 확인 가능합니다</li>
 				<li>각 평가당 총점 60점 이상(100점 만점 기준)이어야 수료입니다.</li>
-				<li>특이사항 혹은 오류에 관해서는 문의게시판 이용 부탁드립니다.</li>
 			</ul>
 		</div>
 		<div class="midbox"
@@ -71,7 +71,7 @@
 	</div>
 	<script>
 	var go = function(examNo) {
-		location.href = "${pageContext.request.contextPath}/user/exam/wrongAnswerNote.daou?type="+examNo;
+		location.href = "${pageContext.request.contextPath}/user/exam/wrongAnswerNote.daou?examNo="+examNo;
 	}
 	</script>
 </body>

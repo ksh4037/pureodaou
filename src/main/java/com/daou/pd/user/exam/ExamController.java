@@ -205,6 +205,7 @@ public class ExamController {
 		ModelAndView mav = new ModelAndView("user/exam/recordList");
 		String id = getSessionId(req);
 		List<ExamListVO> list =  examService.getRecordList(id);
+		mav.addObject("id",id);
 		mav.addObject("rList", list);
 		return mav;
 	}
@@ -217,6 +218,6 @@ public class ExamController {
 		
 		mav.addObject("mlist",mlist);
 		mav.addObject("ilist",ilist);
-		return null;
+		return mav;
 	}
 }

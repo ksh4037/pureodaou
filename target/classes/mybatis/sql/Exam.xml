@@ -163,7 +163,7 @@
 	</update>
 	
 	<select id="getAnswerSheet" parameterType="Integer" resultType="markVO">
-		SELECT e.item_no, e.exam_detail_answer, e.exam_detail_correct, i.item_type, e.exam_no, e.exam_detail_commnet, e.correct_yn
+		SELECT e.item_no, e.exam_detail_answer, e.exam_detail_correct, i.item_type, e.exam_no, e.exam_detail_comment, e.correct_yn
 		FROM quiz_exam_detail e, quiz_item i
 		WHERE e.item_no = i.item_no and e.exam_no = #{exam_no}
 	</select>
