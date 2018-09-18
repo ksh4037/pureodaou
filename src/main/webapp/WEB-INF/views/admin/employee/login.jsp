@@ -3,54 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<%@ include file="../common/import.jsp"%>
 
-<link href="../resources/css/login.css" rel="stylesheet" type="text/css"></link>
-
-<title>Login</title>
-
-<script type="text/javascript">
-	function goLogin() {
-		if ($("#emp_id").val().length < 1) {
-			alert("아이디를 입력해주세요.");
-		} else if ($("#emp_pw").val().length < 1) {
-			alert("비밀번호를 입력해주세요.");
-		} else {
-			var formDataList = $("form[name=login]").serialize();
-
-			$.ajax({
-				type : "POST",
-				url : "goLogin.daou",
-				data : formDataList,
-				async : false,
-				success : function(data) {
-					if (data == 'success') {
-						alert("로그인되었습니다.");
-						location.href = "employeeList.daou";
-					} else if (data == 'IDfail') {
-						alert("등록되지 않은 사원번호입니다.");
-					} else {
-						alert('틀린 패스워드입니다.');
-					}
-				},
-				error : function(data) {
-					alert('로그인 실패하였습니다.');
-				}
-			});
-		}
-	}
-</script>
-
-</head>
 <body style="background-color: #5bc0de">
 	<div class="container">
 		<img src="../resources/img/logo2.png" width="325px"
@@ -81,6 +35,39 @@
 			</h5>
 		</div>
 	</div>
+	
+	
+	<script type="text/javascript">
+		function goLogin() {
+			if ($("#emp_id").val().length < 1) {
+				alert("아이디를 입력해주세요.");
+			} else if ($("#emp_pw").val().length < 1) {
+				alert("비밀번호를 입력해주세요.");
+			} else {
+				var formDataList = $("form[name=login]").serialize();
+	
+				$.ajax({
+					type : "POST",
+					url : "goLogin.daou",
+					data : formDataList,
+					async : false,
+					success : function(data) {
+						if (data == 'success') {
+							alert("로그인되었습니다.");
+							location.href = "employeeList.daou";
+						} else if (data == 'IDfail') {
+							alert("등록되지 않은 사원번호입니다.");
+						} else {
+							alert('틀린 패스워드입니다.');
+						}
+					},
+					error : function(data) {
+						alert('로그인 실패하였습니다.');
+					}
+				});
+			}
+		}
+	</script>
 </body>
 </html>
 

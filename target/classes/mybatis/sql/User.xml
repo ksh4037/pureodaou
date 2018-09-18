@@ -50,6 +50,7 @@
 		emp_dept = #{emp_dept},
 		emp_tel = #{emp_tel},
 		emp_grade = #{emp_grade},
+		emp_pw = #{emp_pw},
 		where emp_id = #{emp_id}
 	</update>
 

@@ -1,5 +1,6 @@
 package com.daou.pd.user.mod;
 
+import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class UserController {
 	@Resource(name = "userService")
 	private UserService userService;
 
+	final int checkKey = 1;
+	
 	@RequestMapping(value = "/")
 	public ModelAndView goUserLoginPage() {
 		ModelAndView mav = new ModelAndView("user/mod/userLogin");
@@ -28,16 +31,31 @@ public class UserController {
 
 	@RequestMapping(value = "goUserLogin.daou")
 	public ModelAndView goUserLogin(HttpSession session, HttpServletRequest request, HttpServletResponse response,
-			UserVO uvo) {
+			UserVO uvo) throws Exception {
 
+		StringBuffer sbuf = new StringBuffer();
+		String txt =uvo.getEmp_pw();
+		MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
+		mDigest.update(txt.getBytes());
+		     
+		    byte[] msgStr = mDigest.digest() ;
+		     
+		    for(int i=0; i < msgStr.length; i++){
+		        byte tmpStrByte = msgStr[i];
+		        String tmpEncTxt = Integer.toString((tmpStrByte & 0xff) + 0x100, 16).substring(1);
+		         
+		    sbuf.append(tmpEncTxt) ;
+		    }
+		uvo.setEmp_pw(sbuf.toString());
+		
 		int fullCheckResult = userService.selectUser(uvo);
 		int IdCheckResult = userService.userIdCheck(uvo);
 
 		ModelAndView mav = new ModelAndView("user/mod/result");
 
-		if (IdCheckResult != 1) {
+		if (IdCheckResult != checkKey) {
 			mav.addObject("resultCode", "IDfail");
-		} else if (fullCheckResult == 1) {
+		} else if (fullCheckResult == checkKey) {
 			session.setAttribute("emp_id", uvo.getEmp_id());
 			session.setAttribute("emp_name", uvo.getEmp_name());
 			mav.addObject("resultCode", "success");
@@ -79,8 +97,23 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "userUpdt.daou")
-	public ModelAndView userUpdt(HttpServletRequest request, HttpServletResponse response, UserVO uvo) {
+	public ModelAndView userUpdt(HttpServletRequest request, HttpServletResponse response, UserVO uvo) throws Exception {
 		ModelAndView mav = new ModelAndView("user/mod/result");
+		
+		StringBuffer sbuf = new StringBuffer();
+		String txt =uvo.getEmp_pw();
+		MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
+		mDigest.update(txt.getBytes());
+		     
+		    byte[] msgStr = mDigest.digest() ;
+		     
+		    for(int i=0; i < msgStr.length; i++){
+		        byte tmpStrByte = msgStr[i];
+		        String tmpEncTxt = Integer.toString((tmpStrByte & 0xff) + 0x100, 16).substring(1);
+		         
+		    sbuf.append(tmpEncTxt) ;
+		    }
+		uvo.setEmp_pw(sbuf.toString());
 		try {
 			userService.updateMember(uvo);
 			mav.addObject("resultCode", "success");

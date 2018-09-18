@@ -5,17 +5,6 @@
 <!DOCTYPE html>
 <html>
 	<%@ include file="../common/import.jsp"%>
-	<head>
-	    <title></title>
-	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-	    <script src="../resources/js/Chart.min.js"></script>
-	    <script src="../resources/js/Chart.StackedBar.js"></script>
-	    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript">
-			google.charts.load('current', {'packages':['corechart']});
-			google.charts.setOnLoadCallback(search);
-		</script>
-	</head>
 	<body>
 		<div class="container-fluid">
 			<div class="row content">
@@ -105,7 +94,7 @@
 					</div>
 				
 					<div>
-						<table id="textappend" class="table" style="margin-top:30px; margin-left:20px; width:420px">
+						<table class="table" style="margin-top:30px; margin-left:20px; width:420px">
 							<thead>
 								<tr>
 									<th style="text-align:center; width:60px">순위</th>
@@ -114,7 +103,7 @@
 									<th style="text-align:center; width:100px">출제 횟수</th><th></th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="textappend">
 							
 	
 							</tbody>
@@ -125,11 +114,16 @@
 		</div>
 	  
 		<%@ include file="../common/footer.jsp"%>
-		 
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(search);
+		</script>
 		<script>
 			function search() {
+				$("#textappend").empty();
 				var formDataList = $("form[name=examSelectForm]").serialize();
-				$("#textappend").remove
 				$.ajax({
 					type : "POST",
 					url : "examPercent.daou",
