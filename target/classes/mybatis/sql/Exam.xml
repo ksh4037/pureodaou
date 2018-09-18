@@ -15,7 +15,7 @@
 		WHERE
 		g.quiz_cfg_code = u.exam_status and q.exam_category = c.category_no
 		and q.exam_degree = u.exam_degree and u.exam_take_id = #{id} and
-		u.exam_final_yn = 'Y'
+		u.exam_final_yn = 'Y' and u.exam_status in ('status01', 'status02')
 		ORDER BY u.exam_degree desc
 	</select>
 
@@ -163,8 +163,29 @@
 	</update>
 	
 	<select id="getAnswerSheet" parameterType="Integer" resultType="markVO">
-		SELECT e.item_no, e.exam_detail_answer, e.exam_detail_correct, i.item_type, e.exam_no
+		SELECT e.item_no, e.exam_detail_answer, e.exam_detail_correct, i.item_type, e.exam_no, e.exam_detail_commnet, e.correct_yn
 		FROM quiz_exam_detail e, quiz_item i
 		WHERE e.item_no = i.item_no and e.exam_no = #{exam_no}
+	</select>
+	
+	<select id="getRecordList" parameterType="String" resultType="examlistVO">
+		SELECT q.exam_degree, u.exam_retake_degree, c.category_name, u.exam_score, u.exam_status, u.exam_no
+		FROM quiz_exam q, quiz_user_exam u, quiz_category c
+		WHERE q.exam_degree = u.exam_degree and q.exam_category = c.category_no  
+		and u.exam_take_id = #{id} and u.exam_status in ('status04', 'status05')
+		ORDER BY q.exam_degree desc, u.exam_retake_degree desc
+	</select>
+	
+	<select id="getTestNote" parameterType="Integer" resultType="itemVO">
+		SELECT i.item_title, i.item_contents, d.exam_detail_comment, i.item_type
+		FROM quiz_item i, quiz_exam_detail d
+		WHERE d.item_no = i.item_no and d.exam_no = #{exam_no}
+		ORDER BY d.exam_detail_no
+	</select>
+	
+	<select id="getWrongNoteOptions" resultType="String" parameterMap="hashmap">
+		SELECT option_contents
+		FROM quiz_item_option
+		WHERE option_no in (#{exam_detail_answer},#{exam_detail_correct})
 	</select>
 </mapper>	 

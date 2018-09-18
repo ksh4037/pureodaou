@@ -45,7 +45,7 @@ table {
 				</tr>
 				<tr>
 					<th>제출상태</th>
-					<td>${intro.uservo.exam_status }</td>
+					<td>${intro.uservo.status_name}</td>
 				</tr>
 				<tr>
 					<th>남은시간</th>

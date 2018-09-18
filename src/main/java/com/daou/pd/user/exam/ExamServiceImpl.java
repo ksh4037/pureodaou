@@ -120,9 +120,19 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public List<MarkVO> getMark(int exam_no) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ExamListVO> getRecordList(String id) {
+		return examMapper().getRecordList(id);
 	}
+
+	@Override
+	public List<ItemVO> getTestNote(int exam_no) {
+		return examMapper().getTestNote(exam_no);
+	}
+
+	@Override
+	public List<String> getWrongNoteOptions(HashMap<String, String> map) {
+		return examMapper().getWrongNoteOptions(map);
+	}
+
 
 }
