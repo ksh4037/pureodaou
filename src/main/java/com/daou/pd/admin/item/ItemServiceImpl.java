@@ -46,9 +46,9 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public int deleteItem(int item_no) {
+	public int deleteItem(List<String> itemNoList) {
 		itemMapper = sqlSession.getMapper(ItemMapper.class);
-		return itemMapper.deleteItem(item_no);
+		return itemMapper.deleteItem(itemNoList);
 	}
 
 	@Override

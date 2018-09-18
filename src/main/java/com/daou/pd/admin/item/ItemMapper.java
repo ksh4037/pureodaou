@@ -14,7 +14,7 @@ public interface ItemMapper {
 
 	public int itemUpdt(ItemVO ivo);
 
-	public int deleteItem(int item_no);
+	public int deleteItem(List<String> itemNoList);
 
 	public int selectItemSeq();
 
