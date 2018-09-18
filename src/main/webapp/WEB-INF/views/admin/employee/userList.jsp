@@ -3,11 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%
-	if (session.getAttribute("emp_id") == null) {
-		response.sendRedirect("login.daou");
-	}
-%>
 
 <!DOCTYPE html>
 	<html>
@@ -110,10 +105,12 @@
 			function goDel() {
 				var values = document.getElementsByName("del_check");
 				var list = new Array();
-		
+				var j=0;
+				
 				for (var i = 0; i < values.length; i++) {
 					if (values[i].checked == true) {
-						list[i] = values[i].value;
+						list[j] = values[i].value;
+						j++;
 					}
 				}
 				$.ajax({

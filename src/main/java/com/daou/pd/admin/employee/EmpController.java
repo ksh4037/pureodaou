@@ -130,16 +130,15 @@ public class EmpController {
 			@RequestParam(value = "list[]") String[] delList) throws Exception {
 
 		ModelAndView mav = new ModelAndView("admin/employee/result");
-		String str="('";
+		
+		String str="";
 		for(int i=0;i<delList.length-1;i++) {
-			str += delList[i].toString() +"','";
+			str += delList[i].toString() +",";
 		}
-		str += delList[delList.length-1].toString() + "')";
+		str += delList[delList.length-1].toString();
 		System.out.println(str);
 		try {
-				
 				empService.deleteMember(str);
-			
 			mav.addObject("resultCode", "success");
 		} catch (Exception e) {
 			mav.addObject("resultCode", "error");
@@ -187,22 +186,8 @@ public class EmpController {
 	public ModelAndView goUpdate(HttpServletRequest request, HttpServletResponse response, EmpVO evo) 
 				throws Exception{
 		ModelAndView mav = new ModelAndView("admin/employee/result");
-		
-		StringBuffer sbuf = new StringBuffer();
-		String txt = evo.getEmp_pw();
-		MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
-		mDigest.update(txt.getBytes());
-		     
-		    byte[] msgStr = mDigest.digest() ;
-		     
-		    for(int i=0; i < msgStr.length; i++){
-		        byte tmpStrByte = msgStr[i];
-		        String tmpEncTxt = Integer.toString((tmpStrByte & 0xff) + 0x100, 16).substring(1);
-		         
-		    sbuf.append(tmpEncTxt) ;
-		    }		
+			
 		try {
-			evo.setEmp_pw(sbuf.toString());
 			empService.updateMember(evo);
 			mav.addObject("resultCode", "success");
 			return mav;
