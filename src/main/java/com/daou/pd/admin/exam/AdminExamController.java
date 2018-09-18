@@ -23,6 +23,7 @@ import com.daou.pd.user.exam.ExamDetailVO;
 import com.daou.pd.user.exam.ExamUserVO;
 import com.daou.pd.user.exam.ExamVO;
 
+
 @Controller
 public class AdminExamController {
 	@Autowired
@@ -125,6 +126,7 @@ public class AdminExamController {
 		searchData.put("degree_scType", request.getParameter("degree_scType"));
 		searchData.put("status_scType", request.getParameter("status_scType"));
 		
+		
 		List<HashMap<String, Object>> recordList = adminExamService.recordList(searchData);
 		List<ConfigVO> statusCodeList = adminExamService.statusCodeList();
 		List<ExamVO> examInfoList = adminExamService.examInfoList();
@@ -134,8 +136,8 @@ public class AdminExamController {
 		mav.addObject("examInfoList", examInfoList);
 		
 		//검색조건
-		mav.addObject("degree_scType", request.getParameter("degree_scType"));
-		mav.addObject("status_scType", request.getParameter("status_scType"));
+		mav.addObject("degree_scType", searchData.get("degree_scType"));
+		mav.addObject("status_scType", searchData.get("status_scType"));
 		return mav;
 	}
 	

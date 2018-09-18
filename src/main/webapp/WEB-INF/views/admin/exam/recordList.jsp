@@ -25,23 +25,25 @@
 				 	<form name="searchForm" id="searchForm" method="post">
 						<table class="table" style="margin-bottom:70px; text-align:center">
 							<tr>
-								<th scope="row" colspan="4"><p align="center"><span style="color:#5bc0de;"><font size=4>[기록리스트 검색조건]</font></span></p></th>
+								<th scope="row" colspan="6"><p align="center"><span style="color:#5bc0de;"><font size=4>[기록리스트 검색조건]</font></span></p></th>
 							</tr>
 							
 							<tr>
 								<th scope="row">회차별 : </th>
 								<td>
 									<select id="degree_scType" name="degree_scType" class="form-control">
-										<option value="all">전체</option>
+										<option value="">전체</option>
 										<c:forEach var="item" items="${examInfoList}">
 											<option value="${item.exam_degree}" <c:if test="${item.exam_degree == degree_scType}">selected</c:if>>${item.exam_degree}회</option>
 										</c:forEach>
 									</select>
 								</td>
+								
+								
 								<th scope="row">최종상태별: </th>
 								<td>
 									<select id="status_scType" name="status_scType" class="form-control" style="width:70%">
-										<option value="all">전체</option>
+										<option value="">전체</option>
 										<c:forEach var="item" items="${statusCodeList}">
 											<option value="${item.quiz_cfg_code}" <c:if test="${item.quiz_cfg_code == status_scType}">selected</c:if>>${item.quiz_cfg_code_name}</option>
 										</c:forEach>
@@ -50,7 +52,7 @@
 							</tr>
 							
 							<tr>
-								<td colspan="4"><p align="center"><button type="button" class="btn btn-primary" onclick="search(); return false;">Search</button></p></td>
+								<td colspan="6"><p align="center"><button type="button" class="btn btn-primary" onclick="search(); return false;">Search</button></p></td>
 							</tr>
 						</table>
 					</form>
@@ -105,7 +107,10 @@
 											
 											<td class="r_td_style">${recordList.exam_retake_degree}회</td>
 											
-											<td class="r_td_style">${fn:substring(recordList.exam_take_date,0,10)}</td>
+											<td class="r_td_style">
+												<c:if test="${empty recordList.exam_take_date}">-</c:if>
+												<c:if test="${!empty recordList.exam_take_date}">${fn:substring(recordList.exam_take_date,0,10)}</c:if>
+											</td>
 											
 											<td class="r_td_style">
 												<c:if test="${!empty statusCodeList}">

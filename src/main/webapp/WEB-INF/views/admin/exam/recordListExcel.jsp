@@ -18,12 +18,18 @@ response.setHeader("Content-Disposition", "inline; filename=examListExcel.xls");
    						<thead>
 							<tr>
 								<th colspan="8">
-									[검색조건] -> 회차별 : ${degree_scType}회, 
-									<c:if test="${status_scType == 'status01'}">최종상태별 : 미응시</c:if>
-									<c:if test="${status_scType == 'status02'}">최종상태별 : 임시저장</c:if>
-									<c:if test="${status_scType == 'status03'}">최종상태별 : 채점중</c:if>
-									<c:if test="${status_scType == 'status04'}">최종상태별 : 채점완료(합격)</c:if>
-									<c:if test="${status_scType == 'status05'}">최종상태별 : 채점완료(불합격)</c:if>
+									[검색조건] -> 
+									회차별 : 
+									<c:if test="${empty degree_scType}">-회,</c:if>
+									<c:if test="${!empty degree_scType}">${degree_scType}회,</c:if>
+									
+									최종상태별 : 
+									<c:if test="${empty status_scType}">-</c:if>
+									<c:if test="${status_scType == 'status01'}">미응시</c:if>
+									<c:if test="${status_scType == 'status02'}">임시저장</c:if>
+									<c:if test="${status_scType == 'status03'}">채점중</c:if>
+									<c:if test="${status_scType == 'status04'}">채점완료(합격)</c:if>
+									<c:if test="${status_scType == 'status05'}">채점완료(불합격)</c:if>
 								</th>
 							</tr>
 						</thead>
