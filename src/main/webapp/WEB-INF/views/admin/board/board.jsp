@@ -10,6 +10,11 @@
 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 	    <script src="../resources/js/Chart.min.js"></script>
 	    <script src="../resources/js/Chart.StackedBar.js"></script>
+	    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(search);
+		</script>
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -55,99 +60,63 @@
 						</table>
 					</form>
 					</div>
-					<div>
-						<table class="table" style="width:300px; margin-left:20px; margin-top:20px">
+					<div class="col-sm-9">
+					<div id="barchart_DOvalues" style="width:400px; height:100px; float:right"></div>
+					<div style="width:370px; height: 500px; float:left">
+						<table class="table" style="width:320px; margin-left:20px; margin-top:20px">
 							<tr>
 								<th scope="row" style="width:120px">응시율</th><th style="width:10px"> </th>
-								<td style="width:30px"><input type="text" id="examPercent" style="border:0px; text-align:right; width:40px"></td>
+								<td style="width:50px"><input type="text" id="examPercent" style="border:0px; text-align:right; width:50px" disable></td>
 								<th style="width:20px">%</th>
 							</tr>
 							<tr>
 								<th scope="row" style="width:120px">통과율</th><th style="width:10px"> </th>
-								<td style="width:30px"><input type="text" id="passPercent" style="border:0px; text-align:right; width:40px"></td>
+								<td style="width:50px"><input type="text" id="passPercent" style="border:none; text-align:right; width:50px" disable></td>
 								<th style="width:20px">%</th>
 							</tr>
 							<tr>
 								<th scope="row" style="width:120px">응시대상자</th><th style="width:5px">총</th>
-								<td style="width:30px"><input type="text" id="examTargetAll" style="border:0px; text-align:right; width:40px"></td>
+								<td style="width:50px"><input type="text" id="examTargetAll" style="border:none; text-align:right; width:50px" disable></td>
 								<th style="width:20px">명</th>
 							</tr>
 							<tr>
 								<th scope="row" style="width:120px">현재응시자</th><th style="width:10px"> </th>
-								<td style="width:30px"><input type="text" id="examTargetDo" style="border:0px; text-align:right; width:40px"></td>
+								<td style="width:50px"><input type="text" id="examTargetDo" style="border:none; text-align:right; width:50px" disable></td>
 								<th style="width:20px">명</th>
 							</tr>
 							<tr>
 								<th scope="row" style="width:120px">통과자</th><th style="width:10px"> </th>
-								<td style="width:30px"><input type="text" id="passTarget" style="border:0px; text-align:right; width:40px"></td>
+								<td style="width:50px"><input type="text" id="passTarget" style="border:none; text-align:right; width:50px" disable></td>
 								<th style="width:20px">명</th>
 							</tr>
 							<tr>
-								<th>부서별 평균</th><th style="width:10px"> </th><td><input type="text" id="deptAverage" style="border:0px; text-align:right; width:40px"></td>
+								<th>부서별 평균</th><th style="width:10px"> </th><td><input type="text" id="deptAverage" style="border:none; text-align:right; width:50px" disable></td>
 								<th>점</th>
 							</tr>
 							<tr>
-								<th>직급별 평균</th><th style="width:10px"> </th><td><input type="text" id="gradeAverage" style="border:0px; text-align:right; width:40px"></td>
+								<th>직급별 평균</th><th style="width:10px"> </th><td><input type="text" id="gradeAverage" style="border:none; text-align:right; width:50px" disable></td>
 								<th>점</th>
 							</tr>
 						</table>
+					</div></div>
+					
+					<div class="col-sm-9" style="margin-top:20px; margin-bottom:20px">
+						<button type="button" class="btn btn-default" onclick="wrongPercent(); return false;">오답률 TOP10 보기</button>
 					</div>
-					
-					
+				
 					<div>
-					<!--  
-					<table class="table" style="width:400px; margin-left:20px; margin-top:20px">
-					<tr>
-						<td><button type="button" class="btn btn-default" onclick="deptAvg(); return false;">부서별 평균 보기</button></td>
-						<th>회차별 부서별 평균</th><td><input type="text" id="deptAverage" style="border:0px; text-align:right; width:40px"></td>
-						<th>점</th>
-					</tr>
-					<tr>
-						<td><button type="button" class="btn btn-default" onclick="gradeAvg(); return false;">직급별 평균 보기</button></td>
-						<th>회차별 직급별 평균</th><td><input type="text" id="gradeAverage" style="border:0px; text-align:right; width:40px"></td>
-						<th>점</th>
-					</tr>
-					</table>-->
-					
-					<br>
-					<button type="button" class="btn btn-default" onclick="wrongPercent(); return false;">오답률 보기</button>
-						<table id="textappend" class="table" style="margin-top:30px; margin-left:20px">
+						<table id="textappend" class="table" style="margin-top:30px; margin-left:20px; width:420px">
 							<thead>
 								<tr>
-									<th>순위</th>
-									<th>문제번호</th>
-									<th>문제</th>
-									<th>오답률</th>
-									<th>출제 횟수</th>
+									<th style="text-align:center; width:60px">순위</th>
+									<th style="text-align:center; width:100px">문제번호</th>
+									<th style="text-align:center; width:100px">오답률</th><th> </th>
+									<th style="text-align:center; width:100px">출제 횟수</th><th></th>
 								</tr>
 							</thead>
 							<tbody>
 							
-									
-							<!-- <tr>
-							<td><input type="text" id="img"></td>
-							<td><input type="text" id="result_table"></td>
-							</tr>
-								<c:forEach var="item" items="${wrongPercentNo}">
-									<input type="text" id="wrongPercentNo">
-								</c:forEach>
-							<c:forEach var="i" begin="1" end="10">
-									<tr>
-										<td><c:set var="rankNum" value="0"/>
-												<c:if test="${i ne 0}">
-												 <c:set var = "sum" value="${rankNum+i}"/>${sum}
-												</c:if>
-										</td>
-										<div id="textappend">
-										
-										</div>
-										 <td>
-										</td>
-										<td>${item.emp_name}</td>
-										<td>${item.d_quiz_cfg_code_name}</td>
-										<td><input type="text" id="setCount" style="border:0px; text-align:right; width:40px"></td>
-									</tr>
-							</c:forEach>-->
+	
 							</tbody>
 						</table>
 					</div>
@@ -156,9 +125,11 @@
 		</div>
 	  
 		<%@ include file="../common/footer.jsp"%>
+		 
 		<script>
 			function search() {
 				var formDataList = $("form[name=examSelectForm]").serialize();
+				$("#textappend").remove
 				$.ajax({
 					type : "POST",
 					url : "examPercent.daou",
@@ -179,7 +150,34 @@
 					   		$("#setCount").val(data.setCount);
 					   		$("#deptAverage").val(data.deptAverage);
 					   		$("#gradeAverage").val(data.gradeAverage);
-						}
+					   		
+					   		var dataDo = google.visualization.arrayToDataTable([
+						        ['examPercent', '도달 비율', '남은 비율',{ role: 'annotation' } ],
+						        [$("#exam_degree").val()+'회차 응시율', Number($("#examPercent").val()), (100 - $("#examPercent").val()),''],
+						        [$("#exam_degree").val()+'회차 통과율', Number($("#passPercent").val()), (100 - $("#passPercent").val()),'']
+						      ]);
+					   		
+					   		
+							var viewDo = new google.visualization.DataView(dataDo);
+							viewDo.setColumns([0, 1,
+					                       { calc: "stringify",
+					                         sourceColumn: 1,
+					                         type: "string",
+					                         role: "annotation" }, 2]);
+
+							 var options = {
+							          isStacked: 'percent',
+							          width: 600,
+							          height: 300,
+							          legend: {position: 'top', maxLines: 3},
+							          hAxis: {
+							            minValue: 0,
+							            ticks: [0,.2,.4,.6,.8,1]
+							          }
+							        };
+							var chartDo = new google.visualization.BarChart(document.getElementById('barchart_DOvalues'));
+							chartDo.draw(viewDo, options);			
+							}
 					},
 					error : function(data) {
 						alert("에러 발생!");	
@@ -196,21 +194,14 @@
 					async : false,
 					success : function(data) {
 						console.log(data);
-						
 						  $.each(data,function(index,item){
 								  var cell= '';
-							
-	
 									cell += '<tr><td width="60px">'+(index+1)+'</td>';
-									cell += '<td><input type="text" class="form-control" id="item_no" name="item_no" value="'+item.item_no+'"/></td>';
-									cell += '<td><input type="text" class="form-control" id="fail_count" name="fail_count" value="'+item.fail_count+'" /></td>';
-									cell += '<td><input type="text" class="form-control" id="total_count" name="total_count" value="'+item.total_count+'"/></td>';
-									cell += '<td><input type="text" class="form-control" id="result" name="result" value="'+item.result*100+'" /></td><th>%</th></tr>';
+									cell += '<td width="100px"><input style="border:none; text-align:center" type="text" class="form-control" id="item_no" name="item_no" value="'+item.item_no+'" disable/></td>';
+									cell += '<td width="100px"><input style="border:none; text-align:right" type="text" class="form-control" id="result" name="result" value="'+item.result*100+'" disable/></td><th width="30px">%</th>';
+									cell += '<td width="100px"><input style="border:none; text-align:right" type="text" class="form-control" id="total_count" name="total_count" value="'+item.total_cnt+'" disable/></td><th>번</th></tr>';
 									 $("#textappend").append(cell);
-									 
 						  });
-					
-			                  
 					},
 					error : function(data) {
 						alert("에러 발생!");	
@@ -218,5 +209,6 @@
 				});
 			}
 		</script>
+		
 	</body>
 </html>

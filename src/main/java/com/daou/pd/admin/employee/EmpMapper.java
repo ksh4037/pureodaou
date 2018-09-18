@@ -10,7 +10,7 @@ public interface EmpMapper {
 
 	public void insertMember(EmpVO evo) throws Exception;
 
-	public int deleteMember(String emp_id);
+	public void deleteMember(String str);
 
 	public EmpVO memberView(EmpVO evo);
 	
