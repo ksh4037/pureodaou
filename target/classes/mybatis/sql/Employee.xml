@@ -19,9 +19,9 @@
 	
 	<select id="memberList" parameterType="empVO" resultType="HashMap">
 		select e.emp_id, e.emp_name, d.quiz_cfg_code_name as d_quiz_cfg_code_name
-		from employee e left join quiz_config d
+		from employee e inner join quiz_config d
 		on e.emp_dept = d.quiz_cfg_code
-		where emp_type = 2
+		where emp_type = 2 and use_yn = 'Y'
 	</select>
 		
 	<insert id="insertMember"  parameterType="empVO">
@@ -39,15 +39,17 @@
 		)
 	</insert>
 	
-	<delete id="deleteMember"  parameterType="String">
-		delete from employee
-		where emp_id = #{emp_id}
-	</delete>
+	<update id="deleteMember" parameterType="String">
+		update employee
+		set
+		use_yn = 'N'
+		where emp_id in #{str}
+	</update>
 	
 	<select id="memberViewAll" parameterType="String" resultType="HashMap">
 		select e.emp_id, e.emp_name, d.quiz_cfg_code_name as d_quiz_cfg_code_name, e.emp_tel, g.quiz_cfg_code_name as g_quiz_cfg_code_name
 		from employee e, quiz_config d, quiz_config g
-		where emp_id = #{emp_id} and (e.emp_dept = d.quiz_cfg_code and e.emp_grade = g.quiz_cfg_code)
+		where emp_id = #{emp_id} and e.emp_dept = d.quiz_cfg_code and e.emp_grade = g.quiz_cfg_code
 	</select>
 	
 	<select id="memberView" parameterType="empVO" resultType="empVO">

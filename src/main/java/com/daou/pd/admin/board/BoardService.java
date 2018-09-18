@@ -27,7 +27,5 @@ public interface BoardService {
 	
 	public List<HashMap<String,Object>> rankWrongCount(ExamVO exvo);
 
-
-	//List<List<Map<Object, Object>>> getCanvasjsChartData();
 	
 }

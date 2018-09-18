@@ -45,9 +45,9 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public int deleteMember(String emp_id) {
+	public void deleteMember(String str) {
 		empMapper = sqlSession.getMapper(EmpMapper.class);
-		return empMapper.deleteMember(emp_id);
+		empMapper.deleteMember(str);
 	}
 
 	@Override

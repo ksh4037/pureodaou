@@ -28,36 +28,33 @@ public class BoardController {
 	private BoardService boardService;
 
 	@RequestMapping(value = "/admin/boardList.daou")
-	public ModelAndView springMVC(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
-			BoardVO bvo) {
+	public ModelAndView springMVC(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BoardVO bvo) {
+		
 		ModelAndView mav = new ModelAndView("admin/board/board");
+		
 		List<BoardVO> degreeList = boardService.degreeList();
 		List<BoardVO> deptList = boardService.deptList();
 		List<BoardVO> gradeList = boardService.gradeList();
+		
 		mav.addObject("degreeList", degreeList);
 		mav.addObject("deptList", deptList);
 		mav.addObject("gradeList", gradeList);
-		// List<List<Map<Object, Object>>> canvasjsDataList =
-		// boardService.getCanvasjsChartData();
-		// mav.addObject("dataPointsList", canvasjsDataList);
+
 		return mav;
 	}
 
+	
 	@RequestMapping(value = "/admin/examPercent.daou")
 	@ResponseBody
 	public HashMap<String, Object> examPercent(HttpServletRequest request, HttpServletResponse response, ExamVO exvo) {
 		
 		String examPercent ="";
-		//float examPercent;
-		int examTargetAll = 0;
-		int examTargetDo = 0;
-		int passTarget = 0;
 		String passPercent= "";
 		
-		examTargetAll = boardService.selectTarget(exvo);
-		examTargetDo = boardService.selectTargetDo(exvo);
-		passTarget = boardService.selectPass(exvo);
 		
+		int examTargetAll = boardService.selectTarget(exvo);
+		int examTargetDo = boardService.selectTargetDo(exvo);
+		int passTarget = boardService.selectPass(exvo);
 		int deptAverage = boardService.deptAverage(exvo);
 		int gradeAverage = boardService.gradeAverage(exvo);
 
@@ -74,15 +71,10 @@ public class BoardController {
 			}else if(examTargetDo ==0) {
 				map.put("examPercent", "anybody");
 			}else {
-				
+			
 				examPercent = String.format("%.2f",((float) examTargetDo/ (float) examTargetAll)*100);
 				passPercent = String.format("%.2f",((float) passTarget/ (float) examTargetDo)*100);
 				
-				
-				System.out.println("examPercent"+examPercent);
-				System.out.println("passPercent"+passPercent);
-				//float ep = Float.parseFloat(examPercent);
-				//float pp =Float.parseFloat(passPercent);
 				map.put("examPercent", examPercent);
 				map.put("examTargetAll", Integer.toString(examTargetAll));
 				map.put("examTargetDo", Integer.toString(examTargetDo));
@@ -90,7 +82,7 @@ public class BoardController {
 				map.put("passPercent",passPercent);
 				map.put("deptAverage", Integer.toString(deptAverage));
 				map.put("gradeAverage", Integer.toString(gradeAverage));
-			//	map.put("setCount", Integer.toString(setCount));
+		
 			}
 		}
 		catch(Exception e) {
@@ -105,21 +97,7 @@ public class BoardController {
 	@ResponseBody
 	public String wrongPercent(HttpServletRequest request, HttpServletResponse response, ExamVO exvo, BoardVO boardVO) {
 		
-		//ModelAndView mav = new ModelAndView("admin/board/result");
-		
-
 		List<HashMap<String,Object>> rankWrongCount = boardService.rankWrongCount(exvo);
-		
-		System.out.println("0일때"+rankWrongCount);
-		
-		//HashMap<String, Object> map = new HashMap<String, Object>();
-		//map.put("item_no", rankWrongCount.containsAll(rankWrongCount));
-		/*rankWrongCount.get(0);
-		exvo.getItem_no();
-		exvo.getResult();
-		exvo.getTotal_count();*/
-		
-		System.out.println("0일때"+exvo.getTotal_count());
 		
 		String str = "";
 		ObjectMapper mapper = new ObjectMapper();

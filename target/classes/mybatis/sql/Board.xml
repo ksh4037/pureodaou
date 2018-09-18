@@ -22,127 +22,106 @@
 	</select>
 	
 	
+	
 	<select id="selectTarget" parameterType="examVO" resultType="int">
 		select ifnull(count(distinct que.exam_take_id) , 0)
-		from quiz_user_exam que left join employee e
+		from quiz_user_exam que inner join employee e
 		on que.exam_take_id = e.emp_id
 		where que.exam_degree = #{exam_degree}
 		<choose>
-			<when test="dept_scType.equals('all') and grade_scType.equals('all')">
-				and e.emp_dept like 'empD%' and e.emp_grade like 'empG%'
-			</when>
-			<when test="dept_scType.equals('all') and grade_scType != 'all'">
-				and e.emp_dept like 'empD%'  and e.emp_grade like #{grade_scType}
+			<when test="dept_scType !='all' and grade_scType !='all'">
+				and e.emp_dept like #{dept_scType}  and e.emp_grade like #{grade_scType}
 			</when>
 			<when test="dept_scType !='all' and grade_scType.equals('all')">
-				and e.emp_dept like #{grade_scType} and e.emp_grade like 'empG%'
+				and e.emp_dept like #{grade_scType}
 			</when>
-			<otherwise>
-				and e.emp_dept like #{dept_scType}  and e.emp_grade like #{grade_scType}
-			</otherwise>
+			<when test="dept_scType.equals('all') and grade_scType != 'all'">
+				and e.emp_grade like #{grade_scType}
+			</when>
 		</choose>
 	</select>
+	
+	
 	
 	<select id="selectTargetDo" parameterType="examVO" resultType="int">
 		select ifnull(count(distinct que.exam_take_id) , 0)
-		from quiz_user_exam que left join employee e
+		from quiz_user_exam que inner join employee e
 		on que.exam_take_id = e.emp_id
 		where que.exam_degree = #{exam_degree} and que.exam_status = ('status03' or 'status04' or'status05') and que.exam_retake_degree = 0
 		<choose>
-			<when test="dept_scType.equals('all') and grade_scType.equals('all')">
-				and e.emp_dept like 'empD%' and e.emp_grade like 'empG%'
-			</when>
-			<when test="dept_scType.equals('all') and grade_scType != 'all'">
-				and e.emp_dept like 'empD%'  and e.emp_grade like #{grade_scType}
+			<when test="dept_scType !='all' and grade_scType !='all'">
+				and e.emp_dept like #{dept_scType}  and e.emp_grade like #{grade_scType}
 			</when>
 			<when test="dept_scType !='all' and grade_scType.equals('all')">
-				and e.emp_dept like #{grade_scType} and e.emp_grade like 'empG%'
+				and e.emp_dept like #{grade_scType}
 			</when>
-			<otherwise>
-				and e.emp_dept like #{dept_scType}  and e.emp_grade like #{grade_scType}
-			</otherwise>
+			<when test="dept_scType.equals('all') and grade_scType != 'all'">
+				and e.emp_grade like #{grade_scType}
+			</when>
 		</choose>
 	</select>
+	
+	
 	
 	<select id="selectPass" parameterType="examVO" resultType="int">
 		select ifnull(count(distinct que.exam_take_id) , 0)
-		from quiz_user_exam que left join employee e
+		from quiz_user_exam que inner join employee e
 		on que.exam_take_id = e.emp_id
 		where que.exam_degree = #{exam_degree} and que.exam_status = 'status04'
 		<choose>
-			<when test="dept_scType.equals('all') and grade_scType.equals('all')">
-				and e.emp_dept like 'empD%' and e.emp_grade like 'empG%'
-			</when>
-			<when test="dept_scType.equals('all') and grade_scType != 'all'">
-				and e.emp_dept like 'empD%'  and e.emp_grade like #{grade_scType}
+			<when test="dept_scType !='all' and grade_scType !='all'">
+				and e.emp_dept like #{dept_scType}  and e.emp_grade like #{grade_scType}
 			</when>
 			<when test="dept_scType !='all' and grade_scType.equals('all')">
-				and e.emp_dept like #{grade_scType} and e.emp_grade like 'empG%'
+				and e.emp_dept like #{grade_scType}
 			</when>
-			<otherwise>
-				and e.emp_dept like #{dept_scType}  and e.emp_grade like #{grade_scType}
-			</otherwise>
+			<when test="dept_scType.equals('all') and grade_scType != 'all'">
+				and e.emp_grade like #{grade_scType}
+			</when>
 		</choose>
 	</select>
+	
+	
+	
 	
 	<select id="deptAverage" parameterType="examVO" resultType="int">
 		select ifnull(avg(que.exam_score), 0)
-		from quiz_user_exam que left join employee e
+		from quiz_user_exam que inner join employee e
 		on que.exam_take_id = e.emp_id
 		where que.exam_status = 'status04'
 		<choose>
-			<when test="dept_scType.equals('all')">
-				and e.emp_dept like 'empD%'
-			</when>
-			<otherwise>
+			<when test="dept_scType != 'all'">
 				and e.emp_dept like #{dept_scType}
-			</otherwise>
+			</when>
 		</choose>
 	</select>
+	
+	
+	
 	
 	<select id="gradeAverage" parameterType="examVO" resultType="int">
 		select ifnull(avg(que.exam_score), 0)
-		from quiz_user_exam que left join employee e
+		from quiz_user_exam que inner join employee e
 		on que.exam_take_id = e.emp_id
 		where que.exam_status = 'status04'
 		<choose>
-			<when test="grade_scType.equals('all')">
-				and e.emp_grade like 'empG%'
-			</when>
-			<otherwise>
+			<when test="grade_scType != 'all'">
 				and e.emp_grade like #{grade_scType}
-			</otherwise>
+			</when>
 		</choose>
 	</select>
 	
 	
-	<select id="selectSetCount" parameterType="examVO" resultType="examVO" >
-		select item_no, count(item_no)
-		from quiz_exam_detail qed left join quiz_user_exam que
-        on qed.exam_no = que.exam_no
-        where que.exam_degree = #{exam_degree}
-        group by item_no
-	</select>
 	
 
 	<select id="rankWrongCount" parameterType="examVO" resultType="boardVO">
-		select a.item_no, a.fail_count, b.total_count, (a.fail_count/b.total_count) as result
-        from
-			 (select qed.item_no,count(qed.item_no) as fail_count
-				from quiz_exam_detail qed inner join quiz_user_exam que
-				on qed.exam_no = que.exam_no
-				where que.exam_degree = 2 and qed.correct_yn = 'N'
-				group by qed.item_no ) a left outer join 
-        
-			(select qed.item_no,count(qed.item_no) as total_count
-				from quiz_exam_detail qed inner join quiz_user_exam que
-				on qed.exam_no = que.exam_no
-				where que.exam_degree = 2
-				group by qed.item_no ) b 
-                
-			on a.item_no = b.item_no
-            order by result desc
-            limit 10
+		select c.item_no, c.total_cnt, c.fail_cnt, (c.fail_cnt/c.total_cnt) as result
+		from (SELECT a.item_no, COUNT(*) as total_cnt, SUM(CASE WHEN a.correct_yn ='N' then 1 ELSE 0 END) as fail_cnt
+				FROM quiz_exam_detail a, quiz_user_exam b 
+				WHERE a.exam_no = b.exam_no AND b.exam_degree = #{exam_degree}
+				GROUP BY a.item_no ) c
+		order by result desc
+		LIMIT 10
 	</select>
 	
 	

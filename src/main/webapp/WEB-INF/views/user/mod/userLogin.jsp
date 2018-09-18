@@ -47,10 +47,18 @@
 			});
 		}
 	}
+	function goAdmin(){
+		location.href="admin/login.daou";
+	}
+	
+	
 </script>
 
 </head>
 <body style="background-color: #114a9b">
+	<div style="margin-top:10px; float:right">
+	<a href="#" onclick="goAdmin()">관리자 로그인</a>
+	</div>
 	<div class="container">
 		<img src="./resources/img/logo2.png" width="325px"
 			style="padding-top:  20px;" />
