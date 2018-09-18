@@ -50,11 +50,7 @@ public class ExamController {
 	public ModelAndView examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
 			@RequestParam("obj_num") String obj, @RequestParam("short_num") String short_n,
 			@RequestParam("category") String category, HttpServletRequest req, @RequestParam("examNo") String examNo,
-			@RequestParam("categoryName") String categoryName, @RequestParam("exam_status") String exam_status) {// 시험
-																													// 여부
-																													// 검사,
-																													// 시험
-																													// 가져오기
+			@RequestParam("categoryName") String categoryName, @RequestParam("exam_status") String exam_status) {//시험여부 검사, 가져오기
 		int degree = Integer.parseInt(str);
 		int ox_num = Integer.parseInt(ox);
 		int obj_num = Integer.parseInt(obj);
@@ -161,10 +157,10 @@ public class ExamController {
 		ModelAndView mav = new ModelAndView("user/exam/markResult");
 		String id = getSessionId(req);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("answerList", list);
+		map.put("alist", list);
 		map.put("id", id);
 
-		examService.markAnswer(map);
+		examService.markAnswer(list);
 		mav.addObject("result", "success");
 
 		map = new HashMap<String, Object>();
@@ -183,8 +179,8 @@ public class ExamController {
 	}
 
 	private void grading(int exam_no) {
-		List<MarkVO> mlist = examService.getAnswerSheet(exam_no);
-		for (MarkVO m : mlist) {
+		List<MarkVO> list = examService.getAnswerSheet(exam_no);
+		for (MarkVO m : list) {
 			if (!m.getItem_type().equals("3")) {
 				if (m.getExam_detail_correct().equals(m.getExam_detail_answer()))
 					m.setCorrect_yn("Y");
@@ -192,7 +188,7 @@ public class ExamController {
 					m.setCorrect_yn("N");
 			}
 		}
-		examService.grading(mlist);
+		examService.grading(list);
 	}
 
 	private String getSessionId(HttpServletRequest req) {

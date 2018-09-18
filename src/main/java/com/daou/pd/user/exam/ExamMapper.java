@@ -35,11 +35,11 @@ public interface ExamMapper {
 
 	int getTime(int exam_no);
 
-	int markAnswer(MarkVO m);
+	int markAnswer(List<MarkVO> list);
 
 	void changeStatus(HashMap<String, Object> map);
 
-	void grading(MarkVO m);
+	void grading(List<MarkVO> mlist);
 
 	List<MarkVO> getAnswerSheet(int exam_no);
 
