@@ -39,7 +39,7 @@ public interface ExamService {
 	List<ExamListVO> getRecordList(String id);
 
 	List<ItemVO> getTestNote(int exam_no);
-	
-	List<String> getWrongNoteOptions(HashMap<String, String> map);
+
+	List<String> getMark(MarkVO mark);
 
 }

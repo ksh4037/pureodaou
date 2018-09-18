@@ -52,7 +52,7 @@
 							</c:otherwise>
 							</c:choose></td>
 						<td>${r.category_name }</td>
-						<td>${r.exam_score }</td>
+						<td>${r.exam_score } 점</td>
 						<c:choose>
 							<c:when test="${r.exam_status == 'status04'}">
 								<td style="color: red;">불합격</td>

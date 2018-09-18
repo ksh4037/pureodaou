@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.daou.pd.admin.item.ItemVO;
@@ -51,7 +50,11 @@ public class ExamController {
 	public ModelAndView examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
 			@RequestParam("obj_num") String obj, @RequestParam("short_num") String short_n,
 			@RequestParam("category") String category, HttpServletRequest req, @RequestParam("examNo") String examNo,
-			@RequestParam("categoryName") String categoryName, @RequestParam("exam_status") String exam_status) {
+			@RequestParam("categoryName") String categoryName, @RequestParam("exam_status") String exam_status) {// 시험
+																													// 여부
+																													// 검사,
+																													// 시험
+																													// 가져오기
 		int degree = Integer.parseInt(str);
 		int ox_num = Integer.parseInt(ox);
 		int obj_num = Integer.parseInt(obj);
@@ -78,7 +81,7 @@ public class ExamController {
 			item.setOvo(olist);
 			map.remove("item_no");
 		}
-		
+
 		System.out.println(exam_status);
 
 		if (exam_status.equals("status02")) {
@@ -94,7 +97,7 @@ public class ExamController {
 		return mav;
 	}
 
-	private void makeExam(int ox_num, int obj_num, int short_num, int exam_category, int exam_no) {
+	private void makeExam(int ox_num, int obj_num, int short_num, int exam_category, int exam_no) {// 시험문제 랜덤 셀렉트
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("ox_num", ox_num);
 		map.put("obj_num", obj_num);
@@ -153,7 +156,6 @@ public class ExamController {
 	}
 
 	@RequestMapping(value = "/user/exam/regist.daou")
-	@ResponseBody
 	public ModelAndView regist(HttpServletRequest req, @RequestBody List<MarkVO> list,
 			@RequestParam("type") String type) {
 		ModelAndView mav = new ModelAndView("user/exam/markResult");
@@ -198,26 +200,36 @@ public class ExamController {
 		String id = (String) session.getAttribute("emp_id");
 		return id;
 	}
-	
-	
-	@RequestMapping(value="/user/exam/recordList.daou")
+
+	@RequestMapping(value = "/user/exam/recordList.daou")
 	public ModelAndView getResultList(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("user/exam/recordList");
 		String id = getSessionId(req);
-		List<ExamListVO> list =  examService.getRecordList(id);
-		mav.addObject("id",id);
+		List<ExamListVO> list = examService.getRecordList(id);
+		mav.addObject("id", id);
 		mav.addObject("rList", list);
 		return mav;
 	}
-	
-	@RequestMapping(value="/user/exam/wrongAnswerNote.daou")
-	public ModelAndView WrongAnswerNote(@RequestParam("examNo")String examNo) {
+
+	@RequestMapping(value = "/user/exam/wrongAnswerNote.daou")
+	public ModelAndView WrongAnswerNote(@RequestParam("examNo") String examNo) {
 		ModelAndView mav = new ModelAndView("user/exam/wrongAnswerNote");
 		List<MarkVO> mlist = examService.getAnswerSheet(Integer.parseInt(examNo));
+		for (MarkVO mark : mlist) {
+			if ("2".equals(mark.getItem_type())) {
+				List<String> strlist = examService.getMark(mark);
+				if (strlist.size() > 1) {
+					mark.setExam_detail_answer(strlist.get(0));
+					mark.setExam_detail_correct(strlist.get(1));
+				} else {
+					mark.setExam_detail_answer(strlist.get(0));
+					mark.setExam_detail_correct(strlist.get(0));
+				}
+			}
+		}
 		List<ItemVO> ilist = examService.getTestNote(Integer.parseInt(examNo));
-		
-		mav.addObject("mlist",mlist);
-		mav.addObject("ilist",ilist);
+		mav.addObject("mlist", mlist);
+		mav.addObject("ilist", ilist);
 		return mav;
 	}
 }
