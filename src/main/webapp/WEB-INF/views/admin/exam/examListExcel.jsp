@@ -51,9 +51,9 @@ response.setHeader("Content-Disposition", "inline; filename=examListExcel.xls");
 											</td>
 											<td><c:out value="${examList.exam_start_date}" escapeXml="false"/></td>
 											<td><c:out value="${examList.exam_end_date}" escapeXml="false"/></td>
-											<td><c:out value="${examList.exam_ox_num}" escapeXml="false"/>개</td>	
-											<td><c:out value="${examList.exam_obj_num}" escapeXml="false"/>개</td>
+											<td><c:out value="${examList.exam_obj_num}" escapeXml="false"/>개</td>	
 											<td><c:out value="${examList.exam_short_num}" escapeXml="false"/>개</td>
+											<td><c:out value="${examList.exam_ox_num}" escapeXml="false"/>개</td>
 											<td><c:out value="${examList.exam_pass_score}" escapeXml="false"/>점</td>
 										</tr>
 									</tbody>

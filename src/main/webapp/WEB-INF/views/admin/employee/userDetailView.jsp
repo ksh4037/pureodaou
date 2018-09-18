@@ -5,48 +5,26 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
+	<%@ include file="../common/import.jsp"%>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../resources/js/admin.js"></script>
-
-<link href="../resources/css/admin.css" rel="stylesheet" type="text/css">
-
-<script type="text/javascript">
-
-	function goUpdtForm(emp_id) {
-		$("#emp_id").val(emp_id);
-		document.user_list.submit();
-	}
-
-	function goBackUser() {
-		location.href = "employeeList.daou";
-	}
-</script>
-<style>
-.table {
-	width: 90%;
-	padding: 30px;
-	margin-left: 30px;
-	margin-bottom: 30px;
-}
-
-.btn {
-	margin-right: 10px;
-}
-
-.btn_area {
-	float: right;
-	margin-top: 10px;
-	margin-right: 10%;
-}
-</style>
+	<style>
+		.table {
+			width: 90%;
+			padding: 30px;
+			margin-left: 30px;
+			margin-bottom: 30px;
+		}
+		
+		.btn {
+			margin-right: 10px;
+		}
+		
+		.btn_area {
+			float: right;
+			margin-top: 10px;
+			margin-right: 10%;
+		}
+	</style>
 </head>
 <body>
 	<div class="container-fluid">
@@ -96,5 +74,18 @@
 			</div>
 		</div>
 				<%@ include file="../common/footer.jsp"%>
+					
+	<script type="text/javascript">
+	
+		function goUpdtForm(emp_id) {
+			$("#emp_id").val(emp_id);
+			document.user_list.submit();
+		}
+	
+		function goBackUser() {
+			location.href = "employeeList.daou";
+		}
+	</script>
+				
 </body>
 </html>
