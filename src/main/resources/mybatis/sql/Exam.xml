@@ -138,10 +138,19 @@
 		WHERE exam_no = #{exam_no}
 	</select>
 	
-	<update id="markAnswer" parameterType="markVO">
+	<!-- <update id="markAnswer" parameterType="markVO">
 		UPDATE quiz_exam_detail
 		SET exam_detail_answer = #{exam_detail_answer}
 		WHERE exam_no = #{exam_no} and item_no = #{item_no}
+	</update> -->
+	
+	<update id="markAnswer" parameterType="java.util.List">
+		<foreach collection="list" item="a" separator=";">
+			UPDATE quiz_exam_detail
+			SET exam_detail_answer = #{a.exam_detail_answer}
+			WHERE exam_no = #{a.exam_no} and item_no = #{a.item_no}
+		</foreach>
+		;
 	</update>
 	
 	<update id="changeStatus" parameterType="hashmap">
@@ -157,9 +166,12 @@
 	</update>
 	
 	<update id="grading">
-		UPDATE quiz_exam_detail
-		SET correct_yn = #{correct_yn}
-		WHERE item_no = #{item_no} and exam_no = #{exam_no}
+		<foreach collection="list" item="m" separator=";">
+			UPDATE quiz_exam_detail
+			SET correct_yn = #{m.correct_yn}
+			WHERE item_no = #{m.item_no} and exam_no = #{m.exam_no}
+		</foreach>
+		;
 	</update>
 	
 	<select id="getAnswerSheet" parameterType="Integer" resultType="markVO">

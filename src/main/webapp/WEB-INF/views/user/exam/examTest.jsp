@@ -129,7 +129,7 @@ input[type=radio] {
 						alert('제출 성공했습니다');
 					else if(type==2)
 						alert('임시저장 성공');
-					location.href="${pageContext.request.contextPath}/"
+					location.href="${pageContext.request.contextPath}/userMain.daou";
 				}else if(data=='fail'){
 					alert('제출에 실패샜습니다');
 				}else{
