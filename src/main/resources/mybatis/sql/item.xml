@@ -8,11 +8,6 @@
 		select item_no, item_title, item_contents, item_type, use_yn, reg_id, reg_date, upt_id, upt_date, category_no
 		from quiz_item
 		where use_yn = 'Y'
-		<if test="scType != null and scType != ''">
-			<if test="scType.equals('question')">
-				and item_title LIKE CONCAT('%',#{srch_input},'%')
-			</if>
-		</if>
 	</select>
 
 	<select id="itemDetail" resultType="itemVO">

@@ -20,6 +20,7 @@ response.setHeader("Content-Disposition", "inline; filename=examListExcel.xls");
 									<th>회차</th>
 									<th>응시자</th>
 									<th>점수</th>
+									<th>합격기준점수</th>
 									<th>재시험회차</th>
 									<th>응시일</th>
 									<th>최종결과</th>
@@ -30,7 +31,7 @@ response.setHeader("Content-Disposition", "inline; filename=examListExcel.xls");
 							<c:if test="${empty recordList}">
 								<tbody>
 									<tr>
-										<td colspan="7" align="center">등록된 기록 정보가 없습니다.</td>
+										<td colspan="8" align="center">등록된 기록 정보가 없습니다.</td>
 									</tr>
 								</tbody>
 							</c:if>
@@ -41,10 +42,22 @@ response.setHeader("Content-Disposition", "inline; filename=examListExcel.xls");
 										<tr>
 											<td class="r_td_style">${recordList.exam_degree}회차</td>
 											<td class="r_td_style">${recordList.emp_name}</td>
+											
 											<td class="r_td_style">
 												<c:if test="${empty recordList.exam_score}">-</c:if>
 												<c:if test="${!empty recordList.exam_score}">${recordList.exam_score}점</c:if>
 											</td>
+											
+											<td class="r_td_style">
+												<c:if test="${empty examInfoList}">-</c:if>
+												
+												<c:if test="${!empty examInfoList}">
+													<c:forEach items="${examInfoList}" var="examInfoList" varStatus="status">
+														<c:if test="${recordList.exam_degree == examInfoList.exam_degree}">${examInfoList.exam_pass_score}점</c:if>
+													</c:forEach>
+												</c:if>
+											</td>  
+											
 											
 											<td class="r_td_style">${recordList.exam_retake_degree}회</td>
 											<td class="r_td_style">${fn:substring(recordList.exam_take_date,0,10)}</td>
@@ -58,10 +71,9 @@ response.setHeader("Content-Disposition", "inline; filename=examListExcel.xls");
 											</td>
 											
 											<td class="r_td_style">
-												<div align="center"> 
-																	
+												<div align="center"> 	
 													<c:if test="${recordList.exam_status == 'status03'}">
-														<input type="button" value="채점하기" onclick="goGrade('${recordList.exam_degree}','${recordList.exam_take_id}');" class="btn btn-primary"/>
+														<span style="color:red;">채점대기</span>
 													</c:if>
 													<c:if test="${recordList.exam_status == 'status04' || recordList.exam_status == 'status05'}">
 														<span style="color:red;">완료</span>
