@@ -4,3 +4,6 @@
 *.bak
 
 *.c
+
+pom.properties
+pom.xml

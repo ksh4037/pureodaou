@@ -157,18 +157,19 @@ input[type=radio] {
 
 	$(function(){
 		start_timer();
-		$('input[type=hidden]').each(function(i) {
+		
+		/* $('input[type=hidden]').each(function(i) {//임시저장 답 마킹
 			console.log(i);
 		});
+		 */
 		
-		
-		$('input[type=radio]').change(function() {
+		/* $('input[type=radio]').change(function() {
 			var cnt = 0;
 			$('input[type=radio]:checked').each(function(){
 				cnt++;
 			});
 			$('.mark').html(cnt);
-		});
+		}); */
 		
 		$('.item_contents').each(function(){
 			if($(this).html().trim()==''){
@@ -264,12 +265,12 @@ input[type=radio] {
 						</c:when>
 					</c:choose>
 				</c:forEach>
-				<c:if test="${!empty mark }">
+				<%-- <c:if test="${!empty mark }">
 					<c:forEach items="${mark}" var="m" varStatus="status">
 						<input type="hidden" id="${status.count }"
 							value="${m.exam_detail_answer }">
 					</c:forEach>
-				</c:if>
+				</c:if> --%>
 			</div>
 		</form>
 	</div>
