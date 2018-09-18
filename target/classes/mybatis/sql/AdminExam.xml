@@ -58,11 +58,11 @@
 		on q.exam_take_id = e.emp_id
 		and e.use_yn = 'Y'
 		
-		<if test="degree_scType != null and degree_scType != ''">
+		<if test="degree_scType != null and degree_scType != '' and degree_scType != 'all'">
 			and q.exam_degree = #{degree_scType}
 		</if>
 		
-		<if test="status_scType != null and status_scType != ''">
+		<if test="status_scType != null and status_scType != '' and status_scType != 'all'">
 			and q.exam_status = #{status_scType}
 		</if>
 		

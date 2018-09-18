@@ -14,6 +14,21 @@ response.setHeader("Content-Disposition", "inline; filename=examListExcel.xls");
 
 			<html lang="ko">
    				<body>
+   					<table>
+   						<thead>
+							<tr>
+								<th colspan="8">
+									[검색조건] -> 회차별 : ${degree_scType}회, 
+									<c:if test="${status_scType == 'status01'}">최종상태별 : 미응시</c:if>
+									<c:if test="${status_scType == 'status02'}">최종상태별 : 임시저장</c:if>
+									<c:if test="${status_scType == 'status03'}">최종상태별 : 채점중</c:if>
+									<c:if test="${status_scType == 'status04'}">최종상태별 : 채점완료(합격)</c:if>
+									<c:if test="${status_scType == 'status05'}">최종상태별 : 채점완료(불합격)</c:if>
+								</th>
+							</tr>
+						</thead>
+					</table>
+							
      				<table>
 							<thead>
 								<tr>

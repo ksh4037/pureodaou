@@ -20,6 +20,8 @@
 				<div class="container">	
 					<h2><span class="span-font">기록리스트</span></h2>
 					<p><span class="span-font">풀어다우 서비스의 기록정보입니다.</span></p>
+					
+					
 				 	<form name="searchForm" id="searchForm" method="post">
 						<table class="table" style="margin-bottom:70px; text-align:center">
 							<tr>
@@ -30,7 +32,7 @@
 								<th scope="row">회차별 : </th>
 								<td>
 									<select id="degree_scType" name="degree_scType" class="form-control">
-										<option value="">전체</option>
+										<option value="all">전체</option>
 										<c:forEach var="item" items="${examInfoList}">
 											<option value="${item.exam_degree}" <c:if test="${item.exam_degree == degree_scType}">selected</c:if>>${item.exam_degree}회</option>
 										</c:forEach>
@@ -39,7 +41,7 @@
 								<th scope="row">최종상태별: </th>
 								<td>
 									<select id="status_scType" name="status_scType" class="form-control" style="width:70%">
-										<option value="">전체</option>
+										<option value="all">전체</option>
 										<c:forEach var="item" items="${statusCodeList}">
 											<option value="${item.quiz_cfg_code}" <c:if test="${item.quiz_cfg_code == status_scType}">selected</c:if>>${item.quiz_cfg_code_name}</option>
 										</c:forEach>
@@ -142,7 +144,8 @@
 	
 	<script type="text/javascript">
 		function getExcel(){
-		    location.href="recordListExcel.daou";
+		    $("#searchForm").attr("action", "recordListExcel.daou");
+			$("#searchForm").submit();
 		}
 		
 		function goGrade(exam_degree, exam_take_id, exam_retake_degree){

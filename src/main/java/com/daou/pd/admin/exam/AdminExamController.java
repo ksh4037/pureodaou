@@ -134,8 +134,8 @@ public class AdminExamController {
 		mav.addObject("examInfoList", examInfoList);
 		
 		//검색조건
-		mav.addObject("degree_scType",searchData.get("degree_scType"));
-		mav.addObject("status_scType",searchData.get("status_scType"));
+		mav.addObject("degree_scType", request.getParameter("degree_scType"));
+		mav.addObject("status_scType", request.getParameter("status_scType"));
 		return mav;
 	}
 	
@@ -237,15 +237,25 @@ public class AdminExamController {
 	@RequestMapping(value = "admin/recordListExcel.daou")
 	public ModelAndView recordListExcel(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("admin/exam/recordListExcel");
+
+		//기록리스트 검색조건
+		HashMap<String, Object> searchData = new HashMap<String, Object>();
 		
-	//	List<HashMap<String, Object>> recordList = adminExamService.recordList();
+	
+		searchData.put("degree_scType", request.getParameter("degree_scType"));
+		searchData.put("status_scType", request.getParameter("status_scType"));
+		
+		List<HashMap<String, Object>> recordList = adminExamService.recordList(searchData);
 		List<ConfigVO> statusCodeList = adminExamService.statusCodeList();
 		List<ExamVO> examInfoList = adminExamService.examInfoList();
 		
-//		mav.addObject("recordList", recordList);
+		mav.addObject("recordList", recordList);
 		mav.addObject("statusCodeList", statusCodeList);
 		mav.addObject("examInfoList", examInfoList);
 		
+		//검색조건
+		mav.addObject("degree_scType",searchData.get("degree_scType"));
+		mav.addObject("status_scType",searchData.get("status_scType"));
 		return mav;
 	}
 	
