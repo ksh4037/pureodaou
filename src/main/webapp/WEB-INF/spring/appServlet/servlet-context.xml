@@ -20,8 +20,26 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+
+	
+	<!-- interceptor -->
+	<beans:bean id="LoginInterceptor" class="com.daou.pd.admin.employee.LoginInterceptor">
+    </beans:bean>
+    <!-- Interceptor 설정 -->
+
+    <interceptors>
+        <interceptor>
+            <mapping path="/admin/**"/>
+            <mapping path="/user/**"/>
+            <mapping path="user/exam/examlist.daou"/>
+            <mapping path="goUserLogin.daou"/>
+            <mapping path="userMain.daou"/>
+            <mapping path="userUpdtForm.daou"/>
+            <mapping path="userUpdt.daou"/>
+            <beans:ref bean="LoginInterceptor"/>
+        </interceptor>
+    </interceptors>
 	<context:component-scan base-package="com.daou.pd" />
-	
-	
+
 	
 </beans:beans>

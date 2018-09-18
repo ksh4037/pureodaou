@@ -17,8 +17,6 @@ public class BoardServiceImpl implements BoardService {
 	private SqlSession sqlSession;
 	private BoardMapper boardMapper;
 	
-	/*@Autowired
-	private BoardDAO boardDAO;*/
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
@@ -85,13 +83,5 @@ public class BoardServiceImpl implements BoardService {
 			return boardMapper.rankWrongCount(exvo);
 		}
 	
-	/*public void setBoardDAO(BoardDAO boardDAO) {
-		this.boardDAO = boardDAO;
-	}
- 
-	@Override
-	public List<List<Map<Object, Object>>> getCanvasjsChartData() {
-		return boardDAO.getCanvasjsChartData();
-	}*/
 
 }

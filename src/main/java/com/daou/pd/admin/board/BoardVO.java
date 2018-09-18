@@ -3,21 +3,25 @@ package com.daou.pd.admin.board;
 
 public class BoardVO {
 	private int item_no;
-	private int fail_count;
-	private int total_count;
+	private int fail_cnt;
+	private int total_cnt;
 	private float result;
 	
 	
-	public BoardVO(int item_no, int fail_count, int total_count, float result) {
+	
+	public BoardVO(int item_no, int fail_cnt, int total_cnt, float result) {
 		super();
 		this.item_no = item_no;
-		this.fail_count = fail_count;
-		this.total_count = total_count;
+		this.fail_cnt = fail_cnt;
+		this.total_cnt = total_cnt;
 		this.result = result;
 	}
 	
 	public BoardVO() {
 	}
+
+	
+
 
 	public int getItem_no() {
 		return item_no;
@@ -27,20 +31,21 @@ public class BoardVO {
 		this.item_no = item_no;
 	}
 
-	public int getFail_count() {
-		return fail_count;
+
+	public int getFail_cnt() {
+		return fail_cnt;
 	}
 
-	public void setFail_count(int fail_count) {
-		this.fail_count = fail_count;
+	public void setFail_cnt(int fail_cnt) {
+		this.fail_cnt = fail_cnt;
 	}
 
-	public int getTotal_count() {
-		return total_count;
+	public int getTotal_cnt() {
+		return total_cnt;
 	}
 
-	public void setTotal_count(int total_count) {
-		this.total_count = total_count;
+	public void setTotal_cnt(int total_cnt) {
+		this.total_cnt = total_cnt;
 	}
 
 	public float getResult() {
