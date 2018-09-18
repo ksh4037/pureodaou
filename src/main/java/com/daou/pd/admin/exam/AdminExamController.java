@@ -23,6 +23,7 @@ import com.daou.pd.user.exam.ExamDetailVO;
 import com.daou.pd.user.exam.ExamUserVO;
 import com.daou.pd.user.exam.ExamVO;
 
+
 @Controller
 public class AdminExamController {
 	@Autowired
@@ -118,12 +119,25 @@ public class AdminExamController {
 	public ModelAndView recordList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("admin/exam/recordList");
 		
-		List<HashMap<String, Object>> recordList = adminExamService.recordList();
+		//기록리스트 검색조건
+		HashMap<String, Object> searchData = new HashMap<String, Object>();
+		
+	
+		searchData.put("degree_scType", request.getParameter("degree_scType"));
+		searchData.put("status_scType", request.getParameter("status_scType"));
+		
+		
+		List<HashMap<String, Object>> recordList = adminExamService.recordList(searchData);
 		List<ConfigVO> statusCodeList = adminExamService.statusCodeList();
+		List<ExamVO> examInfoList = adminExamService.examInfoList();
 		
 		mav.addObject("recordList", recordList);
 		mav.addObject("statusCodeList", statusCodeList);
+		mav.addObject("examInfoList", examInfoList);
 		
+		//검색조건
+		mav.addObject("degree_scType", searchData.get("degree_scType"));
+		mav.addObject("status_scType", searchData.get("status_scType"));
 		return mav;
 	}
 	
@@ -190,7 +204,7 @@ public class AdminExamController {
 			    
 			    
 			 
-			    // exam_score가 quiz_user_exam테이블의 exam_pass_score보다 적으면 상택값을 status04 or status05로 하고, exam_final_yn의 값을 N으로 한다.
+			    // exam_score가 quiz_user_exam테이블의 exam_pass_score보다 적으면 상태값을 status04 or status05로 하고, exam_final_yn의 값을 N으로 한다.
 			    selectPassScore = adminExamService.selectPassScore(evo);
 			    
 			    if(exam_score >= selectPassScore) {
@@ -225,13 +239,25 @@ public class AdminExamController {
 	@RequestMapping(value = "admin/recordListExcel.daou")
 	public ModelAndView recordListExcel(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("admin/exam/recordListExcel");
+
+		//기록리스트 검색조건
+		HashMap<String, Object> searchData = new HashMap<String, Object>();
 		
-		List<HashMap<String, Object>> recordList = adminExamService.recordList();
+	
+		searchData.put("degree_scType", request.getParameter("degree_scType"));
+		searchData.put("status_scType", request.getParameter("status_scType"));
+		
+		List<HashMap<String, Object>> recordList = adminExamService.recordList(searchData);
 		List<ConfigVO> statusCodeList = adminExamService.statusCodeList();
+		List<ExamVO> examInfoList = adminExamService.examInfoList();
 		
 		mav.addObject("recordList", recordList);
 		mav.addObject("statusCodeList", statusCodeList);
+		mav.addObject("examInfoList", examInfoList);
 		
+		//검색조건
+		mav.addObject("degree_scType",searchData.get("degree_scType"));
+		mav.addObject("status_scType",searchData.get("status_scType"));
 		return mav;
 	}
 	

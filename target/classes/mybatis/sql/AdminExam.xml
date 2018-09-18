@@ -49,14 +49,26 @@
 		from quiz_exam
 	</select>
 	
-	<select id="recordList" resultType="hashmap">
+
+	
+	<select id="recordList" parameterType="hashmap" resultType="hashmap">
 		select q.exam_no, q.exam_degree, q.exam_take_id, q.exam_take_date, q.exam_retake_degree, q.exam_status,
 			   q.exam_final_yn, q.exam_score, e.emp_name
-		from quiz_user_exam q left outer join employee e
+		from quiz_user_exam q inner join employee e
 		on q.exam_take_id = e.emp_id
 		and e.use_yn = 'Y'
+		
+		<if test="degree_scType != null and degree_scType != ''">
+			and q.exam_degree = #{degree_scType}
+		</if>
+		
+		<if test="status_scType != null and status_scType != ''">
+			and q.exam_status = #{status_scType}
+		</if>
+
 		order by q.exam_degree desc, q.exam_take_id desc
 	</select>
+
 	
 	<select id="statusCodeList" resultType="configVO">
 		select quiz_cfg_code, quiz_cfg_code_name
@@ -76,6 +88,7 @@
 		where i.item_type = '3' <!-- // item_type == 3 (주관식(short)) -->
 		and a.exam_take_id = #{exam_take_id}
 		and a.exam_degree = #{exam_degree}
+		and a.exam_retake_degree = #{exam_retake_degree}
 	</select>
 	
 	
@@ -121,5 +134,10 @@
 			#{exam_retake_degree}
 		)
 	</insert>
+	
+	<select id="examInfoList" resultType="examVO">
+		select exam_degree, exam_pass_score
+		from quiz_exam
+	</select>
 	
 </mapper>	 

@@ -67,9 +67,9 @@
 											</td>
 											<td>${examList.exam_start_date}</td>
 											<td>${examList.exam_end_date}</td>
-											<td>${examList.exam_ox_num}개</td>	
-											<td>${examList.exam_obj_num}개</td>
+											<td>${examList.exam_obj_num}개</td>	
 											<td>${examList.exam_short_num}개</td>
+											<td>${examList.exam_ox_num}개</td>
 											<td>${examList.exam_pass_score}점</td>
 										</tr>
 									</tbody>

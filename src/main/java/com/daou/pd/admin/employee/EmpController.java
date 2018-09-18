@@ -229,7 +229,6 @@ public class EmpController {
 			mav.addObject("resultCode", "error");
 		}
 		return mav;
-
 	}
 
 }

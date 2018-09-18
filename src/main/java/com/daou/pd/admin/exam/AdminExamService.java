@@ -20,7 +20,7 @@ public interface AdminExamService {
 	
 	public List<ExamVO> examList();
 	
-	public List<HashMap<String, Object>> recordList();
+	public List<HashMap<String, Object>> recordList(HashMap<String, Object> searchData);
 	
 	public List<ConfigVO> statusCodeList();
 	
@@ -37,5 +37,8 @@ public interface AdminExamService {
 	public int finalExamUpdate(ExamUserVO evo);
 	
 	public int insertFailUser(ExamUserVO evo);
+	
+	public List<ExamVO> examInfoList();
+
 
 }

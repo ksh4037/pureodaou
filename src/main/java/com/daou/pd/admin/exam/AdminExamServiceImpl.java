@@ -54,9 +54,9 @@ public class AdminExamServiceImpl implements AdminExamService {
 	
 	
 	@Override
-	public List<HashMap<String, Object>> recordList() {
+	public List<HashMap<String, Object>> recordList(HashMap<String, Object> searchData) {
 		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.recordList();
+		return examMapper.recordList(searchData);
 	}
 	
 	
@@ -106,6 +106,12 @@ public class AdminExamServiceImpl implements AdminExamService {
 	public int insertFailUser(ExamUserVO evo) {
 		examMapper = sqlSession.getMapper(AdminExamMapper.class);
 		return examMapper.insertFailUser(evo);
+	}
+	
+	@Override
+	public  List<ExamVO> examInfoList() {
+		examMapper = sqlSession.getMapper(AdminExamMapper.class);
+		return examMapper.examInfoList();
 	}
 	
 }

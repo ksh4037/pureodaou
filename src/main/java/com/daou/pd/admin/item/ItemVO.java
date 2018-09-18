@@ -29,7 +29,7 @@ public class ItemVO {
 	private String scType;
 	private String srch_input;
 
-
+	
 	
 	
 
