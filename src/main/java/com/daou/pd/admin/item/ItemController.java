@@ -1,7 +1,9 @@
 package com.daou.pd.admin.item;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -131,24 +133,44 @@ public class ItemController {
 
 	@RequestMapping(value = "admin/deleteItem.daou")
 	public ModelAndView deleteItem(HttpServletRequest request, HttpServletResponse response, ItemVO ivo) {
-		ModelAndView mav = new ModelAndView("admin/item/result");
-		String msg = "";
-
-		try {
-			int result = itemService.deleteItem(ivo.getItem_no());
-
-			if (result == 1) {
-				msg = "success";
-			} else {
-				msg = "error";
+			ModelAndView mav = new ModelAndView("admin/item/result");
+			int result = 0;
+			String msg = "";
+			
+			String checkList= request.getParameter("rowid");
+			
+			if(checkList == null) {
+				checkList = String.valueOf(ivo.getItem_no());
 			}
-		} catch (Exception e) {
-			mav.addObject("resultCode", "error");
-		}
+			
+			try {
+				List<String> itemNoList = new ArrayList<String>();
+				StringTokenizer checkListFilter = new StringTokenizer(checkList, ","); 
 
-		mav.addObject("resultCode", msg);
-		return mav;
+				while(checkListFilter.hasMoreTokens()) 
+				{ 
+					itemNoList.add(checkListFilter.nextToken());
+				}
+				for(int i =0 ; i<itemNoList.size(); i++) {
+					System.out.println("넘어온 값 : " + itemNoList.get(i));
+				}
+
+				result = itemService.deleteItem(itemNoList);
+				
+				if (result >= 1) {
+					msg = "success";
+				} else {
+					msg = "error";
+				}
+				
+			} catch (Exception e) {
+				mav.addObject("resultCode", "error");
+			}
+
+			mav.addObject("resultCode", msg);
+			return mav;
 	}
+	
 
 	@RequestMapping(value = "admin/itemUpdtForm.daou")
 	public ModelAndView itemUpdtForm(@RequestParam(value = "item_no") int item_no, HttpServletRequest request, HttpServletResponse response) {
@@ -227,32 +249,6 @@ public class ItemController {
 		return mav;
 	}
 
-	@RequestMapping(value = "admin/deleteChkItem.daou")
-	public ModelAndView deleteChkItem(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "rowid") Integer[] checkList) {
-
-		ModelAndView mav = new ModelAndView("admin/item/result");
-		int result = 0;
-		String msg = "";
-
-		try {
-
-			for (int i = 0; i < checkList.length; i++) {
-				result += itemService.deleteItem(checkList[i]);
-			}
-
-			if (result >= 1) {
-				msg = "success";
-			} else {
-				msg = "error";
-			}
-		} catch (Exception e) {
-			mav.addObject("resultCode", "error");
-		}
-
-		mav.addObject("resultCode", msg);
-		return mav;
-	}
 
 	@RequestMapping(value = "admin/categoryList.daou")
 	public ModelAndView categoryList() {

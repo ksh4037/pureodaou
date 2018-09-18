@@ -20,11 +20,11 @@ response.setHeader("Content-Disposition", "inline; filename=examListExcel.xls");
 								<th colspan="8">
 									[검색조건] -> 
 									회차별 : 
-									<c:if test="${empty degree_scType}">-회,</c:if>
+									<c:if test="${empty degree_scType}">전체, </c:if>
 									<c:if test="${!empty degree_scType}">${degree_scType}회,</c:if>
 									
 									최종상태별 : 
-									<c:if test="${empty status_scType}">-</c:if>
+									<c:if test="${empty status_scType}">전체 </c:if>
 									<c:if test="${status_scType == 'status01'}">미응시</c:if>
 									<c:if test="${status_scType == 'status02'}">임시저장</c:if>
 									<c:if test="${status_scType == 'status03'}">채점중</c:if>

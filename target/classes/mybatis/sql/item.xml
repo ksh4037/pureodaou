@@ -67,14 +67,17 @@
 	</update>
 
 
-	<delete id="deleteItem" parameterType="Integer">
+	<update id="deleteItem" parameterType="java.util.List">
 		update quiz_item
 		set
 		use_yn = 'N',
 		item_title=null,
 		item_contents=null
-		where item_no = #{item_no}
-	</delete>
+		where item_no in 
+		<foreach collection="list" item="item_no" separator="," open="(" close=")">
+			#{item_no}
+		</foreach>
+	</update>
 
 	<delete id="deleteOption" parameterType="Integer">
 		delete from quiz_item_option

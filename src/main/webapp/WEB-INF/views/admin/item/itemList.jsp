@@ -35,13 +35,13 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th align="center"><input type="checkbox" id="allCheck" onclick="allChk(this, 'item');" /></th>
-									<th align="center">No.</th>
-									<th align="center" width="35%">문제내용</th>
-									<th><center>문제유형</center></th>
-									<th align="center"><center>카테고리</center></th>
-									<th><center>등록자</center></th>
-									<th><center>등록일</center></th>
+									<th><input type="checkbox" id="allCheck" onclick="allChk(this, 'item');" /></th>
+									<th>No.</th>
+									<th class="i_th_style" width="35%">문제내용</th>
+									<th class="i_th_style">문제유형</th>
+									<th class="i_th_style">카테고리</th>
+									<th class="i_th_style">등록자</th>
+									<th class="i_th_style">등록일</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -140,13 +140,14 @@
 					checkRow = ''; //checkRow초기화.
 				}
 			}
-
+			
+			
 			if (rowid == '') {
 				alert("삭제할 요소가 선택되지 않았습니다.");
 			} else {
 				$.ajax({
 					type : "POST",
-					url : "deleteChkItem.daou",
+					url : "deleteItem.daou",
 					data : {
 						"rowid" : rowid
 					},

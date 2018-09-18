@@ -93,11 +93,8 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public int markAnswer(HashMap<String, Object> map) {
-		List<MarkVO> mlist = (List<MarkVO>) map.get("answerList");
-		for (MarkVO m : mlist) {
-			examMapper().markAnswer(m);
-		}
+	public int markAnswer(List<MarkVO> list) {
+		examMapper().markAnswer(list);
 		return 0;
 	}
 
@@ -108,10 +105,7 @@ public class ExamServiceImpl implements ExamService {
 
 	@Override
 	public void grading(List<MarkVO> mlist) {
-		for (MarkVO m : mlist) {
-			if (m.getCorrect_yn() != null)
-				examMapper().grading(m);
-		}
+		examMapper().grading(mlist);
 	}
 
 	@Override
@@ -130,9 +124,8 @@ public class ExamServiceImpl implements ExamService {
 	}
 
 	@Override
-	public List<String> getWrongNoteOptions(HashMap<String, String> map) {
-		return examMapper().getWrongNoteOptions(map);
+	public List<String> getMark(MarkVO mark) {
+		return examMapper().getMark(mark);
 	}
-
 
 }

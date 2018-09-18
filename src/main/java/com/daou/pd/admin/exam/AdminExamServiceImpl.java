@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.daou.pd.admin.employee.ConfigVO;
@@ -21,97 +22,87 @@ public class AdminExamServiceImpl implements AdminExamService {
 	@Resource(name = "sqlSession")
 	
 	private SqlSession sqlSession;
-	private AdminExamMapper examMapper;
 
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-
+	
+	@Bean
+	public AdminExamMapper examMapper() {
+		return sqlSession.getMapper(AdminExamMapper.class);
+	}
+	
 	@Override
 	public int examReg(ExamVO evo) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.examReg(evo);
+		return examMapper().examReg(evo);
 	}
 
 
 	@Override
 	public  List<String> selectExamTarget(HashMap<String, Object> data) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.selectExamTarget(data);
+		return examMapper().selectExamTarget(data);
 	}
 
 	@Override
 	public int userExamReg(String emp_id) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.userExamReg(emp_id);
+		return examMapper().userExamReg(emp_id);
 	}
 	
 	@Override
 	public List<ExamVO> examList() {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.examList();
+		return examMapper().examList();
 	}
 	
 	
 	@Override
 	public List<HashMap<String, Object>> recordList(HashMap<String, Object> searchData) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.recordList(searchData);
+		return examMapper().recordList(searchData);
 	}
 	
 	
 	@Override
 	public List<ConfigVO> statusCodeList() {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.statusCodeList();
+		return examMapper().statusCodeList();
 	}
 	
 	@Override
 	public List<HashMap<String, Object>> getShortExamList(ExamUserVO euvo) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.getShortExamList(euvo);
+		return examMapper().getShortExamList(euvo);
 	}
 	
 	@Override
 	public int updtExamDetail(ExamDetailVO euvo) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.updtExamDetail(euvo);
+		return examMapper().updtExamDetail(euvo);
 	}
 	
 	@Override
 	public int selectTotalCorrectYn(ExamDetailVO euvo) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.selectTotalCorrectYn(euvo);
+		return examMapper().selectTotalCorrectYn(euvo);
 	}
 	
 	@Override
 	public int updtExamScore(ExamUserVO evo) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.updtExamScore(evo);
+		return examMapper().updtExamScore(evo);
 	}
 	
 	@Override
 	public int selectPassScore(ExamUserVO evo) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.selectPassScore(evo);
+		return examMapper().selectPassScore(evo);
 	}
 	
 	@Override
 	public int finalExamUpdate(ExamUserVO evo) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.finalExamUpdate(evo);
+		return examMapper().finalExamUpdate(evo);
 	}
 	
 	@Override
 	public int insertFailUser(ExamUserVO evo) {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.insertFailUser(evo);
+		return examMapper().insertFailUser(evo);
 	}
 	
 	@Override
 	public  List<ExamVO> examInfoList() {
-		examMapper = sqlSession.getMapper(AdminExamMapper.class);
-		return examMapper.examInfoList();
+		return examMapper().examInfoList();
 	}
 	
 }

@@ -28,7 +28,7 @@ public interface ExamService {
 
 	int getTime(int exam_no);
 
-	int markAnswer(HashMap<String, Object> map);
+	int markAnswer(List<MarkVO> list);
 
 	void changeStatus(HashMap<String, Object> map);
 
@@ -39,7 +39,7 @@ public interface ExamService {
 	List<ExamListVO> getRecordList(String id);
 
 	List<ItemVO> getTestNote(int exam_no);
-	
-	List<String> getWrongNoteOptions(HashMap<String, String> map);
+
+	List<String> getMark(MarkVO mark);
 
 }

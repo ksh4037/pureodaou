@@ -77,7 +77,7 @@
 							</c:if>
 						</table>
 					</form>
-
+					
 				 	<p align="center"> 
 				 		<input type="button" value="출제하기" onclick="goReg();" class="btn btn-danger"/> 
 				 		<input type="button" value="엑셀 다운로드" onclick="getExcel();" class="btn btn-success"/> 
