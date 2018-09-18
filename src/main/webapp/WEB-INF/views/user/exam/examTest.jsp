@@ -33,6 +33,44 @@ input[type=radio] {
 }
 </style>
 <script>
+	var timerID; // 타이머를 핸들링하기 위한 전역 변수
+	var time = 119; // 타이머 시작시의 시간
+	
+	/* 타이머를 시작하는 함수 */
+	function start_timer() { 
+		timerID = setInterval("decrementTime()", 1000);
+	}
+	/* 남은 시간을 감소시키는 함수 */
+	function decrementTime() { 
+		$('#timer').val(toHourMinSec(time))
+		if(time > 0)
+			time--;
+		else { 
+			clearInterval(timerID);
+			
+		}
+	}
+
+
+	function toHourMinSec(t) { 
+		var hour;
+		var min;
+		var sec;
+	
+		// 정수로부터 남은 시, 분, 초 단위 계산
+		hour = Math.floor(t / 3600);
+		min = Math.floor( (t-(hour*3600)) / 60 );
+		sec = t - (hour*3600) - (min*60);
+	
+		// hh:mm:ss 형태를 유지하기 위해 한자리 수일 때 0 추가
+		if(hour < 10) hour = "0" + hour;
+		if(min < 10) min = "0" + min;
+		if(sec < 10) sec = "0" + sec;
+	
+		return(hour + ":" + min + ":" + sec);
+	}
+
+
 	function blockRightClick() {
 		alert("복사 방지를 위해 오른쪽 버튼은 사용하실 수 없습니다.");
 		return false;
@@ -48,7 +86,8 @@ input[type=radio] {
 			window.alert('소스 보기 기능을 사용하실 수 없습니다')
 			event.keyCode = 0;
 			event.returnValue = false;
-		} else if (key == 8 || key == 116 || key == 78 || key == 82) {
+		} 
+		/* else if (key == 8 || key == 116 || key == 78 || key == 82) {
 			if (e) { //표준
 				console.log('f5');
 				e.preventDefault();
@@ -56,7 +95,7 @@ input[type=radio] {
 				event.keyCode = 0;
 				event.returnValue = false;
 			}
-		}
+		} */
 	}
 	document.onkeydown = LockF5;
 	
@@ -230,7 +269,8 @@ input[type=radio] {
 				</c:forEach>
 				<c:if test="${!empty mark }">
 					<c:forEach items="${mark}" var="m" varStatus="status">
-						<input type="hidden" id="${status.count }" value="${m.exam_detail_answer }">
+						<input type="hidden" id="${status.count }"
+							value="${m.exam_detail_answer }">
 					</c:forEach>
 				</c:if>
 			</div>

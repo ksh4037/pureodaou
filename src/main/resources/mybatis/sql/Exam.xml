@@ -7,7 +7,7 @@
 	<select id="getExamList" parameterType="String"
 		resultType="examlistVO">
 		SELECT c.category_name, u.exam_degree,
-		u.exam_retake_degree, u.exam_left_time,
+		u.exam_retake_degree, u.exam_left_time, u.exam_retake_degree,
 		q.exam_start_date,
 		q.exam_end_date, q.exam_pass_score, g.quiz_cfg_code_name, u.exam_status
 		FROM
@@ -37,6 +37,7 @@
 		u.exam_status = g.quiz_cfg_code
 		and u.exam_degree = #{exam_degree} and
 		u.exam_take_id = #{reg_id}
+		and u.exam_final_yn='Y'
 	</select>
 
 	<select id="checkDegree" parameterType="hashmap"
@@ -47,6 +48,7 @@
 		WHERE
 		d.exam_no = u.exam_no and
 		u.exam_degree = #{degree} and u.exam_take_id = #{id}
+		and u.exam_final_yn = 'Y'
 	</select>
 
 	<select id="getExamNo" resultType="Integer"
@@ -55,6 +57,7 @@
 		FROM
 		quiz_user_exam
 		WHERE exam_take_id = #{id}
+		and exam_final_yn = 'Y'
 	</select>
 
 	<select id="getOX" parameterType="hashmap" resultType="itemVO">
@@ -145,6 +148,12 @@
 		UPDATE quiz_user_exam
 		SET exam_status = #{exam_status}
 		WHERE exam_no = #{exam_no}
+		<if test="exam_status=='status03'">
+			;
+			update quiz_user_exam
+			set exam_take_date = now()
+			where exam_no = #{exam_no};
+		</if>
 	</update>
 	
 	<update id="grading">
