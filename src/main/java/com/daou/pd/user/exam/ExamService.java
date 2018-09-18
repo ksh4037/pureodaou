@@ -36,4 +36,10 @@ public interface ExamService {
 
 	List<MarkVO> getAnswerSheet(int exam_no);
 
+	List<ExamListVO> getRecordList(String id);
+
+	List<ItemVO> getTestNote(int exam_no);
+	
+	List<String> getWrongNoteOptions(HashMap<String, String> map);
+
 }

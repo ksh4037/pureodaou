@@ -79,6 +79,7 @@
 			<table class="table table-hover">
 				<tr style="background-color: #DDDDDD">
 					<th>회차</th>
+					<th>재시험</th>
 					<th>과목</th>
 					<th>기간</th>
 					<th>남은시간</th>
@@ -89,6 +90,14 @@
 				<c:forEach items="${elist }" var="e">
 					<tr>
 						<td>${e.exam_degree }</td>
+						<c:choose>
+							<c:when test="${e.exam_retake_degree > 0}">
+							<td>${e.exam_retake_degree }차</td>
+							</c:when>
+							<c:otherwise>
+							<td> - </td>
+							</c:otherwise>
+						</c:choose>
 						<td>${e.category_name }</td>
 						<td>${e.exam_start_date }~${e.exam_end_date }</td>
 						<td>${e.exam_left_time }</td>

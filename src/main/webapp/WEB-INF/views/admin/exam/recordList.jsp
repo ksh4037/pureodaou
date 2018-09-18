@@ -13,9 +13,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="row content">
-
 		<%@ include file="../common/lnb.jsp"%>
-
 			<div class="col-sm-9">
 				<h4 class="s_title" style="padding-top: 25px; padding-bottom: 15px">
 					<span class="span-font">Home > 기록관리</span>
@@ -31,7 +29,11 @@
 					</p>
 
 					<form name="listForm" id="listForm" method="post">
-						<table class="table">
+						<input type="hidden" name="exam_degree" id="exam_degree"/>
+						<input type="hidden" name="exam_take_id" id="exam_take_id"/>
+						
+						<table class="table"  style="text-align:center;">
+						
 							<thead>
 								<tr>
 									<th class="r_th_style">회차</th>
@@ -58,7 +60,11 @@
 										<tr>
 											<td class="r_td_style">${recordList.exam_degree}회차</td>
 											<td class="r_td_style">${recordList.emp_name}</td>
-											<td class="r_td_style">${recordList.exam_score}점 </td>
+											<td class="r_td_style">
+												<c:if test="${empty recordList.exam_score}">-</c:if>
+												<c:if test="${!empty recordList.exam_score}">${recordList.exam_score}점</c:if>
+											</td>
+											
 											<td class="r_td_style">${recordList.exam_retake_degree}회</td>
 											<td class="r_td_style">${fn:substring(recordList.exam_take_date,0,10)}</td>
 											
@@ -71,14 +77,15 @@
 											</td>
 											
 											<td class="r_td_style">
-											 <div align="center"> 
 												<c:if test="${recordList.exam_status == 'status03'}">
-													<input type="button" value="채점하기" class="btn btn-primary"/>
+													<input type="button" value="채점하기" onclick="goGrade('${recordList.exam_degree}','${recordList.exam_take_id}');" class="btn btn-primary"/>
 												</c:if>
-												<c:if test="${recordList.exam_status != 'status03'}">
-													<span style="color:red;">-</span>
+												<c:if test="${recordList.exam_status == 'status04' || recordList.exam_status == 'status05'}">
+													<span style="color:red;">완료</span>
 												</c:if>
-											</div>
+												<c:if test="${recordList.exam_status == 'status01' || recordList.exam_status == 'status02'}">
+													<span style="color:red;">대기</span>
+												</c:if>
 											</td>
 										</tr>
 									</tbody>
@@ -95,15 +102,18 @@
 	</div>
 
 	<%@ include file="../common/footer.jsp"%>
-
+	
 	<script type="text/javascript">
-		function goReg(){
-			location.href="examRegForm.daou";
+		function getExcel(){
+		    location.href="recordListExcel.daou";
 		}
 		
-		function getExcel(){
-		    location.href="examListExcel.daou";
-		}
+		function goGrade(exam_degree, exam_take_id){
+			$("#exam_degree").val(exam_degree);
+			$("#exam_take_id").val(exam_take_id);
+			$("#listForm").attr("action", "recordGradeForm.daou");
+			$("#listForm").submit();
+		}	
 	</script>
 </body>
 </html>

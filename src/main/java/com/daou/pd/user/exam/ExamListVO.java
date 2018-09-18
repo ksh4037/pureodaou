@@ -7,6 +7,8 @@ public class ExamListVO {
 	private String exam_end_date;
 	private int exam_pass_score;
 	private String exam_status;
+	private int exam_score;
+	private int exam_no;
 
 	private int exam_retake_degree;
 	private int exam_left_time;
@@ -86,6 +88,22 @@ public class ExamListVO {
 
 	public void setCategory_name(String category_name) {
 		this.category_name = category_name;
+	}
+
+	public int getExam_score() {
+		return exam_score;
+	}
+
+	public void setExam_score(int exam_score) {
+		this.exam_score = exam_score;
+	}
+
+	public int getExam_no() {
+		return exam_no;
+	}
+
+	public void setExam_no(int exam_no) {
+		this.exam_no = exam_no;
 	}
 
 }

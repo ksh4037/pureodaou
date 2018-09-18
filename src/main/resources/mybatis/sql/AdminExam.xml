@@ -64,4 +64,62 @@
 		where quiz_cfg_code like 'status%'
 	</select>
 	
+	
+		
+	<select id="getShortExamList" parameterType="examUserVO" resultType="hashmap">
+		select i.item_title, i.item_contents, a.exam_no, a.item_no, a.exam_take_id, a.exam_degree, a.exam_detail_no, a.exam_detail_answer, a.exam_detail_correct, a.exam_retake_degree
+		from quiz_item i left outer join
+		                            ( select u.exam_no, e.item_no, u.exam_take_id, u.exam_degree, e.exam_detail_no, e.exam_detail_answer, e.exam_detail_correct, u.exam_retake_degree
+		                              from quiz_user_exam u left outer join quiz_exam_detail e 
+		                              on u.exam_no = e.exam_no ) a
+		on i.item_no = a.item_no
+		where i.item_type = '3' <!-- // item_type == 3 (주관식(short)) -->
+		and a.exam_take_id = #{exam_take_id}
+		and a.exam_degree = #{exam_degree}
+	</select>
+	
+	
+	<update id="updtExamDetail" parameterType="examDetailVO">
+		update quiz_exam_detail
+		set correct_yn = #{correct_yn}, exam_detail_comment = #{exam_detail_comment}
+		where exam_detail_no = #{exam_detail_no}
+	</update>
+	
+	
+	<select id="selectTotalCorrectYn" parameterType="examDetailVO" resultType="Integer">
+		select count(*)
+		from quiz_exam_detail
+		where correct_yn = 'Y'
+		and exam_no = #{exam_no}
+	</select>
+	
+	
+	<update id="updtExamScore" parameterType="ExamUserVO">
+		update quiz_user_exam
+		set  exam_score = #{exam_score}
+		where exam_no = #{exam_no}
+	</update>
+	
+	<select id="selectPassScore" parameterType="ExamUserVO" resultType="Integer">
+		select exam_pass_score
+		from quiz_exam
+		where exam_degree = #{exam_degree}
+	</select>
+	
+	<update id="finalExamUpdate" parameterType="ExamUserVO">
+		update quiz_user_exam
+		set  exam_status = #{exam_status}, exam_final_yn = #{exam_final_yn}
+		where exam_no = #{exam_no}
+	</update>
+	
+	
+	<insert id="insertFailUser" parameterType="ExamUserVO">
+		insert into quiz_user_exam(exam_degree, exam_take_id, exam_retake_degree)
+		values(
+			#{exam_degree},
+			#{exam_take_id},
+			#{exam_retake_degree}
+		)
+	</insert>
+	
 </mapper>	 

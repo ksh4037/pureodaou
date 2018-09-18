@@ -51,7 +51,7 @@ public class ExamController {
 	public ModelAndView examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
 			@RequestParam("obj_num") String obj, @RequestParam("short_num") String short_n,
 			@RequestParam("category") String category, HttpServletRequest req, @RequestParam("examNo") String examNo,
-			@RequestParam("categoryName") String categoryName) {
+			@RequestParam("categoryName") String categoryName, @RequestParam("exam_status") String exam_status) {
 		int degree = Integer.parseInt(str);
 		int ox_num = Integer.parseInt(ox);
 		int obj_num = Integer.parseInt(obj);
@@ -78,6 +78,13 @@ public class ExamController {
 			item.setOvo(olist);
 			map.remove("item_no");
 		}
+		
+		System.out.println(exam_status);
+
+		if (exam_status.equals("status02")) {
+			System.out.println("답가져오기");
+			map.put("mark", examService.getAnswerSheet(exam_no));
+		}
 		map.put("left_time", left_time);
 		map.put("degree", degree);
 		map.put("categoryName", categoryName);
@@ -101,13 +108,16 @@ public class ExamController {
 			List<OptionVO> olist2 = new ArrayList<OptionVO>();
 			if (olist.size() > 1) {
 				for (OptionVO op : olist) {
-					if (op.getCorrect_yn().equals("Y"))
+					if (op.getCorrect_yn().equals("Y")) {
 						olist2.add(op);
+						break;
+					}
 				}
 				for (OptionVO op : olist) {
 					if (op.getCorrect_yn().equals("N"))
-						if (olist2.size() < 4)
+						if (olist2.size() < 4) {
 							olist2.add(op);
+						}
 				}
 				Collections.shuffle(olist2);
 				item.setOvo(olist2);
@@ -125,6 +135,7 @@ public class ExamController {
 				for (OptionVO ov : ol) {
 					if (ov.getCorrect_yn().equals("Y")) {
 						detail.setExam_detail_correct(Integer.toString(ov.getOption_no()));
+						break;
 					}
 				}
 				detail.setExam_detail_option1(ol.get(0).getOption_no());
@@ -141,7 +152,7 @@ public class ExamController {
 		examService.makeTest(dlist);
 	}
 
-	@RequestMapping(value = "/user/exam/regist.do")
+	@RequestMapping(value = "/user/exam/regist.daou")
 	@ResponseBody
 	public ModelAndView regist(HttpServletRequest req, @RequestBody List<MarkVO> list,
 			@RequestParam("type") String type) {
@@ -186,5 +197,26 @@ public class ExamController {
 		HttpSession session = req.getSession(false);
 		String id = (String) session.getAttribute("emp_id");
 		return id;
+	}
+	
+	
+	@RequestMapping(value="/user/exam/recordList.daou")
+	public ModelAndView getResultList(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("user/exam/recordList");
+		String id = getSessionId(req);
+		List<ExamListVO> list =  examService.getRecordList(id);
+		mav.addObject("rList", list);
+		return mav;
+	}
+	
+	@RequestMapping(value="/user/exam/wrongAnswerNote.daou")
+	public ModelAndView WrongAnswerNote(@RequestParam("examNo")String examNo) {
+		ModelAndView mav = new ModelAndView("user/exam/wrongAnswerNote");
+		List<MarkVO> mlist = examService.getAnswerSheet(Integer.parseInt(examNo));
+		List<ItemVO> ilist = examService.getTestNote(Integer.parseInt(examNo));
+		
+		mav.addObject("mlist",mlist);
+		mav.addObject("ilist",ilist);
+		return null;
 	}
 }
