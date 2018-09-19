@@ -168,7 +168,7 @@ public class AdminExamController {
 	
 		try {
 			
-			 String[] arr_item_index = request.getParameterValues("item_index");
+			 	String[] arr_item_index = request.getParameterValues("item_index");
 			    String[] arr_correct_yn = request.getParameterValues("correct_yn");
 			    String[] exam_detail_comment = request.getParameterValues("exam_detail_comment");
 			    String[] exam_no = request.getParameterValues("exam_no");
