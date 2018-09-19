@@ -113,8 +113,8 @@
 	
 	
 	
-
-	<select id="rankWrongCount" parameterType="examVO" resultType="boardVO">
+	<!--회차별 오답에 대한 문제번호, 회차별 문제 출제 횟수, 회차별 문제의 오답 횟수, 오답률-->
+	<select id="rankWrongCount" parameterType="examVO" resultType="boardVO"> 
 		select c.item_no, c.total_cnt, c.fail_cnt, (c.fail_cnt/c.total_cnt) as result
 		from (SELECT a.item_no, COUNT(*) as total_cnt, SUM(CASE WHEN a.correct_yn ='N' then 1 ELSE 0 END) as fail_cnt
 				FROM quiz_exam_detail a, quiz_user_exam b 

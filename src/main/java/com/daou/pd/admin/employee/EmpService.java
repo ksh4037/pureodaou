@@ -7,8 +7,6 @@ public interface EmpService {
 
 	public int selectAdmin(EmpVO evo);
 
-	public int selectUser(EmpVO evo);
-
 	public List<HashMap<String, Object>> memberList();
 
 	public void insertMember(EmpVO evo) throws Exception;

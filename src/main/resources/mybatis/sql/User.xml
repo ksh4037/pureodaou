@@ -9,7 +9,7 @@
 		select count(*) from employee
 		where emp_id = #{emp_id}
 		and emp_pw = #{emp_pw}
-		and emp_type = 2
+		and emp_type = 2 and use_yn = 'Y'
 	</select>
 
 	<select id="userIdCheck" parameterType="userVO"
@@ -50,7 +50,7 @@
 		emp_dept = #{emp_dept},
 		emp_tel = #{emp_tel},
 		emp_grade = #{emp_grade},
-		emp_pw = #{emp_pw},
+		emp_pw = #{emp_pw}
 		where emp_id = #{emp_id}
 	</update>
 

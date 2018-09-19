@@ -135,7 +135,7 @@
 					data : formDataList,
 					async : false,
 					success : function(data) {
-						console.log(data);
+						
 						if(data == "none"){
 							alert("응시 대상자가 등록되어 있지 않습니다.");							
 						}else if(data == "anybody"){
@@ -183,6 +183,9 @@
 					}
 				});
 			}
+			
+			
+			
 			function wrongPercent() {
 				var formDataList = $("form[name=examSelectForm]").serialize();
 				$.ajax({
@@ -192,7 +195,7 @@
 					dataType : "json",
 					async : false,
 					success : function(data) {
-						console.log(data);
+					
 						  $.each(data,function(index,item){
 								  var cell= '';
 									cell += '<tr><td width="60px">'+(index+1)+'</td>';
