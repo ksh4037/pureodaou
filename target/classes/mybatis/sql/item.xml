@@ -21,7 +21,7 @@
 		select  q.item_no, q.item_contents, q.item_title, q.item_type, q.category_no, q.reg_id, q.reg_date, 
 				q.category_no, o.option_no, o.option_contents , o.correct_yn
 				
-		from quiz_item q left join quiz_item_option o
+		from quiz_item q inner join quiz_item_option o  <!-- left -->
 		on q.item_no = o.item_no
 		where q.item_no = #{item_no}
 		and q.use_yn = 'Y'
