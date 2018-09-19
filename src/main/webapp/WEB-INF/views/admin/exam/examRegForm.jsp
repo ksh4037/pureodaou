@@ -106,6 +106,12 @@
 	<%@ include file="../common/footer.jsp"%>
 
 	<script type="text/javascript">
+	
+		$(document).ready(function() {  //datepicker 설정
+		    $("#exam_start_date").datepicker();
+		    $("#exam_end_date").datepicker();
+		});
+	
 		function goList(){
 			location.href="examList.daou";
 		}
@@ -167,6 +173,12 @@
 				alert('문제의 총 개수는 총 20문항 이어야 합니다.\유형별 문제 수를 다시 입력해주세요.');
 				return;
 			}
+			
+
+			if(parseInt($("#exam_short_num").val()) < 1){
+				alert('주관식 문제는 반드시 1개이상 출제되어야 합니다.');
+				return;
+			}
 
 			var queryString = $("form[name=exam_reg_form]").serialize();
 
@@ -188,7 +200,6 @@
 					alert("등록에 실패하였습니다.");
 				}
 			});
-			
 			
 			
 		}
