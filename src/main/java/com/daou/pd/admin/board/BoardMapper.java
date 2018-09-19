@@ -18,9 +18,9 @@ public interface BoardMapper {
 	
 	public int selectPass(ExamVO exvo);
 	
-	public int deptAverage(ExamVO exvo);
+	public double deptAverage(ExamVO exvo);
 	
-	public int gradeAverage(ExamVO exvo);
+	public double gradeAverage(ExamVO exvo);
 	
 	public int selectSetCount(ExamVO exvo);
 	
