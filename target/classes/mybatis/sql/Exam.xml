@@ -90,10 +90,17 @@
 
 	<select id="getOptionList" parameterType="Integer"
 		resultType="optionVO">
-		SELECT option_no, correct_yn, option_contents
+		SELECT *
+		FROM
+		(SELECT option_no, correct_yn, option_contents
 		FROM quiz_item_option
 		WHERE
-		item_no = #{item_no}
+		item_no = #{item_no} and correct_yn = 'N'
+		ORDER BY rand() limit 3)
+		UNION
+		(SELECT option_no, correct_yn, option_contents
+		FROM quiz_item_option
+		WHERE item_no = #{item_no} and correct_yn='Y')
 	</select>
 
 	<insert id="makeTest" parameterType="java.util.Map">
@@ -156,13 +163,8 @@
 	<update id="changeStatus" parameterType="hashmap">
 		UPDATE quiz_user_exam
 		SET exam_status = #{exam_status}, exam_left_time = #{exam_left_time}
+		<if test="exam_status=='status03'">,set exam_take_date = now()</if>
 		WHERE exam_no = #{exam_no}
-		<if test="exam_status=='status03'">
-			;
-			update quiz_user_exam
-			set exam_take_date = now()
-			where exam_no = #{exam_no};
-		</if>
 	</update>
 	
 	<update id="grading">
