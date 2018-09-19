@@ -3,15 +3,9 @@
  */
 
 
-$(function(){  //datepicker 설정
-    $("#exam_start_date").datepicker();
-    $("#exam_end_date").datepicker();
-});
-
-
 
 $(document).ready(function() {
-	
+
 	// ----- 에디터 가져오기 ----
 	$('.summernote').summernote({
 		         height : 500, // 기본 높이값

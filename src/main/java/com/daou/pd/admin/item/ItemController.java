@@ -78,7 +78,7 @@ public class ItemController {
 		int o_result = 0;
 
 		try {
-			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X 二쇨��떇 ���옣
+			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X 또는 주관식인 경우
 
 				i_result = itemService.itemReg(ivo);
 				int item_no = itemService.selectItemSeq();
@@ -95,7 +95,7 @@ public class ItemController {
 					msg = "error";
 				}
 
-			} else if (ivo.getItem_type().equals("2")) { // 媛앷��떇 ���옣
+			} else if (ivo.getItem_type().equals("2")) { // 객관식인 경우
 
 				i_result = itemService.itemReg(ivo);
 				int item_no = itemService.selectItemSeq();
@@ -200,7 +200,7 @@ public class ItemController {
 		int o_reg_result = 0;
 		
 		try {
-			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X , 二쇨��떇 ���옣
+			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X , 또는 주관식인 경우
 
 				i_update_result = itemService.itemUpdt(ivo);
 				o_delete_result = itemService.deleteOption(ivo.getItem_no());
@@ -217,7 +217,7 @@ public class ItemController {
 					msg = "error";
 				}
 
-			} else if (ivo.getItem_type().equals("2")) { // 媛앷��떇 ���옣
+			} else if (ivo.getItem_type().equals("2")) { // 객관식인 경우
 
 				i_update_result = itemService.itemUpdt(ivo);
 				o_delete_result = itemService.deleteOption(ivo.getItem_no());
@@ -226,7 +226,7 @@ public class ItemController {
 
 				for (int i = 0; i < option_contents.length; i++) {
 
-					if (i == ivo.getAnswer_no()) { // 泥� 踰덉㎏媛� �젙�떟�씠�땲源�
+					if (i == ivo.getAnswer_no()) { // 객관식인 경우 관리자가 선택한 정답의 위치 index
 						ovo.setCorrect_yn("Y");
 					} else {
 						ovo.setCorrect_yn("N");
