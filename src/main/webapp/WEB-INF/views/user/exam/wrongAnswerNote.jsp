@@ -2,27 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style type="text/css">
-.topbox {
-	border-top-left-radius: 7px;
-	border-top-right-radius: 7px;
-}
-
-input[type=radio] {
-	margin-right: 10px;
-}
-</style>
-</head>
-<body>
+<c:import url="examheader.jsp"/>
 	<div style="padding-left: 25%; padding-right: 25%; padding-top: 20px;"
 		oncontextmenu="return blockRightClick()">
 		<div class="topbox"
@@ -46,7 +26,7 @@ input[type=radio] {
 									: 5점</div>
 							</div>
 							<div style="padding-left: 20px;">${item.item_title }</div>
-							<c:if test="${!item.item_contents == ''}">
+							<c:if test="${item.item_contents != null}">
 								<div class="item_contents"
 								style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
 								${item.item_contents }</div>
@@ -71,5 +51,4 @@ input[type=radio] {
 			</div>
 		</form>
 	</div>
-</body>
-</html>
+<c:import url="examfooter"/>

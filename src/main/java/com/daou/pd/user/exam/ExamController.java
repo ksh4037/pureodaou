@@ -50,7 +50,9 @@ public class ExamController {
 	public ModelAndView examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
 			@RequestParam("obj_num") String obj, @RequestParam("short_num") String short_n,
 			@RequestParam("category") String category, HttpServletRequest req, @RequestParam("examNo") String examNo,
-			@RequestParam("categoryName") String categoryName, @RequestParam("exam_status") String exam_status) {//시험여부 검사, 가져오기
+			@RequestParam("categoryName") String categoryName, @RequestParam("exam_status") String exam_status) {// 시험여부
+																													// 검사,
+																													// 가져오기
 		int degree = Integer.parseInt(str);
 		int ox_num = Integer.parseInt(ox);
 		int obj_num = Integer.parseInt(obj);
@@ -153,13 +155,13 @@ public class ExamController {
 
 	@RequestMapping(value = "/user/exam/regist.daou")
 	public ModelAndView regist(HttpServletRequest req, @RequestBody List<MarkVO> list,
-			@RequestParam("type") String type, @RequestParam("leftTime")String leftTime) {
+			@RequestParam("type") String type, @RequestParam("leftTime") String leftTime) {
 		ModelAndView mav = new ModelAndView("user/exam/markResult");
 		String id = getSessionId(req);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("alist", list);
 		map.put("id", id);
-		
+
 		examService.markAnswer(list);
 		mav.addObject("result", "success");
 
@@ -167,7 +169,7 @@ public class ExamController {
 		map.put("id", id);
 		int exam_no = list.get(0).getExam_no();
 		map.put("exam_no", exam_no);
-		
+
 		if ("2".equals(type)) {
 			map.put("exam_status", "status02");
 			map.put("exam_left_time", leftTime);
@@ -185,7 +187,7 @@ public class ExamController {
 		List<MarkVO> list = examService.getAnswerSheet(exam_no);
 		for (MarkVO m : list) {
 			if (!m.getItem_type().equals("3")) {
-				if (m.getExam_detail_correct().equals(m.getExam_detail_answer()) && m.getExam_detail_answer()!=null)
+				if (m.getExam_detail_correct().equals(m.getExam_detail_answer()))
 					m.setCorrect_yn("Y");
 				else
 					m.setCorrect_yn("N");
@@ -221,7 +223,8 @@ public class ExamController {
 					mark.setExam_detail_answer(strlist.get(0));
 					mark.setExam_detail_correct(strlist.get(1));
 				} else {
-					mark.setExam_detail_answer(strlist.get(0));
+					if (mark.getExam_detail_answer() != null)
+						mark.setExam_detail_answer(strlist.get(0));
 					mark.setExam_detail_correct(strlist.get(0));
 				}
 			}
