@@ -104,6 +104,7 @@
 		</div>
 
 	<%@ include file="../common/footer.jsp"%>
+	<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
 
 	<script type="text/javascript">
 	
