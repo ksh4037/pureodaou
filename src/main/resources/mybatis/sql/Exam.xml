@@ -155,7 +155,7 @@
 	
 	<update id="changeStatus" parameterType="hashmap">
 		UPDATE quiz_user_exam
-		SET exam_status = #{exam_status}
+		SET exam_status = #{exam_status}, exam_left_time = #{exam_left_time}
 		WHERE exam_no = #{exam_no}
 		<if test="exam_status=='status03'">
 			;

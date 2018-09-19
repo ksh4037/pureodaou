@@ -43,7 +43,7 @@ input[type=radio] {
 							<div style="display: inline-block;">
 								<div
 									style="color: white; background-color: #114a9b; border-radius: 15px; padding: 7px; margin: 5px;">OX형
-									: 10점</div>
+									: 5점</div>
 							</div>
 							<div style="padding-left: 20px;">${item.item_title }</div>
 							<c:if test="${!item.item_contents == ''}">

@@ -1,37 +1,108 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style type="text/css">
-.topbox {
-	border-top-left-radius: 7px;
-	border-top-right-radius: 7px;
-}
-
-input[type=radio] {
-	margin-right: 10px;
-}
-
-.footer {
-	position: fixed;
-	left: 0px;
-	bottom: 0px;
-	height: 50px;
-	width: 100%;
-	background: #EEEEEE;
-	text-align: right;
-	padding: 10px;
-}
-</style>
+<c:import url="examheader.jsp" />
+<div style="padding-left: 25%; padding-right: 25%; padding-top: 20px;"
+	oncontextmenu="return blockRightClick()">
+	<div class="topbox"
+		style="background-color: #114a9b; color: white; font-size: 16px; padding: 10px;">
+		<ul>
+			<li>회차 : ${info.degree }</li>
+			<li>과목 : ${info.categoryName}</li>
+		</ul>
+	</div>
+	<form id="f">
+		<div class="midbox"
+			style="border-style: solid; border-width: 1px; padding: 25px; margin-bottom: 60px;">
+			<c:forEach items="${itemList }" var="item" varStatus="status">
+				<c:choose>
+					<c:when test="${item.item_type eq '1'}">
+						<div>
+							<div
+								style="border-style: solid; border-width: 1px; padding: 20px">
+								<span style="font-size: 30px; color: orange;">${status.count }</span>
+								<div style="display: inline-block;">
+									<div
+										style="color: white; background-color: #114a9b; border-radius: 15px; padding: 7px; margin: 5px;">OX형
+										: 5점</div>
+								</div>
+								<div style="padding-left: 20px;">${item.item_title }</div>
+								<div class="item_contents"
+									style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
+									${item.item_contents }</div>
+							</div>
+							<div style="padding: 20px;">
+								<input id="${item.item_no }" type="radio"
+									name="${status.count }" value="O">O<br> <input
+									id="${item.item_no }" type="radio" name="${status.count }"
+									value="X">X
+							</div>
+						</div>
+					</c:when>
+					<c:when test="${item.item_type eq '2' }">
+						<div>
+							<div
+								style="border-style: solid; border-width: 1px; padding: 20px">
+								<span style="font-size: 30px; color: orange;">${status.count }</span>
+								<div style="display: inline-block;">
+									<div
+										style="color: white; background-color: #114a9b; border-radius: 15px; padding: 7px; margin: 5px;">객관식
+										: 5점</div>
+								</div>
+								<div style="padding-left: 20px;">${item.item_title }</div>
+								<div class="item_contents"
+									style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
+									${item.item_contents }</div>
+							</div>
+							<div style="padding: 20px;">
+								<c:forEach items="${item.ovo }" var="op" varStatus="status2">
+									<input id="${item.item_no }" type="radio"
+										name="${status.count }" value="${op.option_no }">(${status2.count}) ${op.option_contents }<br>
+								</c:forEach>
+							</div>
+						</div>
+					</c:when>
+					<c:when test="${item.item_type eq '3' }">
+						<div>
+							<div
+								style="border-style: solid; border-width: 1px; padding: 20px">
+								<span style="font-size: 30px; color: orange;">${status.count }</span>
+								<div style="display: inline-block;">
+									<div
+										style="color: white; background-color: #114a9b; border-radius: 15px; padding: 7px; margin: 5px;">객관식
+										: 5점</div>
+								</div>
+								<div style="padding-left: 20px;">${item.item_title }</div>
+								<div class="item_contents"
+									style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
+									${item.item_contents }</div>
+							</div>
+							<div style="padding: 20px;">
+								<textarea class="shortanswer" id="${item.item_no }" rows="2"
+									cols="30" style="width: 100%;" placeholder="정답을 적어주십시오"></textarea>
+							</div>
+						</div>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${!empty mark }">
+				<c:forEach items="${mark}" var="m" varStatus="status">
+					<input type="hidden" id="${status.count }"
+						value="${m.exam_detail_answer }">
+				</c:forEach>
+			</c:if>
+		</div>
+	</form>
+</div>
+<div class="footer">
+	<span id="timer">${info.left_time }</span>
+	<%-- <span class="mark">0</span>/10 --%>
+	<input class="btn btn-primary" type="button" value="임시저장" id="tempstrg"
+		onclick="javascript:submitFunction(${info.exam_no}, 2)"> <input
+		class="btn btn-primary" type="button" value="제출하기"
+		onclick="javascript:submitFunction(${info.exam_no}, 1)"> <input
+		type="hidden" value="${info.exam_no }" id="exam_no">
+</div>
 <script>
 	var timerID; // 타이머를 핸들링하기 위한 전역 변수
 	var time = parseInt($('#timer').html());
@@ -41,6 +112,8 @@ input[type=radio] {
 			time--;
 		else { 
 			clearInterval(timerID);
+			var examNo = $('#exam_no').val();
+			insertanswer(examNo,1);
 		}
 	}
 	
@@ -48,7 +121,7 @@ input[type=radio] {
 		timerID = setInterval("decrementTime()", 1000);
 	}
 
-	function toHourMinSec(t) { 
+	function toHourMinSec(t) { //시분초로 환산
 		var hour;
 		var min;
 		var sec;
@@ -117,7 +190,7 @@ input[type=radio] {
 		answer.push(data); */
 		var jsonEncode = JSON.stringify(answer);
 		 $.ajax({
-			url : '${pageContext.request.contextPath}/user/exam/regist.daou?type='+type,
+			url : '${pageContext.request.contextPath}/user/exam/regist.daou?type='+type+'&leftTime='+time,
 			datatype:'json',
 			method : 'post',
 			data : jsonEncode,
@@ -142,15 +215,15 @@ input[type=radio] {
 		});
 	}
 	
-	var submitFunction = function(degree, type) {
+	var submitFunction = function(exam_no, type) {
 		if(type == 1){
-			if($('.mark').html()<10){
+			/* if($('.mark').html()<10){
 				alert('아직 모든 문제를 풀지 않으셨습니다');
 				return false;
-			}
-			insertanswer(degree, type);
+			} */
+			insertanswer(exam_no, type);
 		}else if(type==2) {
-			insertanswer(degree, type);
+			insertanswer(exam_no, type);
 		}
 		
 	}
@@ -158,10 +231,9 @@ input[type=radio] {
 	$(function(){
 		start_timer();
 		
-		/* $('input[type=hidden]').each(function(i) {//임시저장 답 마킹
-			console.log(i);
+		$('input[type=hidden]').each(function(i) {//임시저장 답 마킹
+			console.log($(this).val());
 		});
-		 */
 		
 		/* $('input[type=radio]').change(function() {
 			var cnt = 0;
@@ -176,110 +248,6 @@ input[type=radio] {
 				$(this).attr('style','display:none');
 			}
 		});
-		
 	});
 </script>
-</head>
-<body>
-	<div style="padding-left: 25%; padding-right: 25%; padding-top: 20px;"
-		oncontextmenu="return blockRightClick()">
-		<div class="topbox"
-			style="background-color: #114a9b; color: white; font-size: 16px; padding: 10px;">
-			<ul>
-				<li>회차 : ${info.degree }</li>
-				<li>과목 : ${info.categoryName}</li>
-			</ul>
-		</div>
-		<form id="f">
-			<div class="midbox"
-				style="border-style: solid; border-width: 1px; padding: 25px; margin-bottom: 60px;">
-
-				<c:forEach items="${itemList }" var="item" varStatus="status">
-					<c:choose>
-						<c:when test="${item.item_type eq '1'}">
-							<div>
-								<div
-									style="border-style: solid; border-width: 1px; padding: 20px">
-									<span style="font-size: 30px; color: orange;">${status.count }</span>
-									<div style="display: inline-block;">
-										<div
-											style="color: white; background-color: #114a9b; border-radius: 15px; padding: 7px; margin: 5px;">OX형
-											: 10점</div>
-									</div>
-									<div style="padding-left: 20px;">${item.item_title }</div>
-									<div class="item_contents"
-										style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
-										${item.item_contents }</div>
-								</div>
-								<div style="padding: 20px;">
-									<input id="${item.item_no }" type="radio"
-										name="${status.count }" value="O">O<br> <input
-										id="${item.item_no }" type="radio" name="${status.count }"
-										value="X">X
-								</div>
-							</div>
-						</c:when>
-						<c:when test="${item.item_type eq '2' }">
-							<div>
-								<div
-									style="border-style: solid; border-width: 1px; padding: 20px">
-									<span style="font-size: 30px; color: orange;">${status.count }</span>
-									<div style="display: inline-block;">
-										<div
-											style="color: white; background-color: #114a9b; border-radius: 15px; padding: 7px; margin: 5px;">객관식
-											: 10점</div>
-									</div>
-									<div style="padding-left: 20px;">${item.item_title }</div>
-									<div class="item_contents"
-										style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
-										${item.item_contents }</div>
-								</div>
-								<div style="padding: 20px;">
-									<c:forEach items="${item.ovo }" var="op" varStatus="status2">
-										<input id="${item.item_no }" type="radio"
-											name="${status.count }" value="${op.option_no }">(${status2.count}) ${op.option_contents }<br>
-									</c:forEach>
-								</div>
-							</div>
-						</c:when>
-						<c:when test="${item.item_type eq '3' }">
-							<div>
-								<div
-									style="border-style: solid; border-width: 1px; padding: 20px">
-									<span style="font-size: 30px; color: orange;">${status.count }</span>
-									<div style="display: inline-block;">
-										<div
-											style="color: white; background-color: #114a9b; border-radius: 15px; padding: 7px; margin: 5px;">객관식
-											: 10점</div>
-									</div>
-									<div style="padding-left: 20px;">${item.item_title }</div>
-									<div class="item_contents"
-										style="padding: 20px; border-style: solid; border-width: 1px; width: 100%;">
-										${item.item_contents }</div>
-								</div>
-								<div style="padding: 20px;">
-									<textarea class="shortanswer" id="${item.item_no }" rows="2"
-										cols="30" style="width: 100%;" placeholder="정답을 적어주십시오"></textarea>
-								</div>
-							</div>
-						</c:when>
-					</c:choose>
-				</c:forEach>
-				<%-- <c:if test="${!empty mark }">
-					<c:forEach items="${mark}" var="m" varStatus="status">
-						<input type="hidden" id="${status.count }"
-							value="${m.exam_detail_answer }">
-					</c:forEach>
-				</c:if> --%>
-			</div>
-		</form>
-	</div>
-	<div class="footer">
-		<span id="timer">${info.left_time }</span> <span class="mark">0</span>/10
-		<input class="btn btn-primary" type="button" value="임시저장"
-			id="tempstrg" onclick="javascript:submitFunction(${info.exam_no}, 2)">
-		<input class="btn btn-primary" type="button" value="제출하기"
-			onclick="javascript:submitFunction(${info.exam_no}, 1)">
-	</div>
-</body>
-</html>
+<c:import url="examfooter.jsp" />

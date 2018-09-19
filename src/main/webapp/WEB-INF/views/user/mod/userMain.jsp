@@ -47,16 +47,14 @@
 	<%@ include file="../mod/footer.jsp"%>
 		
 	<script type="text/javascript">
-		
 			function goExamMain(){
 				$("#menu").attr("action", "user/exam/examlist.daou");
 				$("#menu").submit();
 			}
 			function goExamRecord(){
-				$("#menu").attr("action", "examRecord.daou");
+				$("#menu").attr("action", "/user/exam/recordList.daou");
 				$("#menu").submit();
 			}
-		
 			function goUserBoard(){
 				$("#menu").attr("action", "userBoard.daou");
 				$("#menu").submit();

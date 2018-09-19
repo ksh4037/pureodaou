@@ -24,6 +24,9 @@
 				<th>상태</th>
 				<th>평가</th>
 			</tr>
+			<c:choose>
+				<c:when test="${!empty elist }">
+			
 			<c:forEach items="${elist }" var="e">
 				<tr>
 					<td>${e.exam_degree }</td>
@@ -53,6 +56,11 @@
 						</c:choose></td>
 				</tr>
 			</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<td colspan="8" style="text-align: center; color: #999999;">응시 할 시험이 없습니다</td>
+			</c:otherwise>
+			</c:choose>
 		</table>
 	</div>
 </div>

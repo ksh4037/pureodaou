@@ -153,13 +153,13 @@ public class ExamController {
 
 	@RequestMapping(value = "/user/exam/regist.daou")
 	public ModelAndView regist(HttpServletRequest req, @RequestBody List<MarkVO> list,
-			@RequestParam("type") String type) {
+			@RequestParam("type") String type, @RequestParam("leftTime")String leftTime) {
 		ModelAndView mav = new ModelAndView("user/exam/markResult");
 		String id = getSessionId(req);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("alist", list);
 		map.put("id", id);
-
+		
 		examService.markAnswer(list);
 		mav.addObject("result", "success");
 
@@ -167,12 +167,15 @@ public class ExamController {
 		map.put("id", id);
 		int exam_no = list.get(0).getExam_no();
 		map.put("exam_no", exam_no);
+		
 		if ("2".equals(type)) {
 			map.put("exam_status", "status02");
+			map.put("exam_left_time", 0);
 			examService.changeStatus(map);
 		} else if ("1".equals(type)) {
 			map.put("exam_status", "status03");
 			grading(exam_no);
+			map.put("exam_lfet_time", leftTime);
 			examService.changeStatus(map);
 		}
 		return mav;
@@ -182,7 +185,7 @@ public class ExamController {
 		List<MarkVO> list = examService.getAnswerSheet(exam_no);
 		for (MarkVO m : list) {
 			if (!m.getItem_type().equals("3")) {
-				if (m.getExam_detail_correct().equals(m.getExam_detail_answer()))
+				if (m.getExam_detail_correct().equals(m.getExam_detail_answer()) && m.getExam_detail_answer()!=null)
 					m.setCorrect_yn("Y");
 				else
 					m.setCorrect_yn("N");
