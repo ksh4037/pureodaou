@@ -80,10 +80,10 @@
 		
 	<select id="getShortExamList" parameterType="examUserVO" resultType="hashmap">
 		select i.item_title, i.item_contents, a.exam_no, a.item_no, a.exam_take_id, a.exam_degree, a.exam_detail_no, a.exam_detail_answer, a.exam_detail_correct, a.exam_retake_degree
-		from quiz_item i left outer join
+		from quiz_item i inner join
 		                            ( select u.exam_no, e.item_no, u.exam_take_id, u.exam_degree, e.exam_detail_no, e.exam_detail_answer, e.exam_detail_correct, u.exam_retake_degree
-		                              from quiz_user_exam u left outer join quiz_exam_detail e 
-		                              on u.exam_no = e.exam_no ) a
+		                              from quiz_user_exam u inner join quiz_exam_detail e 
+		                              on u.exam_no = e.exam_no ) a  <!--  le ou jo -->
 		on i.item_no = a.item_no
 		where i.item_type = '3' <!-- // item_type == 3 (주관식(short)) -->
 		and a.exam_take_id = #{exam_take_id}
