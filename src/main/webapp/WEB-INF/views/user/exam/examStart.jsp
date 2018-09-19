@@ -35,19 +35,19 @@
 				<th rowspan="3">과제</th>
 				<th>OX형</th>
 				<td>${intro.exam_ox_num }</td>
-				<td>10</td>
+				<td>5</td>
 				<td rowspan="3">100</td>
-				<td rowspan="3">각 과제의 총점이 60점 미만(100점 만점 기준)의 경우 불합격</td>
+				<td rowspan="3">각 과제의 총점이 일정 점수 미만(100점 만점 기준)의 경우 불합격</td>
 			</tr>
 			<tr>
 				<th>객관식</th>
 				<td>${intro.exam_obj_num }</td>
-				<td>10</td>
+				<td>5</td>
 			</tr>
 			<tr>
 				<th>주관식</th>
 				<td>${intro.exam_short_num }</td>
-				<td>10</td>
+				<td>5</td>
 			</tr>
 		</table>
 		<div

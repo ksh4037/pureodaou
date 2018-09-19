@@ -90,10 +90,17 @@
 
 	<select id="getOptionList" parameterType="Integer"
 		resultType="optionVO">
-		SELECT option_no, correct_yn, option_contents
+		SELECT *
+		FROM
+		(SELECT option_no, correct_yn, option_contents
 		FROM quiz_item_option
 		WHERE
-		item_no = #{item_no}
+		item_no = #{item_no} and correct_yn = 'N'
+		ORDER BY rand() limit 3)
+		UNION
+		(SELECT option_no, correct_yn, option_contents
+		FROM quiz_item_option
+		WHERE item_no = #{item_no} and correct_yn='Y')
 	</select>
 
 	<insert id="makeTest" parameterType="java.util.Map">
@@ -156,13 +163,8 @@
 	<update id="changeStatus" parameterType="hashmap">
 		UPDATE quiz_user_exam
 		SET exam_status = #{exam_status}, exam_left_time = #{exam_left_time}
+		<if test="exam_status=='status03'">,set exam_take_date = now()</if>
 		WHERE exam_no = #{exam_no}
-		<if test="exam_status=='status03'">
-			;
-			update quiz_user_exam
-			set exam_take_date = now()
-			where exam_no = #{exam_no};
-		</if>
 	</update>
 	
 	<update id="grading">
@@ -184,7 +186,7 @@
 		SELECT q.exam_degree, u.exam_retake_degree, c.category_name, u.exam_score, u.exam_status, u.exam_no
 		FROM quiz_exam q, quiz_user_exam u, quiz_category c
 		WHERE q.exam_degree = u.exam_degree and q.exam_category = c.category_no  
-		and u.exam_take_id = #{id} and u.exam_status in ('status04', 'status05')
+		and u.exam_take_id = #{id} and u.exam_status in ('status04', 'status05', 'status03')
 		ORDER BY q.exam_degree desc, u.exam_retake_degree desc
 	</select>
 	

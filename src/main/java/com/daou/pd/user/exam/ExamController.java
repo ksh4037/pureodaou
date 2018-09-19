@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.daou.pd.admin.item.ItemVO;
@@ -50,7 +51,9 @@ public class ExamController {
 	public ModelAndView examTest(@RequestParam("degree") String str, @RequestParam("ox_num") String ox,
 			@RequestParam("obj_num") String obj, @RequestParam("short_num") String short_n,
 			@RequestParam("category") String category, HttpServletRequest req, @RequestParam("examNo") String examNo,
-			@RequestParam("categoryName") String categoryName, @RequestParam("exam_status") String exam_status) {//시험여부 검사, 가져오기
+			@RequestParam("categoryName") String categoryName, @RequestParam("exam_status") String exam_status) {// 시험여부
+																													// 검사,
+																													// 가져오기
 		int degree = Integer.parseInt(str);
 		int ox_num = Integer.parseInt(ox);
 		int obj_num = Integer.parseInt(obj);
@@ -104,9 +107,9 @@ public class ExamController {
 		List<ExamDetailVO> dlist = new ArrayList<ExamDetailVO>();
 		for (ItemVO item : list) {
 			List<OptionVO> olist = examService.getOption(item.getItem_no());
-			List<OptionVO> olist2 = new ArrayList<OptionVO>();
+//			List<OptionVO> olist2 = new ArrayList<OptionVO>();
 			if (olist.size() > 1) {
-				for (OptionVO op : olist) {
+				/*for (OptionVO op : olist) {
 					if (op.getCorrect_yn().equals("Y")) {
 						olist2.add(op);
 						break;
@@ -117,9 +120,9 @@ public class ExamController {
 						if (olist2.size() < 4) {
 							olist2.add(op);
 						}
-				}
-				Collections.shuffle(olist2);
-				item.setOvo(olist2);
+				}*/
+				Collections.shuffle(olist);
+				item.setOvo(olist);
 			} else {
 				item.setOvo(olist);
 			}
@@ -151,41 +154,48 @@ public class ExamController {
 		examService.makeTest(dlist);
 	}
 
-	@RequestMapping(value = "/user/exam/regist.daou")
-	public ModelAndView regist(HttpServletRequest req, @RequestBody List<MarkVO> list,
-			@RequestParam("type") String type, @RequestParam("leftTime")String leftTime) {
-		ModelAndView mav = new ModelAndView("user/exam/markResult");
+	@RequestMapping(value = "/user/exam/regist.daou")//답안 제출
+	@ResponseBody
+	public String regist(HttpServletRequest req, @RequestBody List<MarkVO> list,
+			@RequestParam("type") String type, @RequestParam("leftTime") String leftTime) {
+//		ModelAndView mav = new ModelAndView("user/exam/markResult");
 		String id = getSessionId(req);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("alist", list);
 		map.put("id", id);
-		
+
 		examService.markAnswer(list);
-		mav.addObject("result", "success");
+		
+		String msg = null;
+//		mav.addObject("result", "success");
 
 		map = new HashMap<String, Object>();
 		map.put("id", id);
 		int exam_no = list.get(0).getExam_no();
 		map.put("exam_no", exam_no);
-		
-		if ("2".equals(type)) {
+
+		if ("2".equals(type)) {//임시저장
 			map.put("exam_status", "status02");
 			map.put("exam_left_time", leftTime);
 			examService.changeStatus(map);
-		} else if ("1".equals(type)) {
+			msg = "임시주정 성공";
+		} else if ("1".equals(type)) {//최종제출
 			map.put("exam_status", "status03");
 			grading(exam_no);
 			map.put("exam_left_time", 0);
 			examService.changeStatus(map);
+			msg = "제출 성공";
 		}
-		return mav;
+		
+		
+		return msg;
 	}
 
-	private void grading(int exam_no) {
+	private void grading(int exam_no) {//채점
 		List<MarkVO> list = examService.getAnswerSheet(exam_no);
 		for (MarkVO m : list) {
 			if (!m.getItem_type().equals("3")) {
-				if (m.getExam_detail_correct().equals(m.getExam_detail_answer()) && m.getExam_detail_answer()!=null)
+				if (m.getExam_detail_correct().equals(m.getExam_detail_answer()))
 					m.setCorrect_yn("Y");
 				else
 					m.setCorrect_yn("N");
@@ -221,7 +231,8 @@ public class ExamController {
 					mark.setExam_detail_answer(strlist.get(0));
 					mark.setExam_detail_correct(strlist.get(1));
 				} else {
-					mark.setExam_detail_answer(strlist.get(0));
+					if (mark.getExam_detail_answer() != null)
+						mark.setExam_detail_answer(strlist.get(0));
 					mark.setExam_detail_correct(strlist.get(0));
 				}
 			}

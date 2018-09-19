@@ -197,17 +197,8 @@
 			processData : true,
 			contentType :'application/json; charset=UTF-8',
 			success : function(data) {
-				if(data=='success'){
-					if(type==1)
-						alert('제출 성공했습니다');
-					else if(type==2)
-						alert('임시저장 성공');
+					alert(data);
 					location.href="${pageContext.request.contextPath}/userMain.daou";
-				}else if(data=='fail'){
-					alert('제출에 실패샜습니다');
-				}else{
-					alert('오류');
-				}
 			},
 			error : function() {
 				alert('제출 실패');

@@ -73,12 +73,12 @@ public class ItemController {
 
 		ModelAndView mav = new ModelAndView("admin/item/result");
 
-		String msg = "";
-		int i_result = 0;
-		int o_result = 0;
+		String msg = "";  // 전체 쿼리가 잘 적용됬는지에 대한 ajax 리턴값 (success or error)
+		int i_result = 0; // 문제 insert 쿼리 리턴 값
+		int o_result = 0; // 보기 insert 쿼리 리턴 값
 
 		try {
-			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X 또는 주관식인 경우
+			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X 또는 주관식인 경우 insert
 
 				i_result = itemService.itemReg(ivo);
 				int item_no = itemService.selectItemSeq();
@@ -95,7 +95,7 @@ public class ItemController {
 					msg = "error";
 				}
 
-			} else if (ivo.getItem_type().equals("2")) { // 객관식인 경우
+			} else if (ivo.getItem_type().equals("2")) { // 객관식인 경우 insert
 
 				i_result = itemService.itemReg(ivo);
 				int item_no = itemService.selectItemSeq();
@@ -150,9 +150,6 @@ public class ItemController {
 				while(checkListFilter.hasMoreTokens()) 
 				{ 
 					itemNoList.add(checkListFilter.nextToken());
-				}
-				for(int i =0 ; i<itemNoList.size(); i++) {
-					System.out.println("넘어온 값 : " + itemNoList.get(i));
 				}
 
 				result = itemService.deleteItem(itemNoList);

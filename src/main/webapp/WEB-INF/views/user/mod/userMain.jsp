@@ -35,9 +35,7 @@
 				<input class="form-control" type="submit" id="examMain_btn"
 					value="시험 보기" onclick="goExamMain();"><br></br> <input
 					class="form-control" type="submit" id="examRecord_btn"
-					value="기록 보기" onclick="goExamRecord();"> <br></br> <input
-					class="form-control" type="submit" id="userBoard_btn" value="게시판"
-					onclick="goUserBoard();">
+					value="기록 보기" onclick="goExamRecord();"> <br></br> 
 			</form>
 		</div>
 	</div>
@@ -51,10 +49,6 @@
 			}
 			function goExamRecord(){
 				$("#menu").attr("action", "/user/exam/recordList.daou");
-				$("#menu").submit();
-			}
-			function goUserBoard(){
-				$("#menu").attr("action", "userBoard.daou");
 				$("#menu").submit();
 			}
 			function goUserLogout(){
