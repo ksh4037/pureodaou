@@ -16,14 +16,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			boolean result = false;
 			String reqUrl = request.getRequestURL().toString();
 			System.out.println(reqUrl);
-	/*
+
 		  try {
 			  HttpSession session = request.getSession();
 			 
-			  if(reqUrl.contains("/userLogout.daou")||reqUrl.contains("/admin/login.daou") || reqUrl.contains("/admin/logout.daou")){
+			  if(reqUrl.contains("userLogout.daou")|| reqUrl.contains("goUserLogin.daou")|| reqUrl.contains("admin/goLogin.daou")||reqUrl.contains("admin/login.daou") || reqUrl.contains("admin/logout.daou")){
 				  return true;
 			  }else {
 				  if(reqUrl.contains("/admin")) {  
+					  System.out.println("admin 탔다 "+session.getAttribute("admin_emp_id"));
 					  Object admin_obj = session.getAttribute("admin_emp_id");
 						if (admin_obj == null) {
 			    			response.sendRedirect(request.getContextPath() + "/admin/logout.daou");
@@ -33,6 +34,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 						}
 					}
 					else {
+						 System.out.println("user 탔다 "+session.getAttribute("user_emp_id"));
 						Object user_obj = session.getAttribute("user_emp_id");
 						if(user_obj == null) {
 			    			response.sendRedirect(request.getContextPath() +"/");
@@ -44,8 +46,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			  }
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	        }*/
-	        //admin 세션key 존재시 main 페이지 이동
+	        }
 	        return true;
 	    }
 

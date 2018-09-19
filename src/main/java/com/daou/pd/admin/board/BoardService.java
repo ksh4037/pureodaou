@@ -21,9 +21,9 @@ public interface BoardService {
 	
 	public int selectSetCount(ExamVO exvo);
 	
-	public int deptAverage(ExamVO exvo);
+	public double deptAverage(ExamVO exvo);
 	
-	public int gradeAverage(ExamVO exvo);
+	public double gradeAverage(ExamVO exvo);
 	
 	public List<HashMap<String,Object>> rankWrongCount(ExamVO exvo);
 

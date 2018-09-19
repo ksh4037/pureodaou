@@ -2,13 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-	<%@ include file="../common/import.jsp"%>
-
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+	
+<link href="../resources/css/login.css" rel="stylesheet" type="text/css"></link>
+</head>
 <body style="background-color: #5bc0de">
 	<div class="container">
 		<img src="../resources/img/logo2.png" width="325px"
-			style="padding-top: 20px; float: center" />
+			style="padding-top:  20px;" />
 		<form id="login" name="login" method="post" class="form-horizontal">
 			<table>
 				<thead></thead>
@@ -20,7 +27,8 @@
 					</tr>
 					<tr>
 						<td><label class="control-label col-sm-2" for="emp_pw">패스워드:</label></td>
-						<td><input type="password" class="form-control" onkeypress="if(event.keyCode==13) {goLogin();}" id="emp_pw" placeholder="비밀번호를 입력하세요." name="emp_pw" size=100 ></td>
+						<td><input type="password" class="form-control" onkeypress="if(event.keyCode==13) {goLogin();}" id="emp_pw"
+							placeholder="비밀번호를 입력하세요." name="emp_pw" size=100></td>
 					</tr>
 				</tbody>
 			</table>
