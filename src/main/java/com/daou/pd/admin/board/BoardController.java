@@ -60,28 +60,38 @@ public class BoardController {
 		double gradeAverage = boardService.gradeAverage(exvo);
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		System.out.println("examTargetAll : "+examTargetAll);
+		System.out.println("examTargetDo : "+examTargetDo);
+		System.out.println("passTarget : "+passTarget);
+		System.out.println("deptAverage : "+deptAverage);
+		System.out.println("gradeAverage : "+gradeAverage);
 
 		try {
 			if (examTargetAll==0) {
-				map.put("examPercent", "none");
+				examPercent = "0";
+				passPercent = "0";
+				deptAvg = "0";
+				gradeAvg = "0";
 			}else if(examTargetDo ==0) {
-				map.put("examPercent", "anybody");
+				
+				map.put("examPercent", "응시자 없음");
 			}else {
 			
 				examPercent = String.format("%.2f",((float) examTargetDo/ (float) examTargetAll)*100);
 				passPercent = String.format("%.2f",((float) passTarget/ (float) examTargetDo)*100);
 				deptAvg = String.format("%.2d",deptAverage);
 				gradeAvg = String.format("%.2d",gradeAverage);
-				
-				map.put("examPercent", examPercent);
-				map.put("examTargetAll", Integer.toString(examTargetAll));
-				map.put("examTargetDo", Integer.toString(examTargetDo));
-				map.put("passTarget", Integer.toString(passTarget));
-				map.put("passPercent",passPercent);
-				map.put("deptAverage", deptAvg);
-				map.put("gradeAverage", gradeAvg);
 		
 			}
+			map.put("examPercent", examPercent);
+			map.put("examTargetAll", Integer.toString(examTargetAll));
+			map.put("examTargetDo", Integer.toString(examTargetDo));
+			map.put("passTarget", Integer.toString(passTarget));
+			map.put("passPercent",passPercent);
+			map.put("deptAverage", deptAvg);
+			map.put("gradeAverage", gradeAvg);
+			
 		}
 		catch(Exception e) {
 			map.put("examPercent", "error");

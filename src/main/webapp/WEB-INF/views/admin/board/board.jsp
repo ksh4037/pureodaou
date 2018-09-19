@@ -124,6 +124,8 @@
 		<script type="text/javascript">
 			google.charts.load('current', {'packages':['corechart']});
 			google.charts.setOnLoadCallback(search);
+		</script>
+		<script>
 			function search() {
 				$("#textappend").empty();
 				var formDataList = $("form[name=examSelectForm]").serialize();

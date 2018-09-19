@@ -40,11 +40,14 @@
 		)
 	</insert>
 	
-	<update id="deleteMember" parameterType="String">
+	<update id="deleteMember" parameterType="java.util.List">
 		update employee
 		set
 		use_yn = 'N'
-		where emp_id in (#{str})
+		where emp_id in
+		<foreach collection="list" item="emp_id" separator="," open="(" close=")">
+			#{emp_id}
+		</foreach>
 	</update>
 	
 	<select id="memberViewAll" parameterType="String" resultType="HashMap">

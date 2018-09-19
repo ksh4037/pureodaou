@@ -47,7 +47,7 @@
 		select ifnull(count(distinct que.exam_take_id) , 0)
 		from quiz_user_exam que inner join employee e
 		on que.exam_take_id = e.emp_id
-		where que.exam_degree = #{exam_degree} and que.exam_status = ('status03' or 'status04' or'status05') and que.exam_retake_degree = 0
+		where que.exam_degree = #{exam_degree} and que.exam_status in ('status03' , 'status04' ,'status05') and que.exam_retake_degree = 0
 		<choose>
 			<when test="dept_scType !='all' and grade_scType !='all'">
 				and e.emp_dept like #{dept_scType}  and e.emp_grade like #{grade_scType}
