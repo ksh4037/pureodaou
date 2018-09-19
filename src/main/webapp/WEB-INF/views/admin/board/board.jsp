@@ -152,8 +152,8 @@
 					   		
 					   		var dataDo = google.visualization.arrayToDataTable([
 						        ['examPercent', '도달 비율', '남은 비율',{ role: 'annotation' } ],
-						        [$("#exam_degree").val()+'회차 응시율', Number($("#examPercent").val()), (100 - $("#examPercent").val()),''],
-						        [$("#exam_degree").val()+'회차 통과율', Number($("#passPercent").val()), (100 - $("#passPercent").val()),'']
+						        [$("#exam_degree").val()+'회차 응시율', Number($("#examPercent").val()), (100.00 - $("#examPercent").val()),''],
+						        [$("#exam_degree").val()+'회차 통과율', Number($("#passPercent").val()), (100.00 - $("#passPercent").val()),'']
 						      ]);
 					   		
 					   		

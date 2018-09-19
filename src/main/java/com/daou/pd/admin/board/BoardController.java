@@ -61,27 +61,19 @@ public class BoardController {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println("examTargetAll : "+examTargetAll);
-		System.out.println("examTargetDo : "+examTargetDo);
-		System.out.println("passTarget : "+passTarget);
-		System.out.println("deptAverage : "+deptAverage);
-		System.out.println("gradeAverage : "+gradeAverage);
 
 		try {
-			if (examTargetAll==0) {
+			if (examTargetAll==0 || examTargetDo ==0) {
 				examPercent = "0";
 				passPercent = "0";
 				deptAvg = "0";
 				gradeAvg = "0";
-			}else if(examTargetDo ==0) {
-				
-				map.put("examPercent", "응시자 없음");
 			}else {
 			
 				examPercent = String.format("%.2f",((float) examTargetDo/ (float) examTargetAll)*100);
 				passPercent = String.format("%.2f",((float) passTarget/ (float) examTargetDo)*100);
-				deptAvg = String.format("%.2d",deptAverage);
-				gradeAvg = String.format("%.2d",gradeAverage);
+				deptAvg = String.format("%.2f",deptAverage);
+				gradeAvg = String.format("%.2f",gradeAverage);
 		
 			}
 			map.put("examPercent", examPercent);
