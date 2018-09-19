@@ -84,7 +84,7 @@
 	
 	
 	
-	<select id="deptAverage" parameterType="examVO" resultType="int">
+	<select id="deptAverage" parameterType="examVO" resultType="double">
 		select ifnull(avg(que.exam_score), 0)
 		from quiz_user_exam que inner join employee e
 		on que.exam_take_id = e.emp_id
@@ -99,7 +99,7 @@
 	
 	
 	
-	<select id="gradeAverage" parameterType="examVO" resultType="int">
+	<select id="gradeAverage" parameterType="examVO" resultType="double">
 		select ifnull(avg(que.exam_score), 0)
 		from quiz_user_exam que inner join employee e
 		on que.exam_take_id = e.emp_id

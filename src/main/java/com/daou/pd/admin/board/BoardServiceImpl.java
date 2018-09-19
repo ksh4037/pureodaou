@@ -60,13 +60,13 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-		public int deptAverage(ExamVO exvo) {
+		public double deptAverage(ExamVO exvo) {
 			boardMapper = sqlSession.getMapper(BoardMapper.class);
 			return boardMapper.deptAverage(exvo);
 		}
 		
 		@Override
-		public int gradeAverage(ExamVO exvo) {
+		public double gradeAverage(ExamVO exvo) {
 			boardMapper = sqlSession.getMapper(BoardMapper.class);
 			return boardMapper.gradeAverage(exvo);
 		}

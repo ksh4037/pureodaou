@@ -31,11 +31,11 @@
         <interceptor>
             <mapping path="/admin/**"/>
             <mapping path="/user/**"/>
-            <mapping path="user/exam/examlist.daou"/>
-            <mapping path="goUserLogin.daou"/>
-            <mapping path="userMain.daou"/>
-            <mapping path="userUpdtForm.daou"/>
-            <mapping path="userUpdt.daou"/>
+            <mapping path="/user/exam/examlist.daou"/>
+            <mapping path="/goUserLogin.daou"/>
+            <mapping path="/userMain.daou"/>
+            <mapping path="/userUpdtForm.daou"/>
+            <mapping path="/userUpdt.daou"/>
             <beans:ref bean="LoginInterceptor"/>
         </interceptor>
     </interceptors>

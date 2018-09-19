@@ -27,7 +27,7 @@ public class BoardController {
 	@Resource(name = "boardService")
 	private BoardService boardService;
 
-	@RequestMapping(value = "/admin/boardList.daou")
+	@RequestMapping(value = "admin/boardList.daou")
 	public ModelAndView springMVC(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, BoardVO bvo) {
 		
 		ModelAndView mav = new ModelAndView("admin/board/board");
@@ -44,27 +44,23 @@ public class BoardController {
 	}
 
 	
-	@RequestMapping(value = "/admin/examPercent.daou")
+	@RequestMapping(value = "admin/examPercent.daou")
 	@ResponseBody
 	public HashMap<String, Object> examPercent(HttpServletRequest request, HttpServletResponse response, ExamVO exvo) {
 		
 		String examPercent ="";
 		String passPercent= "";
-		
+		String deptAvg = "";
+		String gradeAvg = "";
 		
 		int examTargetAll = boardService.selectTarget(exvo);
 		int examTargetDo = boardService.selectTargetDo(exvo);
 		int passTarget = boardService.selectPass(exvo);
-		int deptAverage = boardService.deptAverage(exvo);
-		int gradeAverage = boardService.gradeAverage(exvo);
+		double deptAverage = boardService.deptAverage(exvo);
+		double gradeAverage = boardService.gradeAverage(exvo);
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		System.out.println("examTargetAll"+examTargetAll);
-		System.out.println("examTargetDo"+examTargetDo);
-		System.out.println("passTarget"+passTarget);
-		
-		
+
 		try {
 			if (examTargetAll==0) {
 				map.put("examPercent", "none");
@@ -74,14 +70,16 @@ public class BoardController {
 			
 				examPercent = String.format("%.2f",((float) examTargetDo/ (float) examTargetAll)*100);
 				passPercent = String.format("%.2f",((float) passTarget/ (float) examTargetDo)*100);
+				deptAvg = String.format("%.2d",deptAverage);
+				gradeAvg = String.format("%.2d",gradeAverage);
 				
 				map.put("examPercent", examPercent);
 				map.put("examTargetAll", Integer.toString(examTargetAll));
 				map.put("examTargetDo", Integer.toString(examTargetDo));
 				map.put("passTarget", Integer.toString(passTarget));
 				map.put("passPercent",passPercent);
-				map.put("deptAverage", Integer.toString(deptAverage));
-				map.put("gradeAverage", Integer.toString(gradeAverage));
+				map.put("deptAverage", deptAvg);
+				map.put("gradeAverage", gradeAvg);
 		
 			}
 		}
@@ -93,7 +91,7 @@ public class BoardController {
 	}
 	
 	
-	@RequestMapping(value = "/admin/wrongPercent.daou")
+	@RequestMapping(value = "admin/wrongPercent.daou")
 	@ResponseBody
 	public String wrongPercent(HttpServletRequest request, HttpServletResponse response, ExamVO exvo, BoardVO boardVO) {
 		

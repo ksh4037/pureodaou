@@ -56,8 +56,8 @@ public class UserController {
 		if (IdCheckResult != checkKey) {
 			mav.addObject("resultCode", "IDfail");
 		} else if (fullCheckResult == checkKey) {
-			session.setAttribute("emp_id", uvo.getEmp_id());
-			session.setAttribute("emp_name", uvo.getEmp_name());
+			session.setAttribute("user_emp_id", uvo.getEmp_id());
+			session.setAttribute("user_emp_name", uvo.getEmp_name());
 			mav.addObject("resultCode", "success");
 		} else {
 			mav.addObject("resultCode", "PWfail");

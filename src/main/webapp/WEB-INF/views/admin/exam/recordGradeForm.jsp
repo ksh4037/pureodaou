@@ -86,8 +86,8 @@
 									<tr>
 										<td>정답 유무</td>
 										<td>
-											<input type="radio" name="correct_yn_${shortExamList.exam_detail_no}" class="red_correct_yn" value="Y" index="${shortExamList.exam_detail_no}"> 정답
-											<input type="radio" name="correct_yn_${shortExamList.exam_detail_no}" class="red_correct_yn" value="N" index="${shortExamList.exam_detail_no}"> 오답
+											<input type="radio" name="correct_yn_${shortExamList.exam_detail_no}" class="red_correct_yn" value="Y" id="correct_yn" index="${shortExamList.exam_detail_no}"> 정답
+											<input type="radio" name="correct_yn_${shortExamList.exam_detail_no}" class="red_correct_yn" value="N" id="correct_yn" index="${shortExamList.exam_detail_no}"> 오답
 											<input type="hidden" name="correct_yn" id="correct_yn" index="${shortExamList.exam_detail_no}"/>
 							       		</td>
 									</tr>
@@ -133,6 +133,13 @@
 		
 			
 		function goUpdt(){
+			
+			if($(':radio[id="correct_yn"]:checked').length != ($(':radio[id="correct_yn"]').length/2)){
+				alert('정답여부를 선택해주세요.');
+				return;
+			}
+			
+			
 			var queryString = $("form[name=recordGradeForm]").serialize();
 
 			$.ajax({

@@ -3,15 +3,9 @@
  */
 
 
-$(function(){  //datepicker 설정
-    $("#exam_start_date").datepicker();
-    $("#exam_end_date").datepicker();
-});
-
-
 
 $(document).ready(function() {
-	
+
 	// ----- 에디터 가져오기 ----
 	$('.summernote').summernote({
 		         height : 500, // 기본 높이값
@@ -42,35 +36,35 @@ $(document).ready(function() {
 		$("#exam_li").removeClass("active_1"); 
 		$("#member_li").removeClass("active_1"); 
 		$("#board_li").removeClass("active_1"); 
-		$("#write_li").removeClass("active_1"); 
+		$("#record_li").removeClass("active_1"); 
 	}
 	if(path.indexOf("admin/category") != -1) {
 		$("#item_li").addClass("active_1"); 
 		$("#exam_li").removeClass("active_1"); 
 		$("#member_li").removeClass("active_1"); 
 		$("#board_li").removeClass("active_1"); 
-		$("#write_li").removeClass("active_1"); 
+		$("#record_li").removeClass("active_1"); 
 	}
 	if(path.indexOf("admin/employee") != -1) {
 		$("#member_li").addClass("active_1"); 
 		$("#exam_li").removeClass("active_1"); 
 		$("#item_li").removeClass("active_1"); 
 		$("#board_li").removeClass("active_1"); 
-		$("#write_li").removeClass("active_1"); 
+		$("#record_li").removeClass("active_1"); 
 	}
 	if(path.indexOf("admin/board") != -1) {
 		$("#board_li").addClass("active_1"); 
 		$("#exam_li").removeClass("active_1"); 
 		$("#item_li").removeClass("active_1"); 
 		$("#member_li").removeClass("active_1"); 
-		$("#write_li").removeClass("active_1"); 
+		$("#record_li").removeClass("active_1"); 
 	}
 	if(path.indexOf("admin/exam") != -1) {
 		$("#exam_li").addClass("active_1"); 
 		$("#board_li").removeClass("active_1"); 
 		$("#item_li").removeClass("active_1"); 
 		$("#member_li").removeClass("active_1"); 
-		$("#write_li").removeClass("active_1"); 
+		$("#record_li").removeClass("active_1"); 
 	}
 	if(path.indexOf("admin/record") != -1) {
 		$("#record_li").addClass("active_1"); 
