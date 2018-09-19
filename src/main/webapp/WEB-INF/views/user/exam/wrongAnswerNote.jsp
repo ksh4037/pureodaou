@@ -20,17 +20,6 @@
 input[type=radio] {
 	margin-right: 10px;
 }
-
-.footer {
-	position: fixed;
-	left: 0px;
-	bottom: 0px;
-	height: 50px;
-	width: 100%;
-	background: #EEEEEE;
-	text-align: right;
-	padding: 10px;
-}
 </style>
 </head>
 <body>

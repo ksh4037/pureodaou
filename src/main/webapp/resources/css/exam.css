@@ -31,3 +31,6 @@ th {
 table {
 	border-color: #999999;
 }
+input[type=radio] {
+	margin-right: 10px;
+}
