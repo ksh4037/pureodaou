@@ -18,9 +18,7 @@ public interface BoardService {
 	public int selectTargetDo(ExamVO exvo);
 	
 	public int selectPass(ExamVO exvo);
-	
-	public int selectSetCount(ExamVO exvo);
-	
+		
 	public double deptAverage(ExamVO exvo);
 	
 	public double gradeAverage(ExamVO exvo);

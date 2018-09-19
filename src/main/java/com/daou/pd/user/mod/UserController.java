@@ -114,11 +114,20 @@ public class UserController {
 		    sbuf.append(tmpEncTxt) ;
 		    }
 		uvo.setEmp_pw(sbuf.toString());
+		System.out.println("uvo.getEmp_id "+uvo.getEmp_id());
+		System.out.println("uvo.getEmp_pw "+uvo.getEmp_pw());
+		System.out.println("uvo.getEmp_name "+uvo.getEmp_name());
+		System.out.println("uvo.getEmp_tel "+uvo.getEmp_tel());
+		System.out.println("uvo.getEmp_dept "+uvo.getEmp_dept());
+		System.out.println("uvo.getEmp_grade "+uvo.getEmp_grade());
 		try {
+			uvo.setEmp_type(2);
+			uvo.setUse_yn("Y");
 			userService.updateMember(uvo);
 			mav.addObject("resultCode", "success");
 			return mav;
 		} catch (Exception e) {
+			System.out.println("exception : "+e);
 			mav.addObject("resultCode", "error");
 		}
 		return mav;

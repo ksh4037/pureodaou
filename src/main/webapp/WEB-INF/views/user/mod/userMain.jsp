@@ -9,8 +9,6 @@
 <head>
 <%@ include file="../mod/import.jsp"%>
 
-<link href="./resources/css/user.css" rel="stylesheet" type="text/css">
-
 </head>
 <body>
 	<div class="row content">
@@ -20,7 +18,7 @@
 			<input class="btn btn-default" type="submit" id="logout_btn" value="로그아웃" onclick="goUserLogout();">
 			<form id="user_list" name="user_list" method="post" action="userUpdtForm.daou"> 
 				<input type="hidden" name="emp_id" id="emp_id">
-				<button type="button" class="btn btn-default" onclick="userUptForm(${sessionScope.emp_id});">개인정보 수정</button>	 
+				<button type="button" class="btn btn-default" onclick="userUptForm(${sessionScope.user_emp_id});">개인정보 수정</button>	 
 			</form>
 
 		</div>

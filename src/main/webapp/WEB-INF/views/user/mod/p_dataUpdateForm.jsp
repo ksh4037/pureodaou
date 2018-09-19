@@ -40,7 +40,7 @@
 		</div>
 		<div class="content-body">
 			<h2>
-				<span class="body-font"><%=session.getAttribute("emp_id")%>님
+				<span class="body-font"><%=session.getAttribute("user_emp_id")%>님
 					환영합니다!</span>
 			</h2>
 			<h5></h5>
@@ -64,7 +64,7 @@
 						</tr>
 						<tr>
 							<th scope="row">부서</th>
-							<td><select id="emp_dep" name="emp_dep" class="form-control">
+							<td><select id="emp_dept" name="emp_dept" class="form-control">
 									<c:forEach var="item" items="${deptList}">
 											<option value="${item.quiz_cfg_code}"
 												<c:if test="${memberView.emp_dept == item.quiz_cfg_code}"> selected </c:if>>${item.quiz_cfg_code_name}</option>
@@ -117,7 +117,7 @@
 				alert("이름은 필수 입력사항 입니다.");
 				return;
 			}
-			if ($("#emp_dep").val() == '') {
+			if ($("#emp_dept").val() == '') {
 				input_check = false;
 				alert("부서는 필수 입력사항 입니다.");
 				return;
@@ -155,11 +155,11 @@
 							alert("수정되었습니다.");
 							location.href = "userMain.daou";
 						} else {
-							alert('1.수정 실패!');
+							alert('수정 실패!');
 						}
 					},
 					error : function(data) {
-						alert('2.수정 실패!');
+						alert('수정 실패!');
 					}
 				});
 			} else {
