@@ -184,7 +184,7 @@
 		SELECT q.exam_degree, u.exam_retake_degree, c.category_name, u.exam_score, u.exam_status, u.exam_no
 		FROM quiz_exam q, quiz_user_exam u, quiz_category c
 		WHERE q.exam_degree = u.exam_degree and q.exam_category = c.category_no  
-		and u.exam_take_id = #{id} and u.exam_status in ('status04', 'status05')
+		and u.exam_take_id = #{id} and u.exam_status in ('status04', 'status05', 'status03')
 		ORDER BY q.exam_degree desc, u.exam_retake_degree desc
 	</select>
 	

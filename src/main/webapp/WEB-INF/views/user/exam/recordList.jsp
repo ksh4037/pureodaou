@@ -6,7 +6,7 @@
 	<div class="topbox"
 		style="background-color: #114a9b; color: white; font-size: 16px; padding: 10px;">
 		<ul>
-			<li>${id }님의과제 목록 입니다.</li>
+			<li>${id }님의과제목록입니다.</li>
 			<li>각 평가의 점수와 답안을 확인 가능합니다</li>
 			<li>각 평가당 총점 60점 이상(100점 만점 기준)이어야 수료입니다.</li>
 		</ul>
@@ -42,10 +42,19 @@
 						<c:when test="${r.exam_status == 'status04' }">
 							<td style="color: blue;">합격</td>
 						</c:when>
+						<c:when test="${r.exam_status == 'status03' }">
+							<td style="color: green;">채점중</td>
+						</c:when>
 					</c:choose>
-					<td><input class="btn btn-primary" id="${r.exam_no }"
-						type="button" value="오답노트" onclick="javascript:go(${r.exam_no})"></td>
-
+					<td><c:choose>
+							<c:when test="${r.exam_status == 'status03' }">
+						-
+					</c:when>
+							<c:otherwise>
+								<input class="btn btn-primary" id="${r.exam_no }" type="button"
+									value="오답노트" onclick="javascript:go(${r.exam_no})">
+							</c:otherwise>
+						</c:choose></td>
 				</tr>
 			</c:forEach>
 		</table>
