@@ -170,12 +170,12 @@ public class ExamController {
 		
 		if ("2".equals(type)) {
 			map.put("exam_status", "status02");
-			map.put("exam_left_time", 0);
+			map.put("exam_left_time", leftTime);
 			examService.changeStatus(map);
 		} else if ("1".equals(type)) {
 			map.put("exam_status", "status03");
 			grading(exam_no);
-			map.put("exam_lfet_time", leftTime);
+			map.put("exam_left_time", 0);
 			examService.changeStatus(map);
 		}
 		return mav;
@@ -196,7 +196,7 @@ public class ExamController {
 
 	private String getSessionId(HttpServletRequest req) {
 		HttpSession session = req.getSession(false);
-		String id = (String) session.getAttribute("emp_id");
+		String id = (String) session.getAttribute("user_emp_id");
 		return id;
 	}
 
