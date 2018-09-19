@@ -1,8 +1,10 @@
 package com.daou.pd.admin.employee;
 
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -136,12 +138,23 @@ public class EmpController {
 			str += delList[i].toString() +",";
 		}
 		str += delList[delList.length-1].toString();
-		System.out.println(str);
+		
 		try {
-				empService.deleteMember(str);
+			List<String> idNoList = new ArrayList<String>();
+			StringTokenizer checkListFilter = new StringTokenizer(str, ","); 
+
+			while(checkListFilter.hasMoreTokens()) 
+			{ 
+				idNoList.add(checkListFilter.nextToken());
+			}
+			for(int i =0 ; i<idNoList.size(); i++) {
+				System.out.println("넘어온 값 : " + idNoList.get(i));
+			}
+
+			empService.deleteMember(idNoList);
 			mav.addObject("resultCode", "success");
 		} catch (Exception e) {
-			mav.addObject("resultCode", "error");
+			mav.addObject("resultCode", "fail");
 		}
 		return mav;
 	}

@@ -15,7 +15,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 			boolean result = false;
 			String reqUrl = request.getRequestURL().toString();
-			System.out.println(reqUrl);
 
 		  try {
 			  HttpSession session = request.getSession();
@@ -24,7 +23,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				  return true;
 			  }else {
 				  if(reqUrl.contains("/admin")) {  
-					  System.out.println("admin 탔다 "+session.getAttribute("admin_emp_id"));
 					  Object admin_obj = session.getAttribute("admin_emp_id");
 						if (admin_obj == null) {
 			    			response.sendRedirect(request.getContextPath() + "/admin/logout.daou");
@@ -34,7 +32,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 						}
 					}
 					else {
-						 System.out.println("user 탔다 "+session.getAttribute("user_emp_id"));
 						Object user_obj = session.getAttribute("user_emp_id");
 						if(user_obj == null) {
 			    			response.sendRedirect(request.getContextPath() +"/");

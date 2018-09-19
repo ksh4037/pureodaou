@@ -20,6 +20,8 @@ public class EmpServiceImpl implements EmpService {
 		this.sqlSession = sqlSession;
 	}
 
+	
+	
 	@Override
 	public int selectUser(EmpVO evo) {
 		empMapper = sqlSession.getMapper(EmpMapper.class);
@@ -45,9 +47,9 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public void deleteMember(String str) {
+	public void deleteMember(List<String> idNoList) {
 		empMapper = sqlSession.getMapper(EmpMapper.class);
-		empMapper.deleteMember(str);
+		empMapper.deleteMember(idNoList);
 	}
 
 	@Override

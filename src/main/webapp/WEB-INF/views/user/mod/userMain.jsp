@@ -26,7 +26,7 @@
 		</div>
 		<div class="content-body">
 			<h2>
-				<span class="body-font"><%=session.getAttribute("emp_id")%>님
+				<span class="body-font"><%=session.getAttribute("user_emp_id")%>님
 					환영합니다!</span>
 			</h2>
 			<h5></h5>

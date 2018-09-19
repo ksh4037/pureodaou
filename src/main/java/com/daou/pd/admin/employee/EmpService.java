@@ -13,7 +13,7 @@ public interface EmpService {
 
 	public void insertMember(EmpVO evo) throws Exception;
 
-	public void deleteMember(String str) throws Exception;
+	public void deleteMember(List<String> idNoList) throws Exception;
 
 	public EmpVO memberView(EmpVO evo);
 	
