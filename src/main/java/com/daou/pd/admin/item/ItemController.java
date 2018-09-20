@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
-
+//peace
 @Controller
 public class ItemController {
 	@Autowired
@@ -32,7 +32,7 @@ public class ItemController {
 		List<ItemVO> itemList = itemService.itemList(ivo);
 		List<ItemVO> categoryList = itemService.categoryList();
 
-		mav.addObject("categoryList", categoryList);
+		mav.addObject("categoryList", categoryList); 
 		mav.addObject("itemList", itemList);
 		
 		return mav;
@@ -68,7 +68,7 @@ public class ItemController {
 
 	@RequestMapping(value = "admin/itemReg.daou")
 	public ModelAndView itemReg(HttpServletRequest request, HttpServletResponse response, ItemVO ivo,
-			OptionVO ovo, @RequestParam(value = "option_contents") String[] option_contents) {
+			OptionVO ovo, @RequestParam(value = "option_contents") String[] option_contents) { // option_contents -> [보기]
 
 
 		ModelAndView mav = new ModelAndView("admin/item/result");
@@ -78,7 +78,7 @@ public class ItemController {
 		int o_result = 0; // 보기 insert 쿼리 리턴 값
 
 		try {
-			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X 또는 주관식인 경우 insert
+			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X (type : 1 ) 또는 주관식 (type : 3)인 경우 insert
 
 				i_result = itemService.itemReg(ivo);
 				int item_no = itemService.selectItemSeq();
@@ -94,8 +94,8 @@ public class ItemController {
 				} else {
 					msg = "error";
 				}
-
-			} else if (ivo.getItem_type().equals("2")) { // 객관식인 경우 insert
+				
+			} else if (ivo.getItem_type().equals("2")) { // 객관식(type : 2)인 경우 insert
 
 				i_result = itemService.itemReg(ivo);
 				int item_no = itemService.selectItemSeq();
@@ -104,12 +104,11 @@ public class ItemController {
 
 				for (int i = 0; i < option_contents.length; i++) {
 
-					if (i == ivo.getAnswer_no()) { // �젙�떟�씤 蹂닿린�쓽 �쐞移�
+					if (i == ivo.getAnswer_no()) { // 관리자가 여러개의 보기 중 정답이라고 체크한 부분의 index번호
 						ovo.setCorrect_yn("Y");
 					} else {
 						ovo.setCorrect_yn("N");
 					}
-
 					ovo.setOption_contents(option_contents[i]);
 					o_result += itemService.optionReg(ovo);
 				}
@@ -119,10 +118,7 @@ public class ItemController {
 				} else {
 					msg = "error";
 				}
-				
-
 			}
-
 		} catch (Exception e) {
 			mav.addObject("resultCode", "error");
 		}
@@ -132,7 +128,8 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "admin/deleteItem.daou")
-	public ModelAndView deleteItem(HttpServletRequest request, HttpServletResponse response, ItemVO ivo) {
+	public ModelAndView deleteItem(HttpServletRequest request, HttpServletResponse response, ItemVO ivo) { // 리스트페이지에서 체크박스로 복수의 데이터를 삭제한경우 
+																										   // and 상세보기페이지에서 단일 삭제한경우
 			ModelAndView mav = new ModelAndView("admin/item/result");
 			int result = 0;
 			String msg = "";
@@ -197,7 +194,7 @@ public class ItemController {
 		int o_reg_result = 0;
 		
 		try {
-			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X , 또는 주관식인 경우
+			if (ivo.getItem_type().equals("1") || ivo.getItem_type().equals("3")) { // O/X(type : 1) , 또는 주관식(type: 3)인 경우
 
 				i_update_result = itemService.itemUpdt(ivo);
 				o_delete_result = itemService.deleteOption(ivo.getItem_no());
@@ -214,7 +211,7 @@ public class ItemController {
 					msg = "error";
 				}
 
-			} else if (ivo.getItem_type().equals("2")) { // 객관식인 경우
+			} else if (ivo.getItem_type().equals("2")) { // 객관식 (type :2 )인 경우
 
 				i_update_result = itemService.itemUpdt(ivo);
 				o_delete_result = itemService.deleteOption(ivo.getItem_no());
@@ -259,18 +256,18 @@ public class ItemController {
 
 	@RequestMapping(value = "admin/categoryDetail.daou")
 	public ModelAndView categoryDetail(@RequestParam(value = "category_no") int category_no,
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) {   // 카테고리 페이지 상세보기 / 수정하기 페이지 
 
 		ModelAndView mav;
 		String caller = request.getParameter("caller");
 
-		if (caller.equals("updt")) {
+		if (caller.equals("updt")) { // 수정페이지
 			mav = new ModelAndView("admin/item/categoryUpdtForm");
 
 			ItemVO categoryDetail = itemService.categoryDetail(category_no);
 			mav.addObject("categoryDetail", categoryDetail);
 
-		} else {
+		} else { // 상세페이지
 			mav = new ModelAndView("admin/item/categoryDetail");
 
 			ItemVO categoryDetail = itemService.categoryDetail(category_no);

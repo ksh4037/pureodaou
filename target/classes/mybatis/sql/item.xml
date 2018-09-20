@@ -23,7 +23,7 @@
 				
 		from quiz_item q inner join quiz_item_option o  <!-- left -->
 		on q.item_no = o.item_no
-		where q.item_no = #{item_no}
+		where q.item_no = #{item_no} 
 		and q.use_yn = 'Y'
 		order by o.correct_yn desc
 	</select>
@@ -40,7 +40,7 @@
 			#{item_contents},
 			#{item_type},
 			#{category_no},
-			'admin',
+			'admin',  <!-- // 추후에 로그인 부분 완료시 수정 -->
 			now(),
 			null,
 			null,

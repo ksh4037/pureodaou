@@ -1,205 +1,447 @@
 <?xregml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper
+
 	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.daou.pd.user.exam.ExamMapper">
 
+
+
 	<select id="getExamList" parameterType="String"
+
 		resultType="examlistVO">
+
 		SELECT c.category_name, u.exam_degree,
+
 		u.exam_retake_degree, u.exam_left_time, u.exam_retake_degree,
+
 		q.exam_start_date,
-		q.exam_end_date, q.exam_pass_score, g.quiz_cfg_code_name, u.exam_status
+
+		q.exam_end_date, q.exam_pass_score,
+		g.quiz_cfg_code_name, u.exam_status
+
 		FROM
-		quiz_user_exam u, quiz_exam q , quiz_category c, quiz_config g
+
+		quiz_user_exam u, quiz_exam q ,
+		quiz_category c, quiz_config g
+
 		WHERE
-		g.quiz_cfg_code = u.exam_status and q.exam_category = c.category_no
-		and q.exam_degree = u.exam_degree and u.exam_take_id = #{id} and
-		u.exam_final_yn = 'Y' and u.exam_status in ('status01', 'status02')
+
+		g.quiz_cfg_code = u.exam_status and
+		q.exam_category = c.category_no
+
+		and q.exam_degree = u.exam_degree and
+		u.exam_take_id = #{id} and
+
+		u.exam_final_yn = 'Y' and u.exam_status in
+		('status01', 'status02')
+
 		ORDER BY u.exam_degree desc
+
 	</select>
+
+
 
 	<select id="getIntro" parameterType="Integer"
+
 		resultType="examVO">
-		SELECT c.category_name as 'category_name', e.exam_ox_num, e.exam_category, e.exam_degree,
-		e.exam_obj_num, e.exam_short_num, e.exam_pass_score
+
+		SELECT c.category_name as 'category_name', e.exam_ox_num,
+		e.exam_category, e.exam_degree,
+
+		e.exam_obj_num, e.exam_short_num,
+		e.exam_pass_score
+
 		FROM quiz_exam e,
+
 		quiz_category c
-		WHERE e.exam_category = c.category_no and exam_degree =
+
+		WHERE e.exam_category
+		= c.category_no and exam_degree =
+
 		#{exam_degree}
+
 	</select>
+
 	<select id="getSubIntro" parameterType="hashmap"
+
 		resultType="examUserVO">
+
 		SELECT u.exam_left_time, g.quiz_cfg_code_name as
+
 		'status_name', u.exam_no, exam_status
-		FROM quiz_user_exam u, quiz_config g
+
+		FROM quiz_user_exam u,
+		quiz_config g
+
 		WHERE
+
 		u.exam_status = g.quiz_cfg_code
-		and u.exam_degree = #{exam_degree} and
+
+		and u.exam_degree =
+		#{exam_degree} and
+
 		u.exam_take_id = #{reg_id}
+
 		and u.exam_final_yn='Y'
+
 	</select>
+
+
 
 	<select id="checkDegree" parameterType="hashmap"
+
 		resultType="Integer">
+
 		SELECT distinct coalesce(u.exam_no, 0) as 'exam_no'
+
 		FROM
+
 		quiz_exam_detail d, quiz_user_exam u
+
 		WHERE
+
 		d.exam_no = u.exam_no and
+
 		u.exam_degree = #{degree} and u.exam_take_id = #{id}
-		and u.exam_final_yn = 'Y'
+
+		and
+		u.exam_final_yn = 'Y'
+
 	</select>
+
+
 
 	<select id="getExamNo" resultType="Integer"
+
 		parameterType="String">
+
 		SELECT coalesce(max(exam_no),0) as 'exam_no'
+
 		FROM
+
 		quiz_user_exam
+
 		WHERE exam_take_id = #{id}
+
 		and exam_final_yn = 'Y'
+
 	</select>
+
+
 
 	<select id="getOX" parameterType="hashmap" resultType="itemVO">
+
 		SELECT
+
 		item_no, item_title, item_contents
+
 		FROM quiz_item
+
 		WHERE category_no =
+
 		#{exam_category} and item_type = 1 and use_yn = 'Y'
+
 		ORDER BY rand()
+
 		limit #{ox_num}
+
 	</select>
+
 	<select id="getObj" parameterType="hashmap" resultType="itemVO">
+
 		SELECT
+
 		item_no, item_title, item_contents
+
 		FROM quiz_item
+
 		WHERE category_no =
+
 		#{exam_category} and item_type = 2 and use_yn = 'Y'
+
 		ORDER BY rand()
+
 		limit #{obj_num}
+
 	</select>
+
 	<select id="getShort" parameterType="hashmap"
+
 		resultType="itemVO">
+
 		SELECT
+
 		item_no, item_title, item_contents
+
 		FROM quiz_item
+
 		WHERE category_no = #{exam_category} and item_type = 3 and use_yn =
+
 		'Y'
+
 		ORDER BY rand() limit #{short_num}
+
 	</select>
+
+
 
 	<select id="getOptionList" parameterType="Integer"
+
 		resultType="optionVO">
-		SELECT *
+
+		(SELECT option_no, correct_yn, option_contents
+
 		FROM
-		(SELECT option_no, correct_yn, option_contents
-		FROM quiz_item_option
+		quiz_item_option
+
 		WHERE
+
 		item_no = #{item_no} and correct_yn = 'N'
+
 		ORDER BY rand() limit 3)
+
 		UNION
-		(SELECT option_no, correct_yn, option_contents
-		FROM quiz_item_option
-		WHERE item_no = #{item_no} and correct_yn='Y')
+
+		SELECT option_no, correct_yn, option_contents
+
+		FROM
+		quiz_item_option
+
+		WHERE item_no = #{item_no} and correct_yn='Y'
+
 	</select>
 
+
+
 	<insert id="makeTest" parameterType="java.util.Map">
+
 		INSERT INTO quiz_exam_detail (exam_no, item_no, exam_detail_option1,
-		exam_detail_option2, exam_detail_option3, exam_detail_option4, exam_detail_correct) values
+
+		exam_detail_option2, exam_detail_option3, exam_detail_option4,
+		exam_detail_correct) values
+
 		<foreach collection="dlist" item="exam" separator=",">
+
 			(#{exam.exam_no}, #{exam.item_no}, #{exam.exam_detail_option1,
+
 			jdbcType=INTEGER}, #{exam.exam_detail_option2, jdbcType=INTEGER}
+
 			,#{exam.exam_detail_option3, jdbcType=INTEGER},
-			#{exam.exam_detail_option4, jdbcType=INTEGER}, #{exam.exam_detail_correct} )
+
+			#{exam.exam_detail_option4, jdbcType=INTEGER},
+			#{exam.exam_detail_correct} )
+
 		</foreach>
+
 	</insert>
-	
+
+
+
 	<select id="getExam" parameterType="Integer" resultType="itemVO">
-		SELECT q.item_no, q.item_title, q.item_contents, q.item_type
-		FROM quiz_exam_detail d, quiz_item q
-		WHERE d.item_no = q.item_no and d.exam_no = #{exam_no}
+
+		SELECT
+		q.item_no, q.item_title, q.item_contents, q.item_type
+
+		FROM
+		quiz_exam_detail d, quiz_item q
+
+		WHERE d.item_no = q.item_no and
+		d.exam_no = #{exam_no}
+
 	</select>
-	
-	<select id="getExamOptions" parameterType="hashmap" resultType="optionVO">
+
+
+
+	<select id="getExamOptions" parameterType="hashmap"
+		resultType="optionVO">
+
 		SELECT option_no, option_contents, correct_yn
-		FROM quiz_item_option
+
+		FROM
+		quiz_item_option
+
 		WHERE option_no in (
-			(SELECT distinct exam_detail_option1 
-			FROM quiz_exam_detail
-			WHERE item_no = #{item_no} and exam_no = #{exam_no}),
-			(SELECT distinct exam_detail_option2
-			FROM quiz_exam_detail
-			WHERE item_no = #{item_no} and exam_no = #{exam_no}),
-			(SELECT distinct exam_detail_option3 
-			FROM quiz_exam_detail
-			WHERE item_no = #{item_no} and exam_no = #{exam_no}),
-			(SELECT distinct exam_detail_option4 
-			FROM quiz_exam_detail
-			WHERE item_no = #{item_no} and exam_no = #{exam_no})
+
+		(SELECT distinct
+		exam_detail_option1
+
+		FROM quiz_exam_detail
+
+		WHERE item_no = #{item_no} and
+		exam_no = #{exam_no}),
+
+		(SELECT distinct exam_detail_option2
+
+		FROM
+		quiz_exam_detail
+
+		WHERE item_no = #{item_no} and exam_no = #{exam_no}),
+
+		(SELECT distinct exam_detail_option3
+
+		FROM quiz_exam_detail
+
+		WHERE item_no
+		= #{item_no} and exam_no = #{exam_no}),
+
+		(SELECT distinct
+		exam_detail_option4
+
+		FROM quiz_exam_detail
+
+		WHERE item_no = #{item_no} and
+		exam_no = #{exam_no})
+
 		)
+
 	</select>
-	
-	<select id="getTime" parameterType="Integer" resultType="Integer">
+
+
+
+	<select id="getTime" parameterType="Integer"
+		resultType="Integer">
+
 		SELECT distinct exam_left_time
+
 		FROM quiz_user_exam
-		WHERE exam_no = #{exam_no}
+
+		WHERE
+		exam_no = #{exam_no}
+
 	</select>
-	
-	<!-- <update id="markAnswer" parameterType="markVO">
-		UPDATE quiz_exam_detail
-		SET exam_detail_answer = #{exam_detail_answer}
-		WHERE exam_no = #{exam_no} and item_no = #{item_no}
-	</update> -->
-	
+
+
+
+	<!-- <update id="markAnswer" parameterType="markVO"> UPDATE quiz_exam_detail 
+		SET exam_detail_answer = #{exam_detail_answer} WHERE exam_no = #{exam_no} 
+		and item_no = #{item_no} </update> -->
+
+
+
 	<update id="markAnswer" parameterType="java.util.List">
+
 		<foreach collection="list" item="a" separator=";">
-			UPDATE quiz_exam_detail
+
+			UPDATE
+			quiz_exam_detail
+
 			SET exam_detail_answer = #{a.exam_detail_answer}
+
 			WHERE exam_no = #{a.exam_no} and item_no = #{a.item_no}
+
 		</foreach>
+
 		;
+
 	</update>
-	
+
+
+
 	<update id="changeStatus" parameterType="hashmap">
+
 		UPDATE quiz_user_exam
-		SET exam_status = #{exam_status}, exam_left_time = #{exam_left_time}
-		<if test="exam_status=='status03'">,set exam_take_date = now()</if>
+
+		SET exam_status = #{exam_status}, exam_left_time
+		= #{exam_left_time}
+
+		<if test="exam_status=='status03'">, exam_take_date = now()</if>
+
 		WHERE exam_no = #{exam_no}
+
 	</update>
-	
+
+
+
 	<update id="grading">
+
 		<foreach collection="list" item="m" separator=";">
-			UPDATE quiz_exam_detail
+
+			UPDATE
+			quiz_exam_detail
+
 			SET correct_yn = #{m.correct_yn}
-			WHERE item_no = #{m.item_no} and exam_no = #{m.exam_no}
+
+			WHERE item_no =
+			#{m.item_no} and exam_no = #{m.exam_no}
+
 		</foreach>
+
 		;
+
 	</update>
-	
-	<select id="getAnswerSheet" parameterType="Integer" resultType="markVO">
-		SELECT e.item_no, e.exam_detail_answer, e.exam_detail_correct, i.item_type, e.exam_no, e.exam_detail_comment, e.correct_yn
+
+
+
+	<select id="getAnswerSheet" parameterType="Integer"
+		resultType="markVO">
+
+		SELECT e.item_no, e.exam_detail_answer,
+		e.exam_detail_correct, i.item_type, e.exam_no, e.exam_detail_comment,
+		e.correct_yn
+
 		FROM quiz_exam_detail e, quiz_item i
-		WHERE e.item_no = i.item_no and e.exam_no = #{exam_no}
+
+		WHERE e.item_no =
+		i.item_no and e.exam_no = #{exam_no}
+
 	</select>
-	
-	<select id="getRecordList" parameterType="String" resultType="examlistVO">
-		SELECT q.exam_degree, u.exam_retake_degree, c.category_name, u.exam_score, u.exam_status, u.exam_no
-		FROM quiz_exam q, quiz_user_exam u, quiz_category c
-		WHERE q.exam_degree = u.exam_degree and q.exam_category = c.category_no  
-		and u.exam_take_id = #{id} and u.exam_status in ('status04', 'status05', 'status03')
-		ORDER BY q.exam_degree desc, u.exam_retake_degree desc
+
+
+
+	<select id="getRecordList" parameterType="String"
+		resultType="examlistVO">
+
+		SELECT q.exam_degree, u.exam_retake_degree,
+		c.category_name, u.exam_score, u.exam_status, u.exam_no
+
+		FROM quiz_exam
+		q, quiz_user_exam u, quiz_category c
+
+		WHERE q.exam_degree =
+		u.exam_degree and q.exam_category = c.category_no
+
+		and u.exam_take_id =
+		#{id} and u.exam_status in ('status04', 'status05',
+		'status03')
+
+		ORDER BY
+		q.exam_degree desc, u.exam_retake_degree desc
+
 	</select>
-	
-	<select id="getTestNote" parameterType="Integer" resultType="itemVO">
-		SELECT i.item_title, i.item_contents, d.exam_detail_comment, i.item_type
+
+
+
+	<select id="getTestNote" parameterType="Integer"
+		resultType="itemVO">
+
+		SELECT i.item_title, i.item_contents,
+		d.exam_detail_comment, i.item_type
+
 		FROM quiz_item i, quiz_exam_detail d
+
 		WHERE d.item_no = i.item_no and d.exam_no = #{exam_no}
-		ORDER BY d.exam_detail_no
+
+		ORDER BY
+		d.exam_detail_no
+
 	</select>
-	
+
+
+
 	<select id="getMark" resultType="String" parameterType="markVO">
-		SELECT option_contents
+
+		SELECT
+		option_contents
+
 		FROM quiz_item_option
-		WHERE option_no in (#{exam_detail_answer},#{exam_detail_correct})
+
+		WHERE option_no in
+		(#{exam_detail_answer},#{exam_detail_correct})
+
 	</select>
+
 </mapper>	 

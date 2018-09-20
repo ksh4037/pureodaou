@@ -31,7 +31,7 @@
 							<c:if test="${!empty shortExamList}">
 								<c:forEach items="${shortExamList}" var="shortExamList" varStatus="status">
 									<input type="hidden" name="exam_no" id="exam_no" value="${shortExamList.exam_no}">
-									<input type="hidden" name="item_index" value="${shortExamList.exam_detail_no}">
+								    <input type="hidden" name="item_index" value="${shortExamList.exam_detail_no}">  
 									<input type="hidden" name="exam_degree" value="${shortExamList.exam_degree}">
 									<input type="hidden" name="exam_take_id" value="${shortExamList.exam_take_id}">
 									<input type="hidden" name="exam_retake_degree" value="${shortExamList.exam_retake_degree}">
@@ -115,6 +115,7 @@
 								</td>
 							</tr>
 						</table>
+						
 					</div>
 				</form>
 			</div>
@@ -129,6 +130,7 @@
 			 var this_value = $(this).val();
 
 			 $("input[name='correct_yn'][index='"+this_index+"']").val(this_value);
+
 		}); 
 		
 			

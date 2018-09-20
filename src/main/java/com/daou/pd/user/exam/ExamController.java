@@ -109,13 +109,13 @@ public class ExamController {
 			List<OptionVO> olist = examService.getOption(item.getItem_no());
 //			List<OptionVO> olist2 = new ArrayList<OptionVO>();
 			if (olist.size() > 1) {
-				/*for (OptionVO op : olist) {
+				/*for (OptionVO op : olist) {//정답 주입
 					if (op.getCorrect_yn().equals("Y")) {
 						olist2.add(op);
 						break;
 					}
 				}
-				for (OptionVO op : olist) {
+				for (OptionVO op : olist) {//오답 주입
 					if (op.getCorrect_yn().equals("N"))
 						if (olist2.size() < 4) {
 							olist2.add(op);
@@ -154,21 +154,17 @@ public class ExamController {
 		examService.makeTest(dlist);
 	}
 
-	@RequestMapping(value = "/user/exam/regist.daou")//답안 제출
+	@RequestMapping(value = "/user/exam/regist.daou", produces = "application/text; charset=utf8")//답안 제출
 	@ResponseBody
 	public String regist(HttpServletRequest req, @RequestBody List<MarkVO> list,
 			@RequestParam("type") String type, @RequestParam("leftTime") String leftTime) {
-//		ModelAndView mav = new ModelAndView("user/exam/markResult");
 		String id = getSessionId(req);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("alist", list);
 		map.put("id", id);
 
 		examService.markAnswer(list);
-		
 		String msg = null;
-//		mav.addObject("result", "success");
-
 		map = new HashMap<String, Object>();
 		map.put("id", id);
 		int exam_no = list.get(0).getExam_no();
