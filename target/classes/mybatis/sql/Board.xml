@@ -33,7 +33,7 @@
 				and e.emp_dept like #{dept_scType}  and e.emp_grade like #{grade_scType}
 			</when>
 			<when test="dept_scType !='all' and grade_scType.equals('all')">
-				and e.emp_dept like #{grade_scType}
+				and e.emp_dept like #{dept_scType}
 			</when>
 			<when test="dept_scType.equals('all') and grade_scType != 'all'">
 				and e.emp_grade like #{grade_scType}
