@@ -33,7 +33,7 @@
 				and e.emp_dept like #{dept_scType}  and e.emp_grade like #{grade_scType}
 			</when>
 			<when test="dept_scType !='all' and grade_scType.equals('all')">
-				and e.emp_dept like #{grade_scType}
+				and e.emp_dept like #{dept_scType}
 			</when>
 			<when test="dept_scType.equals('all') and grade_scType != 'all'">
 				and e.emp_grade like #{grade_scType}
@@ -88,7 +88,7 @@
 		select ifnull(avg(que.exam_score), 0)
 		from quiz_user_exam que inner join employee e
 		on que.exam_take_id = e.emp_id
-		where que.exam_status = 'status04'
+		where que.exam_status = 'status04' and que.exam_degree= #{exam_degree}
 		<choose>
 			<when test="dept_scType != 'all'">
 				and e.emp_dept like #{dept_scType}
@@ -103,7 +103,7 @@
 		select ifnull(avg(que.exam_score), 0)
 		from quiz_user_exam que inner join employee e
 		on que.exam_take_id = e.emp_id
-		where que.exam_status = 'status04'
+		where que.exam_status = 'status04' and que.exam_degree= #{exam_degree}
 		<choose>
 			<when test="grade_scType != 'all'">
 				and e.emp_grade like #{grade_scType}
