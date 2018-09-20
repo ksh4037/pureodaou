@@ -88,7 +88,7 @@
 										<td>
 											<input type="radio" name="correct_yn_${shortExamList.exam_detail_no}" class="red_correct_yn" value="Y" id="correct_yn" index="${shortExamList.exam_detail_no}"> 정답
 											<input type="radio" name="correct_yn_${shortExamList.exam_detail_no}" class="red_correct_yn" value="N" id="correct_yn" index="${shortExamList.exam_detail_no}"> 오답
-											<input type="text" name="correct_yn" id="correct_yn" index="${shortExamList.exam_detail_no}"/>
+											<input type="hidden" name="correct_yn" id="correct_yn" index="${shortExamList.exam_detail_no}"/>
 							       		</td>
 									</tr>
 									
