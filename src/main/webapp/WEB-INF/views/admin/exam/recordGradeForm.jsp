@@ -88,7 +88,7 @@
 										<td>
 											<input type="radio" name="correct_yn_${shortExamList.exam_detail_no}" class="red_correct_yn" value="Y" id="correct_yn" index="${shortExamList.exam_detail_no}"> 정답
 											<input type="radio" name="correct_yn_${shortExamList.exam_detail_no}" class="red_correct_yn" value="N" id="correct_yn" index="${shortExamList.exam_detail_no}"> 오답
-											<input type="hidden" name="correct_yn" id="correct_yn" index="${shortExamList.exam_detail_no}"/>
+											<input type="text" name="correct_yn" id="correct_yn" index="${shortExamList.exam_detail_no}"/>
 							       		</td>
 									</tr>
 									
@@ -130,16 +130,30 @@
 			 var this_value = $(this).val();
 
 			 $("input[name='correct_yn'][index='"+this_index+"']").val(this_value);
-
+			 
 		}); 
 		
 			
 		function goUpdt(){
 			
+			//var item_list='';
+			
 			if($(':radio[id="correct_yn"]:checked').length != ($(':radio[id="correct_yn"]').length/2)){
 				alert('정답여부를 선택해주세요.');
 				return;
 			}
+			/*
+			
+			for(var i =0; i<$("input[name='correct_yn']").length; i++ ){
+				alert($("input[name='correct_yn']")[i].attr("index")); //리스트에 넣기
+			}
+			
+			$("input[name='correct_yn']").each(function(){
+				item_list += $(this).attr("index");
+			});
+			
+			alert(item_list);
+			*/
 			
 			
 			var queryString = $("form[name=recordGradeForm]").serialize();
