@@ -37,7 +37,7 @@
 				<hr>
 				<br>
 				<h2>
-					<span class="span-font">회원 리스트</span>
+					<span class="span-font">회원 정보 상세보기</span>
 				</h2>
 				<p>
 					<span class="span-font">풀어다우 서비스의 회원 리스트 입니다.</span> <br></br>

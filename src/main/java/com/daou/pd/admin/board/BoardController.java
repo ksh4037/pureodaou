@@ -104,7 +104,6 @@ public class BoardController {
 
 		try { 
 			str = mapper.writeValueAsString(rankWrongCount);
-			System.out.println("str"+str);
 		}
 		catch(Exception e) {
 		}

@@ -22,8 +22,6 @@ public interface BoardMapper {
 	
 	public double gradeAverage(ExamVO exvo);
 	
-	public int selectSetCount(ExamVO exvo);
-	
 	public List<HashMap<String,Object>> rankWrongCount(ExamVO exvo);
 
 }

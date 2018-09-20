@@ -6,7 +6,9 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+
 
 @Component("EmpService")
 
@@ -20,72 +22,62 @@ public class EmpServiceImpl implements EmpService {
 		this.sqlSession = sqlSession;
 	}
 
-	
-	
-	@Override
-	public int selectUser(EmpVO evo) {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
-		return empMapper.selectAdmin(evo);
+	@Bean
+	public EmpMapper empMapper() {
+		return sqlSession.getMapper(EmpMapper.class);
 	}
 
 	@Override
 	public int selectAdmin(EmpVO evo) {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
-		return empMapper.selectAdmin(evo);
+		return empMapper().selectAdmin(evo);
 	}
 
 	@Override
 	public List<HashMap<String, Object>> memberList() {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
-		return empMapper.memberList();
+		return empMapper().memberList();
 	}
 
 	@Override
 	public void insertMember(EmpVO evo) throws Exception {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
+		empMapper = empMapper();
 		empMapper.insertMember(evo);
 	}
 
 	@Override
 	public void deleteMember(List<String> idNoList) {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
+		empMapper = empMapper();
 		empMapper.deleteMember(idNoList);
 	}
 
 	@Override
 	public EmpVO memberView(EmpVO evo) {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
-		return empMapper.memberView(evo);
+		return empMapper().memberView(evo);
 	}
 
 	@Override
 	public HashMap<String,Object> memberViewAll(String emp_id) {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
-		return empMapper.memberViewAll(emp_id);
+		return empMapper().memberViewAll(emp_id);
 	}
 	
 	@Override
 	public List<EmpVO> deptList() {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
-		return empMapper.deptList();
+		return empMapper().deptList();
 	}
 	
 	@Override
 	public List<EmpVO> gradeList() {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
-		return empMapper.gradeList();
+		return empMapper().gradeList();
 	}
 
 	@Override
 	public void updateMember(EmpVO evo) throws Exception {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
+		empMapper = empMapper();
 		empMapper.updateMember(evo);
 	}
 
 	@Override
 	public int employeeIdCheck(EmpVO evo) {
-		empMapper = sqlSession.getMapper(EmpMapper.class);
-		return empMapper.employeeIdCheck(evo);
+		return empMapper().employeeIdCheck(evo);
 	}
 
 }
