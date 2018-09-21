@@ -9,9 +9,9 @@
 
 개발환경 :
 
-jdk 8 버전
-spring framework 4.*
-MyBatis
+jdk 8 버전,
+spring framework 4.*,
+MyBatis,
 maria Database
 
 
