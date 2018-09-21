@@ -14,7 +14,7 @@ maria db 연동
 
 로컬 돌릴때
 톰캣클릭해서
-modules 탭에서 edit 누르고 path를 / 
+modules 탭에서 edit 누르고 path를 / 로 변경!!
 
 
 ## 관리자 기능
