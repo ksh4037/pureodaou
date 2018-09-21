@@ -1,20 +1,24 @@
 # pureodaou
-다우기술 인턴 프로젝트 2조 - 풀어다우 (문제은행 웹 서비스)
+다우기술 인턴(2018/08/27 - 2018/09/21)
+
+프로젝트 2조  (문제은행 웹 서비스)
+
+
+
+팀명 : 풀어다우
+
+개발환경 :
 
 jdk 8 버전
-
 spring framework 4.*
+MyBatis
+maria Database
 
 
-maria db 연동
 
 
-
-<!!!참고!!!>
-
-로컬 돌릴때
-톰캣클릭해서
-modules 탭에서 edit 누르고 path를 / 로 변경!!
+<!--- 참고----!>
+tomcat -> edit -> path: / 변경
 
 
 ## 관리자 기능
