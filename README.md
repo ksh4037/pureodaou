@@ -17,7 +17,7 @@ maria Database
 
 
 
-<!--- 참고----!>
+
 tomcat -> edit -> path: / 변경
 
 
